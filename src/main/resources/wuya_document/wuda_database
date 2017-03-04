@@ -1,8 +1,8 @@
-	user_id	user_name	email	password(MD5)	avciateCode	verifyCode
-user       用户表	用户的唯一身份ID unique	登录名称 唯一	绑定邮箱 一个email 绑定一个账号	加密格式 管理员也无法查看	激活码	找回密码 校验码
-	user_id					
-user_security_question 用户的密保问题 与答案表						
+user		
+		user_id	user_name	email	password(MD5)	avciateCode	verifyCode
+ 用户表	用户的唯一身份ID unique	登录名称 唯一	绑定邮箱 一个email 绑定一个账号	加密格式 管理员也无法查看	激活码	找回密码 校验码
+security_question  question		
 						
-admin      管理员表						
-						
+admin      					
+管理员表							
 security_question 密保问题表						
