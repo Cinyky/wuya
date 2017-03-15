@@ -1,0 +1,13 @@
+.hottopic{
+	margin-top: 60px;
+}
+
+.piece{
+	border-bottom: solid grey 1px;
+	margin-bottom: 10px;
+}
+
+a:hover{
+	cursor: pointer;
+	color: orange;
+}

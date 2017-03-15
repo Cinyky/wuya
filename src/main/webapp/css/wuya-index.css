@@ -1,0 +1,22 @@
+/*.section-info {
+    background-color: #5bc0de !important;
+    color: #ffffff;
+}
+.section {
+    position: relative;
+    padding: 35px 0;
+}*/
+
+.hottopic{
+	margin-top: 60px;
+}
+
+a:hover{
+	cursor: pointer;
+	color: orange;
+}
+
+.piece{
+	border-bottom: solid grey 1px;
+	margin-bottom: 10px;
+}
