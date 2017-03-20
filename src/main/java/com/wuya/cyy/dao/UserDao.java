@@ -12,10 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.wuya.cyy.pojo.UserModel;  
       
       
-    /** 
-     *  
-     * @author Qixuan.Chen 
-     */  
+
     @Repository  
     public class UserDao {  
           
