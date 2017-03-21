@@ -15,7 +15,12 @@ import java.util.Arrays;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-
+/**
+ * 产生验证码工具类
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:49:41
+ */
 public class VerifyCodeUtils {
 	// 使用到Algerian字体，系统里没有的话需要安装字体，字体只显示大写，去掉了1,0,i,o几个容易混淆的字符
 	public static final String VERIFY_CODES = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";

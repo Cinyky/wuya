@@ -10,7 +10,12 @@ import java.util.HashMap;
 import org.springframework.stereotype.Repository;
 
 import com.wuya.cyy.pojo.UserModel;  
-      
+/**
+ * 用户dao 测试类   
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:42:51
+ */
       
 
     @Repository  

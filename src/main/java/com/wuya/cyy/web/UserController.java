@@ -40,54 +40,21 @@ import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
 import com.wuya.cyy.utils.ServiceException;
 /**
- * 测试controller
+ * 用户controller
  * Cinyky 
  *
- * 2017年3月21日上午8:49:57
+ * 2017年3月21日上午8:50:13
  */
 
 @Controller
-@RequestMapping("/test") // url:/模块/资源/{id}/细分 /seckill/list
-public class TestController {
+@RequestMapping("/user") // url:/模块/资源/{id}/细分 /seckill/list
+public class UserController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private BookServiceImpl bookService;
-
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	private ModelAndView list(ModelAndView model,HttpServletRequest request) {
-		List<Book> books = bookService.getList();
-//		model.addAttribute("list", list.get(0));
-//		model.addAttribute("hello", "hello world list");
-		// list.jsp + model = ModelAndView
-		logger.warn("------books:"+books.size());
-		String servletContext = request.getSession().getServletContext().getRealPath("");
-		model.getModel().put("books", books);
-		model.setViewName("list");
-		return model;// WEB-INF/jsp/"list".jsp
-	}
-
-	// ajax json
-	@RequestMapping(value = "/{bookId}/detail", method = RequestMethod.GET)
-	@ResponseBody
-	private ModelAndView detail(@PathVariable("bookId") Long bookId, ModelAndView model) {
-		if (bookId == null) {
-			model.setViewName("redirect:/book/list");
-			return model;
-		}
-		Book book = bookService.getById(bookId);
-		if (book == null) {
-			model.setViewName("forward:/book/list");
-			return model;
-		}
-		logger.warn("bookId:"+bookId+" ,book:"+book.toString());
-//		model.addAttribute("book", book);
-//		model.addAttribute("hello", "hello world");
-		model.setViewName("detail");
-		model.getModel().put("book", book);
-		return model;
-	}
+	
+	@Resource  
+    private RegisterValidateService service;  
 	
 	@RequestMapping(value = "/upload")
 	private void upload(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -215,9 +182,7 @@ public class TestController {
         System.out.println("方法三的运行时间："+String.valueOf(endTime-startTime)+"ms");
         return "success"; 
     }
-	
-	@Resource  
-    private RegisterValidateService service;  
+
       
     @RequestMapping(value="/register",method={RequestMethod.GET,RequestMethod.POST})  
     public ModelAndView  load(HttpServletRequest request,HttpServletResponse response) throws ParseException{  

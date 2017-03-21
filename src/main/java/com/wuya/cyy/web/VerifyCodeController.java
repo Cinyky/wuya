@@ -13,7 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wuya.cyy.utils.VerifyCodeUtils;
-
+/**
+ * 产生验证码图片
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:51:20
+ */
 
 @Controller
 @RequestMapping("/verifycode")

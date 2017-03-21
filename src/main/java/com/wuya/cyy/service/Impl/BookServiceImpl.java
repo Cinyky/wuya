@@ -10,7 +10,12 @@ import org.springframework.stereotype.Service;
 import com.wuya.cyy.dao.BookDao;
 import com.wuya.cyy.pojo.Book;
 import com.wuya.cyy.service.BookService;
-
+/**
+ * 图书impl 测试类
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:47:31
+ */
 @Service
 public class BookServiceImpl implements BookService {
 

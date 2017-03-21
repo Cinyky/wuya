@@ -3,7 +3,12 @@ package com.wuya.cyy.pojo;
 import java.beans.Transient;  
 import java.util.Calendar;  
 import java.util.Date;  
-  
+/**
+ * 用户实体 测试类
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:44:00
+ */
   
 public class UserModel {  
     private Long id;  

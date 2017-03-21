@@ -11,12 +11,12 @@ import com.wuya.cyy.pojo.UserModel;
 import com.wuya.cyy.utils.MD5Util;
 import com.wuya.cyy.utils.SendEmail;
 import com.wuya.cyy.utils.ServiceException;  
-  
-  
-/** 
- *  
- * @author Qixuan.Chen 
- */  
+/**  
+ * 注册验证
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:47:51
+ */
 @Service  
 public class RegisterValidateService {  
       

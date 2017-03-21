@@ -1,7 +1,10 @@
 package com.wuya.cyy.pojo;
 
 /**
- * 图书实体
+ * 图书实体 测试类
+ * Cinyky 
+ * 
+ * 2017年3月21日上午8:43:05
  */
 public class Book {
 

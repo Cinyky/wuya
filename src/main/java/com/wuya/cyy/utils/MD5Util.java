@@ -3,7 +3,12 @@ package com.wuya.cyy.utils;
 import java.io.UnsupportedEncodingException;  
 import java.security.MessageDigest;  
 import java.security.NoSuchAlgorithmException;  
-  
+/**
+ * 加密tools
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:48:11
+ */
 public class MD5Util {  
       
     /** 

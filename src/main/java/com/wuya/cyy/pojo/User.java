@@ -3,10 +3,10 @@ package com.wuya.cyy.pojo;
 import java.util.Date;
 
 /**
- * 
- * @author cyy
+ * 用户实体
+ * Cinyky 
  *
- * 2017年3月1日上午9:21:24
+ * 2017年3月21日上午8:44:37
  */
 public class User {
 	private long id;			//用户ID 用户的唯一标识

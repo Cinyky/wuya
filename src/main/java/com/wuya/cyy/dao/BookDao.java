@@ -5,7 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.wuya.cyy.pojo.Book;
-
+/**
+ * 图书dao 测试类
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:42:41
+ */
 
 
 public interface BookDao {

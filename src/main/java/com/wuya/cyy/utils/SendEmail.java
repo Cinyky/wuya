@@ -11,12 +11,12 @@ import javax.mail.Session;
 import javax.mail.Transport;  
 import javax.mail.internet.InternetAddress;  
 import javax.mail.internet.MimeMessage;  
-  
-  
-/** 
- *  
- * @author Qixuan.Chen 
- */  
+/**
+ * 发邮件tools 
+ * Cinyky 
+ *
+ * 2017年3月21日上午8:48:30
+ */
 public class SendEmail {  
       
     public static final String HOST = "smtp.163.com";  
