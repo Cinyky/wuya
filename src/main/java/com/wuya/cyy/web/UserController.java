@@ -59,19 +59,12 @@ public class UserController {
 	@RequestMapping(value = "/upload")
 	private void upload(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
     	
-//    	response.setHeader("Access-Control-Allow-Origin", "http://localhost:8011");  // 第二个参数填写允许跨域的域名称，不建议直接写 "*"
-//    	response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
-//    	response.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-//
-//    	// 接收跨域的cookie
-//    	response.setHeader("Access-Control-Allow-Credentials", "true");
 		 CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
 	                request.getSession().getServletContext());
 		 if(multipartResolver.isMultipart(request)){
 
 			 MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
 			  Map<String, MultipartFile> fileMap = multiRequest.getFileMap();
-//	    	  while(fileNames.hasNext()){
 			  if(!fileMap.isEmpty()){
 				  for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
 					  	System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue().getSize());
@@ -105,46 +98,7 @@ public class UserController {
 	    	  }else{
 	 			 response.getWriter().write("error|rrrrrrr");
 	    	  }
-			  
 		 }
-    	
-    	  
-    	  
-    	 
-//    	 response.setContentType("textml;charset=UTF-8");
-//         request.setCharacterEncoding("UTF-8");
-//         Part part = multiRequest.getPart("myFileName");// myFileName是文件域的name属性值
-//         logger.warn("upload start. ......");
-//         System.out.println("upload start. ......");
-//         // 文件类型限制
-//         String[] allowedType = { "image/bmp", "image/gif", "image/jpeg", "image/png" };
-//         boolean allowed = Arrays.asList(allowedType).contains(part.getContentType());
-//         if (!allowed) {
-//             response.getWriter().write("error|不支持的类型");
-//             logger.warn("upload error|不支持的类型");
-//             return;
-//         }
-//         // 图片大小限制
-//         if (part.getSize() > 5 * 1024 * 1024) {
-//             response.getWriter().write("error|图片大小不能超过5M");
-//             logger.warn("upload error|图片大小不能超过5M");
-//             return;
-//         }
-//         // 包含原始文件名的字符串
-//         String fi = part.getHeader("content-disposition");
-//         // 提取文件拓展名
-//         String fileNameExtension = fi.substring(fi.indexOf("."), fi.length() - 1);
-//         // 生成实际存储的真实文件名
-//         String realName = UUID.randomUUID().toString() + fileNameExtension;
-//         // 图片存放的真实路径
-//         String realPath = request.getServletContext().getRealPath("/upload") + "/" + realName;
-//         // 将文件写入指定路径下
-//         logger.warn("upload fileNameExtension:"+fileNameExtension+" realName:"+realName+" realPath:"+realPath);
-//         part.write(realPath);
-//         logger.warn("return url"+request.getContextPath() + "/upload/" + realName);
-//
-//         // 返回图片的URL地址
-//         response.getWriter().write(request.getContextPath() + "/upload/" + realName);
 	}
 	
 	@RequestMapping(value="/springUpload")
