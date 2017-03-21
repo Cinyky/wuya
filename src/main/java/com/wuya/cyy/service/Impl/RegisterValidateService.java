@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wuya.cyy.dao.UserDao;
+import com.wuya.cyy.dao.UserTestDao;
 import com.wuya.cyy.pojo.UserModel;
 import com.wuya.cyy.utils.MD5Util;
 import com.wuya.cyy.utils.SendEmail;
@@ -21,7 +21,7 @@ import com.wuya.cyy.utils.ServiceException;
 public class RegisterValidateService {  
       
     @Autowired  
-    private UserDao userDao;  
+    private UserTestDao userDao;  
       
     /** 
      * 处理注册 

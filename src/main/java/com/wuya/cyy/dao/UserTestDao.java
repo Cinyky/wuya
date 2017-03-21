@@ -19,7 +19,7 @@ import com.wuya.cyy.pojo.UserModel;
       
 
     @Repository  
-    public class UserDao {  
+    public class UserTestDao {  
           
        public HashMap<String, String> map=new HashMap<String, String>();  
         /** 
