@@ -35,26 +35,25 @@ public interface SecretQuestionDao {
 	 */
 	int deleteAllQuestion(String uid);
 
-	/**
-	 * 更新
-	 * @param secretQuestion
-	 * @return
-	 */
-	int updateQuestion(SecretQuestion secretQuestion);
-	
 
 	/**
 	 * 更新 修改问题的答案
 	 * @param secretQuestion
 	 * @return
 	 */
-	int updateQuestionByQid(String questionId);
+	int updateQuestionByQid(SecretQuestion secretQuestion);
 	
 	/**
 	 * 通过userId查询所有密保问题
 	 * @return SecretQuestion
 	 */
 	List<SecretQuestion> queryByUid(@Param("uid")String uid);
+	
+	/**
+	 * 通过questionId查询所有密保问题
+	 * @return SecretQuestion
+	 */
+	List<SecretQuestion> queryByQid(@Param("qid")String qid);
 	
 	
 

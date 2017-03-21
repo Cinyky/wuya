@@ -23,7 +23,7 @@ public class Test3_secret_dao {
 
 	@Test
 	public void testQueryById() throws Exception {
-		List<SecretQuestion> questions=questionDao.queryByUid("1");
+		List<SecretQuestion> questions=questionDao.queryByUid("tt");
 		for (SecretQuestion secretQuestion : questions) {
 			System.out.println(secretQuestion.toString());
 		}

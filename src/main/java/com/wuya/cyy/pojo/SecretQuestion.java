@@ -46,6 +46,27 @@ public class SecretQuestion {
 	public void setAnswerInfo(String answerInfo) {
 		this.answerInfo = answerInfo;
 	}
+	
+	public String getUid() {
+		return uid;
+	}
+
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+
 	@Override
 	public String toString() {
 		return "SecretQuestion [questionId=" + questionId + ", uid=" + uid + ", questionInfo=" + questionInfo
