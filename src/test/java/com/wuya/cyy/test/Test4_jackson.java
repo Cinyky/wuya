@@ -2,6 +2,7 @@ package com.wuya.cyy.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -32,10 +33,15 @@ public class Test4_jackson {
 	 private JsonGenerator jsonGenerator = null;
 	 private ObjectMapper objectMapper = null;
 	 private Book book = null;
+	 private List<Book> books = null;
 	@Before
     public void init() {
-		long bookId = 111;
-		book = new Book(bookId, "1111", 11111);
+		long bookId = 1;
+		book = new Book(bookId, "1", 1);
+		books = new ArrayList<>();
+		books.add(new Book(1, "1", 1));
+		books.add(new Book(2, "2", 2));
+		books.add(new Book(3, "3", 3));
         objectMapper = new ObjectMapper();
         try {
             jsonGenerator = objectMapper.getJsonFactory().createJsonGenerator(System.out, JsonEncoding.UTF8);
@@ -63,7 +69,7 @@ public class Test4_jackson {
     }
 
 	@Test
-	public void writeJson() throws Exception {
+	public void writeJsonObject() throws Exception {
 		
 		try {
 	        System.out.println("jsonGenerator");
@@ -74,6 +80,23 @@ public class Test4_jackson {
 	        System.out.println("ObjectMapper");
 	        //writeValue具有和writeObject相同的功能
 	        objectMapper.writeValue(System.out, book);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	
+	}
+	@Test
+	public void writeJsonList() throws Exception {
+		
+		try {
+	        System.out.println("jsonGenerator");
+	        //writeObject可以转换java对象，eg:JavaBean/Map/List/Array等
+	        jsonGenerator.writeObject(books);    
+	        System.out.println();
+	        
+	        System.out.println("ObjectMapper");
+	        //writeValue具有和writeObject相同的功能
+	        System.out.println(objectMapper.writeValueAsString(books));
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
