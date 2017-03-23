@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -35,6 +36,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wuya.cyy.pojo.Book;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
@@ -88,6 +92,18 @@ public class TestController {
 		model.getModel().put("book", book);
 		return model;
 	}
+	
+	// ajax json
+		@RequestMapping(value = "/json", method = RequestMethod.GET)
+		@ResponseBody
+		private void outputjson(HttpServletResponse response) throws JsonGenerationException, JsonMappingException, IOException {
+			List<Book> books = new ArrayList<>();
+			books.add(new Book(1, "1", 1));
+			books.add(new Book(2, "2", 2));
+			books.add(new Book(3, "3", 3));
+			ObjectMapper objectMapper = new ObjectMapper();
+			objectMapper.writeValue(response.getOutputStream(), books);
+		}
 	
 	@RequestMapping(value = "/upload")
 	private void upload(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
