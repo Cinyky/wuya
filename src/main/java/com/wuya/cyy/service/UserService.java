@@ -1,11 +1,11 @@
 package com.wuya.cyy.service;
 
-import java.util.List;
+import com.wuya.cyy.pojo.User;
 
-import com.wuya.cyy.pojo.Book;
+
 
 /**
- * 用户接口
+ * 用户service接口
  * Cinyky 
  *
  * 2017年3月21日上午8:46:00
@@ -13,19 +13,13 @@ import com.wuya.cyy.pojo.Book;
 public interface UserService {
 
 	/**
-	 * 查询一本图书
-	 * 
-	 * @param bookId
+	 * 用户注册
+	 * @param user 用户
 	 * @return
 	 */
-	Book getById(long bookId);
+	int userReg(User user);
+	
 
-	/**
-	 * 查询所有图书
-	 * 
-	 * @return
-	 */
-	List<Book> getList();
-
+	
 
 }

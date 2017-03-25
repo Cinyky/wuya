@@ -1,10 +1,9 @@
 package com.wuya.cyy.dao;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
+import org.apache.ibatis.annotations.Param;
+
 import com.wuya.cyy.pojo.User;
 
 /**
@@ -39,6 +38,12 @@ public interface UserDao {
 	 * @return
 	 */
 	User selectUserByUid(String uid);
+	
+	/**
+	 * 根据用户Id&pwd查询用户
+	 * @return
+	 */
+	User selectUserByUidAndPwd(@Param("loginName")String loginName,@Param("pwd")String pwd);
 	
 	/**
 	 * 根据email查询email_code

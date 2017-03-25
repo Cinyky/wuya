@@ -71,10 +71,22 @@
 			uid=#{uid}
 	</select>
 	
-	<!-- 根据email查询emial_code -->
-	<select id="selectUserByEmail">
+	<!-- 根据用户Id&pwd查询用户 -->
+	<select id="selectUserByUidAndPwd" resultType="User">
 		SELECT
-			email_code
+			*
+		FROM
+			user
+		WHERE
+			loginName=#{loginName}
+		AND
+			pwd=#{pwd}
+	</select>
+	
+	<!-- 根据email查询emial_code -->
+	<select id="selectUserByEmail" resultType="User">
+		SELECT
+			*
 		FROM
 			user
 		WHERE

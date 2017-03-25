@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.wuya.cyy.dao.SecretQuestionDao;
 import com.wuya.cyy.dao.UserDao;
 import com.wuya.cyy.pojo.SecretQuestion;import com.wuya.cyy.pojo.User;
+import com.wuya.cyy.utils.MD5Util;
 @RunWith(SpringJUnit4ClassRunner.class)
 //告诉junit spring配置文件
 @ContextConfiguration({ "classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml" })
@@ -42,17 +43,28 @@ public class Test3_wuya_dao {
 
 	@Test
 	public void testUser_Add() throws Exception {
+//		long ss =0;
+//		User user = new User("2013142202", "cyy", "cyy10208023cy", "1079276272@qq.com", 
+//				"123123", "Cinyky", 1, "i'm a boy", "haha", "China", "asd", ss, ss, ss, 1);
 		long ss =0;
-		User user = new User("2013142202", "cyy", "cyy10208023cy", "1079276272@qq.com", 
+		String pwd =MD5Util.encode2hex("cyy10208023cy");
+		User user = new User("2013142204", "cyy3",pwd, "1079276272@qq.com", 
 				"123123", "Cinyky", 1, "i'm a boy", "haha", "China", "asd", ss, ss, ss, 1);
-		
 		int addUser = userDao.addUser(user);
 		System.out.println(addUser);
 	}
 	
 	@Test
 	public void testUser_QueryById() throws Exception {
-		User user  = userDao.selectUserByUid("2013142202");
+		User user  = userDao.selectUserByUid("2013142204");
+			System.out.println(user.toString());
+	}
+	
+	
+	@Test
+	public void testUser_login() throws Exception {
+		String pwd =MD5Util.encode2hex("cyy10208023cy");
+		User user  = userDao.selectUserByUidAndPwd("2013142204", pwd);
 			System.out.println(user.toString());
 	}
 }
