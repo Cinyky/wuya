@@ -15,7 +15,7 @@ import com.wuya.cyy.pojo.SecretQuestion;
 @RunWith(SpringJUnit4ClassRunner.class)
 //告诉junit spring配置文件
 @ContextConfiguration({ "classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml" })
-public class Test3_secret_dao {
+public class Test3_wuya_dao {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -31,7 +31,7 @@ public class Test3_secret_dao {
 	
 	@Test
 	public void testAdd() throws Exception {
-		int addQuestion = questionDao.addQuestion(new SecretQuestion("tt", "tt", "测试", "无题",1));
+		int addQuestion = questionDao.addQuestion(new SecretQuestion("tt2", "tt", "测试2", "无题2",11));
 		System.out.println(addQuestion);
 	}
 }
