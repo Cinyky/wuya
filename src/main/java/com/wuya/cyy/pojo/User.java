@@ -25,7 +25,21 @@ public class User {
 	private long 	banTime;		//封号时间点
 	private int 	status;			//用户账号状态 -1未激活 0 正常 1封号
 	
-
+//	uid = #{uid},
+//	loginName = #{loginName},
+//	pwd = #{pwd},
+//	bind_email = #{bind_email},
+//	email_code = #{email_code},
+//	nickName = #{nickName},
+//	sex = #{sex},
+//	signature = #{signature},
+//	profile = #{profile},
+//	location = #{location},
+//	headPic = #{headPic},
+//	birth = #{birth},
+//	regTime = #{regTime},
+//	banTime = #{banTime},
+//	status = #{status}
 
 	
 	//	public enum Sex{

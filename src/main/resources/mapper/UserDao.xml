@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.UserDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入用户  --> 
+	<insert id="addUser" parameterType="User">
+		INSERT
+		INTO
+			user
+		values(
+			#{uid},
+			#{loginName},
+			#{pwd},
+			#{bind_email},
+			#{email_code},
+			#{nickName},
+			#{sex},
+			#{signature},
+			#{profile},
+			#{location},
+			#{headPic},
+			#{birth},
+			#{regTime},
+			#{banTime},
+			#{status}
+		)
+	</insert>
+	
+	<!-- 更新用户  --> 
+	<update id="updateUser">
+		UPDATE
+			user
+		SET
+			loginName = #{loginName},
+			pwd = #{pwd},
+			bind_email = #{bind_email},
+			email_code = #{email_code},
+			nickName = #{nickName},
+			sex = #{sex},
+			signature = #{signature},
+			profile = #{profile},
+			location = #{location},
+			headPic = #{headPic},
+			birth = #{birth},
+			regTime = #{regTime},
+			banTime = #{banTime},
+			status = #{status}
+		WHERE
+			uid = #{uid}
+	</update>
+	
+	<!-- 根据用户昵称模糊查询用户 -->
+	<select id="selectUserByNickName" resultType="User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			nickName=#{nickName}
+	</select>
+	
+	<!-- 根据用户Id查询用户 -->
+	<select id="selectUserByUid" resultType="User">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			uid=#{uid}
+	</select>
+	
+	<!-- 根据email查询emial_code -->
+	<select id="selectUserByEmail">
+		SELECT
+			email_code
+		FROM
+			user
+		WHERE
+			email=#{email}
+	</select>
+	
+</mapper>

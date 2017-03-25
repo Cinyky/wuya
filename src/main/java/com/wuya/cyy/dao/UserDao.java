@@ -41,7 +41,7 @@ public interface UserDao {
 	User selectUserByUid(String uid);
 	
 	/**
-	 * 根据email查询emial_code
+	 * 根据email查询email_code
 	 * @return
 	 */
 	User selectUserByEmail(String email);
