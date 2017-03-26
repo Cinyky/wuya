@@ -6,50 +6,60 @@ package com.wuya.cyy.pojo;
  * 2017年3月26日下午5:10:50
  */
 public class Answer {
-	private String questionId;
-	private String uid;
-	private String questionInfo;
-	private String answerInfo;
-	private int status;
+	private String answerId;		//回答id
+	private String questionId;		//问题id
+	private String uid;				//回答问题用户id
+	private String answerInfo;		//回答详情
+	private long answerTime;		//提出问题时间
+	private int status;				//状态
 	
 	
 	
 	public Answer() {
 	}
-	
-	
-	public Answer(String questionId, String uid, String questionInfo, String answerInfo, int status) {
+
+
+
+	public Answer(String answerId, String questionId, String uid, String answerInfo, long answerTime, int status) {
 		super();
+		this.answerId = answerId;
 		this.questionId = questionId;
 		this.uid = uid;
-		this.questionInfo = questionInfo;
 		this.answerInfo = answerInfo;
+		this.answerTime = answerTime;
 		this.status = status;
 	}
+
+
+
+	public String getAnswerId() {
+		return answerId;
+	}
+
+
+
+	public void setAnswerId(String answerId) {
+		this.answerId = answerId;
+	}
+
 
 
 	public String getQuestionId() {
 		return questionId;
 	}
+
+
+
 	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
 	}
-	public String getQuestionInfo() {
-		return questionInfo;
-	}
-	public void setQuestionInfo(String questionInfo) {
-		this.questionInfo = questionInfo;
-	}
-	public String getAnswerInfo() {
-		return answerInfo;
-	}
-	public void setAnswerInfo(String answerInfo) {
-		this.answerInfo = answerInfo;
-	}
-	
+
+
+
 	public String getUid() {
 		return uid;
 	}
+
 
 
 	public void setUid(String uid) {
@@ -57,9 +67,35 @@ public class Answer {
 	}
 
 
+
+	public String getAnswerInfo() {
+		return answerInfo;
+	}
+
+
+
+	public void setAnswerInfo(String answerInfo) {
+		this.answerInfo = answerInfo;
+	}
+
+
+
+	public long getAnswerTime() {
+		return answerTime;
+	}
+
+
+
+	public void setAnswerTime(long answerTime) {
+		this.answerTime = answerTime;
+	}
+
+
+
 	public int getStatus() {
 		return status;
 	}
+
 
 
 	public void setStatus(int status) {
@@ -67,10 +103,11 @@ public class Answer {
 	}
 
 
+
 	@Override
 	public String toString() {
-		return "SecretQuestion [questionId=" + questionId + ", uid=" + uid + ", questionInfo=" + questionInfo
-				+ ", answerInfo=" + answerInfo + "]";
+		return "Answer [answerId=" + answerId + ", questionId=" + questionId + ", uid=" + uid + ", answerInfo="
+				+ answerInfo + ", answerTime=" + answerTime + ", status=" + status + "]";
 	}
 	
 	
