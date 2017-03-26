@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.wuya.cyy.pojo.Answer;
+import com.wuya.cyy.pojo.Focus;
 
 
 /**
@@ -15,38 +15,30 @@ import com.wuya.cyy.pojo.Answer;
  */
 public interface FocusDao {
 	/**
-	 * 增加answer
-	 * @param user
+	 * 增加focus
+	 * @param focus
 	 * @return
 	 */
-	int addAnswer(Answer answer);
+	int addFocus(Focus focus);
 	
 	/**
-	 * 更新用户
-	 * @param user
+	 * 更新focus
+	 * @param focus
 	 * @return
 	 */
-	int updateAnswer(Answer answer);
+	int updateFocus(Focus focus);
 	
 	
 	/**
-	 * 根据questionId查询回答
+	 * 查询关注 根据uid
 	 * @return
 	 */
-	Answer selectAnswerByQuestionId(String questionId);
+	List<Focus> selectFocusByUid(String uid);
 	
 	/**
 	 * 根据uid查询回答
 	 * @return
 	 */
-	List<Answer> selectAnswerByUid(String uid);
-	
-	
-	/**
-	 * 根据info 模糊查询回答
-	 * @return
-	 */
-	List<Answer> selectAnswerByInfo(String answerInfo);
-	
+	List<Focus> selectAnswerByUid(@Param("uid")String uid,@Param("focusType")int focusType);
 	
 }

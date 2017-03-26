@@ -16,14 +16,14 @@ import com.wuya.cyy.pojo.Answer;
 public interface AnswerDao {
 	/**
 	 * 增加answer
-	 * @param user
+	 * @param answer
 	 * @return
 	 */
 	int addAnswer(Answer answer);
 	
 	/**
 	 * 更新用户
-	 * @param user
+	 * @param answer
 	 * @return
 	 */
 	int updateAnswer(Answer answer);
