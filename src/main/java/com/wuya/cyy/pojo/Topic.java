@@ -11,18 +11,19 @@ public class Topic {
 	private String topicName;		//话题名
 	private String topicPic;		//话题图片
 	private int status;				//状态
-	private long topicTime;
+	private long topicTime;			//创建话题时间
 	
 	public Topic() {
 	}
 
-	public Topic(String topicId, String uid, String topicName, String topicPic, int status) {
+	public Topic(String topicId, String uid, String topicName, String topicPic, int status, long topicTime) {
 		super();
 		this.topicId = topicId;
 		this.uid = uid;
 		this.topicName = topicName;
 		this.topicPic = topicPic;
 		this.status = status;
+		this.topicTime = topicTime;
 	}
 
 	public String getTopicId() {
@@ -65,13 +66,19 @@ public class Topic {
 		this.status = status;
 	}
 
+	public long getTopicTime() {
+		return topicTime;
+	}
+
+	public void setTopicTime(long topicTime) {
+		this.topicTime = topicTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Topic [topicId=" + topicId + ", uid=" + uid + ", topicName=" + topicName + ", topicPic=" + topicPic
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", topicTime=" + topicTime + "]";
 	}
 
-	
-	
 	
 }
