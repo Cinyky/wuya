@@ -6,7 +6,7 @@ package com.wuya.cyy.pojo;
  * 2017年3月21日下午7:15:09
  */
 public class SecretQuestion {
-	private String questionId;
+	private String questionId;		
 	private String uid;
 	private String questionInfo;
 	private String answerInfo;

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.wuya.cyy.pojo.Admin;
 
 /**
- * 管理员
+ * 管理员dao
  * Cinyky 
  *
  * 2017年3月21日下午10:32:56

@@ -9,15 +9,17 @@ public class Share {
 	private String uid;			//user id
 	private int	shareType;		//1.question 2.answer
 	private int id;				//分享id
+	private long shareTime;		//分享时间
 	
 	public Share() {
 	}
 
-	public Share(String uid, int shareType, int id) {
+	public Share(String uid, int shareType, int id, long shareTime) {
 		super();
 		this.uid = uid;
 		this.shareType = shareType;
 		this.id = id;
+		this.shareTime = shareTime;
 	}
 
 	public String getUid() {
@@ -44,11 +46,19 @@ public class Share {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Share [uid=" + uid + ", shareType=" + shareType + ", id=" + id + "]";
+	public long getShareTime() {
+		return shareTime;
 	}
 
+	public void setShareTime(long shareTime) {
+		this.shareTime = shareTime;
+	}
+
+	@Override
+	public String toString() {
+		return "Share [uid=" + uid + ", shareType=" + shareType + ", id=" + id + ", shareTime=" + shareTime + "]";
+	}
+	
 
 	
 
