@@ -6,6 +6,7 @@ package com.wuya.cyy.pojo;
  * 2017年3月26日下午5:39:34
  */
 public class Like {
+	private String likeId;
 	private String uid;				//用户id
 	private String answerId;		//回答id
 	private long likeTime;			//点赞时间
@@ -16,12 +17,23 @@ public class Like {
 	}
 
 
-	public Like(String uid, String answerId, long likeTime, int status) {
+	public Like(String likeId, String uid, String answerId, long likeTime, int status) {
 		super();
+		this.likeId = likeId;
 		this.uid = uid;
 		this.answerId = answerId;
 		this.likeTime = likeTime;
 		this.status = status;
+	}
+
+
+	public String getLikeId() {
+		return likeId;
+	}
+
+
+	public void setLikeId(String likeId) {
+		this.likeId = likeId;
 	}
 
 
@@ -67,11 +79,8 @@ public class Like {
 
 	@Override
 	public String toString() {
-		return "Like [uid=" + uid + ", answerId=" + answerId + ", likeTime=" + likeTime + ", status=" + status + "]";
+		return "Like [likeId=" + likeId + ", uid=" + uid + ", answerId=" + answerId + ", likeTime=" + likeTime
+				+ ", status=" + status + "]";
 	}
-	
-	
-	
-	
-	
+
 }

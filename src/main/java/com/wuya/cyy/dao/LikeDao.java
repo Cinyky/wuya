@@ -34,7 +34,12 @@ public interface LikeDao {
 	List<Like> selectLikeByUid(String uid);
 	
 	/**
-	 * 查询like 根据uanswerId
+	 * 查询like 根据likeId
+	 * @return
+	 */
+	List<Like> selectLikeByLikeId(String likeId);
+	/**
+	 * 查询like 根据answerId
 	 * @return
 	 */
 	List<Like> selectLikeByAnswerId(String answerId);

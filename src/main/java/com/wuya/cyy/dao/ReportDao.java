@@ -36,6 +36,12 @@ public interface ReportDao {
 	List<Report> selectReportByUid(String uid);
 	
 	/**
+	 * 查询report 根据uid
+	 * @return
+	 */
+	List<Report> selectReportByReportId(String uid);
+	
+	/**
 	 * 查询report 根据info模糊
 	 * @return
 	 */

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.AnswerDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入Question  --> 
+	<insert id="addQuestion" parameterType="Question">
+			INSERT
+			INTO
+				question
+			values(
+				#{questionId},
+				#{uid},
+				#{questionInfo},
+				#{topicId},
+				#{questionTime},
+				#{status}
+				)
+	</insert>
+	
+	<!-- 更新Question  --> 
+	<update id="updateQuestion">
+			UPDATE
+				question
+			SET
+					uid=#{uid},
+					questionInfo=#{questionInfo},
+					topicId=#{topicId},
+					questionTime=#{questionTime},
+					status=#{status}
+			WHERE
+				questionId=#{questionId}
+	</update>
+	
+	<!-- 根据uid查询Question -->
+	<select id="selectQuestionByUid" resultType="Question">
+		SELECT
+			*
+		FROM
+			question
+		WHERE
+			uid=#{uid}
+	</select>
+
+
+	<!-- 根据QuestionId查询Question -->
+	<select id="selectQuestionByQuestionId" resultType="Question">
+		SELECT
+			*
+		FROM
+			question
+		WHERE
+			questionId=#{questionId}
+	</select>
+	
+	<!-- 根据QuestionId查询Question -->
+	<select id="selectQuestionByInfo" resultType="Question">
+		SELECT
+			*
+		FROM
+			question
+		WHERE
+			questionInfo like'%#{questionInfo}%}
+	</select>
+	
+	
+	<!-- 根据QuestionId查询Question -->
+	<select id="selectQuestionByTopicId" resultType="Question">
+		SELECT
+			*
+		FROM
+			question
+		WHERE
+			topicId=#{topicId}
+	</select>
+
+</mapper>

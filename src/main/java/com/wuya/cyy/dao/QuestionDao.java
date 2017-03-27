@@ -36,6 +36,12 @@ public interface QuestionDao {
 	List<Question> selectQuestionByUid(String uid);
 	
 	/**
+	 * 查询question 根据questionId
+	 * @return
+	 */
+	Question selectQuestionByQuestionId(String questionId);
+	
+	/**
 	 * 查询question 根据info模糊
 	 * @return
 	 */
@@ -47,10 +53,6 @@ public interface QuestionDao {
 	 */
 	List<Question> selectQuestionByTopicId(@Param("topicId")String topicId);
 	
-	/**
-	 * 查询question 根据questionId
-	 * @return
-	 */
-	Question selectQuestionByQuestionId(String questionId);
+	
 	
 }

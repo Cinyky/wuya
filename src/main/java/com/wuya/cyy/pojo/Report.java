@@ -6,6 +6,7 @@ package com.wuya.cyy.pojo;
  * 2017年3月26日下午8:37:35
  */
 public class Report {
+	private String reportId;
 	private String uid;				//用户id
 	private int reportType;			//类型1.question 2.answer 3.user
 	private String id;				//分享id	
@@ -14,14 +15,22 @@ public class Report {
 	private int status;				//状态
 	public Report() {
 	}
-	public Report(String uid, int reportType, String id, String reportInfo, long reportTime, int status) {
+	public Report(String reportId, String uid, int reportType, String id, String reportInfo, long reportTime,
+			int status) {
 		super();
+		this.reportId = reportId;
 		this.uid = uid;
 		this.reportType = reportType;
 		this.id = id;
 		this.reportInfo = reportInfo;
 		this.reportTime = reportTime;
 		this.status = status;
+	}
+	public String getReportId() {
+		return reportId;
+	}
+	public void setReportId(String reportId) {
+		this.reportId = reportId;
 	}
 	public String getUid() {
 		return uid;
@@ -61,11 +70,9 @@ public class Report {
 	}
 	@Override
 	public String toString() {
-		return "Report [uid=" + uid + ", reportType=" + reportType + ", id=" + id + ", reportInfo=" + reportInfo
-				+ ", reportTime=" + reportTime + ", status=" + status + "]";
+		return "Report [reportId=" + reportId + ", uid=" + uid + ", reportType=" + reportType + ", id=" + id
+				+ ", reportInfo=" + reportInfo + ", reportTime=" + reportTime + ", status=" + status + "]";
 	}
-	
-
 
 	
 }
