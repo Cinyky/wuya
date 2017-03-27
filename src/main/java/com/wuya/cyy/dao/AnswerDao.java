@@ -33,20 +33,20 @@ public interface AnswerDao {
 	 * 根据questionId查询回答
 	 * @return
 	 */
-	Answer selectAnswerByQuestionId(String questionId);
+	Answer selectAnswerByQuestionId(@Param("questionId")String questionId);
 	
 	/**
 	 * 根据uid查询回答
 	 * @return
 	 */
-	List<Answer> selectAnswerByUid(String uid);
+	List<Answer> selectAnswerByUid(@Param("uid")String uid);
 	
 	
 	/**
 	 * 根据info 模糊查询回答
 	 * @return
 	 */
-	List<Answer> selectAnswerByInfo(String answerInfo);
+	List<Answer> selectAnswerByInfo(@Param("answerInfo")String answerInfo);
 	
 	
 }

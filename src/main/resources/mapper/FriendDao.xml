@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.AnswerDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入friend  --> 
+	<insert id="addFriend" parameterType="Friend">
+			INSERT
+			INTO
+				friend
+			values(
+					#{uid},
+					#{anotherUid},
+					#{friendTime},
+					#{status}
+				)
+	</insert>
+	
+	<!-- 更新friend  --> 
+	<update id="updateFriend">
+			UPDATE
+				friend
+			SET
+					uid=#{uid},
+					anotherUid=#{anotherUid},
+					friendTime=#{friendTime},
+					status=#{status}
+			WHERE
+				uid=#{uid}
+				AND
+				anotherUid=#{anotherUid}
+	</update>
+	
+	<!-- 根据uid查询friend -->
+	<select id="selectfriendByUid" resultType="Friend">
+		SELECT
+			*
+		FROM
+			friend
+		WHERE
+			uid=#{uid}
+	</select>
+
+
+	<!-- 根据anotherUid查询friend -->
+	<select id="selectfriendByAnotherUid" resultType="Friend">
+		SELECT
+			*
+		FROM
+			friend
+		WHERE
+			anotherUid=#{anotherUid}
+	</select>
+
+</mapper>

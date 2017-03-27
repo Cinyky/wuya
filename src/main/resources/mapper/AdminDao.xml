@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wuya.cyy.dao.AdminDao">
 	<!-- 目的：为dao接口方法提供sql语句配置 -->
-	<!-- 插入用户  --> 
+	<!-- 插入admin  --> 
 	<insert id="addAdmin" parameterType="Admin">
 			INSERT
 			INTO
@@ -16,8 +16,8 @@
 				)
 	</insert>
 	
-	<!-- 更新用户  --> 
-	<update id="updateUser">
+	<!-- 更新admin  --> 
+	<update id="updateAdmin">
 			UPDATE
 				admin
 			SET
@@ -27,7 +27,7 @@
 				uid = #{uid}
 	</update>
 	
-	<!-- 根据用户Id&pwd查询用户 -->
+	<!-- 根据用户Id&pwd查询admin -->
 	<select id="selectUserByUidAndPwd" resultType="Admin">
 		SELECT
 			*

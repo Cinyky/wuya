@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.AnswerDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入answer  --> 
+	<insert id="addAnswer" parameterType="Answer">
+			INSERT
+			INTO
+				answer
+			values(
+				#{answerId},	
+				#{questionId},
+				#{uid},
+				#{answerInfo},
+				#{answerTime},
+				#{status}
+				)
+	</insert>
+	
+	<!-- 更新answer  --> 
+	<update id="updateAnswer">
+			UPDATE
+				answer
+			SET
+				answerId=#{answerId},	
+				questionId=#{questionId},
+				answerInfo=#{answerInfo},
+				answerTime=#{answerTime},
+				status=#{status}
+					WHERE
+				answerId = #{answerId}
+	</update>
+	
+	<!-- 根据questionId查询answer -->
+	<select id="selectAnswerByQuestionId" resultType="Admin">
+		SELECT
+			*
+		FROM
+			answer
+		WHERE
+			questionId=#{questionId}
+	</select>
+	
+	<!-- 根据Uid查询answer -->
+	<select id="selectAnswerByUid" resultType="Admin">
+		SELECT
+			*
+		FROM
+			answer
+		WHERE
+			uid=#{uid}
+	</select>
+	
+	<!-- 根据answerInfo查询answer -->
+	<select id="selectAnswerByInfo" resultType="Admin">
+		SELECT
+			*
+		FROM
+			answer
+		WHERE
+			answerInfo like '%#{answerInfo}%'
+	</select>
+
+
+</mapper>

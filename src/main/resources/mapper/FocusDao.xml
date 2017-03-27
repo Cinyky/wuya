@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.AnswerDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入focus  --> 
+	<insert id="addFocus" parameterType="Focus">
+			INSERT
+			INTO
+				focus
+			values(
+				#{focusId},
+				#{uid},
+				#{focusType},
+				#{id},
+				#{focusTime},
+				#{status}
+				)
+	</insert>
+	
+	<!-- 更新focus  --> 
+	<update id="updateFocus">
+			UPDATE
+				focus
+			SET
+				uid=#{uid},
+				focusType=#{focusType},
+				id=#{id},
+				focusTime=#{focusTime},
+				status=#{status}
+					WHERE
+				focusId = #{focusId}
+	</update>
+	
+	<!-- 根据questionId查询answer -->
+	<select id="selectFocusByUid" resultType="Focus">
+		SELECT
+			*
+		FROM
+			focus
+		WHERE
+			uid=#{uid}
+	</select>
+	
+	<!-- 根据Uid查询answer -->
+	<select id="selectAnswerByUid" resultType="Focus">
+		SELECT
+			*
+		FROM
+			focus
+		WHERE
+			uid=#{uid}
+	</select>
+	
+	<!-- 根据type uid查询Focus -->
+	<select id="selectFocusByUidAndType" resultType="Focus">
+		SELECT
+			*
+		FROM
+			focus
+		WHERE
+			uid=#{uid}
+		    AND
+			focusType=#{focusType}
+	</select>
+
+
+</mapper>

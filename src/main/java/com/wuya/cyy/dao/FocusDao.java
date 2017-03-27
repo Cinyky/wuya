@@ -39,6 +39,6 @@ public interface FocusDao {
 	 * 根据uid查询回答
 	 * @return
 	 */
-	List<Focus> selectAnswerByUid(@Param("uid")String uid,@Param("focusType")int focusType);
+	List<Focus> selectFocusByUidAndType(@Param("uid")String uid,@Param("focusType")int focusType);
 	
 }
