@@ -2,9 +2,6 @@ package com.wuya.cyy.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
-import com.wuya.cyy.pojo.Focus;
 import com.wuya.cyy.pojo.Friend;
 
 
