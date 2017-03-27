@@ -37,15 +37,10 @@ public interface ShareDao {
 	List<Share> selectShareByUid(String uid);
 	
 	/**
-	 * 查询share 根据info模糊
+	 * 查询share 根据type
 	 * @return
 	 */
-	List<Share> selectShareByInfo(@Param("questionInfo")String questionInfo);
+	List<Share> selectShareByType(@Param("shareType")int shareType);
 	
-	/**
-	 * 查询share 根据uid reportType
-	 * @return
-	 */
-	List<Share> selectShareByTypeAndUid(@Param("uid")String uid,@Param("uid")int reportType);
 	
 }
