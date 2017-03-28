@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50554
 File Encoding         : 65001
 
-Date: 2017-03-21 23:14:30
+Date: 2017-03-28 22:59:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,11 +23,28 @@ CREATE TABLE `admin` (
   `uid` varchar(255) NOT NULL DEFAULT '' COMMENT '管理员id',
   `loginName` varchar(255) NOT NULL DEFAULT '' COMMENT '管理员登录名',
   `pwd` varchar(255) NOT NULL DEFAULT '' COMMENT '管理员密码',
+  `status` int(2) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for answer
+-- ----------------------------
+DROP TABLE IF EXISTS `answer`;
+CREATE TABLE `answer` (
+  `answerId` varchar(255) NOT NULL DEFAULT '' COMMENT '回答id',
+  `questionId` varchar(255) DEFAULT NULL COMMENT '问题id',
+  `uid` varchar(255) DEFAULT NULL,
+  `answerInfo` varchar(10240) DEFAULT NULL,
+  `answerTime` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of answer
 -- ----------------------------
 
 -- ----------------------------
@@ -51,6 +68,7 @@ INSERT INTO `secret_question` VALUES ('2', '2', '2', '2', null);
 INSERT INTO `secret_question` VALUES ('3', '1', '3', '3', null);
 INSERT INTO `secret_question` VALUES ('4', '1', '学号？', '2013142202', null);
 INSERT INTO `secret_question` VALUES ('tt', 'tt', '测试', '无题', null);
+INSERT INTO `secret_question` VALUES ('tt2', 'tt', '测试2', '无题2', '11');
 
 -- ----------------------------
 -- Table structure for user
@@ -78,3 +96,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('2013142203', 'cyy2', 'cyy10208023cy', '1079276272@qq.com', '123123', 'Cinyky', '1', 'i\'m a boy', 'haha', 'China', 'asd', '0', '0', '0', '1');
+INSERT INTO `user` VALUES ('2013142204', 'cyy3', '9ac81ed1a7aeb8e442c3596a229776aa', '1079276272@qq.com', '123123', 'Cinyky', '1', 'i\'m a boy', 'haha', 'China', 'asd', '0', '0', '0', '1');
