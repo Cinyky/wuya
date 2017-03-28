@@ -45,7 +45,7 @@ public interface ReportDao {
 	 * 查询report 根据info模糊
 	 * @return
 	 */
-	List<Report> selectReportByInfo(@Param("questionInfo")String questionInfo);
+	List<Report> selectReportByInfo(@Param("reportInfo")String reportInfo);
 	
 	/**
 	 * 查询report 根据uid reportType

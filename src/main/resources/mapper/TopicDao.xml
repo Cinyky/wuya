@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.TopicDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入topic  --> 
+	<insert id="addTopic" parameterType="Topic">
+			INSERT
+			INTO
+				topic
+			values(
+				#{topicId},
+				#{uid},
+				#{topicName},
+				#{topicPic},
+				#{status},
+				#{topicTime}
+				)
+	</insert>
+	
+	<!-- 更新topic  --> 
+	<update id="updateTopic">
+			UPDATE
+				topic
+			SET
+					uid=#{uid},
+					topicName=#{topicName},
+					topicPic=#{topicPic},
+					status=#{status},
+					topicTime=#{topicTime}
+			WHERE
+				topicId=#{topicId}
+	</update>
+	
+	<!-- 根据uid查询topic -->
+	<select id="selectTopicByTopicName" resultType="Topic">
+		SELECT
+			*
+		FROM
+			topic
+		WHERE
+			topicName like'%#{topicName}%'
+	</select>
+
+
+	<!-- 根据uid查询topic -->
+	<select id="selecttopicByUid" resultType="Topic">
+		SELECT
+			*
+		FROM
+			topic
+		WHERE
+			uid=#{uid}
+	</select>
+	
+	<!-- 根据topicId查询topic -->
+	<select id="selectTopicByTopicId" resultType="Topic">
+		SELECT
+			*
+		FROM
+			topic
+		WHERE
+			topicId=#{topicId}
+	</select>
+	
+</mapper>

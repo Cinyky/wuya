@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.ShareDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入share  --> 
+	<insert id="addShare" parameterType="Share">
+			INSERT
+			INTO
+				share
+			values(
+				#{shareId},
+				#{uid},
+				#{shareType},
+				#{id},
+				#{shareTime}
+				)
+	</insert>
+	
+	<!-- 更新share  --> 
+	<update id="updateShare">
+			UPDATE
+				share
+			SET
+					#{shareId},
+					#{uid},
+					#{shareType},
+					#{id},
+					#{shareTime}
+			WHERE
+				shareId=#{shareId}
+	</update>
+	
+	<!-- 根据uid查询share -->
+	<select id="selectShareByUid" resultType="Share">
+		SELECT
+			*
+		FROM
+			share
+		WHERE
+			uid=#{uid}
+	</select>
+
+
+	<!-- 根据reportId查询report -->
+	<select id="selectShareByShareId" resultType="Share">
+		SELECT
+			*
+		FROM
+			share
+		WHERE
+			shareId=#{shareId}
+	</select>
+	
+	<!-- 根据type查询report -->
+	<select id="selectShareByType" resultType="Share">
+		SELECT
+			*
+		FROM
+			share
+		WHERE
+			shareType=#{shareType}
+	</select>
+	
+	
+	<!-- 根据uid reportType查询report -->
+	<select id="selectShareByTypeAndUid" resultType="Share">
+		SELECT
+			*
+		FROM
+			share
+		WHERE
+			uid=#{uid}
+			AND
+			shareType=#{shareType}
+	</select>
+
+</mapper>

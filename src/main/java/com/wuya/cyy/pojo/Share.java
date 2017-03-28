@@ -6,6 +6,7 @@ package com.wuya.cyy.pojo;
  * 2017年3月26日下午9:03:03
  */
 public class Share {
+	private String shareId;
 	private String uid;			//user id
 	private int	shareType;		//1.question 2.answer
 	private int id;				//分享id
@@ -14,12 +15,21 @@ public class Share {
 	public Share() {
 	}
 
-	public Share(String uid, int shareType, int id, long shareTime) {
+	public Share(String shareId, String uid, int shareType, int id, long shareTime) {
 		super();
+		this.shareId = shareId;
 		this.uid = uid;
 		this.shareType = shareType;
 		this.id = id;
 		this.shareTime = shareTime;
+	}
+
+	public String getShareId() {
+		return shareId;
+	}
+
+	public void setShareId(String shareId) {
+		this.shareId = shareId;
 	}
 
 	public String getUid() {
@@ -56,11 +66,10 @@ public class Share {
 
 	@Override
 	public String toString() {
-		return "Share [uid=" + uid + ", shareType=" + shareType + ", id=" + id + ", shareTime=" + shareTime + "]";
+		return "Share [shareId=" + shareId + ", uid=" + uid + ", shareType=" + shareType + ", id=" + id + ", shareTime="
+				+ shareTime + "]";
 	}
-	
 
-	
 
 	
 }
