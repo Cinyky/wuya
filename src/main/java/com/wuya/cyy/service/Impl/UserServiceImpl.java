@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.wuya.cyy.dao.UserDao;
 import com.wuya.cyy.pojo.User;
@@ -18,6 +19,7 @@ import com.wuya.cyy.utils.SendEmail;
  * junliang mint
  * 29 Mar 2017 16:22:57
  */
+@Service
 public class UserServiceImpl  implements UserService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private static final String ACTIVATE_URL = "http://localhost:8080/wuya/user/register?action=activate";
@@ -30,10 +32,9 @@ public class UserServiceImpl  implements UserService {
 		boolean isSuccess = false;
 		User user= new User(loginName, pwd, bind_email, nickName);
 		int affectRow = userDao.addUser(user);
-		
+		logger.warn("user"+user);
 		if(affectRow>0){
-			isSuccess = true; //注册成功 发送激活邮件
-			processReg(user.getBind_email(),user.getEmail_code(),"reg");
+			isSuccess = processReg(user.getBind_email(),user.getEmail_code(),"reg");
 		}
 		return isSuccess;
 	}
@@ -75,12 +76,12 @@ public class UserServiceImpl  implements UserService {
 
 	
 	//处理注册 发送邮件
-	private void processReg(String bind_email,String email_code,String method){
+	private boolean processReg(String bind_email,String email_code,String method){
 		 ///邮件的内容  
         String mailInfo = generatMailInfo(bind_email, email_code, method);
       //发送邮件  
-        SendEmail.send(bind_email, mailInfo.toString());
         logger.debug("SendEmail to"+bind_email+" emailIndo:"+mailInfo);
+        return SendEmail.send(bind_email, mailInfo.toString());
 	}
 	//产生邮件
 	private String generatMailInfo(String bind_email,String email_code,String method){

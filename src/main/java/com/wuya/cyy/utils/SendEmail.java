@@ -49,7 +49,7 @@ public class SendEmail {
         return session;  
     }  
       
-    public static void send(String toEmail , String content) {  
+    public static boolean send(String toEmail , String content) { 
         Session session = getSession();  
         try {  
             System.out.println("--send--"+content);  
@@ -66,9 +66,11 @@ public class SendEmail {
    
             //Send the message  
             Transport.send(msg);  
+            return true;
         }  
         catch (MessagingException mex) {  
             mex.printStackTrace();  
+            return false;
         }  
     }  
     
