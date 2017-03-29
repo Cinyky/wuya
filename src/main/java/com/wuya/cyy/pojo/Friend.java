@@ -9,7 +9,7 @@ public class Friend {
 	private String uid;				//id
 	private String anotherUid;		//创建话题用户id
 	private long friendTime;		//加好友时间
-	private int status;				//1.生效 2.失效
+	private int status;				//1.生效 0.失效
 	
 	public Friend() {
 	}

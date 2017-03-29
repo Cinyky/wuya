@@ -10,8 +10,9 @@ public class Topic {
 	private String uid;				//创建话题用户id
 	private String topicName;		//话题名
 	private String topicPic;		//话题图片
-	private int status;				//状态
 	private long topicTime;			//创建话题时间
+	private int status;				//状态
+	
 	
 	public Topic() {
 	}

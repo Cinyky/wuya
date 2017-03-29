@@ -11,7 +11,7 @@ public class Answer {
 	private String uid;				//回答问题用户id
 	private String answerInfo;		//回答详情
 	private long answerTime;		//提出问题时间
-	private int status;				//状态
+	private int status;				//状态  默认 1 删除0
 	
 	
 	

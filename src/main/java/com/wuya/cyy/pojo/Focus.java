@@ -10,7 +10,7 @@ public class Focus {
 	private String uid;				//user id
 	private int focusType;			// type 1.question 2.topic
 	private String id;				//id
-	private long focusTime;			//提出问题时间
+	private long focusTime;			//关注时间
 	private int status;				//状态
 	
 	public Focus() {
