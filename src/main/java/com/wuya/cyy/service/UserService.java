@@ -1,5 +1,7 @@
 package com.wuya.cyy.service;
 
+import java.util.*;
+
 import com.wuya.cyy.pojo.User;
 
 
@@ -17,9 +19,31 @@ public interface UserService {
 	 * @param user 用户
 	 * @return
 	 */
-	int userReg(User user);
+	boolean userReg(String loginName,String pwd,String bind_email,String nickName);
+	
+	/**
+	 * 用户激活
+	 * @param email , code
+	 * @return
+	 */
+	boolean userActicate(String bind_email,String code);
 	
 
+	/**
+	 * 用户登录
+	 * @param loginName pwd
+	 * @return
+	 */
+	User userLogin(String loginCondition,String pwd);
+	
+	
+	/**
+	 * 根据昵称模糊搜索
+	 * @param user
+	 * @return
+	 */
+	List<User> userSelect(String nickName);
+	
 	
 
 }

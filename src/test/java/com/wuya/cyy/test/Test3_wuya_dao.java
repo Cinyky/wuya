@@ -64,7 +64,9 @@ public class Test3_wuya_dao {
 	@Test
 	public void testUser_login() throws Exception {
 		String pwd =MD5Util.encode2hex("cyy10208023cy");
-		User user  = userDao.selectUserByUidAndPwd("2013142204", pwd);
-			System.out.println(user.toString());
+		User u = new User("123", pwd, "cyy1079276272@163.com", "Cinyky");
+		logger.warn(u.toString());
+//		User user  = userDao.selectUserByUidAndPwd("2013142204", pwd);
+//			System.out.println(user.toString());
 	}
 }

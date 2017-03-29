@@ -31,25 +31,37 @@ public interface UserDao {
 	 * 根据用户昵称模糊查询用户
 	 * @return
 	 */
-	List<User> selectUserByNickName(String nickName);
+	User selectUserByNickNameAndPwd(@Param("nickName")String nickName,@Param("pwd")String pwd);
 	
 	/**
 	 * 根据用户Id查询用户
 	 * @return
 	 */
-	User selectUserByUid(String uid);
+	User selectUserByUid(@Param("uid")String uid);
 	
 	/**
 	 * 根据用户Id&pwd查询用户
 	 * @return
 	 */
-	User selectUserByUidAndPwd(@Param("loginName")String loginName,@Param("pwd")String pwd);
+	User selectUserByLoginNameAndPwd(@Param("loginName")String loginName,@Param("pwd")String pwd);
 	
 	/**
-	 * 根据email查询email_code
+	 * 根据用户Id&pwd查询用户
 	 * @return
 	 */
-	User selectUserByEmail(String email);
+	User selectUserByEmailAndPwd(@Param("bind_email")String bind_email,@Param("pwd")String pwd);
+	
+	/**
+	 * 根据email查询用户
+	 * @return
+	 */
+	User selectUserByEmail(@Param("bind_email")String bind_email);
+	
+	/**
+	 * 根据nickName查询用户
+	 * @return
+	 */
+	List<User> selectUserByNickName(@Param("nickName")String nickName);
 	
 	
 	

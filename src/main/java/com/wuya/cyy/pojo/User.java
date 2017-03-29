@@ -1,6 +1,9 @@
 package com.wuya.cyy.pojo;
 
 import java.util.Date;
+import java.util.UUID;
+
+import com.wuya.cyy.utils.MD5Util;
 
 /**
  * 用户实体
@@ -15,15 +18,15 @@ public class User {
 	private String  bind_email;		//绑定邮箱账号
 	private String  email_code;		//邮箱验证码
 	private String  nickName;		//用户昵称
-	private int 	sex;			//性别 默认1->男 0->女'
-	private String  signature;		//个性签名
-	private String	profile;		//用户个人简介
-	private String  location; 		//居住地
-	private String 	headPic;		//头像
+	private int 	sex =1;			//性别 默认1->男 0->女'
+	private String  signature="这个人很懒";		//个性签名
+	private String	profile="个人简介";		//用户个人简介
+	private String  location="中国"; 		//居住地
+	private String 	headPic="default_headpic";		//头像
 	private long 	birth;		 	//生日
 	private long 	regTime;	    //注册时间
-	private long 	banTime;		//封号时间点
-	private int 	status;			//用户账号状态 -1未激活 0 正常 1封号
+	private long 	banTime = 0;		//封号时间点
+	private int 	status = -1;			//用户账号状态 -1未激活 0 正常 1封号
 	
 //	uid = #{uid},
 //	loginName = #{loginName},
@@ -57,7 +60,7 @@ public class User {
 			int sex, String signature, String profile, String location, String headPic, long birth, long regTime,
 			long banTime, int status) {
 		super();
-		this.uid = uid;
+		this.uid = UUID.randomUUID()+"";
 		this.loginName = loginName;
 		this.pwd = pwd;
 		this.bind_email = bind_email;
@@ -72,6 +75,17 @@ public class User {
 		this.regTime = regTime;
 		this.banTime = banTime;
 		this.status = status;
+	}
+	
+	public User(String loginName, String pwd, String bind_email, String nickName) {
+		super();
+		this.uid = UUID.randomUUID()+"";
+		this.loginName = loginName;
+		this.pwd = MD5Util.encode2hex(pwd);
+		this.bind_email = bind_email;
+		this.email_code = MD5Util.encode2hex(bind_email);
+		this.nickName = nickName;
+		this.regTime = System.currentTimeMillis();
 	}
 
 
