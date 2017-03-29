@@ -29,7 +29,7 @@
 	</insert>
 	
 	<!-- 更新用户  --> 
-	<update id="updateUser">
+	<update id="updateUser"  parameterType="User">
 		UPDATE
 			user
 		SET
