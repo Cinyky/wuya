@@ -20,22 +20,22 @@
             <p class="text-center text-primary">吾生也有涯，而知也无涯。</p>
         
             
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" action="user/login" method="POST">
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <input type="text" class="form-control" id="userName" placeholder="请输入用户名" onfocus="showValidate();">
+                  <input type="text" class="form-control" id="userName" name="loginCondition" placeholder="请输入用户名/昵称/邮箱" onfocus="showValidate();">
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                  <input type="password" class="form-control" id="password" name="pwd" placeholder="请输入密码">
                   <input type="text" class="form-control" style="display: none;" id="passwordShow" placeholder="请输入密码">
                 </div>
               </div>
               
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                		<input type="text" class="form-control" style="display: inline-block;" id="password" placeholder="请输入验证码">
+                		<input type="text" class="form-control" style="display: inline-block;" name="verifycode" placeholder="请输入验证码">
                 		<div class="pull-left">
                 			<a href='#' onclick="javascript:changeImg()">
                 				<img id="img" src="http://localhost:8080/wuya/verifycode/generateImg" />

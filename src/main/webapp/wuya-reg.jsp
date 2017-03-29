@@ -20,7 +20,7 @@
             <p class="text-center text-primary">吾生也有涯，而知也无涯。</p>
         
             
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" action="user/register" method="post">
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                   <input type="text" class="form-control" id="userName" name="user_name" placeholder="请输入用户名" onfocus="showValidate();">
@@ -28,7 +28,12 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <input type="password" class="form-control" id="password" name="pawword" placeholder="请输入密码">
+                  <input type="text" class="form-control" id="nickName" name="nickName" placeholder="请输入昵称" onfocus="showValidate();">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                  <input type="password" class="form-control" id="password" name="pwd" placeholder="请输入密码">
                   <input type="text" class="form-control" style="display: none;" id="passwordShow" placeholder="请输入密码">
                 </div>
               </div>
@@ -42,7 +47,7 @@
               
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                		<input type="email" class="form-control" style="display: inline-block;" id="password" placeholder="请输入163邮箱以激活账号">
+                		<input type="email" class="form-control" style="display: inline-block;" name="bind_email" placeholder="请输入163邮箱以激活账号">
                 </div>
               </div>
               <!--

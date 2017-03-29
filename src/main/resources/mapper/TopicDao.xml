@@ -40,7 +40,7 @@
 		FROM
 			topic
 		WHERE
-			topicName like'%#{topicName}%'
+			topicName like CONCAT('%','${topicName}','%' )
 	</select>
 
 

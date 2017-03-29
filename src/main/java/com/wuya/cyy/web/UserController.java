@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.FileItem;
@@ -36,8 +37,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wuya.cyy.pojo.Book;
+import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
+import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
 /**
  * 用户controller
@@ -54,7 +57,9 @@ public class UserController {
 
 	
 	@Resource  
-    private RegisterValidateService service;  
+    private RegisterValidateService service;
+	@Resource  
+    private UserServiceImpl userService;
 	
 	@RequestMapping(value = "/upload")
 	private void upload(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
@@ -138,18 +143,31 @@ public class UserController {
     }
 
       
-    @RequestMapping(value="/register",method={RequestMethod.GET,RequestMethod.POST})  
-    public ModelAndView  load(HttpServletRequest request,HttpServletResponse response) throws ParseException{  
-        String action = request.getParameter("action");  
-        logger.warn("-----reg----"+action);  
+    @RequestMapping(value="/{action}",method={RequestMethod.GET,RequestMethod.POST})  
+    public ModelAndView  userReg(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("action")String action,
+    		String user_name,
+    		String pwd,
+    		String bind_email,
+    		String nickName
+    		) throws ParseException{  
+        logger.warn("-----user action=="+action+"----");  
         ModelAndView mav=new ModelAndView();  
         String email = "";
         if("register".equals(action)) {  
-            //注册  
-            email = request.getParameter("email");  
-            logger.warn("-----reg----"+email);  
-            service.processregister(email);//发邮箱激活  
-            mav.addObject("text","注册成功");  
+        	logger.warn("-----user_name----"+user_name); 
+        	logger.warn("-----user_name----"+pwd);
+        	logger.warn("-----user_name----"+bind_email);
+        	logger.warn("-----user_name----"+nickName);
+            boolean isReg = userService.userReg(user_name, pwd, bind_email, nickName);
+            logger.warn("-----reg isSuccess----"+isReg);  
+            if(isReg){
+            	mav.addObject("text","注册成功");
+            }else{
+            	mav.addObject("text","注册失败");
+            }
+            
+            mav.addObject("user_name", user_name);
             mav.setViewName("register_success");  
         }   
         else if("activate".equals(action)) {  
@@ -169,6 +187,36 @@ public class UserController {
         }  
         return mav;  
     }  
+    
+    @RequestMapping(value="/login",method={RequestMethod.GET,RequestMethod.POST})  
+    public ModelAndView  userLogin(HttpServletRequest request,HttpServletResponse response,
+    		String loginCondition,
+    		String pwd,
+    		String verifycode
+    		) throws ParseException{  
+        HttpSession session = request.getSession(true);
+        logger.warn("-----login----");  
+        ModelAndView mav=new ModelAndView();
+        User userLogin = userService.userLogin(loginCondition, pwd);
+        if(userLogin!=null){
+        	session.setAttribute("user", userLogin);
+        	
+        	String code = (String) session.getAttribute("verifyCode");
+        	if(code.equals(verifycode)){
+        		mav.addObject("txt","success");
+        	}else{
+        		mav.addObject("txt","success but code null");
+        	}
+            logger.warn("-----login----");
+           
+        }else{
+        	mav.addObject("txt","fail");
+        }
+        mav.setViewName("success");
+        return mav;  
+    }  
+    
+    
     
     
 

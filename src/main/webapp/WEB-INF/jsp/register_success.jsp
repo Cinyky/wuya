@@ -1,4 +1,4 @@
-<%@ page  contentType="text/html; charset=utf-8"
+<%@ page  isELIgnored="false" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	 恭喜你注册成功！请到注册的邮箱点击链接激活！
+	 user_name---	${user_name}
+	 恭喜你${text}！请到注册的邮箱点击链接激活！
 </body>
 </html>

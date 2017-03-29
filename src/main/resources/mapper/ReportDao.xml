@@ -63,7 +63,7 @@
 		FROM
 			report
 		WHERE
-			reportInfo like'%#{reportInfo}%}
+			reportInfo like CONCAT('%','${reportInfo}','%' )
 	</select>
 	
 	

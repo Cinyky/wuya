@@ -61,7 +61,7 @@
 		FROM
 			question
 		WHERE
-			questionInfo like'%#{questionInfo}%}
+			questionInfo like CONCAT('%','${questionInfo}','%' )
 	</select>
 	
 	

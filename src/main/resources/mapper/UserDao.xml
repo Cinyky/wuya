@@ -114,7 +114,7 @@
 		FROM
 			user
 		WHERE
-			nickName like'%#{nickName}%'
+			nickName like CONCAT('%','${nickName}','%' )
 	</select>
 	
 </mapper>

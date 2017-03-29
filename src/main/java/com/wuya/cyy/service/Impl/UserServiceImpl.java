@@ -31,10 +31,12 @@ public class UserServiceImpl  implements UserService {
 		// TODO reg
 		boolean isSuccess = false;
 		User user= new User(loginName, pwd, bind_email, nickName);
-		int affectRow = userDao.addUser(user);
+		isSuccess = processReg(user.getBind_email(),user.getEmail_code(),"reg");
 		logger.warn("user"+user);
-		if(affectRow>0){
-			isSuccess = processReg(user.getBind_email(),user.getEmail_code(),"reg");
+		if(isSuccess){
+			int affectRow = userDao.addUser(user);
+			isSuccess = affectRow>0;
+			logger.warn("success");
 		}
 		return isSuccess;
 	}
@@ -42,6 +44,7 @@ public class UserServiceImpl  implements UserService {
 	@Override
 	public User userLogin(String loginCondition, String pwd) {
 		User user = null;
+		pwd = MD5Util.encode2hex(pwd);
 		user = userDao.selectUserByLoginNameAndPwd(loginCondition, pwd);
 		if(user == null){
 			user = userDao.selectUserByEmailAndPwd(loginCondition, pwd);
