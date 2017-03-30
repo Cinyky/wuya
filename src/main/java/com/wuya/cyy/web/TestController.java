@@ -51,7 +51,6 @@ import com.wuya.cyy.utils.ServiceException;
  */
 
 @Controller
-@RequestMapping("/test") // url:/模块/资源/{id}/细分 /seckill/list
 public class TestController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

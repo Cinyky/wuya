@@ -31,7 +31,7 @@ public interface UserService {
 
 	/**
 	 * 用户登录
-	 * @param loginName pwd
+	 * @param loginCondition(loginName/nickName/email) pwd
 	 * @return
 	 */
 	User userLogin(String loginCondition,String pwd);
@@ -39,10 +39,17 @@ public interface UserService {
 	
 	/**
 	 * 根据昵称模糊搜索
-	 * @param user
+	 * @param nickName
 	 * @return
 	 */
 	List<User> userSelect(String nickName);
+	
+	/**
+	 * 根据昵称模糊搜索
+	 * @param user
+	 * @return
+	 */
+	User userSelectByUid(String uid);
 	
 	
 

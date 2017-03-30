@@ -109,4 +109,10 @@ public class UserServiceImpl  implements UserService {
 		return mailInfo.toString();
 	}
 
+	@Override
+	public User userSelectByUid(String uid) {
+		// TODO Auto-generated method stub
+		return userDao.selectUserByUid(uid);
+	}
+
 }

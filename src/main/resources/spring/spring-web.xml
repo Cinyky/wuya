@@ -33,5 +33,12 @@
 	</bean>
 	
 	<!-- 6.配置mvc拦截器   http://elim.iteye.com/blog/1750680-->
-	
+	<!-- 拦截器 -->  
+     <mvc:interceptors>  
+            <!-- 多个拦截器，顺序执行 -->  
+            <mvc:interceptor>  
+                <mvc:mapping path="/"/>  
+                <bean class="com.wuya.cyy.interceptor.LoginInterceptor"></bean>  
+            </mvc:interceptor>  
+    </mvc:interceptors>  
 </beans>

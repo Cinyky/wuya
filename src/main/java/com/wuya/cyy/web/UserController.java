@@ -215,10 +215,5 @@ public class UserController {
         mav.setViewName("success");
         return mav;  
     }  
-    
-    
-    
-    
-
 
 }
