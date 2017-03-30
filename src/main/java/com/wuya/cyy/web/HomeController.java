@@ -60,22 +60,26 @@ public class HomeController {
     @RequestMapping(value="/",method={RequestMethod.GET,RequestMethod.POST})  
     public ModelAndView  userLogin(HttpServletRequest request,HttpServletResponse response
     		) throws ParseException{  
-    	Cookie[] cookies = request.getCookies();
     	boolean isCookie = false;
-    	for (Cookie cookie : cookies) {
-    		if("user".equalsIgnoreCase(cookie.getName())){
-    			String uid = cookie.getValue();
-    			User user = userService.userSelectByUid(uid);
-    			if(user!=null){
-    				isCookie = true;
-    				HttpSession session = request.getSession(true);
-    				if((User)session.getAttribute("user")!=null){
-    					session.removeAttribute("user");
-    				}
-    				session.setAttribute("user", user);
-    			}
+    	Cookie[] cookies = request.getCookies();
+    	if(cookies!=null&&cookies.length>0){
+    		for (Cookie cookie : cookies) {
+        		if("user".equalsIgnoreCase(cookie.getName())){
+        			String uid = cookie.getValue();
+        			User user = userService.userSelectByUid(uid);
+        			if(user!=null){
+        				isCookie = true;
+        				HttpSession session = request.getSession(true);
+        				if((User)session.getAttribute("user")!=null){
+        					session.removeAttribute("user");
+        				}
+        				session.setAttribute("user", user);
+        			}
+        		}
     		}
-		}
+    	}
+    	
+    	
         ModelAndView mav=new ModelAndView();
         if(isCookie){
             mav.setViewName("redirect:/wuya-index.jsp");
