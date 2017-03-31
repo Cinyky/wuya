@@ -44,7 +44,7 @@ import com.wuya.cyy.service.Impl.RegisterValidateService;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
 /**
- * 用户controller
+ * 主页 跳转controller
  * Cinyky 
  *
  * 2017年3月21日上午8:50:13

@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery.min.js" ></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/wuya-index.js" ></script>
-    <link rel="stylesheet" href="css/font-awesome.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/wuya-index.css" />
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-index.js" ></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-index.css" />
     <title>首页</title>
   </head>
 <body>
@@ -42,7 +42,7 @@
               </li>
               <li class="">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="img/headpic.jpg" class="navbarimg-responsive img-rounded " width="20px" height="20px">
+							<img src="${pageContext.request.contextPath}/img/headpic.jpg" class="navbarimg-responsive img-rounded " width="20px" height="20px">
 							你干嘛
 							<b class="caret"></b>
 						</a>
@@ -77,11 +77,11 @@
             <div class="piece" id="piece1">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_1.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_1.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：自然科学</h7>
-	                  <h4 class="media-heading">实验做不出结果是一种怎样的体验</h4>
+	                  <h4 class="media-heading"><a href="${pageContext.request.contextPath}/question/">实验做不出结果是一种怎样的体验</a></h4>
 	                  <h6 class="media-heading">
 	                    <span>我是一个大帅哥</span>&nbsp;：
 	                    <span>个性签名</span>
@@ -116,7 +116,7 @@
             <div class="piece" id="piece2">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a class="pull-left" href="#"><img class="img-rounded media-object" src="topic/topic_2.jpg" height="42" width="42"></a>
+	                <a class="pull-left" href="#"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_2.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：美食</h7>
@@ -157,7 +157,7 @@
             <div class="piece" id="piece3">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="media-object" src="topic/topic_3.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="media-object" src="${pageContext.request.contextPath}/topic/topic_3.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                	<button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：Linux</h7>
@@ -168,7 +168,7 @@
 	                  </h6>
 	                  <p></p>
 	                  <div class="col-md-3">
-	                    <img src="img/question.jpg" class="img-responsive img-rounded">
+	                    <img src="${pageContext.request.contextPath}/img/question.jpg" class="img-responsive img-rounded">
 	                  </div>
 	                  <div class="col-md-9">
 	                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
@@ -206,7 +206,7 @@
             <div class="piece" id="piece4">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_4.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_4.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：Html5</h7>
@@ -245,7 +245,7 @@
             <div class="piece" id="piece5">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_5.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_5.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：php</h7>
@@ -284,7 +284,7 @@
             <div class="piece" id="piece6">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_6.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_6.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：财务</h7>
@@ -323,7 +323,7 @@
             <div class="piece" id="piece7">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_7.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_7.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：Mac</h7>
@@ -362,7 +362,7 @@
             <div class="piece" id="piece8">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_8.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_8.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：python</h7>
@@ -401,7 +401,7 @@
             <div class="piece" id="piece9">
 	            <ul class="media-list">
 	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_9.jpg" height="42" width="42"></a>
+	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topic/topic_9.jpg" height="42" width="42"></a>
 	                <div class="media-body">
 	                  <button type="button" class="close pull-right">×</button>
 	                  <h7 class="media-heading">来自话题：java</h7>
@@ -481,7 +481,7 @@
     	描述：加载动画
     -->
     <div id="loading" style="position:fixed;bottom:0;left:0;width:80%;line-height:20px;font-size:16px;color:#fff;text-align:center;">
-		<img src="images/waiting.gif" width="20px" height="20px"/>
+		<img src="${pageContext.request.contextPath}/images/waiting.gif" width="20px" height="20px"/>
 	</div>  
 
     <!--暂时不要分页

@@ -37,10 +37,10 @@
                 <div class="col-sm-offset-3 col-sm-6">
                 		<input type="text" class="form-control" style="display: inline-block;" name="verifycode" placeholder="请输入验证码">
                 		<div class="pull-left">
-                			<a href='#' onclick="javascript:changeImg()">
-                				<img id="img" src="http://localhost:8080/wuya/verifycode/generateImg" />
+                			<a href='#' onclick="javascript:changeImg('${pageContext.request.contextPath}')">
+                				<img id="img" src="${pageContext.request.contextPath}/verifycode/generateImg" />
                 			</a>
-							<a href='#' onclick="javascript:changeImg()" class="btn btn-primary">看不清</a>
+							<a href='#' onclick="javascript:changeImg('${pageContext.request.contextPath}')" class="btn btn-primary">看不清</a>
                 		</div>
                 </div>
               </div>
@@ -53,7 +53,7 @@
                 <div class="col-sm-offset-3 col-sm-6">
                   <div class="checkbox pull-left">
                     <label>
-                      <input type="checkbox" checked><span style="color: #D1EEFC;">下次自动登录</span>
+                      <input type="checkbox" checked name="max_age"><span style="color: #D1EEFC;">下次自动登录</span>
                     </label>
                     <label>
                       <input id="showPwd" type="checkbox"/><span style="color: #D1EEFC;">显示密码</span>
@@ -66,13 +66,13 @@
                 <div class="col-sm-offset-3 col-sm-6">
                 	<div class="pull-left">
 	                     <a style="color: #D1EEFC;cursor: pointer;">忘记密码</span>
-	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="wuya-reg.jsp">没有账号？前往注册</span>
+	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">没有账号？前往注册</span>
                      </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
+                  <button type="button" class="btn btn-lg btn-primary btn-block" id="loginSubmit">登录</button>
                 </div>
               </div>
             </form>

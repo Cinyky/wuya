@@ -61,86 +61,7 @@ public class UserController {
 	@Resource  
     private UserServiceImpl userService;
 	
-	@RequestMapping(value = "/upload")
-	private void upload(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-    	
-		 CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
-	                request.getSession().getServletContext());
-		 if(multipartResolver.isMultipart(request)){
-
-			 MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
-			  Map<String, MultipartFile> fileMap = multiRequest.getFileMap();
-			  if(!fileMap.isEmpty()){
-				  for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
-					  	System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue().getSize());
-					  	MultipartFile file = entry.getValue();
-					  	if(file!=null){
-			                   String[] allowedType = { "image/bmp", "image/gif", "image/jpeg", "image/png" };
-			                   boolean allowed = Arrays.asList(allowedType).contains(file.getContentType());
-					  		 if (!allowed) {
-			                       response.getWriter().write("error|不支持的类型");
-			                       logger.warn("upload error|不支持的类型");
-			                       return;
-			                   }
-					  		 String fi = file.getOriginalFilename();
-			                   // 提取文件拓展名
-			                   String fileNameExtension = fi.substring(fi.indexOf("."), fi.length());
-			                   // 生成实际存储的真实文件名
-			                   String realName = UUID.randomUUID().toString() + fileNameExtension;
-			                   // 图片存放的真实路径
-			                   String realPath = request.getServletContext().getRealPath("/upload") + "/" + realName;
-			                   String absolutePath = request.getServletContext().getRealPath("/upload") + "/" + realName;
-			                   // 将文件写入指定路径下
-			                   System.out.println("upload fileNameExtension:"+fileNameExtension+" realName:"+realName
-			                		   +" realPath:"+realPath+" absolutePath:"+absolutePath);
-			                   file.transferTo(new File(realPath));
-			                   System.out.println("return url:"+request.getContextPath() + "/upload/" + realName);
-			          
-			                   // 返回图片的URL地址
-			                   response.getWriter().write(request.getContextPath() + "/upload/" + realName);
-					  	}
-				  }
-	    	  }else{
-	 			 response.getWriter().write("error|rrrrrrr");
-	    	  }
-		 }
-	}
 	
-	@RequestMapping(value="/springUpload")
-    public String  springUpload(HttpServletRequest request) throws IllegalStateException, IOException{
-         long  startTime=System.currentTimeMillis();
-         //将当前上下文初始化给  CommonsMutipartResolver （多部分解析器）
-        CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
-                request.getSession().getServletContext());
-        logger.warn("springUpload");
-        //检查form中是否有enctype="multipart/form-data"
-        if(multipartResolver.isMultipart(request))
-        {
-            //将request变成多部分request
-            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
-           //获取multiRequest 中所有的文件名
-            Iterator iter=multiRequest.getFileNames();
-            
-            while(iter.hasNext())
-            {
-                //一次遍历所有文件
-                MultipartFile file=multiRequest.getFile(iter.next().toString());
-                if(file!=null)
-                {	
-                	logger.warn("getOriginalFilename:"+file.getOriginalFilename());
-                    String path="E:/springUpload/"+file.getOriginalFilename();
-                	logger.warn("path:"+path);
-                    //上传
-                    file.transferTo(new File(path));
-                }
-                 
-            }
-           
-        }
-        long  endTime=System.currentTimeMillis();
-        System.out.println("方法三的运行时间："+String.valueOf(endTime-startTime)+"ms");
-        return "success"; 
-    }
 
       
     @RequestMapping(value="/{action}",method={RequestMethod.GET,RequestMethod.POST})  
@@ -151,24 +72,32 @@ public class UserController {
     		String bind_email,
     		String nickName
     		) throws ParseException{  
+    	String contextPath = request.getContextPath();
         logger.warn("-----user action=="+action+"----");  
         ModelAndView mav=new ModelAndView();  
         String email = "";
-        if("register".equals(action)) {  
-        	logger.warn("-----user_name----"+user_name); 
-        	logger.warn("-----user_name----"+pwd);
-        	logger.warn("-----user_name----"+bind_email);
-        	logger.warn("-----user_name----"+nickName);
-            boolean isReg = userService.userReg(user_name, pwd, bind_email, nickName);
-            logger.warn("-----reg isSuccess----"+isReg);  
-            if(isReg){
-            	mav.addObject("text","注册成功");
-            }else{
-            	mav.addObject("text","注册失败");
-            }
-            
-            mav.addObject("user_name", user_name);
-            mav.setViewName("register_success");  
+        String method = request.getMethod();
+        if("register".equals(action)) { 
+	       	 logger.warn("-----userLogin---- method:"+method); 
+	       	if("get".equalsIgnoreCase(method)){
+	       		mav.setViewName("forward:../wuya-reg.jsp");
+	       	}else{
+	       		logger.warn("-----user_name----"+user_name); 
+	        	logger.warn("-----user_name----"+pwd);
+	        	logger.warn("-----user_name----"+bind_email);
+	        	logger.warn("-----user_name----"+nickName);
+	            boolean isReg = userService.userReg(user_name, pwd, bind_email, nickName);
+	            logger.warn("-----reg isSuccess----"+isReg);  
+	            if(isReg){
+	            	mav.addObject("text","注册成功");
+	            }else{
+	            	mav.addObject("text","注册失败");
+	            }
+	            
+	            mav.addObject("user_name", user_name);
+	            mav.setViewName("register_success");  
+	       	}
+        	
         }   
         else if("activate".equals(action)) {  
             //激活  
@@ -212,11 +141,13 @@ public class UserController {
     	        		mav.addObject("txt","success but code null");
     	        	}
     	            logger.warn("-----login----");
+    	            mav.setViewName("forward:../wuya-index.jsp");
     	           
     	        }else{
     	        	mav.addObject("txt","fail");
+    	        	mav.setViewName("redirect:../user/login");
     	        }
-    	        mav.setViewName("forward:../wuya-index.jsp");
+    	       
     	}
         return mav;  
     }  

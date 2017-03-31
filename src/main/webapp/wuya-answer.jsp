@@ -5,14 +5,14 @@
 <title>answer</title>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery.min.js" ></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/wangEditor.js"></script>
-    <script type="text/javascript" src="js/wuya-answer.js" ></script>
-    <link rel="stylesheet" href="css/font-awesome.css" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/wuya-answer.css" />
-     <link rel="stylesheet" type="text/css" href="css/wangEditor.min.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wangEditor.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-answer.js" ></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-answer.css" />
+     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/wangEditor.min.css">
 </head>
 <body>
 	<div class="navbar navbar-default navbar-fixed-top" style="height: 50px;">
@@ -45,7 +45,7 @@
               </li>
               <li class="">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="img/headpic.jpg" class="navbarimg-responsive img-rounded " width="20px" height="20px">
+							<img src="${pageContext.request.contextPath}/img/headpic.jpg" class="navbarimg-responsive img-rounded " width="20px" height="20px">
 							你干嘛
 							<b class="caret"></b>
 						</a>
@@ -89,7 +89,7 @@
           		<div class="answer" id="answer1">
 		                <div class="panel panel-default">
 			                  <div class="panel-heading">
-			                  	<img src="img/headpic6.jpg" width="60px" height="60px"/>
+			                  	<img src="${pageContext.request.contextPath}/img/headpic6.jpg" width="60px" height="60px"/>
 				              	<div class="author-info" style="display:inline-block;">
 				              		<span class="nickname">Dean.Lee</span><br/>
 				              		<span class="sign">过不去的坎永远只是暂时的...</span>
@@ -116,7 +116,7 @@
                 <div class="answer" id="answer2">
 		                <div class="panel panel-default">
 		                  <div class="panel-heading">
-		                  	<img src="img/headpic7.jpg" width="60px" height="60px"/>
+		                  	<img src="${pageContext.request.contextPath}/img/headpic7.jpg" width="60px" height="60px"/>
 			              	<div class="author-info" style="display:inline-block;">
 			              		<span class="nickname">老猫</span><br/>
 			              		<span class="sign">...</span>
@@ -161,7 +161,7 @@
                   	关于作者
                   </div>
 	              <div class="panel-body">
-	              	<img src="img/headpic6.jpg" width="60px" height="60px"/>
+	              	<img src="${pageContext.request.contextPath}/img/headpic6.jpg" width="60px" height="60px"/>
 	              	<div class="author-info" style="display:inline-block;">
 	              		<span class="nickname">Dean.Lee</span><br/>
 	              		<span class="sign">过不去的坎永远只是暂时的...</span>

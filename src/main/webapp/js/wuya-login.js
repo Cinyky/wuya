@@ -25,11 +25,17 @@ $(function () {
 		     }
 	    });
 		
+		$("#loginSubmit").bind({
+		     click: function(){
+		    	 
+		     }
+	    });
+		
 		
 });
 
 
-function changeImg(){
+function changeImg(path){
 		var img = document.getElementById("img");  
-		img.src = "http://localhost:8080/wuya/verifycode/generateImg?date=" + new Date();;
+		img.src = path+"/verifycode/generateImg?date=" + new Date();;
 	} 

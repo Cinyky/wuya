@@ -4,7 +4,7 @@
   	   var editor = new wangEditor('answer-editor');
 
          // 上传图片
-       editor.config.uploadImgUrl = 'test/upload';
+       editor.config.uploadImgUrl = '/upload/answer';
        editor.config.uploadParams = {
              token1: 'abcde',
              token2: '12345'
