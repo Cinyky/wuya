@@ -3,16 +3,16 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="js/jquery.min.js" ></script>
-    <script type="text/javascript" src="js/bootstrap.min.js" ></script>
-    <script type="text/javascript" src="js/wuya-login.js" ></script>
-    <link rel="stylesheet" href="css/font-awesome.css" />
-    <link rel="stylesheet" href="css/wuya-login-reg-common.css" />
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-login.js" ></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-login-reg-common.css" />
     <title>无涯登录</title>
 </head>
 <body>
 	<div class="cover">
-      <div class="cover-image" style="background-image: url(img/bgimg.jpg);"></div>
+      <div class="cover-image" style="background-image: url(${pageContext.request.contextPath}/img/bgimg.jpg);"></div>
       <div class="container">
         <div class="row">
           <div class="col-sm-offset-3 col-md-6 text-center">
@@ -20,7 +20,7 @@
             <p class="text-center text-primary">吾生也有涯，而知也无涯。</p>
         
             
-            <form class="form-horizontal" role="form" action="user/login" method="POST">
+            <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/user/login" method="POST">
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                   <input type="text" class="form-control" id="userName" name="loginCondition" placeholder="请输入用户名/昵称/邮箱" onfocus="showValidate();">

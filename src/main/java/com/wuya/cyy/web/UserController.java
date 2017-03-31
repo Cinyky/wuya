@@ -193,26 +193,31 @@ public class UserController {
     		String loginCondition,
     		String pwd,
     		String verifycode
-    		) throws ParseException{  
-        HttpSession session = request.getSession(true);
-        logger.warn("-----login----");  
-        ModelAndView mav=new ModelAndView();
-        User userLogin = userService.userLogin(loginCondition, pwd);
-        if(userLogin!=null){
-        	session.setAttribute("user", userLogin);
-        	
-        	String code = (String) session.getAttribute("verifyCode");
-        	if(code.equals(verifycode)){
-        		mav.addObject("txt","success");
-        	}else{
-        		mav.addObject("txt","success but code null");
-        	}
-            logger.warn("-----login----");
-           
-        }else{
-        	mav.addObject("txt","fail");
-        }
-        mav.setViewName("success");
+    		) throws ParseException{
+    	ModelAndView mav=new ModelAndView();
+    	HttpSession session = request.getSession(true);
+    	String method = request.getMethod();
+    	 logger.warn("-----userLogin---- method:"+method); 
+    	if("get".equalsIgnoreCase(method)){
+    		mav.setViewName("forward:../wuya-login.jsp");
+    	}else{
+    	        User userLogin = userService.userLogin(loginCondition, pwd);
+    	        if(userLogin!=null){
+    	        	session.setAttribute("user", userLogin);
+    	        	
+    	        	String code = (String) session.getAttribute("verifyCode");
+    	        	if(code.equals(verifycode)){
+    	        		mav.addObject("txt","success");
+    	        	}else{
+    	        		mav.addObject("txt","success but code null");
+    	        	}
+    	            logger.warn("-----login----");
+    	           
+    	        }else{
+    	        	mav.addObject("txt","fail");
+    	        }
+    	        mav.setViewName("forward:../wuya-index.jsp");
+    	}
         return mav;  
     }  
 
