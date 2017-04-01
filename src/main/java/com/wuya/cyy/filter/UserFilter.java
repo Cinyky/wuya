@@ -37,7 +37,13 @@ public class UserFilter extends	OncePerRequestFilter{
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// 不过滤的uri
-        String[] notFilter = new String[] { "login", "reg" ,"verifycode","js","css","img" };
+        String[] notFilter = new String[] { 
+        		"login", "reg" ,"verifycode",
+        		".img",".jpg",".data",".png",".gif",
+        		"/css","/emotions",
+        		"/error",
+        		"/fonts","ico","/images","/img","/topic", "/js" ,"upload"
+        		};
         String wuya = "/wuya/";
         // 请求的uri
         String uri = request.getRequestURI();
@@ -81,6 +87,7 @@ public class UserFilter extends	OncePerRequestFilter{
                 		}
             		}
             	}
+             isCookie = true;
                 if (!isCookie) {
                     // 如果session中不存在登录者实体，则弹出框提示重新登录
                     // 设置request和response的字符集，防止乱码

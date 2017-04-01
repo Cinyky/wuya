@@ -22,7 +22,7 @@ import com.wuya.cyy.utils.SendEmail;
 @Service
 public class UserServiceImpl  implements UserService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	private static final String ACTIVATE_URL = "http://localhost:8080/wuya/user/register?action=activate";
+	private static final String ACTIVATE_URL = "http://localhost:8080/wuya/user/activate";
 	private static final String FINDPWD_URL = "http://localhost:8080/wuya/user/findpwd?action=verify";
 	@Autowired
 	private UserDao userDao;
@@ -91,7 +91,7 @@ public class UserServiceImpl  implements UserService {
 		StringBuffer mailInfo=new StringBuffer();
 		if("reg".equals(method)){
 			mailInfo.append("点击下面链接激活账号，10分钟内有效，否则重新注册账号，链接只能使用一次，请尽快激活！<br/>");
-			mailInfo.append("<a href='"+ACTIVATE_URL+"&email=");  
+			mailInfo.append("<a href='"+ACTIVATE_URL+"?email=");  
 		    mailInfo.append(bind_email);   
 		    mailInfo.append("&validateCode=");   
 		    mailInfo.append(email_code);  

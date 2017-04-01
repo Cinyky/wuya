@@ -76,8 +76,8 @@ public class UserController {
         logger.warn("-----user action=="+action+"----");  
         ModelAndView mav=new ModelAndView();  
         String email = "";
-        String method = request.getMethod();
         if("register".equals(action)) { 
+        	String method = request.getMethod();
 	       	 logger.warn("-----userLogin---- method:"+method); 
 	       	if("get".equalsIgnoreCase(method)){
 	       		mav.setViewName("forward:../wuya-reg.jsp");
@@ -141,13 +141,29 @@ public class UserController {
     	        		mav.addObject("txt","success but code null");
     	        	}
     	            logger.warn("-----login----");
-    	            mav.setViewName("forward:../wuya-index.jsp");
+    	            mav.setViewName("redirect:/user/u/"+userLogin.getNickName()+"/home");
     	           
     	        }else{
     	        	mav.addObject("txt","fail");
-    	        	mav.setViewName("redirect:../user/login");
+    	        	mav.setViewName("redirect:login");
     	        }
     	       
+    	}
+        return mav;  
+    }  
+    
+    
+    @RequestMapping(value="/u/{nickname}/home",method={RequestMethod.GET,RequestMethod.POST})  
+    public ModelAndView  userHome(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("nickname")String nickname
+    		) throws ParseException{
+    	ModelAndView mav=new ModelAndView();
+    	HttpSession session = request.getSession(true);
+    	String method = request.getMethod();
+    	 logger.warn("-----userLogin---- method:"+method); 
+    	if("get".equalsIgnoreCase(method)){
+    		mav.addObject("nickname", nickname);
+    		mav.setViewName("forward:/wuya-index.jsp");
     	}
         return mav;  
     }  

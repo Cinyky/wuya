@@ -65,14 +65,14 @@
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                 	<div class="pull-left">
-	                     <a style="color: #D1EEFC;cursor: pointer;">忘记密码</span>
-	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">没有账号？前往注册</span>
+	                     <a style="color: #D1EEFC;cursor: pointer;">忘记密码</a>
+	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">没有账号？前往注册</a>
                      </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <button type="button" class="btn btn-lg btn-primary btn-block" id="loginSubmit">登录</button>
+                  <button type="submit" class="btn btn-lg btn-primary btn-block" id="loginSubmit">登录</button>
                 </div>
               </div>
             </form>
