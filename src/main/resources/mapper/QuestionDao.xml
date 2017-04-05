@@ -54,7 +54,7 @@
 			questionId=#{questionId}
 	</select>
 	
-	<!-- 根据QuestionId查询Question -->
+	<!-- 根据questionInfo查询Question -->
 	<select id="selectQuestionByInfo" resultType="Question">
 		SELECT
 			*
@@ -65,7 +65,7 @@
 	</select>
 	
 	
-	<!-- 根据QuestionId查询Question -->
+	<!-- 根据TopicId查询Question -->
 	<select id="selectQuestionByTopicId" resultType="Question">
 		SELECT
 			*
@@ -73,6 +73,20 @@
 			question
 		WHERE
 			topicId=#{topicId}
+	</select>
+	
+	
+	<!-- 根据QuestionId&TopicId查询Question -->
+	<select id="selectQuestionByUidAndTopicId" resultType="Question">
+		SELECT
+			*
+		FROM
+			question
+		WHERE
+			 uid = #{uid}
+		And 
+			 topicId=#{topicId}
+		   
 	</select>
 
 </mapper>

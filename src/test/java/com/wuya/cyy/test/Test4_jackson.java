@@ -67,7 +67,21 @@ public class Test4_jackson {
             e.printStackTrace();
         }
     }
-
+    
+    @Test
+	public void writeJsonString() throws Exception {
+		
+		try {
+			String tt = "json is a data struct";
+	        System.out.println("ObjectMapper");
+	        //writeValue具有和writeObject相同的功能
+	        objectMapper.writeValue(System.out, tt);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	
+	}
+    
 	@Test
 	public void writeJsonObject() throws Exception {
 		

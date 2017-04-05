@@ -37,21 +37,20 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wuya.cyy.pojo.Book;
-import com.wuya.cyy.pojo.Question;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
 /**
- * question Controller
+ * report Controller
  * @author Cinyky
  * junliang mint
- * 5 Apr 2017 11:00:36
+ * 5 Apr 2017 11:12:05
  */
 @Controller
-@RequestMapping("/question") // url:/模块/资源/{id}/细分 /seckill/list
-public class QuestionController {
+@RequestMapping("/report") // url:/模块/资源/{id}/细分 /seckill/list
+public class ReportController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -69,15 +68,14 @@ public class QuestionController {
 	 * @return
 	 * @throws ParseException
 	 */
-    @RequestMapping(value="/add",method={RequestMethod.GET,RequestMethod.POST})  
+    @RequestMapping(value="/{reportType}/add",method={RequestMethod.GET,RequestMethod.POST})  
     public ModelAndView  addQuestion(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("reportType")String reportType,
     		String questionInfo,
     		String topicId
     		) throws ParseException{  
     	String contextPath = request.getContextPath();
-    	User user = (User)request.getSession(true).getAttribute("user");
-        logger.warn("-----question questionInfo==>"+questionInfo+"----");  
-        Question question = new Question(user.getUid(), questionInfo, topicId, System.currentTimeMillis(), 1);
+        logger.warn("-----report reportType==>"+reportType+"----");  
         ModelAndView mav=new ModelAndView();  
         String email = "";
         String method = request.getMethod();
@@ -101,7 +99,8 @@ public class QuestionController {
     	String contextPath = request.getContextPath();
         logger.warn("-----question questionId==>"+questionId+"----");  
         ModelAndView mav=new ModelAndView();  
-        mav.setViewName("forward:/wuya-answer.jsp");
+        String email = "";
+        String method = request.getMethod();
         return mav;  
     }  
     

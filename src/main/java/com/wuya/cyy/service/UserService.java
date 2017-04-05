@@ -46,7 +46,7 @@ public interface UserService {
 	
 	/**
 	 * 根据昵称模糊搜索
-	 * @param user
+	 * @param uid
 	 * @return
 	 */
 	User userSelectByUid(String uid);

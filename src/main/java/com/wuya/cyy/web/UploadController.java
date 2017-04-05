@@ -44,7 +44,7 @@ import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
 import com.wuya.cyy.utils.ServiceException;
 /**
- * 测试controller
+ * 上传 controller
  * Cinyky 
  *
  * 2017年3月21日上午8:49:57
@@ -98,15 +98,21 @@ public class UploadController {
 			                   // 将文件写入指定路径下
 			                   System.out.println("upload fileNameExtension:"+fileNameExtension+" realName:"+realName
 			                		   +" realPath:"+realPath+" absolutePath:"+absolutePath);
-			                   file.transferTo(new File(realPath));
-			                   System.out.println("return url:"+request.getContextPath() + "/upload/" + action+"/" + realName);
-			          
-			                   // 返回图片的URL地址
-			                   response.getWriter().write(request.getContextPath() + "/upload/" + action+"/" + realName);
+			                   File realFile = new File(realPath);
+			                   if(realFile == null){
+			                	   response.getWriter().write("error|file path not exsist");
+			                   }else{
+			                	   file.transferTo(new File(realPath));
+				                   System.out.println("return url:"+request.getContextPath() + "/upload/" + action+"/" + realName);
+				          
+				                   // 返回图片的URL地址
+				                   response.getWriter().write(request.getContextPath() + "/upload/" + action+"/" + realName);
+			                   }
+			                 
 					  	}
 				  }
 	    	  }else{
-	 			 response.getWriter().write("error|rrrrrrr");
+	 			 response.getWriter().write("error|no file");
 	    	  }
 			  
 		 }

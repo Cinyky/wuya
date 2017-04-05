@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 问题实体类
  * Cinyky 
@@ -20,9 +23,9 @@ public class Question {
 
 
 
-	public Question(String questionId, String uid, String questionInfo, String topicId, long questionTime, int status) {
+	public Question(String uid, String questionInfo, String topicId, long questionTime, int status) {
 		super();
-		this.questionId = questionId;
+		this.questionId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.questionInfo = questionInfo;
 		this.topicId = topicId;
