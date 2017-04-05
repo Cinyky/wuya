@@ -26,44 +26,37 @@ public class AnswerServiceImpl  implements AnswerService {
 
 	@Override
 	public boolean answerAdd(Answer answer) {
-		// TODO Auto-generated method stub
-		return false;
+		return answerDao.addAnswer(answer)>0;
 	}
 
 	@Override
 	public boolean answerUpdate(Answer answer) {
-		// TODO Auto-generated method stub
-		return false;
+		return answerDao.updateAnswer(answer)>0;
 	}
 
 	@Override
 	public Answer answerSelectByAnswerId(String answerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return answerDao.selectAnswerByAnswerId(answerId);
 	}
 
 	@Override
 	public List<Answer> answerSelectByInfo(String answerInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		return answerDao.selectAnswerByInfo(answerInfo);
 	}
 
 	@Override
 	public List<Answer> answerSelectByUid(String uid) {
-		// TODO Auto-generated method stub
-		return null;
+		return answerDao.selectAnswerByUid(uid);
 	}
 
 	@Override
-	public List<Answer> answerSelectByTopicId(String topicId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Answer> answerSelectByQuestionId(String questionId) {
+		return answerDao.selectAnswerByQuestionId(questionId);
 	}
 
 	@Override
-	public List<Answer> answerSelectByUidAndTopicId(String topicId, String uid) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Answer> answerSelectByQuestionId(String uid, String questionId) {
+		return answerDao.selectAnswerByUidAndQuestionId(uid, questionId);
 	}
-	
+
 }

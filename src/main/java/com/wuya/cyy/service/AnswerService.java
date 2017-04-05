@@ -49,19 +49,18 @@ public interface AnswerService {
 	List<Answer> answerSelectByUid(String uid);
 	
 	/**
-	 * 根据昵称模糊搜索
-	 * @param nickName
+	 * 根据questionId搜索
+	 * @param questionId
 	 * @return
 	 */
-	List<Answer> answerSelectByTopicId(String topicId);
+	List<Answer> answerSelectByQuestionId(String questionId);
+	
 	
 	/**
-	 * 根据昵称模糊搜索
-	 * @param nickName
+	 * 根据questionId&uid搜索
+	 * @param questionId
 	 * @return
 	 */
-	List<Answer> answerSelectByUidAndTopicId(String topicId,String uid);
+	List<Answer> answerSelectByQuestionId(String questionId,String uid);
 	
-	
-
 }

@@ -33,7 +33,8 @@ public interface AnswerDao {
 	 * 根据questionId查询回答
 	 * @return
 	 */
-	Answer selectAnswerByQuestionId(@Param("questionId")String questionId);
+	List<Answer> selectAnswerByQuestionId(@Param("questionId")String questionId);
+	
 	
 	/**
 	 * 根据uid查询回答
@@ -41,6 +42,17 @@ public interface AnswerDao {
 	 */
 	List<Answer> selectAnswerByUid(@Param("uid")String uid);
 	
+	/**
+	 * 根据uid查询回答
+	 * @return
+	 */
+	List<Answer> selectAnswerByUidAndQuestionId(@Param("uid")String uid,@Param("questionId")String questionId);
+	
+	/**
+	 * 根据questionId查询回答
+	 * @return
+	 */
+	Answer selectAnswerByAnswerId(@Param("answerId")String answerId);
 	
 	/**
 	 * 根据info 模糊查询回答

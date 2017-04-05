@@ -36,13 +36,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wuya.cyy.pojo.Book;
-import com.wuya.cyy.pojo.User;
-import com.wuya.cyy.service.Impl.BookServiceImpl;
-import com.wuya.cyy.service.Impl.RegisterValidateService;
-import com.wuya.cyy.service.Impl.UserServiceImpl;
-import com.wuya.cyy.utils.ServiceException;
+import com.wuya.cyy.pojo.Answer;
+import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 
 
 /**
@@ -60,24 +58,22 @@ public class AnswerController {
 
 	
 	@Resource  
-    private RegisterValidateService service;
-	@Resource  
-    private UserServiceImpl userService;
+    private AnswerServiceImpl answerService;
      
     //分享问题
-    @RequestMapping(value="/{questionID}/detail",method={RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value="/{questionId}/detail",method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public void  shareQuestion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionID")String questionID
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----answer questionID==>"+questionID+"----");  
+    		@PathVariable("questionId")String questionId
+    		) throws ParseException, JsonGenerationException, JsonMappingException, IOException{  
+        logger.warn("-----answer questionId==>"+questionId+"----");  
+        List<Answer> answers = answerService.answerSelectByQuestionId(questionId);
         ObjectMapper objectMapper = new ObjectMapper();
-//    	if(questions!=null && !questions.isEmpty()){
-//    		objectMapper.writeValue(response.getOutputStream(), questions);
-//    	}else{
-//    		response.getOutputStream().print("empty");
-//    	}
+    	if(answers!=null && !answers.isEmpty()){
+    		objectMapper.writeValue(response.getOutputStream(), answers);
+    	}else{
+    		response.getOutputStream().print("empty");
+    	}
     }
     
 }

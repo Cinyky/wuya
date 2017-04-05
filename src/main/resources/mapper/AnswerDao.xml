@@ -34,7 +34,7 @@
 	</update>
 	
 	<!-- 根据questionId查询answer -->
-	<select id="selectAnswerByQuestionId" resultType="Admin">
+	<select id="selectAnswerByQuestionId" resultType="Answer">
 		SELECT
 			*
 		FROM
@@ -44,7 +44,7 @@
 	</select>
 	
 	<!-- 根据Uid查询answer -->
-	<select id="selectAnswerByUid" resultType="Admin">
+	<select id="selectAnswerByUid" resultType="Answer">
 		SELECT
 			*
 		FROM
@@ -53,8 +53,29 @@
 			uid=#{uid}
 	</select>
 	
+	<!-- 根据Uid查询answer -->
+	<select id="selectAnswerByUidAndQuestionId" resultType="Answer">
+		SELECT
+			*
+		FROM
+			answer
+		WHERE
+			uid=#{uid}
+		AND
+			questionId=#{questionID}
+	</select>
+	<!-- 根据questionId查询answer -->
+	<select id="selectAnswerByAnswerId" resultType="Answer">
+		SELECT
+			*
+		FROM
+			answer
+		WHERE
+			answerId=#{answerId}
+	</select>
+	
 	<!-- 根据answerInfo查询answer -->
-	<select id="selectAnswerByInfo" resultType="Admin">
+	<select id="selectAnswerByInfo" resultType="Answer">
 		SELECT
 			*
 		FROM
