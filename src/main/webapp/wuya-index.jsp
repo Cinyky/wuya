@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-index.css" />
-    <title>${nickname }de首页</title>
+    <title>${nickname }的首页</title>
   </head>
 <body>
   <div class="navbar navbar-default navbar-fixed-top" style="height: 50px;">
