@@ -111,7 +111,76 @@
         editor.create();
 //	  $("#answer-editor").removeAttr("style");
 		// $("#answer-editor").attr("height","200px");
+  		
   });
+  
+  function initAnswers(questionId){
+	  console.debug("function showQuestion info :"+info);
+		$.post(
+				"http://localhost:8080/wuya/answer",
+				{
+					"questionId":questionId
+				},
+				function(rs){
+					console.debug("init answers :")
+					var str ="";
+					if(rs=="empty"){
+						$("#answers").append("<h1>该问题还没有回答</h1>");
+						return;
+					}else{
+						var answers = eval(rs);
+						for(var i=0;i<answers.length-1;i++){
+							str+="<div class='answer' id='answer1'>";
+							str+="  <div class='panel panel-default'>";
+							str+="        <div class='panel-heading'>";
+							str+="        	<img src='http://localhost:8080/wuya/img/headpic6.jpg' width='60px' height='60px'/>";
+							str+="        	<div class='author-info' style='display:inline-block;'>";
+							str+="        		<span class='nickname'>Dean.Lee</span><br/>";
+							str+="       		<span class='sign'>过不去的坎永远只是暂时的...</span>";
+							str+="       	</div>";
+							str+="       	<div style='color: grey'>25 人赞同该回答</div>";
+							str+="        </div>";
+							str+="       <div class='panel-body'>";
+							str+="               <p class='answer-info'>";
+							str+=					answer.answerinfo;
+							str+="               </p>";
+							str+="               <hr>";
+							str+="              <span class='answer-date'>发布于-"+getMyDate(answer.answerTime)+"</span>";
+							str+="             <div>";
+							str+="                 <a class='media-object badge alert-danger' style='width:64px;'>25&nbsp;<i class='fa fa-thumbs-up'></i></a>";
+							str+="                 <a>分享</a>";
+							str+="                 <a>收藏</a>";
+							str+="                 <a class='' data-toggle='modal' data-target='#report'>举报</a>";
+							str+="       	  </div>";
+						    str+="     </div>";
+							str+=" </div>";
+							str+="</div>";
+						}
+						$("#answers").append(str);
+					}
+				}
+			);
+  }
+  
+  
+  function getMyDate(str){  
+	    var oDate = new Date(str),  
+	    oYear = oDate.getFullYear(),  
+	    oMonth = oDate.getMonth()+1,  
+	    oDay = oDate.getDate(),  
+	    oHour = oDate.getHours(),  
+	    oMin = oDate.getMinutes(),  
+	    oSen = oDate.getSeconds(),  
+	    oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间  
+	    return oTime;  
+	};  
+	//补0操作  
+	function getzf(num){  
+	    if(parseInt(num) < 10){  
+	        num = '0'+num;  
+	    }  
+	    return num;  
+	} 
 
 
      

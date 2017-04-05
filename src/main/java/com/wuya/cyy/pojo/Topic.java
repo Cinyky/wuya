@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 话题实体类
  * Cinyky 
@@ -17,14 +20,15 @@ public class Topic {
 	public Topic() {
 	}
 
-	public Topic(String topicId, String uid, String topicName, String topicPic, int status, long topicTime) {
+	public Topic(String topicId, String uid, String topicName, String topicPic, int status) {
 		super();
-		this.topicId = topicId;
+		this.topicId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.topicName = topicName;
 		this.topicPic = topicPic;
+		this.topicTime = System.currentTimeMillis();
 		this.status = status;
-		this.topicTime = topicTime;
+		
 	}
 
 	public String getTopicId() {

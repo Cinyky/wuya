@@ -36,6 +36,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wuya.cyy.pojo.Book;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
@@ -63,35 +64,20 @@ public class AnswerController {
 	@Resource  
     private UserServiceImpl userService;
      
-	/**
-	 * 
-	 * 综合查询 用户 && 问题 && answer
-	 * @return
-	 * @throws ParseException
-	 */
-    @RequestMapping(value="/multiple",method={RequestMethod.GET,RequestMethod.POST})  
-    public ModelAndView  getQuestionDetail(HttpServletRequest request,HttpServletResponse response,
-    		String searchInfo
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    }  
-    
     //分享问题
-    @RequestMapping(value="/{searchMethod}/detail",method={RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value="/{questionID}/detail",method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public ModelAndView  shareQuestion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("searchMethod")String searchMethod,
-    		String searchInfo
+    public void  shareQuestion(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("questionID")String questionID
     		) throws ParseException{  
     	String contextPath = request.getContextPath();
-        logger.warn("-----search searchMethod==>"+searchMethod+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String method = request.getMethod();
-        return mav;  
+        logger.warn("-----answer questionID==>"+questionID+"----");  
+        ObjectMapper objectMapper = new ObjectMapper();
+//    	if(questions!=null && !questions.isEmpty()){
+//    		objectMapper.writeValue(response.getOutputStream(), questions);
+//    	}else{
+//    		response.getOutputStream().print("empty");
+//    	}
     }
     
 }

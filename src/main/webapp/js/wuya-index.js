@@ -18,7 +18,7 @@ $(function() {
 				var str = "<div class='piece' id='piece"+(num)+"'>";
 				str	+="<ul class='media-list'>";
 				str	+="	<li class='media'>";
-				str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='topic/topic_1.jpg' height='42' width='42'></a>";
+				str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topic/topic_1.jpg' height='42' width='42'></a>";
 				str	+="		<div class='media-body'>";
 				str	+="			<button type='button' class='close pull-right' id='close"+num+"'>×</button>";
 				str	+="			<h7 class='media-heading'>来自话题：自然科学</h7>";
@@ -64,6 +64,25 @@ $(function() {
 	$('.shield').click(function() {
 		closePiece($(this));
 	});
+	
+	//动态显示
+	$('#questionInfo').keyup(function(){
+		var info =  $(this).val().trim();
+		$("#searchQuestion").empty();
+		if(info!=""){
+		showQuestion(info);
+		}
+	});
+	
+	$('#submitQuestion').click(function(){
+		var info =  $('#questionInfo').val().trim();
+		var topicId = $('#topicId').val();
+		if(info!=""){
+			submitQuestion(info,topicId);
+		}else{
+			alert("问题不可为空");
+		}
+	});
 
 });
 
@@ -85,7 +104,85 @@ function openPiece(id) {
 	$(id).children('.media-list').fadeIn(1000);
 	$(id).children('.undo').remove();
 }
+function showQuestion(info){
+	console.debug("function showQuestion info :"+info);
+	$.post(
+			"http://localhost:8080/wuya/question/ajax",
+			{
+				"questionInfo":info
+			},
+			function(rs){
+				console.debug("ajax:"+rs);
+				var str = "";
+				if(rs=="empty"){
+					return;
+				}else{
+					var questions = eval(rs);
+					str +="<table class='table table-hover table-condensed table-responsive'>";
+					str +="<thead>";
+					str +="<td>";
+					str +="问题详情";
+					str +="</td>";
+					str +="<td>";
+					str +="提问时间";
+					str +="</td>";
+					str +="</thead>";
+					str +="<tbody>";
+					for(var i=0;i<questions.length;i++){
+						var question = questions[i];
+						str +="<tr>";
+						str +=" <td>";
+						str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
+						str +=    question.questionInfo;
+						str +="  </a>";
+						str +=" </td>";
+						str +=" <td>";
+						str +=   getMyDate(question.questionTime);
+						str +=" </td>";
+						str +="</tr>";
+					}
+					str +="		</tbody>";
+					str +="</table>";
+				}
+				$("#searchQuestion").append(str);
+			}
+		)
+}
+
+function getMyDate(str){  
+    var oDate = new Date(str),  
+    oYear = oDate.getFullYear(),  
+    oMonth = oDate.getMonth()+1,  
+    oDay = oDate.getDate(),  
+    oHour = oDate.getHours(),  
+    oMin = oDate.getMinutes(),  
+    oSen = oDate.getSeconds(),  
+    oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间  
+    return oTime;  
+};  
+//补0操作  
+function getzf(num){  
+    if(parseInt(num) < 10){  
+        num = '0'+num;  
+    }  
+    return num;  
+} 
+
+function submitQuestion(info,topicId){
+	console.debug("function submitQuestion info :"+info+" topic："+topicId);
+	$.post(
+			"${pageContext.request.contextPath}/question/add",
+			{
+				"questionInfo":info,
+				"topicId"     :topicId
+			},
+			function(rs){
+				console.debug("rsrsrsrs:"+rs);
+			}
+		)
+}
 
 function init(){
 	
 }
+

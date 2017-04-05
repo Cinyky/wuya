@@ -14,11 +14,11 @@ public class Friend {
 	public Friend() {
 	}
 
-	public Friend(String uid, String anotherUid, long friendTime, int status) {
+	public Friend(String uid, String anotherUid, int status) {
 		super();
 		this.uid = uid;
 		this.anotherUid = anotherUid;
-		this.friendTime = friendTime;
+		this.friendTime = System.currentTimeMillis();
 		this.status = status;
 	}
 

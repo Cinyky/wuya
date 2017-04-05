@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 分享实体
  * Cinyky 
@@ -14,13 +17,13 @@ public class Share {
 	private int status;
 	public Share() {
 	}
-	public Share(String shareId, String uid, int shareType, String id, long shareTime, int status) {
+	public Share(String shareId, String uid, int shareType, String id, int status) {
 		super();
-		this.shareId = shareId;
+		this.shareId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.shareType = shareType;
 		this.id = id;
-		this.shareTime = shareTime;
+		this.shareTime = System.currentTimeMillis();
 		this.status = status;
 	}
 	public String getShareId() {

@@ -57,7 +57,7 @@ public class User {
 
 
 	public User(String uid, String loginName, String pwd, String bind_email, String email_code, String nickName,
-			int sex, String signature, String profile, String location, String headPic, long birth, long regTime,
+			int sex, String signature, String profile, String location, String headPic, long birth,
 			long banTime, int status) {
 		super();
 		this.uid = UUID.randomUUID()+"";
@@ -72,7 +72,7 @@ public class User {
 		this.location = location;
 		this.headPic = headPic;
 		this.birth = birth;
-		this.regTime = regTime;
+		this.regTime = System.currentTimeMillis();
 		this.banTime = banTime;
 		this.status = status;
 	}

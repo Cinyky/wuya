@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 点赞
  * Cinyky 
@@ -17,12 +20,12 @@ public class Like {
 	}
 
 
-	public Like(String likeId, String uid, String answerId, long likeTime, int status) {
+	public Like(String likeId, String uid, String answerId, int status) {
 		super();
-		this.likeId = likeId;
+		this.likeId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.answerId = answerId;
-		this.likeTime = likeTime;
+		this.likeTime = System.currentTimeMillis();
 		this.status = status;
 	}
 

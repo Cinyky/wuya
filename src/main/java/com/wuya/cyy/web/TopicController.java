@@ -36,9 +36,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wuya.cyy.pojo.Book;
 import com.wuya.cyy.pojo.Question;
 import com.wuya.cyy.pojo.User;
@@ -48,14 +45,14 @@ import com.wuya.cyy.service.Impl.RegisterValidateService;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
 /**
- * question Controller
+ * 话题 Controller
  * @author Cinyky
  * junliang mint
- * 5 Apr 2017 11:00:36
+ * 5 Apr 2017 16:07:02
  */
 @Controller
-@RequestMapping("/question") // url:/模块/资源/{id}/细分 /seckill/list
-public class QuestionController {
+@RequestMapping("/topic") // url:/模块/资源/{id}/细分 /seckill/list
+public class TopicController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -67,18 +64,11 @@ public class QuestionController {
 	
     @RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
-    public void  ajaxVerifyQuestion(HttpServletRequest request,HttpServletResponse response,
+    public String  ajaxVerifyQuestion(HttpServletRequest request,HttpServletResponse response,
     		String questionInfo
-    		) throws ParseException, JsonGenerationException, JsonMappingException, IOException{  
+    		) throws ParseException{  
     	logger.warn("questionInfo:"+questionInfo);
-    	List<Question> questions = questionService.questionSelectByInfo(questionInfo);
-    	ObjectMapper objectMapper = new ObjectMapper();
-    	if(questions!=null && !questions.isEmpty()){
-    		objectMapper.writeValue(response.getOutputStream(), questions);
-    	}else{
-    		response.getOutputStream().print("empty");
-    	}
-    	
+        return "1";  
     } 
 	
 	/**
@@ -88,17 +78,17 @@ public class QuestionController {
 	 * @throws ParseException
 	 */
     @RequestMapping(value="/add",method={RequestMethod.GET,RequestMethod.POST})  
-    public String  addQuestion(HttpServletRequest request,HttpServletResponse response,
+    public void  addQuestion(HttpServletRequest request,HttpServletResponse response,
     		String questionInfo,
     		String topicId
     		) throws ParseException{  
     	String contextPath = request.getContextPath();
     	User user = (User)request.getSession(true).getAttribute("user");
         logger.warn("-----question questionInfo==>"+questionInfo+"----");  
-        Question question = new Question(user.getUid(), questionInfo, topicId, 1);
-        boolean questionAdd = questionService.questionAdd(question);
-        String isAdded = questionAdd?"1":"0";
-        return isAdded;  
+//        Question question = new Question(user.getUid(), questionInfo, topicId, System.currentTimeMillis(), 1);
+//        boolean questionAdd = questionService.questionAdd(question);
+//        String isAdded = questionAdd?"1":"0";
+//        return isAdded;  
     } 
 	
 	/**
@@ -109,12 +99,15 @@ public class QuestionController {
 	 */
     @RequestMapping(value="/{questionId}/detail",method={RequestMethod.GET,RequestMethod.POST})  
     public ModelAndView  getQuestionDetail(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId
+    		@PathVariable("questionId")String questionId,
+    		String user_name,
+    		String pwd,
+    		String bind_email,
+    		String nickName
     		) throws ParseException{  
+    	String contextPath = request.getContextPath();
         logger.warn("-----question questionId==>"+questionId+"----");  
-        Question question = questionService.questionSelectByQuestionId(questionId);
         ModelAndView mav=new ModelAndView();  
-        mav.addObject("question", question);
         mav.setViewName("forward:/wuya-answer.jsp");
         return mav;  
     }  

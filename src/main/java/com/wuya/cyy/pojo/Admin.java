@@ -1,6 +1,7 @@
 package com.wuya.cyy.pojo;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * 用户实体
@@ -23,7 +24,7 @@ public class Admin {
 	}
 	public Admin(String uid, String loginName, String pwd) {
 		super();
-		this.uid = uid;
+		this.uid = UUID.randomUUID()+"";
 		this.loginName = loginName;
 		this.pwd = pwd;
 	}

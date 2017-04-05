@@ -49,7 +49,7 @@ public class Test3_wuya_dao {
 		long ss =0;
 		String pwd =MD5Util.encode2hex("cyy10208023cy");
 		User user = new User("2013142204", "cyy3",pwd, "1079276272@qq.com", 
-				"123123", "Cinyky", 1, "i'm a boy", "haha", "China", "asd", ss, ss, ss, 1);
+				"123123", "Cinyky", 1, "i'm a boy", "haha", "China", "asd", ss, ss, 1);
 		int addUser = userDao.addUser(user);
 		System.out.println(addUser);
 	}

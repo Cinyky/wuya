@@ -23,13 +23,13 @@ public class Question {
 
 
 
-	public Question(String uid, String questionInfo, String topicId, long questionTime, int status) {
+	public Question(String uid, String questionInfo, String topicId, int status) {
 		super();
 		this.questionId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.questionInfo = questionInfo;
 		this.topicId = topicId;
-		this.questionTime = questionTime;
+		this.questionTime = System.currentTimeMillis();
 		this.status = status;
 	}
 

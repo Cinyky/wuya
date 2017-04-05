@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 答案实体类
  * Cinyky 
@@ -20,13 +23,13 @@ public class Answer {
 
 
 
-	public Answer(String answerId, String questionId, String uid, String answerInfo, long answerTime, int status) {
+	public Answer(String questionId, String uid, String answerInfo, int status) {
 		super();
-		this.answerId = answerId;
+		this.answerId = UUID.randomUUID()+"";
 		this.questionId = questionId;
 		this.uid = uid;
 		this.answerInfo = answerInfo;
-		this.answerTime = answerTime;
+		this.answerTime = System.currentTimeMillis();
 		this.status = status;
 	}
 

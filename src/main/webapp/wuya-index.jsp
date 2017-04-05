@@ -543,12 +543,29 @@
                   <li>查看是否解决</li>
                   <li>坚持提问</li>
                 </ol>
-              <form class="form  text-center" role="search">
+              <form class="form  text-center" role="search" action="${pageContext.request.contextPath}/question/add">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                  <div><span class="pull-left">问题说明</span> <span class="pull-right"><i class="fa fa-2x fa-fw fa-picture-o"></i></span></div>
-                  <input type="submit" class="btn btn-block btn-primary"/>
+                  <input type="text" class="form-control" name="questionInfo" id="questionInfo" placeholder="输入你想询问的问题">
+                 
+                  <span class="pull-left">问题说明</span>
+                  <divclass="panel panel-default">
+	                  <div class="panel-body"  id="searchQuestion" >
+	                  </div>
+                  
+                  </div>
                 </div>
+                
+                <div class="form-group">
+                 <span>选择一个话题</span>
+                 <select name="topicId" id="topicId">
+					  <option value ="volvo">Volvo</option>
+					  <option value ="saab">Saab</option>
+					  <option value="opel">Opel</option>
+					  <option value="audi">Audi</option>
+				 </select>
+                </div>
+                <!-- disabled="disabled " -->
+                <button type="button" class="btn btn-lg btn-primary btn-block" id="submitQuestion">登录</button>
               </form>
           </div>
         </div>

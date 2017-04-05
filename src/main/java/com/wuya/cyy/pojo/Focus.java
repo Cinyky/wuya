@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 关注实体
  * Cinyky 
@@ -16,13 +19,13 @@ public class Focus {
 	public Focus() {
 	}
 
-	public Focus(String focusId, String uid, int focusType, String id, long focusTime, int status) {
+	public Focus(String focusId, String uid, int focusType, String id, int status) {
 		super();
-		this.focusId = focusId;
+		this.focusId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.focusType = focusType;
 		this.id = id;
-		this.focusTime = focusTime;
+		this.focusTime = System.currentTimeMillis();
 		this.status = status;
 	}
 

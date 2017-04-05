@@ -61,7 +61,14 @@ public class UserController {
 	@Resource  
     private UserServiceImpl userService;
 	
-	
+	@RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
+    @ResponseBody
+    public String  ajaxVerifyUser(HttpServletRequest request,HttpServletResponse response,
+    		String questionInfo
+    		) throws ParseException{  
+    	logger.warn("questionInfo:"+questionInfo);
+        return "1";  
+    } 
 
       
     @RequestMapping(value="/{action}",method={RequestMethod.GET,RequestMethod.POST})  
@@ -137,11 +144,13 @@ public class UserController {
     	        	String code = (String) session.getAttribute("verifyCode");
     	        	if(code.equals(verifycode)){
     	        		mav.addObject("txt","success");
+    	        		mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
     	        	}else{
     	        		mav.addObject("txt","success but code null");
+    	        		mav.setViewName("redirect:login");
     	        	}
     	            logger.warn("-----login----");
-    	            mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
+    	            
     	           
     	        }else{
     	        	mav.addObject("txt","fail");

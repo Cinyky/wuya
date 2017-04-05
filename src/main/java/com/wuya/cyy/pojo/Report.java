@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 举报实体
  * Cinyky 
@@ -15,15 +18,15 @@ public class Report {
 	private int status;				//状态
 	public Report() {
 	}
-	public Report(String reportId, String uid, int reportType, String id, String reportInfo, long reportTime,
+	public Report(String reportId, String uid, int reportType, String id, String reportInfo,
 			int status) {
 		super();
-		this.reportId = reportId;
+		this.reportId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.reportType = reportType;
 		this.id = id;
 		this.reportInfo = reportInfo;
-		this.reportTime = reportTime;
+		this.reportTime = System.currentTimeMillis();
 		this.status = status;
 	}
 	public String getReportId() {

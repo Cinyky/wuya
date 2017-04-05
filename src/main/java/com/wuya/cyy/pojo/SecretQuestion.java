@@ -1,4 +1,7 @@
 package com.wuya.cyy.pojo;
+
+import java.util.UUID;
+
 /**
  * 密保问题实体类
  * Cinyky
@@ -20,7 +23,7 @@ public class SecretQuestion {
 	
 	public SecretQuestion(String questionId, String uid, String questionInfo, String answerInfo, int status) {
 		super();
-		this.questionId = questionId;
+		this.questionId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.questionInfo = questionInfo;
 		this.answerInfo = answerInfo;

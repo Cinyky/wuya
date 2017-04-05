@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-answer.css" />
      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/wangEditor.min.css">
 </head>
-<body>
+<body onload="initAnswers('${question.questionId}')">
 	<div class="navbar navbar-default navbar-fixed-top" style="height: 50px;">
       <div class="container" >
         <div class="navbar-header">
@@ -73,8 +73,7 @@
         <div class="row question" style="background-color:#ffe;">
           <div class="col-md-12">
                 <a class="btn btn-primary">php</a>
-                  <h1>php程序员2017年就业前景如何</h1>
-                  <p>2016年也就是今年培训机构出来的同学太多了，那么多新手对就业的竞争程度是否会产生很大的影响呢。互联网发展的程序员红利还能坚持多久？</p>
+                  <h1>${question.questionInfo}</h1>
                   <div class="pull-right">
                   		<a class="btn btn-primary">分享问题</a>
                   	    <a class="btn btn-primary">收藏问题</a>
@@ -85,7 +84,7 @@
         </div>
         
         <div class="row answer" style="margin-top:10px;">
-          <div class="col-md-8">
+          <div class="col-md-8" id="answers">
           		<div class="answer" id="answer1">
 		                <div class="panel panel-default">
 			                  <div class="panel-heading">
