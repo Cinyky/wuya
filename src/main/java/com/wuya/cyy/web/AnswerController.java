@@ -52,7 +52,7 @@ import com.wuya.cyy.utils.ServiceException;
  */
 
 @Controller
-@RequestMapping("/search") // url:/模块/资源/{id}/细分 /seckill/list
+@RequestMapping("/answer") // url:/模块/资源/{id}/细分 /seckill/list
 public class AnswerController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
