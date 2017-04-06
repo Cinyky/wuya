@@ -115,34 +115,37 @@
   });
   
   function initAnswers(questionId){
-	  console.debug("function showQuestion info :"+info);
+	  console.debug("function initAnswers questionId :"+questionId);
 		$.post(
-				"http://localhost:8080/wuya/answer",
+				"http://localhost:8080/wuya/answer/select",
 				{
 					"questionId":questionId
 				},
 				function(rs){
-					console.debug("init answers :")
+					console.debug("init answers :"+rs)
 					var str ="";
 					if(rs=="empty"){
 						$("#answers").append("<h1>该问题还没有回答</h1>");
 						return;
 					}else{
 						var answers = eval(rs);
+						$("#answers").empty();
 						for(var i=0;i<answers.length-1;i++){
+							var answer = answers[i];
+							var user = eval(answer.user);
 							str+="<div class='answer' id='answer1'>";
 							str+="  <div class='panel panel-default'>";
 							str+="        <div class='panel-heading'>";
-							str+="        	<img src='http://localhost:8080/wuya/img/headpic6.jpg' width='60px' height='60px'/>";
+							str+="        	<img src='http://localhost:8080/wuya/img/"+user.headPic+"' width='60px' height='60px'/>";
 							str+="        	<div class='author-info' style='display:inline-block;'>";
-							str+="        		<span class='nickname'>Dean.Lee</span><br/>";
-							str+="       		<span class='sign'>过不去的坎永远只是暂时的...</span>";
+							str+="        		<span class='nickname'>"+user.nickName+"</span><br/>";
+							str+="       		<span class='sign'>"+user.signature+"</span>";
 							str+="       	</div>";
 							str+="       	<div style='color: grey'>25 人赞同该回答</div>";
 							str+="        </div>";
 							str+="       <div class='panel-body'>";
 							str+="               <p class='answer-info'>";
-							str+=					answer.answerinfo;
+							str+=					answer.answerInfo;
 							str+="               </p>";
 							str+="               <hr>";
 							str+="              <span class='answer-date'>发布于-"+getMyDate(answer.answerTime)+"</span>";
@@ -163,7 +166,8 @@
   }
   
   
-  function getMyDate(str){  
+  function getMyDate(str){
+	  	console.debug("start trans "+str);
 	    var oDate = new Date(str),  
 	    oYear = oDate.getFullYear(),  
 	    oMonth = oDate.getMonth()+1,  

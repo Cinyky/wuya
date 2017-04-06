@@ -41,6 +41,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wuya.cyy.pojo.Book;
 import com.wuya.cyy.pojo.Question;
+import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
@@ -59,9 +60,6 @@ public class QuestionController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	
-	@Resource  
-    private RegisterValidateService service;
 	@Resource  
     private QuestionServiceImpl questionService;
 	
@@ -97,8 +95,7 @@ public class QuestionController {
         logger.warn("-----question questionInfo==>"+questionInfo+"----");  
         Question question = new Question(user.getUid(), questionInfo, topicId, 1);
         boolean questionAdd = questionService.questionAdd(question);
-        String isAdded = questionAdd?"1":"0";
-        return isAdded;  
+        return questionAdd?"1":"0";  
     } 
 	
 	/**
@@ -113,6 +110,7 @@ public class QuestionController {
     		) throws ParseException{  
         logger.warn("-----question questionId==>"+questionId+"----");  
         Question question = questionService.questionSelectByQuestionId(questionId);
+//        Topic topic = 
         ModelAndView mav=new ModelAndView();  
         mav.addObject("question", question);
         mav.setViewName("forward:/wuya-answer.jsp");

@@ -81,7 +81,7 @@
 		FROM
 			answer
 		WHERE
-			answerInfo like '%#{answerInfo}%'
+			answerInfo like CONCAT('%','${answerInfo}','%' )
 	</select>
 
 

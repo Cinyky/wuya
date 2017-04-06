@@ -280,6 +280,7 @@
           </div>
 
            <div class="modal-footer">
+            <a class="btn btn-primary" id="submitAnswer">提交</a>
             <a class="btn btn-primary" data-dismiss="modal">关闭</a>
           </div>
 

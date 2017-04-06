@@ -22,7 +22,7 @@ public class User {
 	private String  signature="这个人很懒";		//个性签名
 	private String	profile="个人简介";		//用户个人简介
 	private String  location="中国"; 		//居住地
-	private String 	headPic="default_headpic";		//头像
+	private String 	headPic="default_headpic.jpg";		//头像
 	private long 	birth;		 	//生日
 	private long 	regTime;	    //注册时间
 	private long 	banTime = 0;		//封号时间点

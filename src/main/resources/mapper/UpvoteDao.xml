@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.UpvoteDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入Upvote  --> 
+	<insert id="addUpvote" parameterType="Upvote">
+			INSERT
+			INTO
+				upvote
+			values(
+				#{upvoteId},
+				#{uid},
+				#{answerId},
+				#{upvoteTime},
+				#{status}
+				)
+	</insert>
+	
+	<!-- 更新Upvote  --> 
+	<update id="updateUpvote">
+			UPDATE
+				upvote
+			SET
+					uid=#{uid},
+					answerId=#{answerId},
+					upvoteTime=#{upvoteTime},
+					status=#{status}
+			WHERE
+				upvoteId=#{upvoteId}
+	</update>
+	
+	<!-- 根据uid查询Upvote -->
+	<select id="selectUpvoteByUid" resultType="Upvote">
+		SELECT
+			*
+		FROM
+			upvote
+		WHERE
+			uid=#{uid}
+	</select>
+
+
+	<!-- 根据upvoteId查询Upvote -->
+	<select id="selectUpvoteByUpvoteId" resultType="Upvote">
+		SELECT
+			*
+		FROM
+			upvote
+		WHERE
+			upvoteId=#{upvoteId}
+	</select>
+	
+	<!-- 根据answerId查询Upvote -->
+	<select id="selectUpvoteByAnswerId" resultType="Upvote">
+		SELECT
+			*
+		FROM
+			upvote
+		WHERE
+			answerId=#{answerId}
+	</select>
+	
+	<!-- 根据answerId查询Upvotecount -->
+	<select id="selectUpvoteCountByAnswerId" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			upvote
+		WHERE
+			answerId=#{answerId}
+	</select>
+	
+		<!-- 根据answerId查询Upvotecount -->
+	<select id="selectUpvoteByAnswerIdAndUid" resultType="Upvote">
+		SELECT
+			count(1)
+		FROM
+			upvote
+		WHERE
+			answerId=#{answerId}
+		AND
+			uid=#{uid}
+	</select>
+
+</mapper>

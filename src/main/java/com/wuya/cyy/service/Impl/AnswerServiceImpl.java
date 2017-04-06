@@ -12,7 +12,7 @@ import com.wuya.cyy.dao.AnswerDao;
 import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.service.AnswerService;
 /**
- * Question Service
+ * Answer Service
  * @author Cinyky
  * junliang mint
  * 5 Apr 2017 11:47:58

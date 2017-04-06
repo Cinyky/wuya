@@ -107,7 +107,7 @@ public class UserController {
         	
         }   
         else if("activate".equals(action)) {  
-            //激活  
+            //TODO 
             email = request.getParameter("email");//获取email  
             String validateCode = request.getParameter("validateCode");//激活码  
             logger.warn("-----reg----"+email);  

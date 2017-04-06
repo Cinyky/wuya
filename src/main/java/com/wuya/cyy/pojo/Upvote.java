@@ -8,35 +8,35 @@ import java.util.UUID;
  *
  * 2017年3月26日下午5:39:34
  */
-public class Like {
-	private String likeId;
+public class Upvote {
+	private String upvoteId;
 	private String uid;				//用户id
 	private String answerId;		//回答id
-	private long likeTime;			//点赞时间
+	private long upvoteTime;			//点赞时间
 	private int status;				//状态
 	
 	
-	public Like() {
+	public Upvote() {
 	}
 
 
-	public Like(String likeId, String uid, String answerId, int status) {
+	public Upvote(String uid, String answerId, int status) {
 		super();
-		this.likeId = UUID.randomUUID()+"";
+		this.upvoteId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.answerId = answerId;
-		this.likeTime = System.currentTimeMillis();
+		this.upvoteTime = System.currentTimeMillis();
 		this.status = status;
 	}
 
 
-	public String getLikeId() {
-		return likeId;
+	public String getUpvoteId() {
+		return upvoteId;
 	}
 
 
-	public void setLikeId(String likeId) {
-		this.likeId = likeId;
+	public void setUpvoteId(String upvoteId) {
+		this.upvoteId = upvoteId;
 	}
 
 
@@ -60,13 +60,13 @@ public class Like {
 	}
 
 
-	public long getLikeTime() {
-		return likeTime;
+	public long getUpvoteTime() {
+		return upvoteTime;
 	}
 
 
-	public void setLikeTime(long likeTime) {
-		this.likeTime = likeTime;
+	public void setUpvoteTime(long upvoteTime) {
+		this.upvoteTime = upvoteTime;
 	}
 
 
@@ -82,7 +82,7 @@ public class Like {
 
 	@Override
 	public String toString() {
-		return "Like [likeId=" + likeId + ", uid=" + uid + ", answerId=" + answerId + ", likeTime=" + likeTime
+		return "Upvote [upvoteId=" + upvoteId + ", uid=" + uid + ", answerId=" + answerId + ", upvoteTime=" + upvoteTime
 				+ ", status=" + status + "]";
 	}
 

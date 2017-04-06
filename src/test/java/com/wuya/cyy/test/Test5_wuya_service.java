@@ -10,19 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.wuya.cyy.dao.SecretQuestionDao;
-import com.wuya.cyy.dao.UserDao;
-import com.wuya.cyy.pojo.SecretQuestion;
+import com.wuya.cyy.pojo.Answer;
+import com.wuya.cyy.pojo.Upvote;
 import com.wuya.cyy.pojo.User;
+import com.wuya.cyy.service.Impl.AnswerServiceImpl;
+import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
-import com.wuya.cyy.utils.MD5Util;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 // 告诉junit spring配置文件
 @ContextConfiguration({ "classpath:spring/spring-dao.xml", "classpath:spring/spring-service.xml" })
 public class Test5_wuya_service {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	/* ===================== 
+	 * user service test
+	 * =====================
+	 **/
 	@Autowired
 	private UserServiceImpl userService;
 
@@ -49,5 +52,69 @@ public class Test5_wuya_service {
 		User userLogin = userService.userLogin("cyy2013142202", "12312322");
 		logger.warn(userLogin.toString());
 	}
+	
+	/* ===================== 
+	 * answer service test
+	 * =====================
+	 **/
+	@Autowired
+	private AnswerServiceImpl answerService;
+	
+	@Test
+	public void testAnswer_Add() throws Exception {
+		boolean answerAdd = answerService.answerAdd(new Answer("2791bb3c-8f89-420c-84d1-836d710c9a3f", "7d9db1cf-cc01-461a-af7b-be98e9aea0c0", "testInfo", 1));
+		logger.warn("testAnswer_Add :"+(answerAdd? "true" : "false"));
+	}
+	
+	@Test
+	public void testAnswer_Select_info() throws Exception {
+		List<Answer> answerSelectByInfo = answerService.answerSelectByInfo("test");
+		if(answerSelectByInfo!=null && !answerSelectByInfo.isEmpty()){
+			for (Answer answer : answerSelectByInfo) {
+				logger.warn(answer.toString());
+			}
+			
+		}
+	
+	}
+	
+	@Test
+	public void testAnswer_Select_QuestionId() throws Exception {
+		List<Answer> answerSelectByInfo = answerService.answerSelectByQuestionId("2791bb3c-8f89-420c-84d1-836d710c9a3f");
+		if(answerSelectByInfo!=null && !answerSelectByInfo.isEmpty()){
+			for (Answer answer : answerSelectByInfo) {
+				logger.warn(answer.toString());
+			}
+		}
+	
+	}
+	
+	/* ===================== 
+	 * answer service test
+	 * =====================
+	 **/
+	@Autowired
+	private UpvoteServiceImpl upvoteService;
+	
+	@Test
+	public void testLike_Add() throws Exception {
+	    boolean upvoteAdd = upvoteService.upvoteAdd(new Upvote("7d9db1cf-cc01-461a-af7b-be98e9aea0c0", "d2852c7f-1e21-41e5-ad81-1c5538c7b6b3", 1));
+		logger.warn("testLike_Add :"+(upvoteAdd? "true" : "false"));
+	}
+	
+	@Test
+	public void testLike_Select_answerId() throws Exception {
+		String upvoteCountSelectByAnswerId = "";
+		try {
+			upvoteCountSelectByAnswerId = upvoteService.upvoteCountSelectByAnswerId("d2852c7f-1e21-41e5-ad81-1c5538c7b6b3");
+		} catch (Exception e) {
+			logger.warn(upvoteCountSelectByAnswerId==""?"null":upvoteCountSelectByAnswerId);
+		}finally{
+			logger.warn(upvoteCountSelectByAnswerId==""?"null":upvoteCountSelectByAnswerId);
+		}
+		
+		
+	}
+
 
 }

@@ -15,7 +15,9 @@ public class Answer {
 	private String answerInfo;		//回答详情
 	private long answerTime;		//提出问题时间
 	private int status;				//状态  默认 1 删除0
-	
+	//++++++++++++++ 另外封装
+	private User user;				//发表回答的user
+	private String likeCount;		//点赞次数
 	
 	
 	public Answer() {
@@ -31,6 +33,18 @@ public class Answer {
 		this.answerInfo = answerInfo;
 		this.answerTime = System.currentTimeMillis();
 		this.status = status;
+	}
+
+	
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 
