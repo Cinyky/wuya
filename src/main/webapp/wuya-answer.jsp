@@ -45,8 +45,8 @@
               </li>
               <li class="">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="${pageContext.request.contextPath}/img/headpic.jpg" class="navbarimg-responsive img-rounded " width="20px" height="20px">
-							你干嘛
+							<img src="${pageContext.request.contextPath}/img/${user.headPic}" class="navbarimg-responsive img-rounded " width="20px" height="20px">
+							${user.nickName}
 							<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">
@@ -160,20 +160,20 @@
                   	关于作者
                   </div>
 	              <div class="panel-body">
-	              	<img src="${pageContext.request.contextPath}/img/headpic6.jpg" width="60px" height="60px"/>
+	              	<img src="${pageContext.request.contextPath}/img/${user.headPic}" width="60px" height="60px"/>
 	              	<div class="author-info" style="display:inline-block;">
-	              		<span class="nickname">Dean.Lee</span><br/>
-	              		<span class="sign">过不去的坎永远只是暂时的...</span>
+	              		<span class="nickname">${user.nickName}</span><br/>
+	              		<span class="sign">${user.signature }</span>
 	              	</div>
 	              	<hr/>
 	              	<a style="display:inline-block;margin-left:60px;" >
 	              		<div class="NumberBoard-item" style="width:42px;">回答</div>
-	              		<div class="NumberBoard-item" style="width:42px;">213</div>
+	              		<div class="NumberBoard-item" style="width:42px;" id="answerNum">0</div>
 	              	</a>
 	              	
 	              	<a style="display:inline-block;margin-left:40px;">
 	              		<div class="NumberBoard-item" style="width:42px;">关注者</div>
-	              		<div class="NumberBoard-item" style="width:42px;">145</div>
+	              		<div class="NumberBoard-item" style="width:42px;" id="focusNum">0</div>
 	              	</a>
 	              	<hr/>
 	              	<a class="btn btn-primary btn-block">关注他</a>

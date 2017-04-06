@@ -43,10 +43,15 @@ public class AnswerServiceImpl  implements AnswerService {
 	public List<Answer> answerSelectByInfo(String answerInfo) {
 		return answerDao.selectAnswerByInfo(answerInfo);
 	}
-
+	
 	@Override
 	public List<Answer> answerSelectByUid(String uid) {
 		return answerDao.selectAnswerByUid(uid);
+	}
+	
+	@Override
+	public String answerCountSelectByUid(String uid) {
+		return answerDao.selectAnswerCountByUid(uid);
 	}
 
 	@Override
@@ -58,5 +63,7 @@ public class AnswerServiceImpl  implements AnswerService {
 	public List<Answer> answerSelectByQuestionId(String uid, String questionId) {
 		return answerDao.selectAnswerByUidAndQuestionId(uid, questionId);
 	}
+
+	
 
 }

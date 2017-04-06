@@ -1,5 +1,7 @@
 package com.wuya.cyy.web;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -79,7 +82,6 @@ public class AnswerController {
     		String answerInfo,
     		String questionId
     		) throws ParseException{  
-    	String contextPath = request.getContextPath();
     	User user = (User)request.getSession(true).getAttribute("user");
         logger.warn("-----addAnswer answerInfo==>"+answerInfo+"---questionId==>"+questionId);  
         Answer answer = new Answer(questionId, user.getUid(), answerInfo, 1);
@@ -97,10 +99,11 @@ public class AnswerController {
         List<Answer> answers = answerService.answerSelectByQuestionId(questionId);
         for (Answer answer : answers) {
         	User user = userService.userSelectByUid(answer.getUid());
-        	String upvoteCountSelectByAnswerId = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
         	answer.setUser(user);
+        	answer.setUpvoteCount(upvoteCount);
         	logger.warn("user:"+user.toString());
-        	
+        	logger.warn("upvoteCount:"+upvoteCount);
 		}
         ObjectMapper objectMapper = new ObjectMapper();
     	if(answers!=null && !answers.isEmpty()){
@@ -108,6 +111,17 @@ public class AnswerController {
     	}else{
     		response.getOutputStream().print("empty");
     	}
+    }
+    
+    //问题nums
+    @RequestMapping(value="/nums",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public void  selectAnswersNums(HttpServletRequest request,HttpServletResponse response
+    		) throws ParseException, JsonGenerationException, JsonMappingException, IOException{  
+    	User user = (User)request.getSession(true).getAttribute("user");
+        String answerCountSelectByUid = answerService.answerCountSelectByUid(user.getUid());
+        logger.warn("answerCountSelectByUid:"+answerCountSelectByUid);
+        response.getOutputStream().print(answerCountSelectByUid);
     }
 	
 	

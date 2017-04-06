@@ -42,8 +42,8 @@
               </li>
               <li class="">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img src="${pageContext.request.contextPath}/img/headpic.jpg" class="navbarimg-responsive img-rounded " width="20px" height="20px">
-							你干嘛
+							<img src="${pageContext.request.contextPath}/img/${user.headPic}" class="navbarimg-responsive img-rounded " width="20px" height="20px">
+							${user.nickName}
 							<b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu">

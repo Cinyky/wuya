@@ -1,6 +1,9 @@
   // 阻止输出log
           // wangEditor.config.printLog = false;
   $(function(){
+	  
+	  initAnswerNums();
+	  initFocusNums
   	   var editor = new wangEditor('answer-editor');
 
          // 上传图片
@@ -141,7 +144,7 @@
 							str+="        		<span class='nickname'>"+user.nickName+"</span><br/>";
 							str+="       		<span class='sign'>"+user.signature+"</span>";
 							str+="       	</div>";
-							str+="       	<div style='color: grey'>25 人赞同该回答</div>";
+							str+="       	<div style='color: grey'>"+answer.upvoteCount+" 人赞同该回答</div>";
 							str+="        </div>";
 							str+="       <div class='panel-body'>";
 							str+="               <p class='answer-info'>";
@@ -150,7 +153,7 @@
 							str+="               <hr>";
 							str+="              <span class='answer-date'>发布于-"+getMyDate(answer.answerTime)+"</span>";
 							str+="             <div>";
-							str+="                 <a class='media-object badge alert-danger' style='width:64px;'>25&nbsp;<i class='fa fa-thumbs-up'></i></a>";
+							str+="                 <a class='media-object badge alert-danger' style='width:64px;'>"+answer.upvoteCount+"&nbsp;<i class='fa fa-thumbs-up'></i></a>";
 							str+="                 <a>分享</a>";
 							str+="                 <a>收藏</a>";
 							str+="                 <a class='' data-toggle='modal' data-target='#report'>举报</a>";
@@ -185,6 +188,26 @@
 	    }  
 	    return num;  
 	} 
+	
+	function initAnswerNums(){
+		console.debug("====initAnswerNums====");
+		$.post(
+				"http://localhost:8080/wuya/answer/nums",
+				{
+					"method":"1"
+				},
+				function(rs){
+					console.debug("initAnswerNums  rs:"+rs);
+					$("#answerNum").html(rs);
+				}
+			);
+	}
+
+	function initFocusNums(){
+		console.debug("====initFocusNums====");
+		
+	}
+
 
 
      

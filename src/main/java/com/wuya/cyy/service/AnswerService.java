@@ -49,6 +49,13 @@ public interface AnswerService {
 	List<Answer> answerSelectByUid(String uid);
 	
 	/**
+	 * 根据uid 搜索 answer
+	 * @param uid
+	 * @return
+	 */
+	String answerCountSelectByUid(String uid);
+	
+	/**
 	 * 根据questionId搜索
 	 * @param questionId
 	 * @return

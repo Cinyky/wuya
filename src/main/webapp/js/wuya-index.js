@@ -1,4 +1,5 @@
 $(function() {
+	
 	<!--提示框组件-- >
 	$("[data-toggle='share_tooltip']").tooltip();
 	$("[data-toggle='showAll_tooltip']").tooltip();
@@ -83,7 +84,6 @@ $(function() {
 			alert("问题不可为空");
 		}
 	});
-
 });
 
 function showReport() {
@@ -171,7 +171,7 @@ function getzf(num){
 function submitQuestion(info,topicId){
 	console.debug("function submitQuestion info :"+info+" topic："+topicId);
 	$.post(
-			"${pageContext.request.contextPath}/question/add",
+			"http://localhost:8080/wuya/question/add",
 			{
 				"questionInfo":info,
 				"topicId"     :topicId
@@ -179,10 +179,8 @@ function submitQuestion(info,topicId){
 			function(rs){
 				console.debug("rsrsrsrs:"+rs);
 			}
-		)
+		);
 }
 
-function init(){
-	
-}
+
 

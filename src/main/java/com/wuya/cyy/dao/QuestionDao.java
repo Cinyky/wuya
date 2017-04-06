@@ -59,5 +59,10 @@ public interface QuestionDao {
 	 */
 	List<Question> selectQuestionByUidAndTopicId(@Param("topicId")String topicId,@Param("uid")String uid);
 	
+	/**
+	 * 查询question 根据topicId
+	 * @return
+	 */
+	List<Question> selectQuestionByHot(@Param("begin")String begin,@Param("end")String end);
 	
 }

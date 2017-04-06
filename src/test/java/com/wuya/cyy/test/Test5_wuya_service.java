@@ -105,13 +105,8 @@ public class Test5_wuya_service {
 	@Test
 	public void testLike_Select_answerId() throws Exception {
 		String upvoteCountSelectByAnswerId = "";
-		try {
 			upvoteCountSelectByAnswerId = upvoteService.upvoteCountSelectByAnswerId("d2852c7f-1e21-41e5-ad81-1c5538c7b6b3");
-		} catch (Exception e) {
 			logger.warn(upvoteCountSelectByAnswerId==""?"null":upvoteCountSelectByAnswerId);
-		}finally{
-			logger.warn(upvoteCountSelectByAnswerId==""?"null":upvoteCountSelectByAnswerId);
-		}
 		
 		
 	}

@@ -88,5 +88,16 @@
 			 topicId=#{topicId}
 		   
 	</select>
+	
+	<!-- 根据QuestionId&TopicId查询Question -->
+	<select id="selectQuestionByHot" resultType="Question">
+		SELECT
+			*
+		FROM
+			question
+	    ORDER BY questionTime
+	    LIMIT #{begin} , #{end}
+	</select>	   
+	
 
 </mapper>

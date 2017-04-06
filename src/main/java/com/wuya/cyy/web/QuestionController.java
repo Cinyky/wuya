@@ -109,12 +109,22 @@ public class QuestionController {
     		@PathVariable("questionId")String questionId
     		) throws ParseException{  
         logger.warn("-----question questionId==>"+questionId+"----");  
-        Question question = questionService.questionSelectByQuestionId(questionId);
-//        Topic topic = 
         ModelAndView mav=new ModelAndView();  
+        Question question = questionService.questionSelectByQuestionId(questionId);
         mav.addObject("question", question);
+        
+        //TODO get answer jsp topic
+//        Topic topic 
+//        mav.addObject("topic", topic);
         mav.setViewName("forward:/wuya-answer.jsp");
         return mav;  
+    }  
+    
+    @RequestMapping(value="/init/index",method={RequestMethod.GET,RequestMethod.POST})  
+    @ResponseBody
+    public void  getQuestionIndex(HttpServletRequest request,HttpServletResponse response
+    		) throws ParseException{  
+    	
     }  
     
     //分享问题

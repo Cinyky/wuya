@@ -53,6 +53,18 @@
 			uid=#{uid}
 	</select>
 	
+	
+	<!-- 根据Uid查询answer -->
+	<select id="selectAnswerCountByUid" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			answer
+		WHERE
+			uid=#{uid}
+	</select>
+	
+	
 	<!-- 根据Uid查询answer -->
 	<select id="selectAnswerByUidAndQuestionId" resultType="Answer">
 		SELECT

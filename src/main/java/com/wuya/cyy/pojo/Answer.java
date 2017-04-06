@@ -17,7 +17,7 @@ public class Answer {
 	private int status;				//状态  默认 1 删除0
 	//++++++++++++++ 另外封装
 	private User user;				//发表回答的user
-	private String likeCount;		//点赞次数
+	private String upvoteCount;		//点赞次数
 	
 	
 	public Answer() {
@@ -34,8 +34,21 @@ public class Answer {
 		this.answerTime = System.currentTimeMillis();
 		this.status = status;
 	}
-
 	
+	
+	
+
+	public String getUpvoteCount() {
+		return upvoteCount;
+	}
+
+
+
+	public void setUpvoteCount(String upvoteCount) {
+		this.upvoteCount = upvoteCount;
+	}
+
+
 
 	public User getUser() {
 		return user;

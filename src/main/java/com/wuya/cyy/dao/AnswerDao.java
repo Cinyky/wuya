@@ -46,6 +46,12 @@ public interface AnswerDao {
 	 * 根据uid查询回答
 	 * @return
 	 */
+	String selectAnswerCountByUid(@Param("uid")String uid);
+	
+	/**
+	 * 根据uid查询回答
+	 * @return
+	 */
 	List<Answer> selectAnswerByUidAndQuestionId(@Param("uid")String uid,@Param("questionId")String questionId);
 	
 	/**
