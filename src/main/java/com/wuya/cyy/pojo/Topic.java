@@ -12,23 +12,29 @@ public class Topic {
 	private String topicId;			//话题id
 	private String uid;				//创建话题用户id
 	private String topicName;		//话题名
-	private String topicPic;		//话题图片
+	private String topicPic="default_topic.jpg";		//话题图片
 	private long topicTime;			//创建话题时间
-	private int status;				//状态
+	private int status = 1;				//状态
 	
 	
 	public Topic() {
 	}
 
-	public Topic(String topicId, String uid, String topicName, String topicPic, int status) {
+	public Topic(String uid, String topicName) {
 		super();
 		this.topicId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.topicName = topicName;
-		this.topicPic = topicPic;
 		this.topicTime = System.currentTimeMillis();
-		this.status = status;
-		
+	}
+	
+	
+
+	public Topic(String topicId, String uid, String topicName) {
+		super();
+		this.topicId = topicId;
+		this.uid = uid;
+		this.topicName = topicName;
 	}
 
 	public String getTopicId() {

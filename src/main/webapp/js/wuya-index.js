@@ -192,20 +192,20 @@ function getIndexStr(user,question,answer,topic){
 	str	+="<ul class='media-list'>";
 	str	+="	<li class='media'>";
 	if(topic==null){
-		str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topic/topic_1.jpg' height='42' width='42'></a>";
+		str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topicimg/default_topic.jpg' height='42' width='42'></a>";
 	}else{
-		str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topic/"+topic.topicPic+"' height='42' width='42'></a>";
+		str	+="		<a href='http://localhost:8080/wuya/topic/"+topic.topicId+"/detail' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topicimg/"+topic.topicPic+"' height='42' width='42'></a>";
 	}
 	str	+="		<div class='media-body'>";
 	str	+="			<button type='button' class='close pull-right ccc' id='close"+question.questionId+"'>×</button>";
 	if(topic==null){
 		str	+="			<h7 class='media-heading'>来自话题：默认话题</h7>";
 	}else{
-		str	+="			<h7 class='media-heading'>"+topic.topicName+"</h7>";
+		str	+="			<h7 class='media-heading'>来自话题："+topic.topicName+"</h7>";
 	}
-	str	+="			<h4 class='media-heading'>"+question.questionInfo+"</h4>";
+	str	+="			<a href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'><h4 class='media-heading'>"+question.questionInfo+"</h4></a>";
 	str	+="			<h6 class='media-heading'>";
-	str	+="			<span>"+user.nickName+"</span>&nbsp;";
+	str	+="			<a href='http://localhost:8080/wuya/personal/"+user.uid+"'>"+user.nickName+"</a>&nbsp;";
 	str	+="			<span>"+user.signature+"</span>";
 	str	+="			</h6>";
 	str +="			<p>";
@@ -213,11 +213,9 @@ function getIndexStr(user,question,answer,topic){
 		str += "还没有回答 赶集去回答吧！！";
 	}else{
 		console.debug("answer length:"+answer.answerInfo.length);
-		if(answer.answerInfo.length>200){
-			
-		}else{
+		
 			str +=				answer.answerInfo;
-		}
+		
 	}
 //	str	+="			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一只生物科研，这是再正常不过的了。实验做不出来是很正常的事情，谁都有不会的时候，对吧，谁怕谁？";
 //	str	+="				当一个人明白着一些的时候按时记得哈开始打哈卡仕达看卡收到货卡仕达卡还是的卡号多少卡号的卡号卡按时打卡hk...";
@@ -227,7 +225,14 @@ function getIndexStr(user,question,answer,topic){
 	str	+="	</li>";
 	str	+=" <li class='media'>";
 	str	+="		<span class='pull-left'>";
-	str	+="   		<a class='media-object badge alert-danger' style='width:64px;'>5&nbsp;<i class='fa fa-thumbs-up'></i></a>";
+	str	+="   		<a class='media-object badge alert-danger' style='width:64px;'>"
+	if(answer==null){
+		str +=	"0";
+	}else{
+		str +=	answer.upvoteCount;
+	}
+	
+	str += "&nbsp;<i class='fa fa-thumbs-up'></i></a>";
 	str	+="  	</span>";
 	str	+="  	<div class='media-body'>";
 	str	+="  	  <a>分享</a>";

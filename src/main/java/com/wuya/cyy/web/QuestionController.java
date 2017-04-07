@@ -51,6 +51,8 @@ import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
+import com.wuya.cyy.service.Impl.TopicServiceImpl;
+import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
 /**
@@ -71,6 +73,10 @@ public class QuestionController {
     private AnswerServiceImpl answerService;
 	@Resource  
     private UserServiceImpl userService;
+	@Resource  
+    private TopicServiceImpl topicService;
+	@Resource  
+    private UpvoteServiceImpl upvoteService;
 	
     @RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -121,10 +127,9 @@ public class QuestionController {
         ModelAndView mav=new ModelAndView();  
         Question question = questionService.questionSelectByQuestionId(questionId);
         mav.addObject("question", question);
-        
-        //TODO get answer jsp topic
-//        Topic topic 
-//        mav.addObject("topic", topic);
+        //TODO get question jsp topic
+        Topic topic = topicService.selectTopicByTopicId(question.getTopicId());
+        mav.addObject("question_topic", topic);
         mav.setViewName("forward:/wuya-answer.jsp");
         return mav;  
     }  
@@ -146,9 +151,14 @@ public class QuestionController {
 				String uid = question.getUid();
 				String topicId = question.getTopicId();
 				Answer answer = answerService.answerOneSelectByQuestionId(questionId);
+				if(answer!=null){
+					String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+					answer.setUpvoteCount(upvoteCount);
+				}
 				User user = userService.userSelectByUid(uid);
 				//TODO topic service
-				Topic topic = null;
+				Topic topic = topicService.selectTopicByTopicId(topicId);
+				
 				ret.setAnswer(answer);
 				ret.setQuestion(question);
 				ret.setTopic(topic);

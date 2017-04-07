@@ -12,10 +12,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Question;
+import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.pojo.Upvote;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
+import com.wuya.cyy.service.Impl.TopicServiceImpl;
 import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 
@@ -125,6 +127,35 @@ public class Test5_wuya_service {
 	public void testQuestion_Select_answerId() throws Exception {
 		List<Question> selectQuestionByHot = questionService.selectQuestionByHot();
 		logger.warn(selectQuestionByHot.size()+"");
+	}
+	
+	
+	/* ===================== 
+	 * topic service test
+	 * =====================
+	 **/
+	@Autowired
+	private TopicServiceImpl topicService;
+	@Test
+	public void testTopic_Add() throws Exception {
+		Topic topic = new Topic("0", "Cinyky", "默认话题");
+//		Topic topic = new Topic("1", "Cinyky", "科技");
+//		Topic topic = new Topic("2", "Cinyky", "游戏");
+//		Topic topic = new Topic("3", "Cinyky", "运动");
+//		Topic topic = new Topic("4", "Cinyky", "美食");
+//		Topic topic = new Topic("5", "Cinyky", "汽车");
+//		Topic topic = new Topic("6", "Cinyky", "动漫");
+//		Topic topic = new Topic("7", "Cinyky", "电影");
+//		Topic topic = new Topic("8", "Cinyky", "科学");
+//		Topic topic = new Topic("9", "Cinyky", "历史");
+//		Topic topic = new Topic("10", "Cinyky", "旅游");
+		boolean topicAdd = topicService.topicAdd(topic);
+		logger.warn(topicAdd?"true":"false");
+	}
+	@Test
+	public void testTopic_Select_questionId() throws Exception {
+		Topic topic = topicService.selectTopicByTopicId("0");
+		logger.warn(topic.toString());
 	}
 
 

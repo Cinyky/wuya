@@ -14,8 +14,8 @@
 				#{uid},
 				#{topicName},
 				#{topicPic},
-				#{status},
-				#{topicTime}
+				#{topicTime},
+				#{status}
 				)
 	</insert>
 	

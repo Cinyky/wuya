@@ -136,7 +136,7 @@
 					console.debug("init answers :"+rs)
 					
 					if(rs=="empty"){
-						$("#answers").append("<h1>该问题还没有回答</h1>");
+						$("#answers").append("<h1 id='noAnswer'>该问题还没有回答</h1>");
 						return;
 					}else{
 						var answers = eval(rs);
@@ -156,7 +156,7 @@
   
   function getAnswerStr(answer_user,answer,uid){
 	  	var str ="";
-		str+="<div class='answer' id='answer1'>";
+		str+="<div class='answer' id='"+answer.answerId+"'>";
 		str+="  <div class='panel panel-default'>";
 		str+="        <div class='panel-heading'>";
 		str+="        	<img src='http://localhost:8080/wuya/img/"+answer_user.headPic+"' width='60px' height='60px'/>";
@@ -243,6 +243,7 @@
 					if(rs=="fail"){
 						alert("fail");
 					}else{
+						$("#noAnswer").fadeout();
 						console.debug("answer -- rs:"+rs);
 						var answer = eval("("+rs+")");
 						console.debug("answer -- user:"+answer.upvoteCount);
