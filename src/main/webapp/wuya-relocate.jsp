@@ -3,6 +3,8 @@
 		<meta charset="UTF-8">
 		<title>跳转中</title>
 <body>
+	<jsp:include page="templet/necessary.jsp" />
+	<jsp:include page="templet/navbar.jsp" />
 	<h1><span id="sp">5</span>s后跳转。。。<a href="wuya-index.html">立即跳转</a></h1>
 	
 	<script type="text/javascript"> 

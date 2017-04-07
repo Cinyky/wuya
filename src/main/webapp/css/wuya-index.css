@@ -20,3 +20,8 @@ a:hover{
 	border-bottom: solid grey 1px;
 	margin-bottom: 10px;
 }
+
+.ccc{
+	position: absolute;
+    right: 30px;
+}

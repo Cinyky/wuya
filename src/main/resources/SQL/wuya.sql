@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50554
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : wuya
 
 Target Server Type    : MYSQL
-Target Server Version : 50554
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-03-29 09:02:09
+Date: 2017-04-07 16:25:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,6 +47,22 @@ CREATE TABLE `answer` (
 -- ----------------------------
 -- Records of answer
 -- ----------------------------
+INSERT INTO `answer` VALUES ('37d16abf-94aa-4020-818c-1b1ada072f09', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'testInfo1', '1491462535272', '1');
+INSERT INTO `answer` VALUES ('d2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'testInfo2', '1491462687252', '1');
+INSERT INTO `answer` VALUES ('78dadd32-6c58-4591-ad65-e0e281226fec', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...</p>\n              <p>123213123<img src=\"/wuya/upload/answer/88cd27c4-e146-478d-a4c0-15e2882c5bb9.jpg\" alt=\"headpic\" style=\"max-width: 100%;\">我也不知道 测试回答</p><p><br></p>', '1491546272030', '1');
+INSERT INTO `answer` VALUES ('6d9ca932-22ad-4f65-b63a-900a1397e310', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><br></p>\n              <p><img src=\"/wuya/upload/answer/2d38ee98-8ef8-495f-a985-7f8ea868e13e.jpg\" alt=\"headpic2\" style=\"max-width: 100%; width: 105px; height: 98px;\" class=\"\"><br>大家好啊 &nbsp;这个数字 很顺啊</p><p><br></p>', '1491547080975', '1');
+INSERT INTO `answer` VALUES ('246a8345-b3e2-47c0-822b-30bce0b8b4a7', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><br></p>\n              <p><img src=\"/wuya/upload/answer/2d38ee98-8ef8-495f-a985-7f8ea868e13e.jpg\" alt=\"headpic2\" style=\"max-width: 100%; width: 105px; height: 98px;\" class=\"\"><br>大家好啊 &nbsp;这个数字 很顺啊</p><p><br></p>', '1491547083014', '1');
+INSERT INTO `answer` VALUES ('60682825-3769-4bbb-a447-5ee704f04dff', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><ol><li>我不知道题主说的什么</li><li>这个命题不成立</li><li>哈哈哈</li></ol></p>\n              <p><br></p>', '1491547199394', '1');
+INSERT INTO `answer` VALUES ('4fb90038-6592-46ef-b3f5-c24cf559d2e0', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c9/dindongjenliwu_thumb.gif\">给力啊</p>\n              <p><br></p>', '1491547611791', '1');
+INSERT INTO `answer` VALUES ('e1753926-f039-4e1a-ae8f-2e06d640d87f', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_thumb.png\">&nbsp;hahah&nbsp;<img src=\"http://api.map.baidu.com/staticimage?center=121.226791,31.021245&zoom=13&amp;width=478&amp;height=258&amp;markers=121.226791,31.021245\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491547787666', '1');
+INSERT INTO `answer` VALUES ('7ba5be8d-6b85-45d5-b62c-70d829326600', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><img src=\"/wuya/upload/answer/c6c08e27-3d7f-444c-92b3-c4fde28ae8a3.jpg\" alt=\"headpic\" style=\"max-width: 100%;\">沙发<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif\"></p>\n              <p><br></p>', '1491548073038', '1');
+INSERT INTO `answer` VALUES ('3caa3aba-57ff-4963-9e47-003b5cf8f66e', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6a/laugh.gif\"></p>\n              <p><br></p>', '1491548330778', '1');
+INSERT INTO `answer` VALUES ('29d815d8-bd4d-4e6f-913c-a84341d492b9', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"http://api.map.baidu.com/staticimage?center=121.480237,31.236305&zoom=11&amp;width=478&amp;height=258\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491548491683', '1');
+INSERT INTO `answer` VALUES ('73a63dc3-4924-4a7f-9d8d-2d0570e59333', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>answer answer</p>', '1491548656892', '1');
+INSERT INTO `answer` VALUES ('fccce765-8397-4adf-a17b-79f9254de84d', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>...<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/huanglianwx_thumb.gif\"></p>\n              <p><br></p>', '1491548767365', '1');
+INSERT INTO `answer` VALUES ('ecf74a93-b330-41c1-ace1-b325091bbb77', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/4ddaf9dc-d40c-4d45-9533-12c424191321.jpg\" alt=\"bgimg\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491548796106', '1');
+INSERT INTO `answer` VALUES ('44523771-cb96-4091-9b46-b0d6a99beea6', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/huanglianwx_thumb.gif\"></p>\n              <p>qwqe</p>', '1491549080436', '1');
+INSERT INTO `answer` VALUES ('9ba4fafe-875c-4b75-ad0f-a2dd66a57115', '7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"http://api.map.baidu.com/staticimage?center=121.48189,31.234939&zoom=18&amp;width=478&amp;height=258&amp;markers=121.414964,31.246502|121.423013,31.253417|121.423013,31.253417|121.409215,31.24255|121.408065,31.243538|121.431061,31.204999|121.504651,31.205988|121.482018,31.234723\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491549384318', '1');
 
 -- ----------------------------
 -- Table structure for focus
@@ -81,23 +97,6 @@ CREATE TABLE `friend` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for like
--- ----------------------------
-DROP TABLE IF EXISTS `like`;
-CREATE TABLE `like` (
-  `likeId` varchar(255) NOT NULL DEFAULT '' COMMENT 'like id',
-  `uid` varchar(255) DEFAULT '' COMMENT 'user id',
-  `answerId` varchar(255) DEFAULT '' COMMENT '回答id',
-  `likeTime` bigint(255) DEFAULT '0' COMMENT '点赞时间 默认0',
-  `status` int(2) DEFAULT '1' COMMENT '默认1生效 0失效',
-  PRIMARY KEY (`likeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of like
--- ----------------------------
-
--- ----------------------------
 -- Table structure for question
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
@@ -114,6 +113,10 @@ CREATE TABLE `question` (
 -- ----------------------------
 -- Records of question
 -- ----------------------------
+INSERT INTO `question` VALUES ('14ddf6d2-dd5d-4716-a2b4-14205b445062', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', 'saab', '1491477436205', '1');
+INSERT INTO `question` VALUES ('2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '爱迪生阿萨德', 'volvo', '1491381116366', '1');
+INSERT INTO `question` VALUES ('394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '12', null, '1491380990918', '1');
+INSERT INTO `question` VALUES ('7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '12', null, '1491380834533', '1');
 
 -- ----------------------------
 -- Table structure for report
@@ -194,6 +197,24 @@ CREATE TABLE `topic` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for upvote
+-- ----------------------------
+DROP TABLE IF EXISTS `upvote`;
+CREATE TABLE `upvote` (
+  `upvoteId` varchar(255) NOT NULL DEFAULT '' COMMENT 'upvote id',
+  `uid` varchar(255) DEFAULT '' COMMENT 'user id',
+  `answerId` varchar(255) DEFAULT '' COMMENT '回答id',
+  `upvoteTime` bigint(255) DEFAULT '0' COMMENT '点赞时间 默认0',
+  `status` int(2) DEFAULT '1' COMMENT '默认1生效 0失效',
+  PRIMARY KEY (`upvoteId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of upvote
+-- ----------------------------
+INSERT INTO `upvote` VALUES ('cc8d4e9a-531c-4b07-9dfd-5e001d3043e5', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1491472855539', '1');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -219,5 +240,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2013142203', 'cyy2', 'cyy10208023cy', '1079276272@qq.com', '123123', 'Cinyky', '1', 'i\'m a boy', 'haha', 'China', 'asd', '0', '0', '0', '1');
-INSERT INTO `user` VALUES ('2013142204', 'cyy3', '9ac81ed1a7aeb8e442c3596a229776aa', '1079276272@qq.com', '123123', 'Cinyky', '1', 'i\'m a boy', 'haha', 'China', 'asd', '0', '0', '0', '1');
+INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1490787789317', '0', '-1');
+INSERT INTO `user` VALUES ('a643c7bc-ffe3-4675-8d10-79fa1de44b3d', '1079276272', '9034ab708f195b961e5ea00a76d33336', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1491533698993', '0', '-1');
+SET FOREIGN_KEY_CHECKS=1;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -139,11 +140,9 @@ public class UserController {
     	}else{
     	        User userLogin = userService.userLogin(loginCondition, pwd);
     	        if(userLogin!=null){
-    	        	session.setAttribute("user", userLogin);
-    	        	
     	        	String code = (String) session.getAttribute("verifyCode");
     	        	if(code.equals(verifycode)){
-    	        		mav.addObject("txt","success");
+    	        		session.setAttribute("user", userLogin);
     	        		mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
     	        	}else{
     	        		mav.addObject("txt","success but code null");
@@ -158,6 +157,17 @@ public class UserController {
     	        }
     	       
     	}
+        return mav;  
+    }  
+    
+    @RequestMapping(value="/logout",method={RequestMethod.GET,RequestMethod.POST})  
+    public ModelAndView  userLogOut(HttpServletRequest request,HttpServletResponse response
+    		) throws ParseException{
+    	ModelAndView mav=new ModelAndView();
+    	HttpSession session = request.getSession(false);
+    	if(session!=null)
+    		session.removeAttribute("user");;
+    	mav.setViewName("redirect:login");
         return mav;  
     }  
     

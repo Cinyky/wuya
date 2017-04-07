@@ -94,13 +94,18 @@ function closePiece(piece) {
 	var id = piece.closest('.piece').attr('id');
 	console.debug(id);
 	piece.closest('.media-list').fadeOut(1000);
-	var str = "<div class='undo'>此内容将不会在动态中再次显示 <a onclick='openPiece("+id+")'>撤销</a></div>";
+	var str  = "<div class='undo'>此内容将不会在动态中再次显示 "
+		str += "<a onclick='openPiece(\"";
+		str += id;
+		str += "\")'>撤销</a></div>";
 	console.debug(str);
 	piece.closest('.piece').append(str);
 }
 
 function openPiece(id) {
-	console.debug(id);
+	console.debug("open before id ===>"+id);
+	id ='#'+id;
+	console.debug("open after id ===>"+id);
 	$(id).children('.media-list').fadeIn(1000);
 	$(id).children('.undo').remove();
 }
@@ -173,51 +178,7 @@ function initQuestionIndex(){
 						var question = eval(arr.question);
 						var answer = eval(arr.answer);
 						var topic = eval(arr.topic);
-						console.debug("user"+i+":"+arr.user);
-						console.debug("question"+i+":"+arr.question);
-						console.debug("answer"+i+":"+arr.answer);
-						console.debug("topic"+i+":"+arr.topic);
-						console.debug("topic after"+i+":"+topic);
-						var str = "<div class='piece' id='piece"+question.questionId+"'>";
-						str	+="<ul class='media-list'>";
-						str	+="	<li class='media'>";
-						str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topic/topic_1.jpg' height='42' width='42'></a>";
-						str	+="		<div class='media-body'>";
-						str	+="			<button type='button' class='close pull-right' id='close"+question.questionId+"'>×</button>";
-						str	+="			<h7 class='media-heading'>来自话题：自然科学</h7>";
-						str	+="			<h4 class='media-heading'>"+question.questionInfo+"</h4>";
-						str	+="			<h6 class='media-heading'>";
-						str	+="			<span>"+user.nickName+"</span>&nbsp;";
-						str	+="			<span>"+user.signature+"</span>";
-						str	+="			</h6>";
-						str +="			<p>";
-						if(answer==null){
-							str += "还没有回答 赶集去回答吧！！";
-						}else{
-							str +=				answer.answerInfo;
-						}
-//						str	+="			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一只生物科研，这是再正常不过的了。实验做不出来是很正常的事情，谁都有不会的时候，对吧，谁怕谁？";
-//						str	+="				当一个人明白着一些的时候按时记得哈开始打哈卡仕达看卡收到货卡仕达卡还是的卡号多少卡号的卡号卡按时打卡hk...";
-//						str	+="				<a data-toggle='showAll_tooltip' data-placement='bottom' title='点击查看详细'>显示全部</a>";
-						str	+="			</p>";
-						str	+="		</div>";
-						str	+="	</li>";
-						str	+=" <li class='media'>";
-						str	+="		<span class='pull-left'>";
-						str	+="   		<a class='media-object badge alert-danger' style='width:64px;'>5&nbsp;<i class='fa fa-thumbs-up'></i></a>";
-						str	+="  	</span>";
-						str	+="  	<div class='media-body'>";
-						str	+="  	  <a>分享</a>";
-						str	+="       <a>收藏</a>";
-						str	+="       <a class='shield' data-toggle='shield_tooltip' data-placement='top' title='不再显示在首页推荐中'>屏蔽</a>";
-						str	+="       <a class='' data-toggle='modal' data-target='#report'>";
-						str	+="			举报";
-						str	+="	  	  </a>";
-						str	+=" 	 </div>";
-						str	+=" </li>";
-						str	+="</ul>";
-						str	+="</div>";
-						str +="<script>$('#close"+question.questionId+"').click(function() {closePiece($(this));});</script>";
+						var str = getIndexStr(user,question,answer,topic);
 						$('#wuya').append(str);
 					}
 					
@@ -226,6 +187,62 @@ function initQuestionIndex(){
 		)
 }
 
+function getIndexStr(user,question,answer,topic){
+	var str = "<div class='piece' id='piece"+question.questionId+"'>";
+	str	+="<ul class='media-list'>";
+	str	+="	<li class='media'>";
+	if(topic==null){
+		str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topic/topic_1.jpg' height='42' width='42'></a>";
+	}else{
+		str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topic/"+topic.topicPic+"' height='42' width='42'></a>";
+	}
+	str	+="		<div class='media-body'>";
+	str	+="			<button type='button' class='close pull-right ccc' id='close"+question.questionId+"'>×</button>";
+	if(topic==null){
+		str	+="			<h7 class='media-heading'>来自话题：默认话题</h7>";
+	}else{
+		str	+="			<h7 class='media-heading'>"+topic.topicName+"</h7>";
+	}
+	str	+="			<h4 class='media-heading'>"+question.questionInfo+"</h4>";
+	str	+="			<h6 class='media-heading'>";
+	str	+="			<span>"+user.nickName+"</span>&nbsp;";
+	str	+="			<span>"+user.signature+"</span>";
+	str	+="			</h6>";
+	str +="			<p>";
+	if(answer==null){
+		str += "还没有回答 赶集去回答吧！！";
+	}else{
+		console.debug("answer length:"+answer.answerInfo.length);
+		if(answer.answerInfo.length>200){
+			
+		}else{
+			str +=				answer.answerInfo;
+		}
+	}
+//	str	+="			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一只生物科研，这是再正常不过的了。实验做不出来是很正常的事情，谁都有不会的时候，对吧，谁怕谁？";
+//	str	+="				当一个人明白着一些的时候按时记得哈开始打哈卡仕达看卡收到货卡仕达卡还是的卡号多少卡号的卡号卡按时打卡hk...";
+//	str	+="				<a data-toggle='showAll_tooltip' data-placement='bottom' title='点击查看详细'>显示全部</a>";
+	str	+="			</p>";
+	str	+="		</div>";
+	str	+="	</li>";
+	str	+=" <li class='media'>";
+	str	+="		<span class='pull-left'>";
+	str	+="   		<a class='media-object badge alert-danger' style='width:64px;'>5&nbsp;<i class='fa fa-thumbs-up'></i></a>";
+	str	+="  	</span>";
+	str	+="  	<div class='media-body'>";
+	str	+="  	  <a>分享</a>";
+	str	+="       <a>收藏</a>";
+	str	+="       <a class='shield' data-toggle='shield_tooltip' data-placement='top' title='不再显示在首页推荐中'>屏蔽</a>";
+	str	+="       <a class='' data-toggle='modal' data-target='#report'>";
+	str	+="			举报";
+	str	+="	  	  </a>";
+	str	+=" 	 </div>";
+	str	+=" </li>";
+	str	+="</ul>";
+	str	+="</div>";
+	str +="<script>$('#close"+question.questionId+"').click(function() {closePiece($(this));});</script>";
+	return str;
+}
 
 
 function getMyDate(str){  

@@ -1,11 +1,11 @@
 package com.wuya.cyy.web;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -76,17 +76,28 @@ public class AnswerController {
 	 *	新增问题
 	 * @return
 	 * @throws ParseException
+	 * @throws IOException 
 	 */
-    @RequestMapping(value="/add",method={RequestMethod.GET,RequestMethod.POST})  
-    public String  addAnswer(HttpServletRequest request,HttpServletResponse response,
+    @RequestMapping(value="/add",method={RequestMethod.GET,RequestMethod.POST}) 
+    @ResponseBody
+    public void  addAnswer(HttpServletRequest request,HttpServletResponse response,
     		String answerInfo,
     		String questionId
-    		) throws ParseException{  
+    		) throws ParseException, IOException{  
     	User user = (User)request.getSession(true).getAttribute("user");
         logger.warn("-----addAnswer answerInfo==>"+answerInfo+"---questionId==>"+questionId);  
         Answer answer = new Answer(questionId, user.getUid(), answerInfo, 1);
         boolean answerAdd = answerService.answerAdd(answer);
-        return answerAdd?"1":"0";  
+        answer.setUser((User)request.getSession(true).getAttribute("user"));
+        answer.setUpvoteCount("0");
+        List<Answer> answers = new ArrayList<>();
+        answers.add(answer);
+        if(answerAdd){
+        	 new ObjectMapper().writeValue(response.getOutputStream(), answer);
+        }else{
+        	response.getOutputStream().print("fail");
+        }
+       
     } 
 	
   //问题详情
