@@ -37,6 +37,12 @@ public interface AnswerDao {
 	
 	
 	/**
+	 * 根据questionId查询一个回答
+	 * @return
+	 */
+	Answer selectOneAnswerByQuestionId(@Param("questionId")String questionId);
+	
+	/**
 	 * 根据uid查询回答
 	 * @return
 	 */

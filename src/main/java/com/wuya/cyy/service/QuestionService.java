@@ -51,19 +51,26 @@ public interface QuestionService {
 	List<Question> questionSelectByUid(String uid);
 	
 	/**
-	 * 根据昵称模糊搜索
-	 * @param nickName
+	 * topicId => question
+	 * @param topicId
 	 * @return
 	 */
 	List<Question> questionSelectByTopicId(String topicId);
 	
 	/**
-	 * 根据昵称模糊搜索
-	 * @param nickName
+	 * topicId & Uid => question
+	 * @param topicId
+	 * @param uid
 	 * @return
 	 */
 	List<Question> questionSelectByUidAndTopicId(String topicId,String uid);
 	
+	/**
+	 * 
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	List<Question> selectQuestionByHot();
 	
-
 }

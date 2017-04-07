@@ -58,11 +58,18 @@ public class AnswerServiceImpl  implements AnswerService {
 	public List<Answer> answerSelectByQuestionId(String questionId) {
 		return answerDao.selectAnswerByQuestionId(questionId);
 	}
+	
+	@Override
+	public Answer answerOneSelectByQuestionId(String questionId) {
+		//TODO select one answer
+		return answerDao.selectOneAnswerByQuestionId(questionId);
+	}
 
 	@Override
 	public List<Answer> answerSelectByQuestionId(String uid, String questionId) {
 		return answerDao.selectAnswerByUidAndQuestionId(uid, questionId);
 	}
+
 
 	
 

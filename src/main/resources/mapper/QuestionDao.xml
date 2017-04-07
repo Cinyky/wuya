@@ -89,15 +89,21 @@
 		   
 	</select>
 	
-	<!-- 根据QuestionId&TopicId查询Question -->
+	<!-- 根据QuestionTime limit begin end查询Question -->
 	<select id="selectQuestionByHot" resultType="Question">
 		SELECT
 			*
 		FROM
 			question
 	    ORDER BY questionTime
-	    LIMIT #{begin} , #{end}
-	</select>	   
+	    LIMIT #{begin},#{end}
+	</select>
 	
-
+	<!-- 根据QuestionTime limit begin end查询Question -->
+	<select id="selectQuestionCountByHot" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			question
+	</select>	   
 </mapper>

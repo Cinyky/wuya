@@ -62,6 +62,13 @@ public interface AnswerService {
 	 */
 	List<Answer> answerSelectByQuestionId(String questionId);
 	
+	/**
+	 * one answer
+	 * @param questionId
+	 * @return
+	 */
+	Answer answerOneSelectByQuestionId(String questionId);
+	
 	
 	/**
 	 * 根据questionId&uid搜索
@@ -69,5 +76,6 @@ public interface AnswerService {
 	 * @return
 	 */
 	List<Answer> answerSelectByQuestionId(String questionId,String uid);
+	
 	
 }

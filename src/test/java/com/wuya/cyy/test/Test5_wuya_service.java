@@ -11,9 +11,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.wuya.cyy.pojo.Answer;
+import com.wuya.cyy.pojo.Question;
 import com.wuya.cyy.pojo.Upvote;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.AnswerServiceImpl;
+import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 
@@ -43,7 +45,8 @@ public class Test5_wuya_service {
 
 	@Test
 	public void testUser_Add() throws Exception {
-		boolean userReg = userService.userReg("cyy2013142202", "12312322", "cyy1079276272@163.com", "Cinyky1234");
+//		boolean userReg = userService.userReg("cyy2013142202", "12312322", "cyy1079276272@163.com", "Cinyky1234");
+		boolean userReg = userService.userReg("1079276272", "276272", "cyy1079276272@163.com", "Cinyky1234");
 		logger.warn(userReg ? "true" : "false");
 	}
 	
@@ -90,7 +93,7 @@ public class Test5_wuya_service {
 	}
 	
 	/* ===================== 
-	 * answer service test
+	 * upvote service test
 	 * =====================
 	 **/
 	@Autowired
@@ -109,6 +112,19 @@ public class Test5_wuya_service {
 			logger.warn(upvoteCountSelectByAnswerId==""?"null":upvoteCountSelectByAnswerId);
 		
 		
+	}
+	
+	/* ===================== 
+	 * question service test
+	 * =====================
+	 **/
+	@Autowired
+	private QuestionServiceImpl questionService;
+	
+	@Test
+	public void testQuestion_Select_answerId() throws Exception {
+		List<Question> selectQuestionByHot = questionService.selectQuestionByHot();
+		logger.warn(selectQuestionByHot.size()+"");
 	}
 
 

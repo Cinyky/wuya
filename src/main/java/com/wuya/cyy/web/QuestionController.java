@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,10 +41,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Book;
+import com.wuya.cyy.pojo.HotQuestionAndAnswerAndTopic;
 import com.wuya.cyy.pojo.Question;
 import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.pojo.User;
+import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
@@ -62,6 +67,10 @@ public class QuestionController {
 
 	@Resource  
     private QuestionServiceImpl questionService;
+	@Resource  
+    private AnswerServiceImpl answerService;
+	@Resource  
+    private UserServiceImpl userService;
 	
     @RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -123,8 +132,36 @@ public class QuestionController {
     @RequestMapping(value="/init/index",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
     public void  getQuestionIndex(HttpServletRequest request,HttpServletResponse response
-    		) throws ParseException{  
+    		) throws ParseException, IOException{  
+    	ServletOutputStream outputStream = response.getOutputStream();
+    	List<Question> questions = questionService.selectQuestionByHot();
     	
+    	if(questions==null || questions.isEmpty()){
+    		outputStream.print("empty");
+    	}else{
+    		List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>();
+    		for (Question question : questions) {
+    			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+				String questionId = question.getQuestionId();
+				String uid = question.getUid();
+				String topicId = question.getTopicId();
+				Answer answer = answerService.answerOneSelectByQuestionId(questionId);
+				User user = userService.userSelectByUid(uid);
+				//TODO topic service
+				Topic topic = null;
+				ret.setAnswer(answer);
+				ret.setQuestion(question);
+				ret.setTopic(topic);
+				ret.setUser(user);
+				retList.add(ret);
+			}
+    		if(!retList.isEmpty()){
+    			ObjectMapper objectMapper = new ObjectMapper();
+    			objectMapper.writeValue(outputStream, retList);
+    		}else{
+    			outputStream.print("empty");
+    		}
+    	}
     }  
     
     //分享问题

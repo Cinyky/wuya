@@ -63,6 +63,12 @@ public interface QuestionDao {
 	 * 查询question 根据topicId
 	 * @return
 	 */
-	List<Question> selectQuestionByHot(@Param("begin")String begin,@Param("end")String end);
+	List<Question> selectQuestionByHot(@Param("begin")int begin,@Param("end")int end);
+	
+	/**
+	 * 查询question 根据topicId
+	 * @return
+	 */
+	String selectQuestionCountByHot();
 	
 }
