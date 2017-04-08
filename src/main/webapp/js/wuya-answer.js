@@ -243,7 +243,7 @@
 					if(rs=="fail"){
 						alert("fail");
 					}else{
-						$("#noAnswer").fadeout();
+						$("#noAnswer").fadeOut();
 						console.debug("answer -- rs:"+rs);
 						var answer = eval("("+rs+")");
 						console.debug("answer -- user:"+answer.upvoteCount);
