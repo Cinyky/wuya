@@ -2,8 +2,8 @@
           // wangEditor.config.printLog = false;
   $(function(){
 	  
-	  initAnswerNums();
-	  initFocusNums();
+//	  initAnswerNums();
+//	  initFocusNums();
 	  
 	  $('#questionInfo').keyup(function(){
 			var info =  $(this).val().trim();
@@ -209,19 +209,19 @@
 	    return num;  
 	} 
 	
-	function initAnswerNums(){
-		console.debug("====initAnswerNums====");
-		$.post(
-				"http://localhost:8080/wuya/answer/nums",
-				{
-					"method":"1"
-				},
-				function(rs){
-					console.debug("initAnswerNums  rs:"+rs);
-					$("#answerNum").html(rs);
-				}
-			);
-	}
+//	function initAnswerNums(){
+//		console.debug("====initAnswerNums====");
+//		$.post(
+//				"http://localhost:8080/wuya/answer/nums",
+//				{
+//					"method":"1"
+//				},
+//				function(rs){
+//					console.debug("initAnswerNums  rs:"+rs);
+//					$("#answerNum").html(rs);
+//				}
+//			);
+//	}
 
 	function initFocusNums(){
 		

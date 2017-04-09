@@ -47,5 +47,10 @@ public interface TopicService {
 	 * @return
 	 */
 	Topic selectTopicByTopicId(@Param("topicId")String topicId);
+	/**
+	 * 查询所有
+	 * @return
+	 */
+	List<Topic> topicSelectAll();
 	
 }

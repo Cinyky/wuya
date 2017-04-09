@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -36,13 +37,21 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Book;
+import com.wuya.cyy.pojo.HotQuestionAndAnswerAndTopic;
 import com.wuya.cyy.pojo.Question;
+import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.pojo.User;
+import com.wuya.cyy.service.TopicService;
+import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
+import com.wuya.cyy.service.Impl.TopicServiceImpl;
+import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
+import com.wuya.cyy.utils.RandomUtils;
 import com.wuya.cyy.utils.ServiceException;
 /**
  * 话题 Controller
@@ -55,12 +64,19 @@ import com.wuya.cyy.utils.ServiceException;
 public class TopicController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
+	private List<Topic> recommendedTopics;  
 	
 	@Resource  
-    private RegisterValidateService service;
+    private TopicServiceImpl topicService;
 	@Resource  
     private QuestionServiceImpl questionService;
+	@Resource  
+    private AnswerServiceImpl answerService;
+	@Resource  
+    private UpvoteServiceImpl upvoteService;
+	@Resource  
+    private UserServiceImpl userService;
 	
     @RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -85,10 +101,6 @@ public class TopicController {
     	String contextPath = request.getContextPath();
     	User user = (User)request.getSession(true).getAttribute("user");
         logger.warn("-----question questionInfo==>"+questionInfo+"----");  
-//        Question question = new Question(user.getUid(), questionInfo, topicId, System.currentTimeMillis(), 1);
-//        boolean questionAdd = questionService.questionAdd(question);
-//        String isAdded = questionAdd?"1":"0";
-//        return isAdded;  
     } 
 	
 	/**
@@ -97,18 +109,41 @@ public class TopicController {
 	 * @return
 	 * @throws ParseException
 	 */
-    @RequestMapping(value="/{questionId}/detail",method={RequestMethod.GET,RequestMethod.POST})  
+    @RequestMapping(value="/{topicId}/detail",method={RequestMethod.GET,RequestMethod.POST})  
     public ModelAndView  getQuestionDetail(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
+    		@PathVariable("topicId")String topicId
     		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
+        logger.warn("-----topic topicId==>"+topicId+"----");  
         ModelAndView mav=new ModelAndView();  
-        mav.setViewName("forward:/wuya-answer.jsp");
+        User user = (User)request.getSession(true).getAttribute("user");
+        Topic topic = topicService.selectTopicByTopicId(topicId);
+        mav.addObject("topic", topic);
+        if(recommendedTopics==null || recommendedTopics.isEmpty()){
+        	recommendedTopics = new ArrayList<>();
+        	recommendedTopics = topicService.topicSelectAll();
+        }
+        List<Topic> randomRecommendTopics = RandomUtils.randomRecommendTopics(recommendedTopics);
+        mav.addObject("recommendTopics", randomRecommendTopics);
+        //TODO topic user focus 
+    	List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>(); //每个话题的 answerQuestion 
+        List<Question> questions = questionService.questionSelectByTopicId(topicId);
+       for (Question question : questions) {
+    	   HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+    	   String questionId = question.getQuestionId();
+		    String uid = question.getUid();
+			Answer question_answer = answerService.answerOneSelectByQuestionId(questionId);
+			if(question_answer!=null){
+				String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(question_answer.getAnswerId());
+				question_answer.setUpvoteCount(upvoteCount);
+			}
+			User question_user = userService.userSelectByUid(uid);
+			ret.setAnswer(question_answer);
+			ret.setQuestion(question);
+			ret.setUser(question_user);
+			retList.add(ret);
+       }
+       mav.addObject("retList", retList);
+        mav.setViewName("forward:/wuya-topic.jsp");
         return mav;  
     }  
     

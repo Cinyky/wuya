@@ -141,18 +141,21 @@ public class UserController {
     	        User userLogin = userService.userLogin(loginCondition, pwd);
     	        if(userLogin!=null){
     	        	String code = (String) session.getAttribute("verifyCode");
-    	        	if(code.equals(verifycode)){
-    	        		session.setAttribute("user", userLogin);
-    	        		mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
+    	        	if(code != null){
+	    	        	if(verifycode.equals(code)){
+	    	        		session.setAttribute("user", userLogin);
+	    	        		mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
+	    	        	}else{
+	    	        		mav.addObject("txt","success but code null");
+	    	        		mav.setViewName("redirect:login");
+	    	        	}
+	    	            logger.warn("-----login----");
     	        	}else{
-    	        		mav.addObject("txt","success but code null");
-    	        		mav.setViewName("redirect:login");
+    	        		mav.addObject("txt","code null");
+        	        	mav.setViewName("redirect:login");
     	        	}
-    	            logger.warn("-----login----");
-    	            
-    	           
     	        }else{
-    	        	mav.addObject("txt","fail");
+    	        	mav.addObject("txt","user fail");
     	        	mav.setViewName("redirect:login");
     	        }
     	       

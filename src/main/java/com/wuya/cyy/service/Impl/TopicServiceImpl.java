@@ -47,6 +47,11 @@ public class TopicServiceImpl implements TopicService {
 	public Topic selectTopicByTopicId(String topicId) {
 		return topicDao.selectTopicByTopicId(topicId);
 	}
+
+	@Override
+	public List<Topic> topicSelectAll() {
+		return topicDao.selectTopicByRecommend() ;
+	}
 	
 
 }

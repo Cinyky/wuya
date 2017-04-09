@@ -51,4 +51,10 @@ public interface TopicDao {
 	 */
 	Topic selectTopicByTopicId(@Param("topicId")String topicId);
 	
+	/**
+	 * 查询所有话题
+	 * @return
+	 */
+	List<Topic> selectTopicByRecommend();
+	
 }

@@ -171,6 +171,7 @@ function initQuestionIndex(){
 					var arrs = eval(rs);
 					console.debug("empty=====");
 					$('#wuya').empty();
+					console.debug("共"+arrs.length+"个");
 					for(var i = 0;i<arrs.length;i++){
 						console.debug("第"+i+"次");
 						var arr = arrs[i];

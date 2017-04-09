@@ -95,7 +95,7 @@
 			*
 		FROM
 			question
-	    ORDER BY questionTime
+	    ORDER BY questionTime DESC
 	    LIMIT #{begin},#{end}
 	</select>
 	

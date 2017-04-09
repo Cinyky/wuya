@@ -64,4 +64,12 @@
 			topicId=#{topicId}
 	</select>
 	
+	<select id="selectTopicByRecommend" resultType="Topic">
+		SELECT
+			*
+		FROM
+			topic
+		ORDER BY topicTime DESC
+	</select>
+	
 </mapper>

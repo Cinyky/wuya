@@ -28,6 +28,12 @@ public class User {
 	private long 	banTime = 0;		//封号时间点
 	private int 	status = -1;			//用户账号状态 -1未激活 0 正常 1封号
 	
+	
+	//+++++++++++++++++++++++++++
+	private String answerNums;
+	private String focusNums;
+	private String focusTopics;
+	
 //	uid = #{uid},
 //	loginName = #{loginName},
 //	pwd = #{pwd},
@@ -45,6 +51,20 @@ public class User {
 //	status = #{status}
 
 	
+	public String getAnswerNums() {
+		return answerNums;
+	}
+
+
+
+
+	public void setAnswerNums(String answerNums) {
+		this.answerNums = answerNums;
+	}
+
+
+
+
 	//	public enum Sex{
 	//	MALE,			//男
 	//	FEMALE;			//女

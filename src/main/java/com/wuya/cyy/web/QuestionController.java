@@ -126,7 +126,12 @@ public class QuestionController {
         logger.warn("-----question questionId==>"+questionId+"----");  
         ModelAndView mav=new ModelAndView();  
         Question question = questionService.questionSelectByQuestionId(questionId);
+        String uid = question.getUid();
+        User user = userService.userSelectByUid(uid);
+        String answerNums = answerService.answerCountSelectByUid(user.getUid());
+        user.setAnswerNums(answerNums);
         mav.addObject("question", question);
+        mav.addObject("question_user", user);
         //TODO get question jsp topic
         Topic topic = topicService.selectTopicByTopicId(question.getTopicId());
         mav.addObject("question_topic", topic);

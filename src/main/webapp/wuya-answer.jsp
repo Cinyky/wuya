@@ -22,7 +22,7 @@
       <div class="container">
         <div class="row question" style="background-color:#ffe;">
           <div class="col-md-12">
-                <a class="btn btn-primary">php</a>
+                <a class="btn btn-primary">${question_topic.topicName }</a>
                   <h1>${question.questionInfo}</h1>
                   <div class="pull-right">
                   		<a class="btn btn-primary">分享问题</a>
@@ -44,15 +44,15 @@
                   	关于作者
                   </div>
 	              <div class="panel-body">
-	              	<img src="${pageContext.request.contextPath}/img/${user.headPic}" width="60px" height="60px"/>
+	              	<img src="${pageContext.request.contextPath}/img/${question_user.headPic}" width="60px" height="60px"/>
 	              	<div class="author-info" style="display:inline-block;">
-	              		<span class="nickname">${user.nickName}</span><br/>
-	              		<span class="sign">${user.signature }</span>
+	              		<span class="nickname">${question_user.nickName}</span><br/>
+	              		<span class="sign">${question_user.signature }</span>
 	              	</div>
 	              	<hr/>
 	              	<a style="display:inline-block;margin-left:60px;" >
 	              		<div class="NumberBoard-item" style="width:42px;">回答</div>
-	              		<div class="NumberBoard-item" style="width:42px;" id="answerNum">0</div>
+	              		<div class="NumberBoard-item" style="width:42px;" id="answerNum">${question_user.answerNums }</div>
 	              	</a>
 	              	
 	              	<a style="display:inline-block;margin-left:40px;">
