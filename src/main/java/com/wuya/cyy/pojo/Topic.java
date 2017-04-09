@@ -16,7 +16,26 @@ public class Topic {
 	private long topicTime;			//创建话题时间
 	private int status = 1;				//状态
 	
+	//+++++++++++++++++++++++++++++++++
+	private String isFocused;
+	private String focusNums;
 	
+	public String getFocusNums() {
+		return focusNums;
+	}
+
+	public void setFocusNums(String focusNums) {
+		this.focusNums = focusNums;
+	}
+
+	public String getIsFocused() {
+		return isFocused;
+	}
+
+	public void setIsFocused(String isFocused) {
+		this.isFocused = isFocused;
+	}
+
 	public Topic() {
 	}
 

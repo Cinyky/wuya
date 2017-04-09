@@ -139,7 +139,7 @@ public class AnswerController {
     //问题详情
     @RequestMapping(value="/{questionId}/detail",method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public void  shareQuestion(HttpServletRequest request,HttpServletResponse response,
+    public void  showQuestionAnswers(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("questionId")String questionId
     		) throws ParseException, JsonGenerationException, JsonMappingException, IOException{  
         logger.warn("-----answer questionId==>"+questionId+"----");  
@@ -154,5 +154,25 @@ public class AnswerController {
     		response.getOutputStream().print("empty");
     	}
     }
+    
+    
+    //share  answer
+    @RequestMapping(value="/{answerId}/share",method={RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public void  shareQuestion(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("answerId")String answerId
+    		) throws ParseException{  
+        logger.warn("-----answer share answerId==>"+answerId+"----");  
+    }
+    
+    @RequestMapping(value="/{answerId}/focus",method={RequestMethod.GET,RequestMethod.POST}) 
+    @ResponseBody
+    public void  focusQuestoion(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("answerId")String answerId
+    		) throws ParseException{  
+    	logger.warn("-----answer share answerId==>"+answerId+"----");  
+    }
+    
+       
     
 }

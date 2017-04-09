@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wuya.cyy.dao.FocusDao;
 import com.wuya.cyy.dao.TopicDao;
 import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.service.TopicService;
@@ -22,6 +23,8 @@ public class TopicServiceImpl implements TopicService {
 
 	@Autowired
 	private TopicDao topicDao;
+	@Autowired
+	private FocusDao focusDao;
 
 	@Override
 	public boolean topicAdd(Topic topic) {

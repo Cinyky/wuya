@@ -28,6 +28,12 @@ public interface FocusDao {
 	 */
 	int updateFocus(Focus focus);
 	
+	/**
+	 * delete
+	 * @param focus
+	 * @return
+	 */
+	int deleteFocus(Focus focus);
 	
 	/**
 	 * 查询关注 根据uid
@@ -36,9 +42,18 @@ public interface FocusDao {
 	List<Focus> selectFocusByUid(String uid);
 	
 	/**
-	 * 根据uid查询回答
+	 * 根据uid type
 	 * @return
 	 */
 	List<Focus> selectFocusByUidAndType(@Param("uid")String uid,@Param("focusType")int focusType);
+	
+
+	/**
+	 * 根据uid focusId
+	 * @return
+	 */
+	Focus selectFocusExsist(Focus focus);
+	
+	String selectFocusCount(@Param("id")String id);
 	
 }

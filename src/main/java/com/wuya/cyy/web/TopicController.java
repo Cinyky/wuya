@@ -37,8 +37,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.fabric.xmlrpc.base.Array;
 import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Book;
+import com.wuya.cyy.pojo.Focus;
 import com.wuya.cyy.pojo.HotQuestionAndAnswerAndTopic;
 import com.wuya.cyy.pojo.Question;
 import com.wuya.cyy.pojo.Topic;
@@ -46,6 +51,7 @@ import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.TopicService;
 import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
+import com.wuya.cyy.service.Impl.FocusServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
 import com.wuya.cyy.service.Impl.TopicServiceImpl;
@@ -77,6 +83,8 @@ public class TopicController {
     private UpvoteServiceImpl upvoteService;
 	@Resource  
     private UserServiceImpl userService;
+	@Resource  
+    private FocusServiceImpl focusService;
 	
     @RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -87,25 +95,20 @@ public class TopicController {
         return "1";  
     } 
 	
-	/**
-	 * 
-	 *	新增问题
-	 * @return
-	 * @throws ParseException
-	 */
     @RequestMapping(value="/add",method={RequestMethod.GET,RequestMethod.POST})  
     public void  addQuestion(HttpServletRequest request,HttpServletResponse response,
-    		String questionInfo,
-    		String topicId
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
+    		String topicName
+    		) throws ParseException, JsonGenerationException, JsonMappingException, IOException{  
     	User user = (User)request.getSession(true).getAttribute("user");
-        logger.warn("-----question questionInfo==>"+questionInfo+"----");  
+        logger.warn("-----topic add topicName==>"+topicName+"----");  
+        Topic topic = new Topic(user.getUid(), topicName);
+        boolean topicAdd = topicService.topicAdd(topic);
+        new ObjectMapper().writeValue(response.getOutputStream(), topic);
     } 
 	
 	/**
 	 * 
-	 *	问题详情
+	 *	topic 
 	 * @return
 	 * @throws ParseException
 	 */
@@ -116,6 +119,16 @@ public class TopicController {
         logger.warn("-----topic topicId==>"+topicId+"----");  
         ModelAndView mav=new ModelAndView();  
         User user = (User)request.getSession(true).getAttribute("user");
+        List<Focus> focusSelectByUid = focusService.focusSelectByUid(user.getUid());
+        List<Topic> myTopics = new ArrayList<>();
+        if(focusSelectByUid!=null || !focusSelectByUid.isEmpty()){
+        	for (Focus focus : focusSelectByUid) {
+				String id = focus.getId();
+				Topic selectTopicByTopicId = topicService.selectTopicByTopicId(id);
+				myTopics.add(selectTopicByTopicId);
+			}
+        }
+        mav.addObject("myTopics", myTopics);
         Topic topic = topicService.selectTopicByTopicId(topicId);
         mav.addObject("topic", topic);
         if(recommendedTopics==null || recommendedTopics.isEmpty()){
@@ -123,8 +136,14 @@ public class TopicController {
         	recommendedTopics = topicService.topicSelectAll();
         }
         List<Topic> randomRecommendTopics = RandomUtils.randomRecommendTopics(recommendedTopics);
+        for (Topic temp_topic : randomRecommendTopics) {
+			Focus focus = new Focus(user.getUid(), temp_topic.getTopicId());
+			boolean focusExsist = focusService.focusExsist(focus);
+			temp_topic.setIsFocused(focusExsist?"1":"2");
+			String focusCount = focusService.focusCount(temp_topic.getTopicId());
+			temp_topic.setFocusNums(focusCount);
+		}
         mav.addObject("recommendTopics", randomRecommendTopics);
-        //TODO topic user focus 
     	List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>(); //每个话题的 answerQuestion 
         List<Question> questions = questionService.questionSelectByTopicId(topicId);
        for (Question question : questions) {
@@ -147,57 +166,48 @@ public class TopicController {
         return mav;  
     }  
     
-    //分享问题
-    @RequestMapping(value="/{questionId}/share",method={RequestMethod.GET,RequestMethod.POST})
+    //recommend topic
+    @RequestMapping(value="/recommend",method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public ModelAndView  shareQuestion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
+    public void  shareQuestion(HttpServletRequest request,HttpServletResponse response
+    		) throws ParseException, JsonGenerationException, JsonMappingException, IOException{  
+    	 User user = (User)request.getSession(true).getAttribute("user");
+    	 if(recommendedTopics==null || recommendedTopics.isEmpty()){
+         	recommendedTopics = new ArrayList<>();
+         	recommendedTopics = topicService.topicSelectAll();
+         }
+         List<Topic> randomRecommendTopics = RandomUtils.randomRecommendTopics(recommendedTopics);
+         for (Topic temp_topic : randomRecommendTopics) {
+ 			Focus focus = new Focus(user.getUid(), temp_topic.getTopicId());
+ 			boolean focusExsist = focusService.focusExsist(focus);
+ 			temp_topic.setIsFocused(focusExsist?"1":"2");
+ 			String focusCount = focusService.focusCount(temp_topic.getTopicId());
+ 			temp_topic.setFocusNums(focusCount);
+ 		}
+         new ObjectMapper().writeValue(response.getOutputStream(), randomRecommendTopics);
     }
     
-    @RequestMapping(value="/{questionId}/focus",method={RequestMethod.GET,RequestMethod.POST}) 
+    @RequestMapping(value="/{topicId}/focus",method={RequestMethod.GET,RequestMethod.POST}) 
     @ResponseBody
-    public ModelAndView  focusQuestoion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
+    public void  focusQuestoion(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("topicId")String topicId
+    		) throws ParseException, IOException{  
+        logger.warn("-----topic topicId==>"+topicId+"----"); 
+        User user = (User)request.getSession(true).getAttribute("user");
+        Focus focus = new Focus(user.getUid(), topicId);
+        boolean focusExsist = focusService.focusExsist(focus);
+        boolean isSuccess;
+        String method = "2";   //不存在  关准
+        if(focusExsist){
+        	method = "1"; //存在 剔除关注
+        	isSuccess = focusService.focusDelete(focus);
+        }else{
+        	isSuccess = focusService.focusAdd(focus);
+        }
+        String count = focusService.focusCount(topicId);
+//        String success = isSuccess?"true":"flase";
+        String res = method+"|"+count;
+        response.getOutputStream().print(res);
     }  
-    
-    @RequestMapping(value="/{questionId}/like",method={RequestMethod.GET,RequestMethod.POST}) 
-    @ResponseBody
-    public ModelAndView  likeQuestoion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    } 
-    
 
 }

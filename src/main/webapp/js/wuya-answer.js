@@ -199,6 +199,7 @@
 	    oMin = oDate.getMinutes(),  
 	    oSen = oDate.getSeconds(),  
 	    oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间  
+	    console.debug(oDate);
 	    return oTime;  
 	};  
 	//补0操作  

@@ -180,56 +180,20 @@ public class QuestionController {
     }  
     
     //分享问题
-    @RequestMapping(value="/{questionId}/share",method={RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
-    public ModelAndView  shareQuestion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    }
-    
-    @RequestMapping(value="/{questionId}/focus",method={RequestMethod.GET,RequestMethod.POST}) 
-    @ResponseBody
-    public ModelAndView  focusQuestoion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    }  
-    
-    @RequestMapping(value="/{questionId}/like",method={RequestMethod.GET,RequestMethod.POST}) 
-    @ResponseBody
-    public ModelAndView  likeQuestoion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    } 
-    
+//    @RequestMapping(value="/{questionId}/share",method={RequestMethod.GET,RequestMethod.POST})
+//    @ResponseBody
+//    public void  shareQuestion(HttpServletRequest request,HttpServletResponse response,
+//    		@PathVariable("questionId")String questionId
+//    		) throws ParseException{  
+//        logger.warn("-----question share questionId==>"+questionId+"----");  
+//    }
+    //focus 问题
+//    @RequestMapping(value="/{questionId}/focus",method={RequestMethod.GET,RequestMethod.POST}) 
+//    @ResponseBody
+//    public void  focusQuestoion(HttpServletRequest request,HttpServletResponse response,
+//    		@PathVariable("questionId")String questionId
+//    		) throws ParseException{  
+//        logger.warn("-----question focus questionId==>"+questionId+"----");  
+//    }  
 
 }

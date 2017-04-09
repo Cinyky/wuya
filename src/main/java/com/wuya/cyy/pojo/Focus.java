@@ -11,23 +11,32 @@ import java.util.UUID;
 public class Focus {
 	private String focusId;			//focusId;
 	private String uid;				//user id
-	private int focusType;			// type 1.question 2.topic
+	private int focusType;			// type 1.topic 2.question
 	private String id;				//id
 	private long focusTime;			//关注时间
-	private int status;				//状态
+	private int status =1;				//状态
 	
+
 	public Focus() {
 	}
 
-	public Focus(String focusId, String uid, int focusType, String id, int status) {
+	public Focus(String uid, int focusType, String id) {
 		super();
 		this.focusId = UUID.randomUUID()+"";
 		this.uid = uid;
 		this.focusType = focusType;
 		this.id = id;
 		this.focusTime = System.currentTimeMillis();
-		this.status = status;
 	}
+	
+	public Focus(String uid, String id) {
+		super();
+		this.focusId = UUID.randomUUID()+"";
+		this.uid = uid;
+		this.id = id;
+		this.focusTime = System.currentTimeMillis();
+	}
+
 
 	public String getFocusId() {
 		return focusId;

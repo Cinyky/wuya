@@ -33,6 +33,18 @@
 				focusId = #{focusId}
 	</update>
 	
+	<!-- 更新focus  --> 
+	<update id="deleteFocus">
+			DELETE
+			FROM
+				focus
+			WHERE
+				uid=#{uid}
+			AND
+				id=#{id}
+	</update>
+	
+	
 	<!-- 根据questionId查询answer -->
 	<select id="selectFocusByUid" resultType="Focus">
 		SELECT
@@ -64,6 +76,28 @@
 		    AND
 			focusType=#{focusType}
 	</select>
+	
+	<!-- 根据type uid查询Focus Exsist -->
+	<select id="selectFocusExsist" resultType="Focus">
+		SELECT
+			*
+		FROM
+			focus
+		WHERE
+			uid=#{uid}
+		    AND
+			id=#{id}
+	</select>
+	
+	<select id="selectFocusCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			focus
+		WHERE
+			id=#{id}
+	</select>
+	
 
 
 </mapper>

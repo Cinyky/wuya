@@ -18,7 +18,6 @@ public class RandomUtils {
 				 int index = new Random().nextInt(size);
 				 tmpTopics.add(topics.get(index));
 			 }
-				 
 		 }
 		 Iterator<Topic> iterator = tmpTopics.iterator();
 		 List<Topic> retTopics =  new ArrayList<>();

@@ -39,7 +39,7 @@ public interface ReportDao {
 	 * 查询report 根据uid
 	 * @return
 	 */
-	List<Report> selectReportByReportId(String uid);
+	Report selectReportByReportId(String reportId);
 	
 	/**
 	 * 查询report 根据info模糊

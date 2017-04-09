@@ -133,6 +133,7 @@ public class UserController {
     		) throws ParseException{
     	ModelAndView mav=new ModelAndView();
     	HttpSession session = request.getSession(true);
+    	session.setMaxInactiveInterval(10*60);
     	String method = request.getMethod();
     	 logger.warn("-----userLogin---- method:"+method); 
     	if("get".equalsIgnoreCase(method)){

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <jsp:include page="templet/necessary.jsp" />
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-personal.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-topic.js" ></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-personal.css" />
     <title>topic</title>
   </head>
@@ -23,55 +23,17 @@
           <div class="col-md-8">
           	<div class="panel panel-default">
           			<div class="panel-heading">
-         				已关注的话题动态 <span class="pull-right">共关注86个话题</span>
+         				已关注的话题动态 <span class="pull-right">共关注${fn:length(myTopics)}个话题</span>
          			</div>
 		              <div class="panel-body">
-							<a class="btn btn-primary active" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
-							<a class="btn btn-primary" style="margin:2px;border-radius:8px;">Mac</a>
+		              		<c:forEach items='${myTopics}' var='myTopic'>
+		              		  <c:if test="${myTopic.topicId eq  topic.topicId}">
+		              		 	 <a class="btn btn-primary active" style="margin:2px;border-radius:8px;" onclick="chooseTopic('${myTopic.topicId}')">${myTopic.topicName}</a>
+		              		  </c:if>
+		              		  <c:if test="${myTopic.topicId ne  topic.topicId}">
+		              		  	<a class="btn btn-primary" style="margin:2px;border-radius:8px;" onclick="chooseTopic('${myTopic.topicId}')">${myTopic.topicName}</a>
+		              		  </c:if>
+							</c:forEach>
 		              </div>
 	        </div>
 	        <div class="topic-bar" style="border-bottom:1px solid grey;">
@@ -135,7 +97,7 @@
 		              <div class="panel-body">
 							来源：<span class="status">
 								其他人关注  推荐
-								<a >换一换</a>
+								<a onclick="changeTopics()">换一换</a>
 							</span>			           
 							<hr>
 							<div id ="recommendTopics">
@@ -144,9 +106,20 @@
 										<a href="#" ><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topicimg/${recTopics.topicPic }" height="42" width="42"></a>
 										<div style="display:inline-block;position:relative;top:10px;">
 											<span>话题：${recTopics.topicName }</span><br>
-											<span>关注人数</span><span>111</span>
+											<span>关注人数</span><span id="focusNums${recTopics.topicId }">${recTopics.focusNums }</span>
 										</div>
-										<a class="btn btn-primary pull-right" style="position:relative;top:10px;">关注</a>
+											<a class="btn btn-primary pull-right" style="position:relative;top:10px;" id="checkFocus${recTopics.topicId }" 
+													onclick="changeFocus('${recTopics.topicId}')" >
+											
+												<c:if test="${recTopics.isFocused eq '2' }">
+													关注
+												</c:if>
+												<c:if test="${recTopics.isFocused eq '1' }">
+													取消关注
+												</c:if>
+											</a>
+									
+										
 									</div>
 								</c:forEach>
 							</div>
