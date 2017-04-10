@@ -47,6 +47,10 @@
                  	<c:if test="${personal_user.uid ne user.uid }">
                  		 <a href="javaScript" class="btn btn-primary" onclick="changeFriend('${personal_user.uid}')">关注他</a>
                  	</c:if>
+                 	<c:if test="${personal_user.uid eq user.uid }">
+                 		 <a>修改个人界面</a>
+                 	</c:if>
+                 	
                   </div>
                   
             	</div>
@@ -57,12 +61,11 @@
         <div class="row">
           <div class="col-md-8 panel">
             <div style="padding-left: 20px;">
-              <a href="#" class="btn" onclick="changeType('1')">回答</a>
-              <a href="#" class="btn" onclick="changeType('2')">分享</a>
-              <a href="#" class="btn" onclick="changeType('3')">提问</a>
-              <a href="#" class="btn" onclick="changeType('4')">收藏</a>
-              <a href="#" class="btn" onclick="changeType('5')">话题</a>
-              <a href="#" class="btn" onclick="changeType('6')">好友</a>
+              <a href="#" class="btn" onclick="changeType('1')">提问</a>
+              <a href="#" class="btn" onclick="changeType('2')">回答</a>
+              <a href="#" class="btn" onclick="changeType('3')">分享</a>
+              <a href="#" class="btn" onclick="changeType('4')">创建的话题</a>
+              <a href="#" class="btn" onclick="changeType('5')">好友</a>
             </div>
               <h3>
                 	<c:if test="${personal_user.uid ne user.uid }">他</c:if>
@@ -104,191 +107,6 @@
 	                    </div>
 	                </div>
                 </c:forEach>
-                <!--
-                  type question
-                -->
-                <h3>他的分享</h3>
-                <hr>
-                <div class="piece" id="piece1">
-                  <h4>分享了问题</h4>
-                  <ul class="media-list">
-                    <li class="media">
-                      <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_1.jpg" height="42" width="42"></a>
-                      <div class="media-body">
-                        <h7 class="media-heading">来自话题：自然科学</h7>
-                        <h4 class="media-heading">实验做不出结果是一种怎样的体验</h4>
-                        <h6 class="media-heading">
-                          <span>我是一个大帅哥</span>&nbsp;：
-                          <span>个性签名</span>
-                        </h6>
-                      </div>
-                    </li>
-                  </ul>
-                </div>  <!--推荐人体1结束--> 
-                <div class="piece" id="piece1">
-                  <h4>分享了回答</h4>
-                 <h3>学历究竟对于JAVA入行有多深的影响？</h3>
-                  <img src="img/headpic2.jpg" class="navbarimg-responsive img-thumbnail " width="42px" height="42px">
-                  <span>韦庆明</span><br>
-                  <span>认真，你就赢了</span>
-                  <div style="color: grey">25 人赞同该回答</div>
-                     <p>
-                      作为一名中专生，在软件编程行业工作6年经验的我，来答答这个问题吧。 中专时候的专业为Java软件编程与开发，课程有Java、也穿插了一些 .net，自认为已经非常努力的学习了，但是，实习出来工作，我发现我什么都没有学会，是真的，什么都没有学会！ 实习的时候，我发现我什么都不懂 我连在学校用的开发工具叫什么都不记得。 我不懂开发
-                    </p>
-                    <div>
-                      <a class="media-object badge alert-danger" style="width:64px;">25&nbsp;<i class="fa fa-thumbs-up"></i></a>
-                      <a>分享</a>
-                      <a>收藏</a>
-                      <a class="" data-toggle="modal" data-target="#report">举报</a>
-                    </div>
-                </div>  <!--推荐人体1结束--> 
-
-
-                <!--
-                  type question
-                -->
-                <h3>他的提问</h3>
-                <hr>
-                <div class="piece" id="piece1">
-                  <h4>提出了问题</h4>
-                  <ul class="media-list">
-                    <li class="media">
-                      <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_1.jpg" height="42" width="42"></a>
-                      <div class="media-body">
-                        <h7 class="media-heading">来自话题：自然科学</h7>
-                        <h4 class="media-heading">实验做不出结果是一种怎样的体验</h4>
-                        <h6 class="media-heading">
-                          <span>我是一个大帅哥</span>&nbsp;：
-                          <span>个性签名</span>
-                        </h6>
-                      </div>
-                    </li>
-                  </ul>
-                </div>  <!--推荐人体1结束--> 
-
-
-
-                <!--
-                  type question
-                -->
-                <h3>他的收藏</h3>
-                <hr>
-                <div class="piece" id="piece1">
-                  <h4>收藏了问题</h4>
-                  <ul class="media-list">
-                    <li class="media">
-                      <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_1.jpg" height="42" width="42"></a>
-                      <div class="media-body">
-                        <h7 class="media-heading">来自话题：自然科学</h7>
-                        <h4 class="media-heading">实验做不出结果是一种怎样的体验</h4>
-                        <h6 class="media-heading">
-                          <span>我是一个大帅哥</span>&nbsp;：
-                          <span>个性签名</span>
-                        </h6>
-                      </div>
-                    </li>
-                  </ul>
-                </div>  <!--推荐人体1结束--> 
-                <div class="piece" id="piece1">
-                  <h4>收藏了回答</h4>
-                 <h3>学历究竟对于JAVA入行有多深的影响？</h3>
-                  <img src="img/headpic2.jpg" class="navbarimg-responsive img-thumbnail " width="42px" height="42px">
-                  <span>韦庆明</span><br>
-                  <span>认真，你就赢了</span>
-                  <div style="color: grey">25 人赞同该回答</div>
-                     <p>
-                      作为一名中专生，在软件编程行业工作6年经验的我，来答答这个问题吧。 中专时候的专业为Java软件编程与开发，课程有Java、也穿插了一些 .net，自认为已经非常努力的学习了，但是，实习出来工作，我发现我什么都没有学会，是真的，什么都没有学会！ 实习的时候，我发现我什么都不懂 我连在学校用的开发工具叫什么都不记得。 我不懂开发
-                    </p>
-                    <div>
-                      <a class="media-object badge alert-danger" style="width:64px;">25&nbsp;<i class="fa fa-thumbs-up"></i></a>
-                      <a>分享</a>
-                      <a>收藏</a>
-                      <a class="" data-toggle="modal" data-target="#report">举报</a>
-                    </div>
-                </div>  <!--推荐人体1结束--> 
-
-
-
-                <h3>他的话题</h3>
-                <hr>
-                <div class="piece" id="piece1">
-                  <h4>关注了话题</h4>
-                  <ul class="media-list">
-                    <li class="media">
-                      <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_1.jpg" height="42" width="42"></a>
-                      <div class="media-body">
-                        <h7 class="media-heading">话题：自然科学</h7>
-                        <h6 class="media-heading">
-                          <span>话题作者:我是一个大帅哥</span>&nbsp;
-                          <span>我是一个大帅</span>
-                        </h6>
-                      </div>
-                    </li>
-                  </ul>
-                </div>  <!--推荐人体1结束--> 
-                <div class="piece" id="piece1">
-                  <h4>创立了话题</h4>
-                  <ul class="media-list">
-                    <li class="media">
-                      <a href="#" class="pull-left"><img class="img-rounded media-object" src="topic/topic_1.jpg" height="42" width="42"></a>
-                      <div class="media-body">
-                        <h7 class="media-heading">话题：自然科学</h7>
-                        <h6 class="media-heading">
-                          <span>话题作者:韦庆明</span>&nbsp;
-                          <span>认真，你就赢了</span>
-                        </h6>
-                      </div>
-                    </li>
-                  </ul>
-                </div>  <!--推荐人体1结束--> 
-
-                <h3>他的关注</h3>
-                <hr>
-                <a href="" class="btn" style="color: orange;">他关注的人</a>
-                <a href="" class="btn">关注他的人</a>
-                <div class="piece" id="piece1">
-                     <img src="img/headpic2.jpg" class="navbarimg-responsive img-thumbnail " width="64px" height="64px">
-                     <div style="display: inline-block;position: relative;top: 20px">
-                       <span>韦庆明</span><br>
-                       <span>认真，你就赢了</span><br>
-                       <span>6 回答</span>&nbsp;<span>165 关注者</span>
-                     </div> 
-                     
-                     <a href="" class="btn btn-primary pull-right" style="margin-top: 30px">取关</a>
-                </div>  <!--推荐人体1结束--> 
-                <div class="piece" id="piece1">
-                     <img src="img/headpic3.jpg" class="navbarimg-responsive img-thumbnail " width="64px" height="64px">
-                     <div style="display: inline-block;position: relative;top: 20px">
-                       <span>神经猫</span><br>
-                       <span>认真，你就赢了</span><br>
-                       <span>6 回答</span>&nbsp;<span>165 关注者</span>
-                     </div> 
-                     
-                     <a href="" class="btn btn-primary pull-right" style="margin-top: 30px">取关</a>
-                </div>  <!--推荐人体1结束--> 
-                <div class="piece" id="piece1">
-                     <img src="img/headpic4.jpg" class="navbarimg-responsive img-thumbnail " width="64px" height="64px">
-                     <div style="display: inline-block;position: relative;top: 20px">
-                       <span>Paradise复活</span><br>
-                       <span>数据/投资/编程 爱好者</span><br>
-                       <span>6 回答</span>&nbsp;<span>165 关注者</span>
-                     </div> 
-                     
-                     <a href="" class="btn btn-primary pull-right" style="margin-top: 30px">取关</a>
-                </div>  <!--推荐人体1结束--> 
-                <div class="piece" id="piece1">
-                     <img src="img/headpic5.jpg" class="navbarimg-responsive img-thumbnail " width="64px" height="64px">
-                     <div style="display: inline-block;position: relative;top: 20px">
-                       <span>张先生的夫人</span><br>
-                       <span>自由</span><br>
-                       <span>6 回答</span>&nbsp;<span>165 关注者</span>
-                     </div> 
-                     
-                     <a href="" class="btn btn-primary pull-right" style="margin-top: 30px">取关</a>
-                </div>  <!--推荐人体1结束--> 
-
-            
-
             </div>        
 
           </div>

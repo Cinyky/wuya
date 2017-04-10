@@ -26,6 +26,7 @@ function changeFocus(topicId){
 		);
 }
 
+//换话题 切换
 function changeTopics(){
 	$.getJSON(
 			"http://localhost:8080/wuya/topic/recommend",

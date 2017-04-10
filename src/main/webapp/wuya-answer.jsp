@@ -28,7 +28,7 @@
                   <h1>${question.questionInfo}</h1>
                   <div class="pull-right">
                   		<a class="btn btn-primary" onclick="share('${question.questionId}','2')">分享问题</a>
-                  	    <a class="btn btn-primary" onclick="store('${question.questionId}','2')">收藏问题</a>
+                  	    <a class="btn btn-primary" data-toggle='modal' data-target='#report' onclick="report('${question.questionId}','2')">举报问题</a>
                   		<a class="btn btn-primary" data-toggle="modal" data-target="#answer" >写回答</a>
                   </div>
               
@@ -86,34 +86,45 @@
     </div>
 
     
-    
+     <!--
+    	作者：1079276272@qq.com
+    	时间：2017-02-15
+    	描述：模态框1 question
+    -->
     <jsp:include page="templet/showQuestion.jsp" />
      <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15
     	描述：模态框2 report
     -->
-    <div class="fade modal" id="report">
-      <div class="modal-dialog">
+    
+    <jsp:include page="templet/showReport.jsp" />
+    <!--
+    	作者：1079276272@qq.com
+    	时间：2017-03-13
+    	描述：模态框3 answer
+    -->
+    <div id="answer" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-举报系统</h4>
+            <h4 class="modal-title">无涯-提出你的疑惑</h4>
           </div>
-          <div class="modal-body">
-                <h4>举报</h4>
-                <input type="hidden" id='reportId' val=''/>
-                <input type="hidden" id='reportType' val=''/>
-                <input type="text" class="form-control" placeholder="举报理由" id="reportInfo" >
+    
+          <div class="editor-container">
+              <div id="answer-editor">
+                  <p>请输入内容...</p>
+              </div>
           </div>
-          <div class="modal-footer">
-          	<a class="btn btn-primary" onclick="submitReport()">举报</a>
+
+           <div class="modal-footer">
+            <a class="btn btn-primary" onclick="submitAnswer('${question.questionId}')" >提交</a>
             <a class="btn btn-primary" data-dismiss="modal">关闭</a>
           </div>
         </div>
       </div>
     </div>
-    
     <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15
@@ -141,33 +152,7 @@
         </div>
       </div>
     </div>
-	<!--
-    	作者：1079276272@qq.com
-    	时间：2017-03-13
-    	描述：
-    -->
-    <div id="answer" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-提出你的疑惑</h4>
-          </div>
-    
-          <div class="editor-container">
-              <div id="answer-editor">
-                  <p>请输入内容...</p>
-              </div>
-          </div>
-
-           <div class="modal-footer">
-            <a class="btn btn-primary" onclick="submitAnswer('${question.questionId}')" >提交</a>
-            <a class="btn btn-primary" data-dismiss="modal">关闭</a>
-          </div>
-
-        </div>
-      </div>
-    </div>
+	
     
 </body>
 </html>

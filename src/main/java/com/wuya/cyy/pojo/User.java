@@ -30,10 +30,11 @@ public class User {
 	
 	
 	//+++++++++++++++++++++++++++
-	private String answerNums;
-	private String focusedFriends;
-	private String focusFriends;
-	private String focusTopics;
+	private String answerNums;		//回答问题数
+	private String focusedFriends;	//关注的朋友
+	private String focusFriends;	//关注朋友
+	private String focusTopics;		//关注的话题数量
+//	private String isFocused;		//是否被关注
 	
 //	uid = #{uid},
 //	loginName = #{loginName},
@@ -52,37 +53,23 @@ public class User {
 //	status = #{status}
 
 	
-	public String getAnswerNums() {
-		return answerNums;
-	}
 
-
-
-
-
-
+//	public String getIsFocused() {
+//		return isFocused;
+//	}
+//
+//	public void setIsFocused(String isFocused) {
+//		this.isFocused = isFocused;
+//	}
 
 
 	public String getFocusFriends() {
 		return focusFriends;
 	}
 
-
-
-
-
-
-
-
 	public void setFocusFriends(String focusFriends) {
 		this.focusFriends = focusFriends;
 	}
-
-
-
-
-
-
 
 
 	public String getFocusedFriends() {
@@ -90,36 +77,23 @@ public class User {
 	}
 
 
-
-
-
-
-
-
 	public void setFocusedFriends(String focusedFriends) {
 		this.focusedFriends = focusedFriends;
 	}
-
-
-
-
-
-
 
 
 	public String getFocusTopics() {
 		return focusTopics;
 	}
 
-
-
-
 	public void setFocusTopics(String focusTopics) {
 		this.focusTopics = focusTopics;
 	}
 
 
-
+	public String getAnswerNums() {
+		return answerNums;
+	}
 
 	public void setAnswerNums(String answerNums) {
 		this.answerNums = answerNums;

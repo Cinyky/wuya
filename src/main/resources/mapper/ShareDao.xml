@@ -14,7 +14,8 @@
 				#{uid},
 				#{shareType},
 				#{id},
-				#{shareTime}
+				#{shareTime},
+				#{status}
 				)
 	</insert>
 	
@@ -42,18 +43,7 @@
 			uid=#{uid}
 	</select>
 
-
-	<!-- 根据reportId查询report -->
-	<select id="selectShareByShareId" resultType="Share">
-		SELECT
-			*
-		FROM
-			share
-		WHERE
-			shareId=#{shareId}
-	</select>
-	
-	<!-- 根据type查询report -->
+	<!-- 根据shareId查询report -->
 	<select id="selectShareByType" resultType="Share">
 		SELECT
 			*

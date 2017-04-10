@@ -40,45 +40,43 @@
          				 <a href="#" ><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topicimg/${topic.topicPic}" height="42" width="42"></a>
          				 <span class="topic-name">${topic.topicName }</span> <a class="pull-right">热门排序</span><a class="pull-right">时间排序</span>
          	</div>
-         	
-         	
-			<c:forEach items='${retList}' var='list'>
-			 <c:set value='${list.user }' var='list_user'></c:set>
-			 <c:set value='${list.answer }' var='list_answer'></c:set>
-			 <c:set value='${list.question }' var='list_question'></c:set>
-			 <div class="piece" id="piece${list_question.questionId }">
-	            <ul class="media-list">
-	              <li class="media">
-	                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topicimg/${topic.topicPic}" height="42" width="42"></a>
-	                <div class="media-body">
-	                  <button type="button" class="close pull-right ccc">×</button>
-	                  <h4 class="media-heading">${list_question.questionInfo }</h4>
-	                  <h6 class="media-heading">
-	                    <span>${list_user.nickName }</span>&nbsp;：
-	                    <span>${list_user.signature }</span>
-	                  </h6>
-	                  <p>
-	                  	${list_answer.answerInfo }
-	                  </p>
-	                </div>
-	              </li>
-	              <li class="media">
-	                <span class="pull-left">
-	                  <a class="media-object badge alert-danger" style="width:64px;">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-up"></i></a>
-	                </span>
-	               <div class="media-body">
-	                	  <a>分享</a>
-		                  <a>收藏</a>
-		                  <a class="shield" data-toggle="shield_tooltip" data-placement="top" title="不再显示在首页推荐中">屏蔽</a>
-		                  <a class="" data-toggle="modal" data-target="#report">
-							举报
-						  </a>
-	                </div>
-	              </li>
-	            </ul>
-            </div>  <!--推荐人体1结束-->
-			</c:forEach>
-          
+         	<div id="topicContent">
+				<c:forEach items='${retList}' var='list'>
+				 <c:set value='${list.user }' var='list_user'></c:set>
+				 <c:set value='${list.answer }' var='list_answer'></c:set>
+				 <c:set value='${list.question }' var='list_question'></c:set>
+				 <div class="piece" id="piece${list_question.questionId }">
+		            <ul class="media-list">
+		              <li class="media">
+		                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topicimg/${topic.topicPic}" height="42" width="42"></a>
+		                <div class="media-body">
+		                  <button type="button" class="close pull-right ccc">×</button>
+		                  <h4 class="media-heading">${list_question.questionInfo }</h4>
+		                  <h6 class="media-heading">
+		                    <span>${list_user.nickName }</span>&nbsp;：
+		                    <span>${list_user.signature }</span>
+		                  </h6>
+		                  <p>
+		                  	${list_answer.answerInfo }
+		                  </p>
+		                </div>
+		              </li>
+		              <li class="media">
+		                <span class="pull-left">
+		                  <a class="media-object badge alert-danger" style="width:64px;">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-up"></i></a>
+		                </span>
+		               <div class="media-body">
+		                	  <a>分享</a>
+			                  <a class="shield" data-toggle="shield_tooltip" data-placement="top" title="不再显示在首页推荐中">屏蔽</a>
+			                  <a class="" data-toggle="modal" data-target="#report">
+								举报
+							  </a>
+		                </div>
+		              </li>
+		            </ul>
+	            </div>  <!--推荐人体1结束-->
+				</c:forEach>
+          	</div>
           </div>
           
           <div class="col-md-4">

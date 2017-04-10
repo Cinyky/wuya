@@ -196,8 +196,7 @@
 		}
 		
 		str+=		"</a>";
-		str+="                 <a data-toggle='modal' data-target='#share' onclick='share(\""+answer.answerId+"\")'>分享</a>";
-		str+="                 <a onclick='store(\""+answer.answerId+"\")'>收藏</a>";
+		str+="                 <a onclick='share(\""+answer.answerId+"\",\"1\")'>分享</a>";
 		if(uid==answer.uid){
 			str +="<span>来自我自己的回答</span>"
 		}else{
@@ -248,23 +247,24 @@
 	  console.debug("+++++++关注的uid==>>"+uid);
   }
   
-  //收藏
-  function store(answerId){
-	  console.debug("+++++++store answerId==>>"+answerId);
-  }
-  
   //分享
-  function share(answerId,questionId){
-	  console.debug("+++++++share answerId==>>"+answerId);
-	  console.debug("+++++++share questionId==>>"+questionId);
-	  $("#shareId").val(answerId+"|"+questionId);
-  }
-  
-  //提交分享
-  function submitShare(){
-	  var shareId = $("#shareId").val();
-	  var shareType = $("#shareType").val();
-	  console.debug("+++submitShare()  shareId==>>"+shareId+"  reportType==>>"+shareType);
+  function share(id,shareType){
+	  console.debug("+++++++share id==>>"+id);
+	  console.debug("+++++++share shareType==>>"+shareType);
+	  $.post(
+				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				{
+					"shareId" :id
+				},
+				function(rs){
+					console.debug("report  rs :"+rs);
+					if(rs=="1"){
+						alert("分享成功");
+					}else{
+						alert("分享失败");
+					}
+				}
+			);
   }
   
   function report(id,reportType){

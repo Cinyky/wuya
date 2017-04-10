@@ -15,6 +15,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,17 +39,24 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Book;
+import com.wuya.cyy.pojo.Focus;
+import com.wuya.cyy.pojo.Friend;
 import com.wuya.cyy.pojo.HotQuestionAndAnswerAndTopic;
 import com.wuya.cyy.pojo.Question;
+import com.wuya.cyy.pojo.Share;
 import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
+import com.wuya.cyy.service.Impl.FocusServiceImpl;
 import com.wuya.cyy.service.Impl.FriendServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
+import com.wuya.cyy.service.Impl.ShareServiceImpl;
+import com.wuya.cyy.service.Impl.TopicServiceImpl;
 import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
@@ -78,6 +86,13 @@ public class UserController {
 	private UpvoteServiceImpl upvoteService;
 	@Resource
 	private FriendServiceImpl friendService;
+	@Resource
+	private TopicServiceImpl topicService;
+	@Resource
+	private FocusServiceImpl focusService;
+	@Resource
+	private ShareServiceImpl shareService;
+	@Resource
 	
 	@RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -239,6 +254,152 @@ public class UserController {
 		mav.addObject("personal_answers", retList);
         mav.setViewName("forward:/wuya-personal.jsp");
         return mav;  
+    } 
+    
+    @RequestMapping(value="/{type}/{uid}/personal",method={RequestMethod.GET,RequestMethod.POST})  
+    public void  userContent(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("type")String type,
+    		@PathVariable("uid")String uid
+    		) throws ParseException, IOException{
+    	/*
+    	 * 1.提问
+           2.回答
+           3.分享
+           4.创建的话题
+           5.好友
+    	 */
+    	ObjectMapper objectMapper = new ObjectMapper();
+    	ServletOutputStream outputStream = response.getOutputStream();
+    	User myuser = (User)request.getSession(true).getAttribute("user");
+    	User user = userService.userSelectByUid(uid);
+    	String myuid = myuser.getUid();
+    	List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>();
+    	switch (type) {
+			case "1": //questions
+				List<Question> questions = questionService.questionSelectByUid(uid);
+				for (Question question : questions) {
+	    			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+					String topicId = question.getTopicId();
+//					Answer answer = answerService.answerOneSelectByQuestionId(questionId);
+//					if(answer!=null){
+//						String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+//						answer.setUpvoteCount(upvoteCount);
+//					}
+					Topic topic = topicService.selectTopicByTopicId(topicId);
+//					ret.setAnswer(answer);
+					ret.setQuestion(question);
+					ret.setTopic(topic);
+					ret.setUser(user);
+					retList.add(ret);
+				}
+				if(!retList.isEmpty()){
+	    			objectMapper.writeValue(outputStream, retList);
+	    		}else{
+	    			outputStream.print("empty");
+	    		}
+				break;
+			case "2"://回答
+				List<Answer> answers = answerService.answerSelectByUid(uid);
+				for (Answer answer : answers) {
+					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+					String answer_questionid = answer.getQuestionId();
+					Question question = questionService.questionSelectByQuestionId(answer_questionid);
+		        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());   //点赞次数
+		        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), myuid);
+		        	answer.setUser(user);
+		        	answer.setUpvoteCount(upvoteCount);
+		        	answer.setIsUpvoted(isUpvote?"1":"2");
+		        	ret.setAnswer(answer);
+		        	ret.setUser(user);
+		        	ret.setQuestion(question);
+		        	retList.add(ret);
+				}
+				if(!retList.isEmpty()){
+	    			objectMapper.writeValue(outputStream, retList);
+	    		}else{
+	    			outputStream.print("empty");
+	    		}
+				break;
+
+			case "3"://分享 type  1--》answer  2--》question
+				List<Share> shares = shareService.shareSelectByUid(myuid);
+				for (Share share : shares) {
+					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+					int shareType = share.getShareType();
+					String shareId = share.getShareId();
+					ret.setShareType(shareType);
+					if(shareType==1){
+						Answer answer = answerService.answerSelectByAnswerId(shareId);
+						String answer_questionid = answer.getQuestionId();
+						Question question = questionService.questionSelectByQuestionId(answer_questionid);
+			        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());   //点赞次数
+			        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), myuid);
+			        	answer.setUser(user);
+			        	answer.setUpvoteCount(upvoteCount);
+			        	answer.setIsUpvoted(isUpvote?"1":"2");
+			        	ret.setAnswer(answer);
+			        	ret.setUser(user);
+			        	ret.setQuestion(question);
+					}else{
+						Question question = questionService.questionSelectByQuestionId(shareId);
+						String questionId = question.getQuestionId();
+						String topicId = question.getTopicId();
+						Topic topic = topicService.selectTopicByTopicId(topicId);
+						ret.setQuestion(question);
+						ret.setTopic(topic);
+						ret.setUser(user);
+					}
+					retList.add(ret);
+				}
+				if(!retList.isEmpty()){
+	    			objectMapper.writeValue(outputStream, retList);
+	    		}else{
+	    			outputStream.print("empty");
+	    		}
+				break;
+
+			case "4"://话题  关注  topic type 1. focus 2. create
+				List<Focus> focuses  = focusService.focusSelectByUid(uid);
+				if(focuses!=null && !focuses.isEmpty()){
+					for(Focus focus : focuses){
+						HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+						ret.setTopicType(1);
+						String focusId = focus.getFocusId();    //话题id
+						long focusTime = focus.getFocusTime();	//关注话题时间
+						Topic topic = topicService.selectTopicByTopicId(focusId);
+						topic.setTopicTime(focusTime);      //改变为关注时间
+						String topic_uid = topic.getUid();
+						User userSelectByUid = userService.userSelectByUid(topic_uid);
+						ret.setTopic(topic);
+						ret.setUser(userSelectByUid);
+						retList.add(ret);
+					}
+				}
+				List<Topic> topics = topicService.topicSelectByUid(uid);
+				if(topics!=null && !topics.isEmpty()){
+					for(Topic topic:topics){
+						HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+						ret.setTopicType(2);
+						ret.setTopic(topic);
+						ret.setUser(user);
+						retList.add(ret);
+					}
+				}
+				if(!retList.isEmpty()){
+	    			objectMapper.writeValue(outputStream, retList);
+	    		}else{
+	    			outputStream.print("empty");
+	    		}
+				break;
+
+			case "5":
+				List<Friend> focusFriends = friendService.friendSelectByUid(uid);   //关注的好友
+				List<Friend> focused = friendService.friendSelectByUid(uid);   		//被关注的好友
+				break;
+			default:
+				break;
+		}
+    	
     } 
     
 

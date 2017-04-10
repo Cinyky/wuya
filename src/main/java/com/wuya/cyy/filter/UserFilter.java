@@ -70,24 +70,26 @@ public class UserFilter extends	OncePerRequestFilter{
                 // 执行过滤
                 // 从session中获取登录者实体
                 boolean isCookie = false;
-            	Cookie[] cookies = request.getCookies();
-            	if(cookies!=null&&cookies.length>0){
-            		for (Cookie cookie : cookies) {
-                		if("user".equalsIgnoreCase(cookie.getName())){
-                			String uid = cookie.getValue();
-                			User user = userService.userSelectByUid(uid);
-                			if(user!=null){
-                				isCookie = true;
-                				HttpSession session = request.getSession(true);
-                				if((User)session.getAttribute("user")!=null){
-                					session.removeAttribute("user");
-                				}
-                				session.setAttribute("user", user);
-                			}
-                		}
-            		}
-            	}
-             isCookie = true;
+//            	Cookie[] cookies = request.getCookies();
+//            	if(cookies!=null&&cookies.length>0){
+//            		for (Cookie cookie : cookies) {
+//                		if("user".equalsIgnoreCase(cookie.getName())){
+//                			String uid = cookie.getValue();
+//                			User user = userService.userSelectByUid(uid);
+//                			if(user!=null){
+//                				isCookie = true;
+//                				HttpSession session = request.getSession(true);
+//                				if((User)session.getAttribute("user")!=null){
+//                					session.removeAttribute("user");
+//                				}
+//                				session.setAttribute("user", user);
+//                			}
+//                		}
+//            		}
+//            	}
+                User user = (User)request.getSession(true).getAttribute("user");
+                isCookie = user!=null;
+//            	isCookie = true;
                 if (!isCookie) {
                     // 如果session中不存在登录者实体，则弹出框提示重新登录
                     // 设置request和response的字符集，防止乱码

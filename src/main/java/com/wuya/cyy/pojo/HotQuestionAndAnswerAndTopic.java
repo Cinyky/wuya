@@ -10,6 +10,22 @@ public class HotQuestionAndAnswerAndTopic {
 	private Question question;
 	private Answer answer;
 	private Topic topic;
+	
+	private int shareType;  //1.answer 2.question
+	private int topicType;  //1.关注 2.创建
+	
+	public int getTopicType() {
+		return topicType;
+	}
+	public void setTopicType(int topicType) {
+		this.topicType = topicType;
+	}
+	public int getShareType() {
+		return shareType;
+	}
+	public void setShareType(int shareType) {
+		this.shareType = shareType;
+	}
 	public User getUser() {
 		return user;
 	}

@@ -38,12 +38,6 @@ public interface ShareDao {
 	
 
 	/**
-	 * 查询share 根据shareId
-	 * @return
-	 */
-	List<Share> selectShareByShareId(String shareId);
-	
-	/**
 	 * 查询share 根据type
 	 * @return
 	 */
@@ -53,7 +47,7 @@ public interface ShareDao {
 	 * 查询share 根据type
 	 * @return
 	 */
-	List<Share> selectShareByTypeAndUid(@Param("shareType")int shareType,@Param("shareType")String uid);
+	List<Share> selectShareByTypeAndUid(@Param("shareType")int shareType,@Param("uid")String uid);
 	
 	
 }

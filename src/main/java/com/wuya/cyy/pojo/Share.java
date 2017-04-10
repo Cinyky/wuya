@@ -11,13 +11,13 @@ import java.util.UUID;
 public class Share {
 	private String shareId;
 	private String uid;			//user id
-	private int	shareType;		//1.question 2.answer
+	private int	shareType;		//1.answer 2.question
 	private String id;				//分享id
 	private long shareTime;		//分享时间
 	private int status;
 	public Share() {
 	}
-	public Share(String shareId, String uid, int shareType, String id, int status) {
+	public Share(String uid, int shareType, String id, int status) {
 		super();
 		this.shareId = UUID.randomUUID()+"";
 		this.uid = uid;
