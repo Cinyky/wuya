@@ -37,9 +37,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wuya.cyy.pojo.Book;
+import com.wuya.cyy.pojo.Report;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
+import com.wuya.cyy.service.Impl.ReportServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
 /**
@@ -56,30 +58,31 @@ public class ReportController {
 
 	
 	@Resource  
-    private RegisterValidateService service;
-	@Resource  
-    private UserServiceImpl userService;
+    private ReportServiceImpl reportService;
      
 	
 	
 	/**
 	 * 
-	 *	新增问题
+	 *	新增Report
 	 * @return
 	 * @throws ParseException
+	 * @throws IOException 
 	 */
     @RequestMapping(value="/{reportType}/add",method={RequestMethod.GET,RequestMethod.POST})  
-    public ModelAndView  addQuestion(HttpServletRequest request,HttpServletResponse response,
+    @ResponseBody
+    public void  addQuestion(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("reportType")String reportType,
-    		String questionInfo,
-    		String topicId
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----report reportType==>"+reportType+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
+    		String reportId,
+    		String reportInfo
+    		) throws ParseException, IOException{  
+//    	type 1 answer  type 2 question
+    	User user = (User)request.getSession(true).getAttribute("user");
+        logger.warn("-----report reportType==>"+reportType+"---reportId==>"+reportId+"---reportInfo==>"+reportInfo);  
+        Report report = new Report(user.getUid(), Integer.parseInt(reportType), reportId, reportInfo);
+        boolean reportAdd = reportService.reportAdd(report);
+        // 1 举报成功 2.举报失败
+        response.getOutputStream().print(reportAdd?"1":"2");
     } 
 	
 	/**
@@ -104,57 +107,6 @@ public class ReportController {
         return mav;  
     }  
     
-    //分享问题
-    @RequestMapping(value="/{questionId}/share",method={RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
-    public ModelAndView  shareQuestion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    }
-    
-    @RequestMapping(value="/{questionId}/focus",method={RequestMethod.GET,RequestMethod.POST}) 
-    @ResponseBody
-    public ModelAndView  focusQuestoion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    }  
-    
-    @RequestMapping(value="/{questionId}/like",method={RequestMethod.GET,RequestMethod.POST}) 
-    @ResponseBody
-    public ModelAndView  likeQuestoion(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("questionId")String questionId,
-    		String user_name,
-    		String pwd,
-    		String bind_email,
-    		String nickName
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
-        logger.warn("-----question questionId==>"+questionId+"----");  
-        ModelAndView mav=new ModelAndView();  
-        String email = "";
-        String method = request.getMethod();
-        return mav;  
-    } 
     
 
 }

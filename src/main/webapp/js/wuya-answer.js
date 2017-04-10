@@ -12,6 +12,16 @@
 			showQuestion(info);
 			}
 		});
+	  
+	  $('#submitQuestion').click(function(){
+			var info =  $('#questionInfo').val().trim();
+			var topicId = $('#topicId').val();
+			if(info!=""){
+				submitQuestion(info,topicId);
+			}else{
+				alert("问题不可为空");
+			}
+		});
   	  editor = new wangEditor('answer-editor');
 
          // 上传图片
@@ -159,7 +169,7 @@
 		str+="<div class='answer' id='"+answer.answerId+"'>";
 		str+="  <div class='panel panel-default'>";
 		str+="        <div class='panel-heading'>";
-		str+="        	<img src='http://localhost:8080/wuya/img/"+answer_user.headPic+"' width='60px' height='60px'/>";
+		str+="        	<a href='http://localhost:8080/wuya/user/"+answer_user.uid+"/personal'><img src='http://localhost:8080/wuya/img/"+answer_user.headPic+"' width='60px' height='60px'/></a>";
 		str+="        	<div class='author-info' style='display:inline-block;'>";
 		str+="        		<span class='nickname'>"+answer_user.nickName+"</span><br/>";
 		str+="       		<span class='sign'>"+answer_user.signature+"</span>";
@@ -186,12 +196,12 @@
 		}
 		
 		str+=		"</a>";
-		str+="                 <a data-toggle='modal' data-target='#share' onclick='share(\""+answer.answerId+"\",\""+answer.questionId+"\")'>分享</a>";
+		str+="                 <a data-toggle='modal' data-target='#share' onclick='share(\""+answer.answerId+"\")'>分享</a>";
 		str+="                 <a onclick='store(\""+answer.answerId+"\")'>收藏</a>";
 		if(uid==answer.uid){
 			str +="<span>来自我自己的回答</span>"
 		}else{
-			str+="                 <a class='' data-toggle='modal' data-target='#report' onclick='report(\""+answer.answerId+"\",\""+answer.questionId+"\")'>举报</a>";
+			str+="                 <a class='' data-toggle='modal' data-target='#report' onclick='report(\""+answer.answerId+"\",\"1\")'>举报</a>";
 		}
 		str+="       	  </div>";
 	    str+="     </div>";
@@ -229,42 +239,63 @@
 						$("#upvoteBot"+id).append(icoDown);
 						alert("点赞成功");
 					}
-					
-					
 				}
 			);
   }
+  
+  //加好友
   function changeFriend(uid){
 	  console.debug("+++++++关注的uid==>>"+uid);
   }
   
+  //收藏
   function store(answerId){
 	  console.debug("+++++++store answerId==>>"+answerId);
   }
   
+  //分享
   function share(answerId,questionId){
 	  console.debug("+++++++share answerId==>>"+answerId);
 	  console.debug("+++++++share questionId==>>"+questionId);
 	  $("#shareId").val(answerId+"|"+questionId);
   }
   
+  //提交分享
   function submitShare(){
 	  var shareId = $("#shareId").val();
 	  var shareType = $("#shareType").val();
 	  console.debug("+++submitShare()  shareId==>>"+shareId+"  reportType==>>"+shareType);
   }
   
-  function report(answerId,questionId){
-	  console.debug("+++++++report answerId==>>"+answerId);
-	  console.debug("+++++++report questionId==>>"+questionId);
-	  $("#reportId").val(answerId+"|"+questionId);
+  function report(id,reportType){
+	  console.debug("+++++++report id==>>"+id);
+	  console.debug("+++++++report reportType==>>"+reportType);
+	  $("#reportId").val(id);
+	  $("#reportType").val(reportType);
   }
   
   function submitReport(){
 	  var reportId = $("#reportId").val();
 	  var reportType = $("#reportType").val();
-	  var reportInfo = $("#reportInfo").val();
+	  var reportInfo = $("#reportInfo").val().trim();
 	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
+	  $.post(
+				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				{
+					"reportId" :reportId,
+					"reportInfo":reportInfo
+				},
+				function(rs){
+					console.debug("report  rs :"+rs);
+					if(rs=="1"){
+						alert("举报成功");
+						$("#reportInfo").val("");
+						$('#report').modal('hide');
+					}else{
+						alert("举报失败");
+					}
+				}
+			);
   }
   
   
@@ -364,6 +395,20 @@
 					$("#searchQuestion").append(str);
 				}
 			)
+	}
+	
+	function submitQuestion(info,topicId){
+		console.debug("function submitQuestion info :"+info+" topic："+topicId);
+		$.post(
+				"http://localhost:8080/wuya/question/add",
+				{
+					"questionInfo":info,
+					"topicId"     :topicId
+				},
+				function(rs){
+					console.debug("rsrsrsrs:"+rs);
+				}
+			);
 	}
 
 

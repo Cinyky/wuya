@@ -18,8 +18,7 @@ public class Report {
 	private int status;				//状态
 	public Report() {
 	}
-	public Report(String reportId, String uid, int reportType, String id, String reportInfo,
-			int status) {
+	public Report(String uid, int reportType, String id, String reportInfo) {
 		super();
 		this.reportId = UUID.randomUUID()+"";
 		this.uid = uid;
@@ -27,7 +26,7 @@ public class Report {
 		this.id = id;
 		this.reportInfo = reportInfo;
 		this.reportTime = System.currentTimeMillis();
-		this.status = status;
+		this.status = 1;
 	}
 	public String getReportId() {
 		return reportId;

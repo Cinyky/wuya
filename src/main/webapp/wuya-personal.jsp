@@ -1,15 +1,16 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <jsp:include page="templet/necessary.jsp" />
-    <script type="text/javascript" src="js/wuya-personal.js" ></script>
-    <link rel="stylesheet" href="css/wuya-personal.css" />
-    <title>personal</title>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-personal.js" ></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-personal.css" />
+    <title>${personal_user.nickName }的主页</title>
   </head>
 <body>
-	 <div class="navbar navbar-default navbar-fixed-top" style="height: 50px;">
      <jsp:include page="templet/navbar.jsp" />
     <!--
     	作者：1079276272@qq.com
@@ -24,20 +25,28 @@
             	<div style="width: 100%;height:15.8%; background-color: #fff;
                           border: 1px solid grey;border-radius: 4px;">
               		<div class="headpic" style="display: inline-block;margin-left: 20px;margin-top: -20px">
-              			<img src="img/headpic2.jpg" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
+              			<img src="${pageContext.request.contextPath}/img/${personal_user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
               		</div>
               		<div class="personal-info" 
                        style="position: relative;left: 100px;top: -50px;margin-left: 10px">
                     <span class="nickname" 
                           style="font-size: 26px;font-weight: bolder;">
-                          韦庆明
+                          ${personal_user.nickName }
                     </span>
                     &nbsp;
-                    <span class="profession">全栈工程师</span><br>
-                    <label><i class="fa fa-fw fa-male"></i></label><br>
-                    <span>认真，你就赢了</span>
-                 	
-                  <a href="" class="btn btn-primary" style="">关注他</a>
+                    <span class="profession">${personal_user.signature }</span><br>
+                    <label>
+                    	<c:if test="${personal_user.sex eq 1}">
+                    		<i class="fa fa-fw fa-male"></i>
+                    	</c:if>
+                    	<c:if test="${personal_user.sex ne 1}">
+                    		<i class="fa fa-fw fa-female"></i>
+                    	</c:if>
+                    </label><br>
+                    <span>${personal_user.signature }</span>
+                 	<c:if test="${personal_user.uid ne user.uid }">
+                 		 <a href="javaScript" class="btn btn-primary" onclick="changeFriend('${personal_user.uid}')">关注他</a>
+                 	</c:if>
                   </div>
                   
             	</div>
@@ -48,43 +57,53 @@
         <div class="row">
           <div class="col-md-8 panel">
             <div style="padding-left: 20px;">
-              <a href="#" class="btn">回答</a>
-              <a href="#" class="btn">分享</a>
-              <a href="#" class="btn">提问</a>
-              <a href="#" class="btn">收藏</a>
-              <a href="#" class="btn">话题</a>
-              <a href="#" class="btn">关注</a>
+              <a href="#" class="btn" onclick="changeType('1')">回答</a>
+              <a href="#" class="btn" onclick="changeType('2')">分享</a>
+              <a href="#" class="btn" onclick="changeType('3')">提问</a>
+              <a href="#" class="btn" onclick="changeType('4')">收藏</a>
+              <a href="#" class="btn" onclick="changeType('5')">话题</a>
+              <a href="#" class="btn" onclick="changeType('6')">好友</a>
             </div>
-
-
-           
-            <div class="what">
-                 
-
-                <!--
-                  type activity
-                -->
-                <h3>他的回答</h3>
-                <hr>
-                <div class="piece" id="piece1">
-                  <h4>回答了问题</h4>
-                  <h3>学历究竟对于JAVA入行有多深的影响？</h3>
-                  <img src="img/headpic2.jpg" class="navbarimg-responsive img-thumbnail " width="42px" height="42px">
-                  <span>韦庆明</span><br>
-                  <span>认真，你就赢了</span>
-                  <div style="color: grey">25 人赞同该回答</div>
-                     <p>
-                      作为一名中专生，在软件编程行业工作6年经验的我，来答答这个问题吧。 中专时候的专业为Java软件编程与开发，课程有Java、也穿插了一些 .net，自认为已经非常努力的学习了，但是，实习出来工作，我发现我什么都没有学会，是真的，什么都没有学会！ 实习的时候，我发现我什么都不懂 我连在学校用的开发工具叫什么都不记得。 我不懂开发
-                    </p>
-                    <div>
-                      <a class="media-object badge alert-danger" style="width:64px;">5&nbsp;<i class="fa fa-thumbs-up"></i></a>
-                      <a>分享</a>
-                      <a>收藏</a>
-                      <a class="" data-toggle="modal" data-target="#report">举报</a>
-                    </div>
-                </div>  <!--推荐人体1结束--> 
-
-
+              <h3>
+                	<c:if test="${personal_user.uid ne user.uid }">他</c:if>
+                	<c:if test="${personal_user.uid eq user.uid }">我</c:if>
+                	的<span id="type">回答</span>
+              </h3>
+               <hr>
+            <div class="what" id="whatContent">
+            
+                <c:forEach items="${personal_answers }" var="list">
+                	<c:set value="${list.user }" var="list_user"></c:set>
+                	<c:set value="${list.question }" var="list_question"></c:set>
+                	<c:set value="${list.answer }" var="list_answer"></c:set>
+                	<div class="piece" id="piece${list_answer.answerId }">
+                	  <h3><a href="${pageContext.request.contextPath}/question/${list_question.questionId}/detail">${list_question.questionInfo }</a></h3>
+	                  <div style="color: grey">${list_answer.upvoteCount} 人赞同该回答</div>
+	                     <p>
+	                     ${list_answer.answerInfo }
+	                    </p>
+	                    <div>
+	                      <c:if test="${list_answer.isUpvoted eq 1 }">
+	                      	<a class="media-object badge alert-danger" style="width:64px;"  onclick="upvote('${list_answer.answerId}')">
+		                      	${list_answer.upvoteCount }&nbsp;
+		                      	<i class="fa fa-thumbs-down"></i>
+	                     	</a>
+	                      </c:if>
+	                      <c:if test="${list_answer.isUpvoted ne 1 }">
+	                      	<a class="media-object badge alert-success" style="width:64px;"  onclick="upvote('${list_answer.answerId}')">
+		                      	${list_answer.upvoteCount }&nbsp;
+		                      	<i class="fa fa-thumbs-up"></i>
+	                     	</a>
+	                      </c:if>
+	                      <a>分享</a>
+	                      <a>收藏</a>
+	                      <c:if test="${personal_user.uid ne user.uid }">
+								<a data-toggle="modal" data-target="#report">举报</a>
+						  </c:if>
+	                      
+	                    </div>
+	                </div>
+                </c:forEach>
                 <!--
                   type question
                 -->
@@ -277,12 +296,12 @@
 		           <div class="panel panel-default  panel text-center">
 		                <a style="display:inline-block;" >
 			              		<div class="NumberBoard-item" style="width:42px;">关注了</div>
-			              		<div class="NumberBoard-item" style="width:42px;">213</div>
+			              		<div class="NumberBoard-item" style="width:42px;">${personal_user.focusFriends }</div>
 			              	</a>
 			              	
 			              	<a style="display:inline-block;margin-left:40px;">
 			              		<div class="NumberBoard-item" style="width:42px;">关注者</div>
-			              		<div class="NumberBoard-item" style="width:42px;">145</div>
+			              		<div class="NumberBoard-item" style="width:42px;">${personal_user.focusedFriends }</div>
 			              	</a>
 		          
 		          </div>
@@ -310,31 +329,7 @@
     	描述：模态框1 提问
       style="position:absolute;left: 4%;bottom: 40%;display: inline-block;"
     -->
-    <div class="fade modal" id="question">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-提出你的疑惑</h4>
-          </div>
-          <div class="modal-body">
-                <h4>提问步骤</h4>
-                <ol>
-                  <li>搜索是否已有相似问题</li>
-                  <li>查看是否解决</li>
-                  <li>坚持提问</li>
-                </ol>
-              <form class="form  text-center" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                  <div><span class="pull-left">问题说明</span></div>
-                  <input type="submit" class="btn btn-block btn-primary" value="query" />
-                </div>
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <jsp:include page="templet/showQuestion.jsp" />
      <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15

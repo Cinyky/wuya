@@ -31,7 +31,7 @@
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="#">我的主页</a></li>
+									<li><a href="${pageContext.request.contextPath}/user/${user.uid}/personal">我的主页</a></li>
 									<li><a href="${pageContext.request.contextPath}/user/logout">注销</a></li>
 								</ul>
 					</li>

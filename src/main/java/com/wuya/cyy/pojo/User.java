@@ -32,6 +32,7 @@ public class User {
 	//+++++++++++++++++++++++++++
 	private String answerNums;
 	private String focusedFriends;
+	private String focusFriends;
 	private String focusTopics;
 	
 //	uid = #{uid},
@@ -53,6 +54,28 @@ public class User {
 	
 	public String getAnswerNums() {
 		return answerNums;
+	}
+
+
+
+
+
+
+
+
+	public String getFocusFriends() {
+		return focusFriends;
+	}
+
+
+
+
+
+
+
+
+	public void setFocusFriends(String focusFriends) {
+		this.focusFriends = focusFriends;
 	}
 
 

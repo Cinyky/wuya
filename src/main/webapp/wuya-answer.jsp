@@ -27,8 +27,8 @@
                 <a class="btn btn-primary">${question_topic.topicName }</a>
                   <h1>${question.questionInfo}</h1>
                   <div class="pull-right">
-                  		<a class="btn btn-primary">分享问题</a>
-                  	    <a class="btn btn-primary">收藏问题</a>
+                  		<a class="btn btn-primary" onclick="share('${question.questionId}','2')">分享问题</a>
+                  	    <a class="btn btn-primary" onclick="store('${question.questionId}','2')">收藏问题</a>
                   		<a class="btn btn-primary" data-toggle="modal" data-target="#answer" >写回答</a>
                   </div>
               
@@ -63,7 +63,7 @@
 	              	</a>
 	              	<hr/>
 	              	<c:if test="${question_user.uid ne user.uid }">
-		              	<a class="btn btn-primary btn-block" onclick="changeFriend('${question_user.uid}')>
+		              	<a class="btn btn-primary btn-block" onclick="changeFriend('${question_user.uid}')">
 		              		关注他
 		              	</a>
 	              	</c:if>
@@ -87,12 +87,6 @@
 
     
     
-    <!--
-    	作者：1079276272@qq.com
-    	时间：2017-02-15
-    	描述：模态框1 提问
-      style="position:absolute;left: 4%;bottom: 40%;display: inline-block;"
-    -->
     <jsp:include page="templet/showQuestion.jsp" />
      <!--
     	作者：1079276272@qq.com
@@ -109,11 +103,8 @@
           <div class="modal-body">
                 <h4>举报</h4>
                 <input type="hidden" id='reportId' val=''/>
-                <select id="reportType">
-                	<option value="1">举报回答</option>
-                	<option value="2">举报问题</option>
-                </select>
-                <input type="text" class="form-control" placeholder="搜索你感兴趣的内容..." id="reportInfo" >
+                <input type="hidden" id='reportType' val=''/>
+                <input type="text" class="form-control" placeholder="举报理由" id="reportInfo" >
           </div>
           <div class="modal-footer">
           	<a class="btn btn-primary" onclick="submitReport()">举报</a>

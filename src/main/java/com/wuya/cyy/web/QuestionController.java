@@ -103,18 +103,38 @@ public class QuestionController {
 	 *	新增问题
 	 * @return
 	 * @throws ParseException
+	 * @throws IOException 
 	 */
     @RequestMapping(value="/add",method={RequestMethod.GET,RequestMethod.POST})  
-    public String  addQuestion(HttpServletRequest request,HttpServletResponse response,
+    @ResponseBody
+    public void  addQuestion(HttpServletRequest request,HttpServletResponse response,
     		String questionInfo,
     		String topicId
-    		) throws ParseException{  
-    	String contextPath = request.getContextPath();
+    		) throws ParseException, IOException{  
     	User user = (User)request.getSession(true).getAttribute("user");
         logger.warn("-----question questionInfo==>"+questionInfo+"----");  
         Question question = new Question(user.getUid(), questionInfo, topicId, 1);
         boolean questionAdd = questionService.questionAdd(question);
-        return questionAdd?"1":"0";  
+        if(questionAdd){
+        	HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+			String questionId = question.getQuestionId();
+			String uid = question.getUid();
+			Answer answer = answerService.answerOneSelectByQuestionId(questionId);
+			if(answer!=null){
+				String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+				answer.setUpvoteCount(upvoteCount);
+			}
+			User answer_user = userService.userSelectByUid(uid);
+			Topic topic = topicService.selectTopicByTopicId(topicId);
+			ret.setAnswer(answer);
+			ret.setQuestion(question);
+			ret.setTopic(topic);
+			ret.setUser(answer_user);
+        	new ObjectMapper().writeValue(response.getOutputStream(), ret); 
+        }else{
+        	response.getOutputStream().print("fail");
+        }
+         
     } 
 	
 	/**

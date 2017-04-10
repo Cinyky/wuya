@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -37,10 +38,18 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Book;
+import com.wuya.cyy.pojo.HotQuestionAndAnswerAndTopic;
+import com.wuya.cyy.pojo.Question;
+import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.pojo.User;
+import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
+import com.wuya.cyy.service.Impl.FriendServiceImpl;
+import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
+import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
 import com.wuya.cyy.utils.ServiceException;
 /**
@@ -61,6 +70,14 @@ public class UserController {
     private RegisterValidateService service;
 	@Resource  
     private UserServiceImpl userService;
+	@Resource  
+    private AnswerServiceImpl answerService;
+	@Resource  
+    private QuestionServiceImpl questionService;
+	@Resource 
+	private UpvoteServiceImpl upvoteService;
+	@Resource
+	private FriendServiceImpl friendService;
 	
 	@RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -181,7 +198,6 @@ public class UserController {
     		@PathVariable("nickname")String nickname
     		) throws ParseException{
     	ModelAndView mav=new ModelAndView();
-    	HttpSession session = request.getSession(true);
     	String method = request.getMethod();
     	 logger.warn("-----userLogin---- method:"+method); 
     	if("get".equalsIgnoreCase(method)){
@@ -191,18 +207,37 @@ public class UserController {
         return mav;  
     } 
     
-    @RequestMapping(value="/{nickname}/personal",method={RequestMethod.GET,RequestMethod.POST})  
+    
+    @RequestMapping(value="/{uid}/personal",method={RequestMethod.GET,RequestMethod.POST})  
     public ModelAndView  userPersonal(HttpServletRequest request,HttpServletResponse response,
-    		@PathVariable("nickname")String nickname
+    		@PathVariable("uid")String uid
     		) throws ParseException{
     	ModelAndView mav=new ModelAndView();
-    	HttpSession session = request.getSession(true);
-    	String method = request.getMethod();
-    	 logger.warn("-----userLogin---- method:"+method); 
-    	if("get".equalsIgnoreCase(method)){
-    		mav.addObject("nickname", nickname);
-    		mav.setViewName("forward:/wuya-personal.jsp");
-    	}
+    	List<Answer> answers = answerService.answerSelectByUid(uid);
+    	List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>();
+    	User user = userService.userSelectByUid(uid);
+    	 String answerNums = answerService.answerCountSelectByUid(user.getUid());
+         user.setAnswerNums(answerNums);
+         String focusFriends = friendService.friendCountSelectByAnotherUid(user.getUid());
+         user.setFocusedFriends(focusFriends);
+         String friendCountSelectByUid = friendService.friendCountSelectByUid(uid);
+         user.setFocusFriends(friendCountSelectByUid);
+         mav.addObject("personal_user", user);
+		for (Answer answer : answers) {
+			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+			String questionId = answer.getQuestionId(); //问题
+			Question question = questionService.questionSelectByQuestionId(questionId);
+			if(answer!=null){
+				String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+				answer.setUpvoteCount(upvoteCount);
+			}
+			ret.setAnswer(answer);
+			ret.setQuestion(question);
+			ret.setUser(user);
+			retList.add(ret);
+		}
+		mav.addObject("personal_answers", retList);
+        mav.setViewName("forward:/wuya-personal.jsp");
         return mav;  
     } 
     
