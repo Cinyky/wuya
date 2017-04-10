@@ -13,7 +13,14 @@ public class HotQuestionAndAnswerAndTopic {
 	
 	private int shareType;  //1.answer 2.question
 	private int topicType;  //1.关注 2.创建
+	private int friendType; //1.我关注的好友 2.关注我的好友
 	
+	public int getFriendType() {
+		return friendType;
+	}
+	public void setFriendType(int friendType) {
+		this.friendType = friendType;
+	}
 	public int getTopicType() {
 		return topicType;
 	}

@@ -3,10 +3,17 @@ package com.wuya.cyy.web;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +37,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +45,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -256,6 +265,65 @@ public class UserController {
         return mav;  
     } 
     
+    @Target({ElementType.METHOD, ElementType.TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
+    static @interface RequestHandler{
+    	String request() default "";
+    }
+    
+    static HashMap<String, Method> s_handlerMapping = new HashMap<String, Method>();
+    
+    static {
+    	for(Method method: UserController.class.getDeclaredMethods()){
+    		RequestHandler info = method.getAnnotation(RequestHandler.class);
+    		if(info != null){
+    			s_handlerMapping.put(info.request(), method);
+    		}
+    	}
+    }
+    
+    @RequestHandler(request="1")
+    void handleQuest(User user, User targetUser, List<HotQuestionAndAnswerAndTopic> retList)
+    {
+    	List<Question> questions = questionService.questionSelectByUid(targetUser.getUid());
+		for (Question question : questions) {
+			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+			String topicId = question.getTopicId();
+//			Answer answer = answerService.answerOneSelectByQuestionId(questionId);
+//			if(answer!=null){
+//				String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+//				answer.setUpvoteCount(upvoteCount);
+//			}
+			Topic topic = topicService.selectTopicByTopicId(topicId);
+//			ret.setAnswer(answer);
+			ret.setQuestion(question);
+			ret.setTopic(topic);
+			ret.setUser(user);
+			retList.add(ret);
+		}		
+    }
+    
+    @RequestHandler(request="2")
+    void handleAnswer(User user, User targetUser, List<HotQuestionAndAnswerAndTopic> retList)
+    {
+    	List<Answer> answers = answerService.answerSelectByUid(targetUser.getUid());
+		for (Answer answer : answers) {
+			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+			String answer_questionid = answer.getQuestionId();
+			Question question = questionService.questionSelectByQuestionId(answer_questionid);
+        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());   //点赞次数
+        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), user.getUid());
+        	answer.setUser(user);
+        	answer.setUpvoteCount(upvoteCount);
+        	answer.setIsUpvoted(isUpvote?"1":"2");
+        	ret.setAnswer(answer);
+        	ret.setUser(user);
+        	ret.setQuestion(question);
+        	retList.add(ret);
+		}
+    }
+    
+    
     @RequestMapping(value="/{type}/{uid}/personal",method={RequestMethod.GET,RequestMethod.POST})  
     public void  userContent(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("type")String type,
@@ -274,6 +342,24 @@ public class UserController {
     	User user = userService.userSelectByUid(uid);
     	String myuid = myuser.getUid();
     	List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>();
+    	
+    	Method method = s_handlerMapping.get(type);
+    	if(method!=null){
+    		try{
+    			method.invoke(this, myuser, user, retList);
+    			if(!retList.isEmpty()){
+	    			objectMapper.writeValue(outputStream, retList);
+	    		}else{
+	    			outputStream.print("empty");
+	    		}
+    			return;
+    		}catch(Exception ex){
+    			
+    		}
+    	}
+    	
+    	
+    	
     	switch (type) {
 			case "1": //questions
 				List<Question> questions = questionService.questionSelectByUid(uid);
@@ -342,7 +428,6 @@ public class UserController {
 			        	ret.setQuestion(question);
 					}else{
 						Question question = questionService.questionSelectByQuestionId(shareId);
-						String questionId = question.getQuestionId();
 						String topicId = question.getTopicId();
 						Topic topic = topicService.selectTopicByTopicId(topicId);
 						ret.setQuestion(question);
@@ -395,6 +480,11 @@ public class UserController {
 			case "5":
 				List<Friend> focusFriends = friendService.friendSelectByUid(uid);   //关注的好友
 				List<Friend> focused = friendService.friendSelectByUid(uid);   		//被关注的好友
+				for(Friend friend :focusFriends){
+					String anotherUid = friend.getAnotherUid();
+					User userSelectByUid = userService.userSelectByUid(anotherUid);
+					
+				}
 				break;
 			default:
 				break;
