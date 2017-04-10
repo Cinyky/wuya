@@ -33,7 +33,7 @@
 				focusId = #{focusId}
 	</update>
 	
-	<!-- 更新focus  --> 
+	<!-- delete focus  --> 
 	<update id="deleteFocus">
 			DELETE
 			FROM

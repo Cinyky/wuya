@@ -11,7 +11,7 @@ import java.util.UUID;
 public class Report {
 	private String reportId;
 	private String uid;				//用户id
-	private int reportType;			//类型1.question 2.answer 3.user
+	private int reportType;			//类型1.answer 2.question
 	private String id;				//分享id	
 	private String	reportInfo;		//举报理由	
 	private long reportTime;		//举报时间

@@ -2,6 +2,8 @@ package com.wuya.cyy.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.wuya.cyy.pojo.Friend;
 
 
@@ -31,12 +33,24 @@ public interface FriendDao {
 	 * 查询friend 根据uid anotherUid
 	 * @return
 	 */
-	List<Friend> selectFriendByUid(String uid);
+	List<Friend> selectFriendByUid(@Param("uid")String uid);
 	
 	/**
 	 * 查询friend 根据uid anotherUid
 	 * @return
 	 */
-	List<Friend> selectFriendByAnotherUid(String anotherUid);
+	List<Friend> selectFriendByAnotherUid(@Param("anotherUid")String anotherUid);
+	
+	/**
+	 * 查询friend 根据uid 关注的人数
+	 * @return
+	 */
+	String selectFriendCountByUid(@Param("uid")String uid);
+	
+	/**
+	 * 查询friend 根据uid anotherUid
+	 * @return
+	 */
+	String selectFriendCountByAnotherUid(@Param("anotherUid")String anotherUid);
 	
 }

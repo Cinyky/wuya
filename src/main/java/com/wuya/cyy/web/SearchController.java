@@ -81,12 +81,10 @@ public class SearchController {
     
     //分享问题
     @RequestMapping(value="/{searchMethod}/detail",method={RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
     public ModelAndView  shareQuestion(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("searchMethod")String searchMethod,
     		String searchInfo
     		) throws ParseException{  
-    	String contextPath = request.getContextPath();
         logger.warn("-----search searchMethod==>"+searchMethod+"----");  
         ModelAndView mav=new ModelAndView();  
         String method = request.getMethod();

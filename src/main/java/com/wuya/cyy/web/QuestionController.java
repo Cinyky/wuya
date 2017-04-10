@@ -47,8 +47,10 @@ import com.wuya.cyy.pojo.HotQuestionAndAnswerAndTopic;
 import com.wuya.cyy.pojo.Question;
 import com.wuya.cyy.pojo.Topic;
 import com.wuya.cyy.pojo.User;
+import com.wuya.cyy.service.FriendService;
 import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.BookServiceImpl;
+import com.wuya.cyy.service.Impl.FriendServiceImpl;
 import com.wuya.cyy.service.Impl.QuestionServiceImpl;
 import com.wuya.cyy.service.Impl.RegisterValidateService;
 import com.wuya.cyy.service.Impl.TopicServiceImpl;
@@ -77,6 +79,8 @@ public class QuestionController {
     private TopicServiceImpl topicService;
 	@Resource  
     private UpvoteServiceImpl upvoteService;
+	@Resource  
+    private FriendServiceImpl friendService;
 	
     @RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -130,6 +134,8 @@ public class QuestionController {
         User user = userService.userSelectByUid(uid);
         String answerNums = answerService.answerCountSelectByUid(user.getUid());
         user.setAnswerNums(answerNums);
+        String focusFriends = friendService.friendCountSelectByAnotherUid(user.getUid());
+        user.setFocusedFriends(focusFriends);
         mav.addObject("question", question);
         mav.addObject("question_user", user);
         //TODO get question jsp topic

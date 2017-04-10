@@ -18,7 +18,7 @@ public class Answer {
 	//++++++++++++++ 另外封装
 	private User user;				//发表回答的user
 	private String upvoteCount;		//点赞次数
-	
+	private String isUpvoted;		//是否被我点赞过
 	
 	public Answer() {
 	}
@@ -37,6 +37,18 @@ public class Answer {
 	
 	
 	
+
+	public String getIsUpvoted() {
+		return isUpvoted;
+	}
+
+
+
+	public void setIsUpvoted(String isUpvoted) {
+		this.isUpvoted = isUpvoted;
+	}
+
+
 
 	public String getUpvoteCount() {
 		return upvoteCount;

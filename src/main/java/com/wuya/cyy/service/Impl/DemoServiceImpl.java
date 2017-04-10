@@ -58,4 +58,10 @@ public class DemoServiceImpl implements UpvoteService {
 		return upvoteDao.selectUpvoteByAnswerIdAndUid(answerId, uid)!=null;
 	}
 
+	@Override
+	public boolean upvoteDelete(String answerId, String uid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

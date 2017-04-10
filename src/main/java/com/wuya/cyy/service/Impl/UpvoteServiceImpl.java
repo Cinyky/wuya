@@ -58,4 +58,9 @@ public class UpvoteServiceImpl implements UpvoteService {
 		return upvoteDao.selectUpvoteByAnswerIdAndUid(answerId, uid)!=null;
 	}
 
+	@Override
+	public boolean upvoteDelete(String answerId, String uid) {
+		return upvoteDao.deleteUpvote(answerId, uid)>0;
+	}
+
 }

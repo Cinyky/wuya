@@ -41,5 +41,19 @@ public interface FriendService {
 	 */
 	List<Friend> friendSelectByAnotherUid(String anotherUid);
 	
+	/**
+	 * 根据uid 搜索 friend
+	 * @param uid
+	 * @return
+	 */
+	String friendCountSelectByUid(String uid);
+	
+	/**
+	 * 根据friendId搜索
+	 * @param anotherUid
+	 * @return
+	 */
+	String friendCountSelectByAnotherUid(String anotherUid);
+	
 	
 }

@@ -46,4 +46,14 @@ public class FriendServiceImpl implements FriendService {
 		return friendDao.selectFriendByAnotherUid(anotherUid);
 	}
 
+	@Override
+	public String friendCountSelectByUid(String uid) {
+		return friendDao.selectFriendCountByUid(uid);
+	}
+
+	@Override
+	public String friendCountSelectByAnotherUid(String anotherUid) {
+		return friendDao.selectFriendCountByAnotherUid(anotherUid);
+	}
+
 }

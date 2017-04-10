@@ -44,6 +44,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Question;
+import com.wuya.cyy.pojo.Upvote;
 import com.wuya.cyy.pojo.User;
 import com.wuya.cyy.service.Impl.AnswerServiceImpl;
 import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
@@ -107,13 +108,16 @@ public class AnswerController {
     		String questionId
     		) throws ParseException, JsonGenerationException, JsonMappingException, IOException{  
         logger.warn("-----answer questionId==>"+questionId+"----");  
+        User user = (User)request.getSession(true).getAttribute("user");
         List<Answer> answers = answerService.answerSelectByQuestionId(questionId);
         for (Answer answer : answers) {
-        	User user = userService.userSelectByUid(answer.getUid());
+        	User tempUser = userService.userSelectByUid(answer.getUid());
         	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
-        	answer.setUser(user);
+        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), user.getUid());
+        	answer.setUser(tempUser);
         	answer.setUpvoteCount(upvoteCount);
-        	logger.warn("user:"+user.toString());
+        	answer.setIsUpvoted(isUpvote?"1":"2");
+        	logger.warn(" answer user:"+tempUser.toString());
         	logger.warn("upvoteCount:"+upvoteCount);
 		}
         ObjectMapper objectMapper = new ObjectMapper();
@@ -159,7 +163,7 @@ public class AnswerController {
     //share  answer
     @RequestMapping(value="/{answerId}/share",method={RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public void  shareQuestion(HttpServletRequest request,HttpServletResponse response,
+    public void  shareAnswer(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("answerId")String answerId
     		) throws ParseException{  
         logger.warn("-----answer share answerId==>"+answerId+"----");  
@@ -167,10 +171,29 @@ public class AnswerController {
     
     @RequestMapping(value="/{answerId}/focus",method={RequestMethod.GET,RequestMethod.POST}) 
     @ResponseBody
-    public void  focusQuestoion(HttpServletRequest request,HttpServletResponse response,
+    public void  focusAnswer(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("answerId")String answerId
     		) throws ParseException{  
     	logger.warn("-----answer share answerId==>"+answerId+"----");  
+    }
+    
+    @RequestMapping(value="/{answerId}/upvote",method={RequestMethod.GET,RequestMethod.POST}) 
+    @ResponseBody
+    public void  upVoteAnswer(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("answerId")String answerId
+    		) throws ParseException, IOException{  
+    	logger.warn("-----answer upvote answerId==>"+answerId+"----");  
+    	User user = (User)request.getSession(true).getAttribute("user");
+    	String uid = user.getUid();
+    	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answerId, uid);
+    	if(isUpvote){
+    		upvoteService.upvoteDelete(answerId, uid);
+    	}else{
+    		upvoteService.upvoteAdd(new Upvote(uid, answerId, 1));
+    	}
+    	String count = upvoteService.upvoteCountSelectByAnswerId(answerId);
+    	String res = (isUpvote?"1":"2")+"|"+count;
+    	response.getOutputStream().print(res);
     }
     
        

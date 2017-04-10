@@ -1,4 +1,6 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,11 +59,14 @@
 	              	
 	              	<a style="display:inline-block;margin-left:40px;">
 	              		<div class="NumberBoard-item" style="width:42px;">关注者</div>
-	              		<div class="NumberBoard-item" style="width:42px;" id="focusNum">0</div>
+	              		<div class="NumberBoard-item" style="width:42px;" id="focusNum">${question_user.focusedFriends }</div>
 	              	</a>
 	              	<hr/>
-	              	<a class="btn btn-primary btn-block">关注他</a>
-	              	
+	              	<c:if test="${question_user.uid ne user.uid }">
+		              	<a class="btn btn-primary btn-block" onclick="changeFriend('${question_user.uid}')>
+		              		关注他
+		              	</a>
+	              	</c:if>
 	              </div>
                 </div>
                 
@@ -92,7 +97,7 @@
      <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15
-    	描述：模态框2 unused
+    	描述：模态框2 report
     -->
     <div class="fade modal" id="report">
       <div class="modal-dialog">
@@ -102,19 +107,44 @@
             <h4 class="modal-title">无涯-举报系统</h4>
           </div>
           <div class="modal-body">
-                <h4>举报步骤</h4>
-                <ol>
-                  <li>搜索是否已有相似问题</li>
-                  <li>查看是否解决</li>
-                  <li>坚持提问</li>
-                </ol>
-              <form class="form  text-center" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                </div>
-              </form>
+                <h4>举报</h4>
+                <input type="hidden" id='reportId' val=''/>
+                <select id="reportType">
+                	<option value="1">举报回答</option>
+                	<option value="2">举报问题</option>
+                </select>
+                <input type="text" class="form-control" placeholder="搜索你感兴趣的内容..." id="reportInfo" >
           </div>
           <div class="modal-footer">
+          	<a class="btn btn-primary" onclick="submitReport()">举报</a>
+            <a class="btn btn-primary" data-dismiss="modal">关闭</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!--
+    	作者：1079276272@qq.com
+    	时间：2017-02-15
+    	描述：模态框3 share
+    -->
+    <div class="fade modal" id="share">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">无涯-举报系统</h4>
+          </div>
+          <div class="modal-body">
+                <h4>举报</h4>
+                <input type="hidden" id='shareId' val=''/>
+                <select id="shareType">
+                	<option value="1">分享回答</option>
+                	<option value="2">分享问题</option>
+                </select>
+          </div>
+          <div class="modal-footer">
+          	<a class="btn btn-primary" onclick="submitShare()">举报</a>
             <a class="btn btn-primary" data-dismiss="modal">关闭</a>
           </div>
         </div>

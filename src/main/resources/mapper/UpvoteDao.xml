@@ -40,6 +40,18 @@
 		WHERE
 			uid=#{uid}
 	</select>
+	
+		
+	<!-- 更新focus  --> 
+	<update id="deleteUpvote">
+			DELETE
+			FROM
+				upvote
+			WHERE
+				uid=#{uid}
+			AND
+				answerId=#{answerId}
+	</update>
 
 
 	<!-- 根据upvoteId查询Upvote -->
@@ -75,7 +87,7 @@
 		<!-- 根据answerId查询Upvotecount -->
 	<select id="selectUpvoteByAnswerIdAndUid" resultType="Upvote">
 		SELECT
-			count(1)
+			*
 		FROM
 			upvote
 		WHERE

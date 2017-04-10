@@ -28,6 +28,13 @@ public interface UpvoteService {
 	boolean upvoteUpdate(Upvote upvote);
 	
 	/**
+	 * 更新 upvote
+	 * @param upvote 回答
+	 * @return
+	 */
+	boolean upvoteDelete(String answerId,String uid);
+	
+	/**
 	 * 根据uid 搜索 upvote
 	 * @param uid
 	 * @return

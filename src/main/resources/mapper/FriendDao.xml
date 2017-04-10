@@ -33,7 +33,7 @@
 	</update>
 	
 	<!-- 根据uid查询friend -->
-	<select id="selectfriendByUid" resultType="Friend">
+	<select id="selectFriendByUid" resultType="Friend">
 		SELECT
 			*
 		FROM
@@ -44,9 +44,30 @@
 
 
 	<!-- 根据anotherUid查询friend -->
-	<select id="selectfriendByAnotherUid" resultType="Friend">
+	<select id="selectFriendByAnotherUid" resultType="Friend">
 		SELECT
 			*
+		FROM
+			friend
+		WHERE
+			anotherUid=#{anotherUid}
+	</select>
+	
+	<!-- 根据uid查询friend -->
+	<select id="selectFriendCountByUid" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			friend
+		WHERE
+			uid=#{uid}
+	</select>
+
+
+	<!-- 根据anotherUid查询friend -->
+	<select id="selectFriendCountByAnotherUid" resultType="java.lang.String">
+		SELECT
+			count(*)
 		FROM
 			friend
 		WHERE

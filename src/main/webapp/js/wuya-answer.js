@@ -164,7 +164,7 @@
 		str+="        		<span class='nickname'>"+answer_user.nickName+"</span><br/>";
 		str+="       		<span class='sign'>"+answer_user.signature+"</span>";
 		str+="       	</div>";
-		str+="       	<div style='color: grey'>"+answer.upvoteCount+" 人赞同该回答</div>";
+		str+="       	<div style='color: grey' ><span id='upvoteCountTop"+answer.answerId+"'>"+answer.upvoteCount+"</span> 人赞同该回答</div>";
 		str+="        </div>";
 		str+="       <div class='panel-body'>";
 		str+="               <p class='answer-info'>";
@@ -173,19 +173,98 @@
 		str+="               <hr>";
 		str+="              <span class='answer-date'>发布于-"+getMyDate(answer.answerTime)+"</span>";
 		str+="             <div>";
-		str+="                 <a class='media-object badge alert-danger' style='width:64px;'>"+answer.upvoteCount+"&nbsp;<i class='fa fa-thumbs-up'></i></a>";
-		str+="                 <a>分享</a>";
-		str+="                 <a>收藏</a>";
+		if(answer.isUpvoted=="1"){
+			str+="                 <a class='media-object badge alert-danger' id='upvoteBot"+answer.answerId+"' ";
+		}else{
+			str+="                 <a class='media-object badge alert-success' id='upvoteBot"+answer.answerId+"' ";
+		}
+		str+=		"style='width:64px;' onclick='upvote(\""+answer.answerId+"\")'>"+answer.upvoteCount;
+		if(answer.isUpvoted=="1"){
+			str+=					"&nbsp;<i class='fa fa-thumbs-down' id='upvoteIco"+answer.answerId+"'></i>";
+		}else{
+			str+=					"&nbsp;<i class='fa fa-thumbs-up' id='upvoteIco"+answer.answerId+"'></i>";
+		}
+		
+		str+=		"</a>";
+		str+="                 <a data-toggle='modal' data-target='#share' onclick='share(\""+answer.answerId+"\",\""+answer.questionId+"\")'>分享</a>";
+		str+="                 <a onclick='store(\""+answer.answerId+"\")'>收藏</a>";
 		if(uid==answer.uid){
 			str +="<span>来自我自己的回答</span>"
 		}else{
-			str+="                 <a class='' data-toggle='modal' data-target='#report'>举报</a>";
+			str+="                 <a class='' data-toggle='modal' data-target='#report' onclick='report(\""+answer.answerId+"\",\""+answer.questionId+"\")'>举报</a>";
 		}
 		str+="       	  </div>";
 	    str+="     </div>";
 		str+=" </div>";
 		str+="</div>";
 		return str;
+  }
+  
+  function upvote(id){
+	  console.debug("+++++++upvote id==>>"+id);
+	  $.post(
+				"http://localhost:8080/wuya/answer/"+id+"/upvote",
+				{
+					"answerId":id
+				},
+				function(rs){
+					console.debug("upvote answer rs :"+rs);
+					var strs = rs.split("|");
+					var type = strs[0];
+					var count = strs[1];
+					$("#upvoteCountTop"+id).text(count);
+					$("#upvoteBot"+id).text(count);
+					var icoDown = "&nbsp;<i class='fa fa-thumbs-down' id='upvoteIco"+id+"'></i>";
+					var icoUp = "&nbsp;<i class='fa fa-thumbs-up' id='upvoteIco"+id+"'></i>";
+					if(type=="1"){
+						$("#upvoteBot"+id).removeClass("alert-danger");
+						$("#upvoteBot"+id).addClass("alert-success");
+						$("#upvoteIco"+id).remove();
+						$("#upvoteBot"+id).append(icoUp);
+						alert("取消点赞成功");
+					}else{
+						$("#upvoteBot"+id).removeClass("alert-success");
+						$("#upvoteBot"+id).addClass("alert-danger");
+						$("#upvoteIco"+id).remove();
+						$("#upvoteBot"+id).append(icoDown);
+						alert("点赞成功");
+					}
+					
+					
+				}
+			);
+  }
+  function changeFriend(uid){
+	  console.debug("+++++++关注的uid==>>"+uid);
+  }
+  
+  function store(answerId){
+	  console.debug("+++++++store answerId==>>"+answerId);
+  }
+  
+  function share(answerId,questionId){
+	  console.debug("+++++++share answerId==>>"+answerId);
+	  console.debug("+++++++share questionId==>>"+questionId);
+	  $("#shareId").val(answerId+"|"+questionId);
+  }
+  
+  function submitShare(){
+	  var shareId = $("#shareId").val();
+	  var shareType = $("#shareType").val();
+	  console.debug("+++submitShare()  shareId==>>"+shareId+"  reportType==>>"+shareType);
+  }
+  
+  function report(answerId,questionId){
+	  console.debug("+++++++report answerId==>>"+answerId);
+	  console.debug("+++++++report questionId==>>"+questionId);
+	  $("#reportId").val(answerId+"|"+questionId);
+  }
+  
+  function submitReport(){
+	  var reportId = $("#reportId").val();
+	  var reportType = $("#reportType").val();
+	  var reportInfo = $("#reportInfo").val();
+	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
   }
   
   
@@ -210,25 +289,6 @@
 	    return num;  
 	} 
 	
-//	function initAnswerNums(){
-//		console.debug("====initAnswerNums====");
-//		$.post(
-//				"http://localhost:8080/wuya/answer/nums",
-//				{
-//					"method":"1"
-//				},
-//				function(rs){
-//					console.debug("initAnswerNums  rs:"+rs);
-//					$("#answerNum").html(rs);
-//				}
-//			);
-//	}
-
-	function initFocusNums(){
-		
-		//TODO init focus
-		console.debug("====initFocusNums====");
-	}
 
 	function submitAnswer(questionId){
 		console.debug("submitAnswer start===== questionId==>"+questionId);
