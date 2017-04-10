@@ -101,7 +101,6 @@ public class UserController {
 	private FocusServiceImpl focusService;
 	@Resource
 	private ShareServiceImpl shareService;
-	@Resource
 	
 	@RequestMapping(value="/ajax",method={RequestMethod.GET,RequestMethod.POST})  
     @ResponseBody
@@ -265,66 +264,66 @@ public class UserController {
         return mav;  
     } 
     
-    @Target({ElementType.METHOD, ElementType.TYPE})
-    @Retention(RetentionPolicy.RUNTIME)
-    static @interface RequestHandler{
-    	String request() default "";
-    }
+//    @Target({ElementType.METHOD, ElementType.TYPE})
+//    @Retention(RetentionPolicy.RUNTIME)
+//    static @interface RequestHandler{
+//    	String request() default "";
+//    }
+//    
+//    static HashMap<String, Method> s_handlerMapping = new HashMap<String, Method>();
+//    
+//    static {
+//    	for(Method method: UserController.class.getDeclaredMethods()){
+//    		RequestHandler info = method.getAnnotation(RequestHandler.class);
+//    		if(info != null){
+//    			s_handlerMapping.put(info.request(), method);
+//    		}
+//    	}
+//    }
     
-    static HashMap<String, Method> s_handlerMapping = new HashMap<String, Method>();
-    
-    static {
-    	for(Method method: UserController.class.getDeclaredMethods()){
-    		RequestHandler info = method.getAnnotation(RequestHandler.class);
-    		if(info != null){
-    			s_handlerMapping.put(info.request(), method);
-    		}
-    	}
-    }
-    
-    @RequestHandler(request="1")
-    void handleQuest(User user, User targetUser, List<HotQuestionAndAnswerAndTopic> retList)
-    {
-    	List<Question> questions = questionService.questionSelectByUid(targetUser.getUid());
-		for (Question question : questions) {
-			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
-			String topicId = question.getTopicId();
+//    @RequestHandler(request="1")
+//    void handleQuest(User user, User targetUser, List<HotQuestionAndAnswerAndTopic> retList)
+//    {
+//    	List<Question> questions = questionService.questionSelectByUid(targetUser.getUid());
+//		for (Question question : questions) {
+//			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+//			String topicId = question.getTopicId();
 //			Answer answer = answerService.answerOneSelectByQuestionId(questionId);
 //			if(answer!=null){
 //				String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
 //				answer.setUpvoteCount(upvoteCount);
 //			}
-			Topic topic = topicService.selectTopicByTopicId(topicId);
-//			ret.setAnswer(answer);
-			ret.setQuestion(question);
-			ret.setTopic(topic);
-			ret.setUser(user);
-			retList.add(ret);
-		}		
-    }
+//			Topic topic = topicService.selectTopicByTopicId(topicId);
+////			ret.setAnswer(answer);
+//			ret.setQuestion(question);
+//			ret.setTopic(topic);
+//			ret.setUser(user);
+//			retList.add(ret);
+//		}		
+//    }
     
-    @RequestHandler(request="2")
-    void handleAnswer(User user, User targetUser, List<HotQuestionAndAnswerAndTopic> retList)
-    {
-    	List<Answer> answers = answerService.answerSelectByUid(targetUser.getUid());
-		for (Answer answer : answers) {
-			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
-			String answer_questionid = answer.getQuestionId();
-			Question question = questionService.questionSelectByQuestionId(answer_questionid);
-        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());   //点赞次数
-        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), user.getUid());
-        	answer.setUser(user);
-        	answer.setUpvoteCount(upvoteCount);
-        	answer.setIsUpvoted(isUpvote?"1":"2");
-        	ret.setAnswer(answer);
-        	ret.setUser(user);
-        	ret.setQuestion(question);
-        	retList.add(ret);
-		}
-    }
+//    @RequestHandler(request="2")
+//    void handleAnswer(User user, User targetUser, List<HotQuestionAndAnswerAndTopic> retList)
+//    {
+//    	List<Answer> answers = answerService.answerSelectByUid(targetUser.getUid());
+//		for (Answer answer : answers) {
+//			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+//			String answer_questionid = answer.getQuestionId();
+//			Question question = questionService.questionSelectByQuestionId(answer_questionid);
+//        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());   //点赞次数
+//        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), user.getUid());
+//        	answer.setUser(user);
+//        	answer.setUpvoteCount(upvoteCount);
+//        	answer.setIsUpvoted(isUpvote?"1":"2");
+//        	ret.setAnswer(answer);
+//        	ret.setUser(user);
+//        	ret.setQuestion(question);
+//        	retList.add(ret);
+//		}
+//    }
+//    
     
-    
-    @RequestMapping(value="/{type}/{uid}/personal",method={RequestMethod.GET,RequestMethod.POST})  
+    @RequestMapping(value="/{type}/{uid}/personalcontent",method={RequestMethod.GET,RequestMethod.POST})  
     public void  userContent(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("type")String type,
     		@PathVariable("uid")String uid
@@ -343,20 +342,20 @@ public class UserController {
     	String myuid = myuser.getUid();
     	List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>();
     	
-    	Method method = s_handlerMapping.get(type);
-    	if(method!=null){
-    		try{
-    			method.invoke(this, myuser, user, retList);
-    			if(!retList.isEmpty()){
-	    			objectMapper.writeValue(outputStream, retList);
-	    		}else{
-	    			outputStream.print("empty");
-	    		}
-    			return;
-    		}catch(Exception ex){
-    			
-    		}
-    	}
+//    	Method method = s_handlerMapping.get(type);
+//    	if(method!=null){
+//    		try{
+//    			method.invoke(this, myuser, user, retList);
+//    			if(!retList.isEmpty()){
+//	    			objectMapper.writeValue(outputStream, retList);
+//	    		}else{
+//	    			outputStream.print("empty");
+//	    		}
+//    			return;
+//    		}catch(Exception ex){
+//    			
+//    		}
+//    	}
     	
     	
     	
@@ -442,7 +441,6 @@ public class UserController {
 	    			outputStream.print("empty");
 	    		}
 				break;
-
 			case "4"://话题  关注  topic type 1. focus 2. create
 				List<Focus> focuses  = focusService.focusSelectByUid(uid);
 				if(focuses!=null && !focuses.isEmpty()){
