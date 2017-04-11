@@ -120,7 +120,6 @@ public class UserController {
     		String bind_email,
     		String nickName
     		) throws ParseException{  
-    	String contextPath = request.getContextPath();
         logger.warn("-----user action=="+action+"----");  
         ModelAndView mav=new ModelAndView();  
         String email = "";
@@ -356,9 +355,6 @@ public class UserController {
 //    			
 //    		}
 //    	}
-    	
-    	
-    	
     	switch (type) {
 			case "1": //questions
 				List<Question> questions = questionService.questionSelectByUid(uid);
@@ -377,11 +373,6 @@ public class UserController {
 					ret.setUser(user);
 					retList.add(ret);
 				}
-				if(!retList.isEmpty()){
-	    			objectMapper.writeValue(outputStream, retList);
-	    		}else{
-	    			outputStream.print("empty");
-	    		}
 				break;
 			case "2"://回答
 				List<Answer> answers = answerService.answerSelectByUid(uid);
@@ -399,11 +390,6 @@ public class UserController {
 		        	ret.setQuestion(question);
 		        	retList.add(ret);
 				}
-				if(!retList.isEmpty()){
-	    			objectMapper.writeValue(outputStream, retList);
-	    		}else{
-	    			outputStream.print("empty");
-	    		}
 				break;
 
 			case "3"://分享 type  1--》answer  2--》question
@@ -435,11 +421,6 @@ public class UserController {
 					}
 					retList.add(ret);
 				}
-				if(!retList.isEmpty()){
-	    			objectMapper.writeValue(outputStream, retList);
-	    		}else{
-	    			outputStream.print("empty");
-	    		}
 				break;
 			case "4"://话题  关注  topic type 1. focus 2. create
 				List<Focus> focuses  = focusService.focusSelectByUid(uid);
@@ -468,24 +449,45 @@ public class UserController {
 						retList.add(ret);
 					}
 				}
-				if(!retList.isEmpty()){
-	    			objectMapper.writeValue(outputStream, retList);
-	    		}else{
-	    			outputStream.print("empty");
-	    		}
 				break;
 
 			case "5":
 				List<Friend> focusFriends = friendService.friendSelectByUid(uid);   //关注的好友
 				List<Friend> focused = friendService.friendSelectByUid(uid);   		//被关注的好友
 				for(Friend friend :focusFriends){
+					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+					ret.setFriendType(1);
 					String anotherUid = friend.getAnotherUid();
 					User userSelectByUid = userService.userSelectByUid(anotherUid);
-					
+					String answerNums = answerService.answerCountSelectByUid(userSelectByUid.getUid());
+					userSelectByUid.setAnswerNums(answerNums);
+			        String focusFriendsCount = friendService.friendCountSelectByAnotherUid(userSelectByUid.getUid());
+			        userSelectByUid.setFocusedFriends(focusFriendsCount);
+					ret.setUser(userSelectByUid);
+					retList.add(ret);
+				}
+				for(Friend friend :focused){
+					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+					ret.setFriendType(2);
+					String anotherUid = friend.getAnotherUid();
+					User userSelectByUid = userService.userSelectByUid(anotherUid);
+					String answerNums = answerService.answerCountSelectByUid(userSelectByUid.getUid());
+					userSelectByUid.setAnswerNums(answerNums);
+			        String focusFriendsCount = friendService.friendCountSelectByAnotherUid(userSelectByUid.getUid());
+			        userSelectByUid.setFocusedFriends(focusFriendsCount);
+					ret.setUser(userSelectByUid);
+					retList.add(ret);
 				}
 				break;
 			default:
 				break;
+		}
+    	
+    	if(!retList.isEmpty()){
+    		objectMapper.writeValue(System.out,retList);
+			objectMapper.writeValue(outputStream, retList);
+		}else{
+			outputStream.print("empty");
 		}
     	
     } 
