@@ -110,6 +110,15 @@ public class UserController {
     	logger.warn("questionInfo:"+questionInfo);
         return "1";  
     } 
+	
+	@RequestMapping(value="/personal/info",method={RequestMethod.GET,RequestMethod.POST})  
+    public ModelAndView  completeUser(HttpServletRequest request,HttpServletResponse response
+    		) throws ParseException{ 
+		String method = request.getMethod();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("forward:/wuya-personal-info.jsp");
+		return mav;
+    } 
 
       
     @RequestMapping(value="/{action}",method={RequestMethod.GET,RequestMethod.POST})  
@@ -530,7 +539,6 @@ public class UserController {
     	}catch(Exception ex){
     		mapper.writeValue(outputStream, "fail");
     	}
-    	
     }
     
 

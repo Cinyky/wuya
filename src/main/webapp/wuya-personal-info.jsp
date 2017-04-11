@@ -1,12 +1,14 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <jsp:include page="templet/necessary.jsp" />
-    <script type="text/javascript" src="js/wuya-personal.js" ></script>
-    <link rel="stylesheet" href="css/wuya-personal.css" />
-    <title>personal-info</title>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-personal-info.js" ></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-personal.css" />
+    <title>${user.nickName }的个人信息</title>
   </head>
 <body>
 	 <jsp:include page="templet/navbar.jsp" />
@@ -24,48 +26,59 @@
             	<div style="width: 100%; background-color: #fff;
                           border: 1px solid grey;border-radius: 4px;">
               		<div class="headpic" style="display: inline-block;margin-left: 20px;margin-top: -20px">
-              			<img src="img/headpic2.jpg" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
+              				<img src="${pageContext.request.contextPath}/upload/headpic/${user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
               		</div>
-                  <a href="" class="btn btn-primary pull-right">返回个人主页</a>
+              		
+                    <a href="${pageContext.request.contextPath}/user/${user.uid}/personal" class="btn btn-primary pull-right">返回个人主页</a>
               		<div class="personal-info" 
                        style="position: relative;left: 100px;top: -50px;margin-left: 10px">
                     <span class="nickname" 
                           style="font-size: 26px;font-weight: bolder;">
-                          韦庆明
-                    </span><br>
-                    
-                    <div class="info-type" style="min-width: 100px;display: inline-block;">职业:</div>
-                    <span class="profession">全栈工程师</span> <a class="btn btn-primary">添加</a><a class="btn btn-primary">修改</a>
-                    <input type="text" />
-                    <a class="btn btn-primary">保存</a><a class="btn btn-primary">取消</a>
+                         	${user.nickName }
+                    </span>
+                    <br>
+                    <div id="imgPre">
+                    	
+                    </div>
+                    <label for="changeHeadPic"> <img id="prePic" src="${pageContext.request.contextPath}/upload/headpic/${user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px"></label>
+                    <input type="file" style="display:none" id="changeHeadPic"/>
+                    <a class="btn btn-primary">保存</a>
+                    <br>
+                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
+                    <div class="info-type" style="min-width: 100px;display: inline-block;">个性签名:</div>
+                    <input type="text" placeholder="${user.signature }"/><a class="btn btn-primary">保存</a>
                     <br>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
-                    
                     <div class="info-type" style="min-width: 100px;display: inline-block;">性别:</div>
-                    <span class="sex">男</span><a class="btn btn-primary">添加</a><a class="btn btn-primary">修改</a>
-                    <input type="radio" value="1" name="sex" checked/>男
-                    <input type="radio" value="0" name="sex"/>女
-                    <a class="btn btn-primary">保存</a><a class="btn btn-primary">取消</a>
+                    <c:if test="${user.sex eq 1 }">
+	                    <input type="radio" value="1" name="sex" checked/>男
+	                    <input type="radio" value="0" name="sex"/>女
+                    </c:if>
+                    <c:if test="${user.sex eq 0 }">
+                    	<input type="radio" value="1" name="sex" />男
+	                    <input type="radio" value="0" name="sex" checked/>女
+                    </c:if>
+                    <a class="btn btn-primary">保存</a>
                     <br>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     
                     <div class="info-type" style="min-width: 100px;display: inline-block;">一句话介绍:</div>
-                    <span class="sign">认真，你就赢了</span><a class="btn btn-primary">添加</a><a class="btn btn-primary">修改</a>
-                    <input type="text" /><a class="btn btn-primary">保存</a><a class="btn btn-primary">取消</a>
+                    <input type="text" placeholder="${user.profile }"/>
+                    <a class="btn btn-primary">保存</a>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
-                    
                     <div class="info-type" style="min-width: 100px;display: inline-block;">居住地:</div>
-                     <span class="sign">认真，你就赢了</span> <a class="btn btn-primary">添加</a><a class="btn btn-primary">修改</a>
-                    <input type="text" />
-                    <a class="btn btn-primary">保存</a><a class="btn btn-primary">取消</a>
-                  
+                    <input type="text" placeholder="${user.location}"/>
+                    <a class="btn btn-primary">保存</a>
                     <br>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     
-					<div class="info-type" style="min-width: 100px;display: inline-block;">个人简介:</div>
-					<input type="text" /><a class="btn btn-primary">保存</a><a class="btn btn-primary">取消</a>
-                    <a class="btn btn-primary">添加</a>
-                    <a class="btn btn-primary">修改</a>
+					<div class="info-type" style="min-width: 100px;display: inline-block;">修改生日:</div>
+						<c:if test="${user.birth eq 0 }">
+							<input type="text" placeholder="形如2017-4-10"  />
+						</c:if>
+						<a class="btn btn-primary">保存</a>
+					<br/>
+                   
                     <br>                 
                   </div>
                   
