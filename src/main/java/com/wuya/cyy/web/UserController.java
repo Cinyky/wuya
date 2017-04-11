@@ -328,8 +328,8 @@ public class UserController {
     		@PathVariable("uid")String uid
     		) throws ParseException, IOException{
     	/*
-    	 * 1.提问
-           2.回答
+    	 * 1.回答
+           2.提问
            3.分享
            4.创建的话题
            5.好友
@@ -356,7 +356,25 @@ public class UserController {
 //    		}
 //    	}
     	switch (type) {
-			case "1": //questions
+			
+			case "1"://回答
+				List<Answer> answers = answerService.answerSelectByUid(uid);
+				for (Answer answer : answers) {
+					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+					String answer_questionid = answer.getQuestionId();
+					Question question = questionService.questionSelectByQuestionId(answer_questionid);
+		        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());   //点赞次数
+		        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), myuid);
+		        	answer.setUser(user);
+		        	answer.setUpvoteCount(upvoteCount);
+		        	answer.setIsUpvoted(isUpvote?"1":"2");
+		        	ret.setAnswer(answer);
+		        	ret.setUser(user);
+		        	ret.setQuestion(question);
+		        	retList.add(ret);
+				}
+				break;
+			case "2": //questions
 				List<Question> questions = questionService.questionSelectByUid(uid);
 				for (Question question : questions) {
 	    			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
@@ -374,30 +392,16 @@ public class UserController {
 					retList.add(ret);
 				}
 				break;
-			case "2"://回答
-				List<Answer> answers = answerService.answerSelectByUid(uid);
-				for (Answer answer : answers) {
-					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
-					String answer_questionid = answer.getQuestionId();
-					Question question = questionService.questionSelectByQuestionId(answer_questionid);
-		        	String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());   //点赞次数
-		        	boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), myuid);
-		        	answer.setUser(user);
-		        	answer.setUpvoteCount(upvoteCount);
-		        	answer.setIsUpvoted(isUpvote?"1":"2");
-		        	ret.setAnswer(answer);
-		        	ret.setUser(user);
-		        	ret.setQuestion(question);
-		        	retList.add(ret);
-				}
-				break;
-
 			case "3"://分享 type  1--》answer  2--》question
 				List<Share> shares = shareService.shareSelectByUid(myuid);
+				if(shares==null){
+					retList =null;
+					break;
+				}
 				for (Share share : shares) {
 					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
 					int shareType = share.getShareType();
-					String shareId = share.getShareId();
+					String shareId = share.getId();
 					ret.setShareType(shareType);
 					if(shareType==1){
 						Answer answer = answerService.answerSelectByAnswerId(shareId);
@@ -428,14 +432,20 @@ public class UserController {
 					for(Focus focus : focuses){
 						HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
 						ret.setTopicType(1);
-						String focusId = focus.getFocusId();    //话题id
+						String focusId = focus.getId();    //话题id
 						long focusTime = focus.getFocusTime();	//关注话题时间
 						Topic topic = topicService.selectTopicByTopicId(focusId);
 						topic.setTopicTime(focusTime);      //改变为关注时间
 						String topic_uid = topic.getUid();
-						User userSelectByUid = userService.userSelectByUid(topic_uid);
+						if("Cinyky".equals(topic_uid)){
+							User u = new User();
+							u.setUid(topic_uid);
+							ret.setUser(u);
+						}else{
+							User userSelectByUid = userService.userSelectByUid(topic_uid);
+							ret.setUser(userSelectByUid);
+						}
 						ret.setTopic(topic);
-						ret.setUser(userSelectByUid);
 						retList.add(ret);
 					}
 				}
@@ -491,6 +501,37 @@ public class UserController {
 		}
     	
     } 
+    
+    
+    @RequestMapping(value="/{anotherUid}/friend",method={RequestMethod.GET,RequestMethod.POST})  
+    @ResponseBody
+    public void  changeFriends(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("anotherUid")String anotherUid
+    		) throws IOException {
+    	ObjectMapper mapper = new ObjectMapper();
+    	ServletOutputStream outputStream = response.getOutputStream();
+    	try{
+        	User myuser = (User)request.getSession(true).getAttribute("user");
+        	String uid = myuser.getUid();
+        	boolean friendExsist = friendService.friendExsist(uid, anotherUid);
+        	boolean isChanged = false;
+        	if(friendExsist){
+        		isChanged = friendService.friendDelete(uid, anotherUid);
+        	}else{//remove friend relationship
+        		Friend friend = new Friend(uid, anotherUid, 1);
+        		isChanged = friendService.friendAdd(friend);
+        	}
+        	if(!isChanged){
+        		mapper.writeValue(outputStream, "fail");
+        	}else{
+        		String rs = friendExsist ? "1":"2"; 
+        		mapper.writeValue(outputStream, rs);
+        	}
+    	}catch(Exception ex){
+    		mapper.writeValue(outputStream, "fail");
+    	}
+    	
+    }
     
 
 }

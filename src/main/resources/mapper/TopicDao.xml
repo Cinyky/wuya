@@ -45,7 +45,7 @@
 
 
 	<!-- 根据uid查询topic -->
-	<select id="selecttopicByUid" resultType="Topic">
+	<select id="selectTopicByUid" resultType="Topic">
 		SELECT
 			*
 		FROM

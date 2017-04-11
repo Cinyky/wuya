@@ -56,4 +56,14 @@ public class FriendServiceImpl implements FriendService {
 		return friendDao.selectFriendCountByAnotherUid(anotherUid);
 	}
 
+	@Override
+	public boolean friendDelete(String uid, String anotherUid) {
+		return friendDao.deleteFriend(uid,anotherUid)>0;
+	}
+
+	@Override
+	public boolean friendExsist(String uid, String anotherUid) {
+		return friendDao.selectFriendExsist(uid, anotherUid)!=null;
+	}
+
 }

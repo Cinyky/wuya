@@ -28,6 +28,19 @@ public interface FriendService {
 	boolean friendUpdate(Friend friend);
 	
 	/**
+	 * delete friend
+	 * @param friend 好友
+	 * @return
+	 */
+	boolean friendDelete(String uid,String anotherUid);
+	/**
+	 * check friend
+	 * @param friend 好友
+	 * @return
+	 */
+	boolean friendExsist(String uid,String anotherUid);
+	
+	/**
 	 * 根据uid 搜索 friend
 	 * @param uid
 	 * @return

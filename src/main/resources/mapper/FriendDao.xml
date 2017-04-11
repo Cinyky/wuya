@@ -32,6 +32,17 @@
 				anotherUid=#{anotherUid}
 	</update>
 	
+	<!-- 删除friend  --> 
+	<update id="deleteFriend">
+			DELETE
+			FROM
+				friend
+			WHERE
+				uid=#{uid}
+				AND
+				anotherUid=#{anotherUid}
+	</update>
+	
 	<!-- 根据uid查询friend -->
 	<select id="selectFriendByUid" resultType="Friend">
 		SELECT
@@ -72,6 +83,18 @@
 			friend
 		WHERE
 			anotherUid=#{anotherUid}
+	</select>
+	
+	<!-- 根据uid查询friend -->
+	<select id="selectFriendExsist" resultType="Friend">
+		SELECT
+			*
+		FROM
+			friend
+		WHERE
+		uid=#{uid}
+			AND
+		anotherUid=#{anotherUid}
 	</select>
 
 </mapper>

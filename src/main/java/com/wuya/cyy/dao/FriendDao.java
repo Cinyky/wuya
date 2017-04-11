@@ -28,7 +28,14 @@ public interface FriendDao {
 	 */
 	int updateFriend(Friend friend);
 	
+	/**
+	 * shanchu friend
+	 * @param friend
+	 * @return
+	 */
+	int deleteFriend(@Param("uid")String uid,@Param("anotherUid")String anotherUid);
 	
+	Friend selectFriendExsist(@Param("uid")String uid,@Param("anotherUid")String anotherUid);
 	/**
 	 * 查询friend 根据uid anotherUid
 	 * @return

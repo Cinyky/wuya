@@ -1,7 +1,7 @@
   // 阻止输出log
           // wangEditor.config.printLog = false;
   $(function(){
-	  
+	  friendStatus = ["关注", "取关"];
 //	  initAnswerNums();
 //	  initFocusNums();
 	  
@@ -243,9 +243,19 @@
   }
   
   //加好友
-  function changeFriend(uid){
-	  console.debug("+++++++关注的uid==>>"+uid);
-  }
+	function changeFriend(anotherUid){
+		$.post(
+				path+"/user/"+anotherUid+"/friend",
+				function(rs){
+					console.debug("changeFriend anotherUid  :"+changeFriend);
+					if("fail"==rs){
+						alert("失败");
+					}else{
+						$("#friendStatus"+anotherUid).text(friendStatus[parseInt(rs)]);
+					}
+				}
+			);
+	}
   
   //分享
   function share(id,shareType){

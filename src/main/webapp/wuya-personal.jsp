@@ -61,11 +61,11 @@
         <div class="row">
           <div class="col-md-8 panel">
             <div style="padding-left: 20px;">
-              <a href="#" class="btn" onclick="changeType('1')">提问</a>
-              <a href="#" class="btn" onclick="changeType('2')">回答</a>
-              <a href="#" class="btn" onclick="changeType('3')">分享</a>
-              <a href="#" class="btn" onclick="changeType('4')">创建的话题</a>
-              <a href="#" class="btn" onclick="changeType('5')">好友</a>
+              <a href="#" class="btn" onclick="changeType('1','${personal_user.uid}','${user.uid}')">回答</a>
+              <a href="#" class="btn" onclick="changeType('2','${personal_user.uid}','${user.uid}')">提问</a>
+              <a href="#" class="btn" onclick="changeType('3','${personal_user.uid}','${user.uid}')">分享</a>
+              <a href="#" class="btn" onclick="changeType('4','${personal_user.uid}','${user.uid}')">创建的话题</a>
+              <a href="#" class="btn" onclick="changeType('5','${personal_user.uid}','${user.uid}')">好友</a>
             </div>
               <h3>
                 	<c:if test="${personal_user.uid ne user.uid }">他</c:if>
@@ -81,25 +81,24 @@
                 	<c:set value="${list.answer }" var="list_answer"></c:set>
                 	<div class="piece" id="piece${list_answer.answerId }">
                 	  <h3><a href="${pageContext.request.contextPath}/question/${list_question.questionId}/detail">${list_question.questionInfo }</a></h3>
-	                  <div style="color: grey">${list_answer.upvoteCount} 人赞同该回答</div>
+	                  <div style="color: grey"><span id="upvoteCountTop${list_answer.answerId }">${list_answer.upvoteCount}</span> 人赞同该回答</div>
 	                     <p>
 	                     ${list_answer.answerInfo }
 	                    </p>
 	                    <div>
 	                      <c:if test="${list_answer.isUpvoted eq 1 }">
-	                      	<a class="media-object badge alert-danger" style="width:64px;"  onclick="upvote('${list_answer.answerId}')">
+	                      	<a class="media-object badge alert-danger" style="width:64px;"  onclick="upvote('${list_answer.answerId}')" id="upvoteBot${list_answer.answerId }">
 		                      	${list_answer.upvoteCount }&nbsp;
 		                      	<i class="fa fa-thumbs-down"></i>
 	                     	</a>
 	                      </c:if>
 	                      <c:if test="${list_answer.isUpvoted ne 1 }">
-	                      	<a class="media-object badge alert-success" style="width:64px;"  onclick="upvote('${list_answer.answerId}')">
+	                      	<a class="media-object badge alert-success" style="width:64px;"  onclick="upvote('${list_answer.answerId}')" id="upvoteBot${list_answer.answerId }">
 		                      	${list_answer.upvoteCount }&nbsp;
 		                      	<i class="fa fa-thumbs-up"></i>
 	                     	</a>
 	                      </c:if>
 	                      <a>分享</a>
-	                      <a>收藏</a>
 	                      <c:if test="${personal_user.uid ne user.uid }">
 								<a data-toggle="modal" data-target="#report">举报</a>
 						  </c:if>
