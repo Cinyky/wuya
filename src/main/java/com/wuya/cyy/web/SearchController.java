@@ -3,6 +3,7 @@ package com.wuya.cyy.web;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,10 +94,12 @@ public class SearchController {
     @RequestMapping(value="/detail",method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView  shareQuestion(HttpServletRequest request,HttpServletResponse response,
     		String searchInfo
-    		) throws ParseException{  
+    		) throws ParseException, UnsupportedEncodingException{  
     	String method = request.getMethod();
         ModelAndView mav=new ModelAndView();
-       
+        response.setContentType("text/html;charset=UTF-8");// 设置服务器发送给浏览器的编码方式
+		request.setCharacterEncoding("UTF-8"); // 客户端向服务器提交的数据的解码方式
+       logger.warn("search info ==============="+searchInfo);
         if("post".equalsIgnoreCase(method)){
         	 String rs="";
              User myuser = (User)request.getSession(true).getAttribute("user");
@@ -168,12 +171,20 @@ public class SearchController {
         		for (Topic topic : topics) {
 	    			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
 	    			String uid = topic.getUid();
+	    			if("Cinyky".equals(uid)){
+	    				User user = new User();
+	    				user.setUid(uid);
+	    				ret.setUser(user);
+	    			}else{
+	    				User user = userService.userSelectByUid(uid);
+	    				ret.setUser(user);
+	    			}
 	    			String topicId = topic.getTopicId();
 	    			boolean focusExsist = focusService.focusExsist(myuid,topicId);
 	    			topic.setIsFocused(focusExsist?"1":"2");
-	    			User user = userService.userSelectByUid(uid);
+	    			
 	    			ret.setTopic(topic);
-	    			ret.setUser(user);
+	    			
 	    			retList.add(ret);
 				}
         		mav.addObject("search_topics", retList);
@@ -187,8 +198,6 @@ public class SearchController {
         }else{
         	mav.addObject("search_rs", "noinfo");
         }
-       
-       
         mav.setViewName("forward:/wuya-search.jsp");
         return mav;  
     }

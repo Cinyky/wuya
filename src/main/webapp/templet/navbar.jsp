@@ -2,7 +2,7 @@
 <div class="navbar navbar-default navbar-fixed-top" style="height: 50px;">
       <div class="container" >
 	        <div class="navbar-header">
-	          <a class="navbar-brand" contenteditable="true"><span>无涯wuya</span><i class="fa fa-fw fa-ship"></i></a>
+	          <a class="navbar-brand" contenteditable="false"><span>无涯wuya</span><i class="fa fa-fw fa-ship"></i></a>
 	        </div>
 	        <div class="form-group">
 		          <div class="collapse navbar-collapse" id="navbar-ex-collapse">

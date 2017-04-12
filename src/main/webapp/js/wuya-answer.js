@@ -169,7 +169,7 @@
 		str+="<div class='answer' id='"+answer.answerId+"'>";
 		str+="  <div class='panel panel-default'>";
 		str+="        <div class='panel-heading'>";
-		str+="        	<a href='http://localhost:8080/wuya/user/"+answer_user.uid+"/personal'><img src='http://localhost:8080/wuya/img/"+answer_user.headPic+"' width='60px' height='60px'/></a>";
+		str+="        	<a href='http://localhost:8080/wuya/user/"+answer_user.uid+"/personal'><img src='http://localhost:8080/wuya/upload/headpic/"+answer_user.headPic+"' width='60px' height='60px'/></a>";
 		str+="        	<div class='author-info' style='display:inline-block;'>";
 		str+="        		<span class='nickname'>"+answer_user.nickName+"</span><br/>";
 		str+="       		<span class='sign'>"+answer_user.signature+"</span>";

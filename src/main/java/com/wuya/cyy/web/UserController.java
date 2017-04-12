@@ -152,7 +152,8 @@ public class UserController {
 	            }
 	            
 	            mav.addObject("user_name", user_name);
-	            mav.setViewName("register_success");  
+//	            mav.setViewName("register_success");  
+	            mav.setViewName("redirect:/user/login");
 	       	}
         	
         }   

@@ -36,7 +36,7 @@ public interface TopicDao {
 	 * 查询topic 根据topicName模糊
 	 * @return
 	 */
-	List<Topic> selectTopicByTopicName(String topicName);
+	List<Topic> selectTopicByTopicName(@Param("topicName")String topicName);
 	
 	/**
 	 * 查询topic 根据uid

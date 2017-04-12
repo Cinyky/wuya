@@ -111,7 +111,7 @@ public class UploadController {
 				                	   res = realName;
 				                   }
 				                   // 返回图片的URL地址
-				                   response.getWriter().write(realName);
+				                   response.getWriter().write(res);
 			                   }
 			                 
 					  	}
