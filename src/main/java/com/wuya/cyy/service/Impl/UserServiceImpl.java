@@ -111,8 +111,12 @@ public class UserServiceImpl  implements UserService {
 
 	@Override
 	public User userSelectByUid(String uid) {
-		// TODO Auto-generated method stub
 		return userDao.selectUserByUid(uid);
+	}
+
+	@Override
+	public boolean userUpdate(User user) {
+		return userDao.updateUser(user)>0;
 	}
 
 }

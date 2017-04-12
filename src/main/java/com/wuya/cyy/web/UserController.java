@@ -10,6 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -540,6 +541,60 @@ public class UserController {
     		mapper.writeValue(outputStream, "fail");
     	}
     }
+    
+    
+    @RequestMapping(value="/info/{type}/update",method={RequestMethod.GET,RequestMethod.POST})  
+    public void  userUpdate(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("type")String type,
+    		String info
+    		) throws ParseException, IOException{
+//    	updateUserInfoTypes = ["headpic","signature","sex","profile","location","birth","all"];
+    	HttpSession session = request.getSession(true);
+    	ServletOutputStream outputStream = response.getOutputStream();
+    	User user = (User)session.getAttribute("user");
+    	logger.warn("type====>"+type+"  info===>"+info);
+    	logger.warn("user before====>"+user.toString());
+    	switch (type) {
+			case "headpic":
+				user.setHeadPic(info);
+				break;
+			case "signature":
+				user.setSignature(info);		
+				break;
+			case "sex":
+				user.setSex(Integer.parseInt(info));
+				break;
+			case "profile":
+				user.setProfile(info);
+				break;
+			case "location":
+				user.setLocation(info);
+				break;
+			case "birth":
+				user.setBirth(new SimpleDateFormat("yyyy/MM/dd").parse(info).getTime());
+				break;
+			case "all":
+				String[] infos = info.split("|");
+				user.setHeadPic(infos[0]);
+				user.setSignature(infos[1]);
+				user.setSex(Integer.parseInt(infos[2]));
+				user.setProfile(infos[3]);
+				user.setLocation(infos[4]);
+				user.setBirth(new SimpleDateFormat("yyyy/MM/dd").parse(infos[5]).getTime());
+				break;
+			default:
+				break;
+		}
+    	boolean userUpdate = userService.userUpdate(user);
+    	if(userUpdate){
+    		session.removeAttribute("user");
+    		session.setAttribute("user", user);
+    		new ObjectMapper().writeValue(outputStream, user);
+    	}else{
+    		new ObjectMapper().writeValue(outputStream, "fail");
+    	}
+    	
+    } 
     
 
 }

@@ -25,7 +25,7 @@
             	<div style="width: 100%;height:15.8%; background-color: #fff;
                           border: 1px solid grey;border-radius: 4px;">
               		<div class="headpic" style="display: inline-block;margin-left: 20px;margin-top: -20px">
-              			<img src="${pageContext.request.contextPath}/img/${personal_user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
+              			<img src="${pageContext.request.contextPath}/upload/headpic/${personal_user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
               		</div>
               		<div class="personal-info" 
                        style="position: relative;left: 100px;top: -50px;margin-left: 10px">

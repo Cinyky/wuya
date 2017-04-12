@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="cover">
-      <div class="cover-image" style="background-image: url(${pageContext.request.contextPath}/img/bgimg.jpg);"></div>
+      <div class="cover-image" style="background-image: url(${pageContext.request.contextPath}/upload/headpic/bgimg.jpg);"></div>
       <div class="container">
         <div class="row">
           <div class="col-sm-offset-3 col-md-6 text-center">

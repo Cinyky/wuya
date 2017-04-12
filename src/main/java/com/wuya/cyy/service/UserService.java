@@ -50,6 +50,12 @@ public interface UserService {
 	 * @return
 	 */
 	User userSelectByUid(String uid);
+	/**
+	 * 用户更新
+	 * @param user
+	 * @return
+	 */
+	boolean userUpdate(User user);
 	
 	
 

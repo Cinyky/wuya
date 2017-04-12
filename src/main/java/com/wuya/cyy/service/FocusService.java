@@ -40,7 +40,7 @@ public interface FocusService {
 	 */
 	List<Focus> focusSelectByUidAndType(String uid,int focusType);
 	
-	boolean focusExsist(Focus focus);
+	boolean focusExsist(String uid,String id);
 
 	boolean focusDelete(Focus focus);
 

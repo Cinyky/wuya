@@ -104,9 +104,14 @@ public class UploadController {
 			                   }else{
 			                	   file.transferTo(new File(realPath));
 				                   System.out.println("return url:"+request.getContextPath() + "/upload/" + action+"/" + realName);
-				          
+				                   String res ="";
+				                   if("answer".equals(action)){
+				                	   res =  request.getContextPath() + "/upload/" + action+"/" + realName;
+				                   }else{
+				                	   res = realName;
+				                   }
 				                   // 返回图片的URL地址
-				                   response.getWriter().write(request.getContextPath() + "/upload/" + action+"/" + realName);
+				                   response.getWriter().write(realName);
 			                   }
 			                 
 					  	}

@@ -1,6 +1,9 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="com.wuya.cyy.pojo.User" %>
 <html>
   <head>
     <meta charset="utf-8">
@@ -26,7 +29,7 @@
             	<div style="width: 100%; background-color: #fff;
                           border: 1px solid grey;border-radius: 4px;">
               		<div class="headpic" style="display: inline-block;margin-left: 20px;margin-top: -20px">
-              				<img src="${pageContext.request.contextPath}/upload/headpic/${user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
+              				<img id="myPic" src="${pageContext.request.contextPath}/upload/headpic/${user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px">
               		</div>
               		
                     <a href="${pageContext.request.contextPath}/user/${user.uid}/personal" class="btn btn-primary pull-right">返回个人主页</a>
@@ -42,44 +45,55 @@
                     </div>
                     <label for="changeHeadPic"> <img id="prePic" src="${pageContext.request.contextPath}/upload/headpic/${user.headPic}" class="navbarimg-responsive img-thumbnail " width="80px" height="80px"></label>
                     <input type="file" style="display:none" id="changeHeadPic"/>
-                    <a class="btn btn-primary">保存</a>
+                    <input type="hidden"  name="update_headpic" value="${user.headPic}"/>
+                    <a class="btn btn-primary" onclick="submitUserInfo('0','${user.headPic}')">保存</a>
                     <br>
                      <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     <div class="info-type" style="min-width: 100px;display: inline-block;">个性签名:</div>
-                    <input type="text" placeholder="${user.signature }"/><a class="btn btn-primary">保存</a>
+                    <input type="text" name="update_signature" placeholder="${user.signature }"/>
+                    <a class="btn btn-primary" onclick="submitUserInfo('1','${user.signature}')">保存</a>
                     <br>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     <div class="info-type" style="min-width: 100px;display: inline-block;">性别:</div>
                     <c:if test="${user.sex eq 1 }">
-	                    <input type="radio" value="1" name="sex" checked/>男
-	                    <input type="radio" value="0" name="sex"/>女
+	                    <input type="radio" value="1" name="update_sex" checked/>男
+	                    <input type="radio" value="0" name="update_sex"/>女
                     </c:if>
                     <c:if test="${user.sex eq 0 }">
-                    	<input type="radio" value="1" name="sex" />男
-	                    <input type="radio" value="0" name="sex" checked/>女
+                    	<input type="radio" value="1" name="update_sex" />男
+	                    <input type="radio" value="0" name="update_sex" checked/>女
                     </c:if>
-                    <a class="btn btn-primary">保存</a>
+                    <a class="btn btn-primary" onclick="submitUserInfo('2','${user.sex}')">保存</a>
                     <br>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     
                     <div class="info-type" style="min-width: 100px;display: inline-block;">一句话介绍:</div>
-                    <input type="text" placeholder="${user.profile }"/>
-                    <a class="btn btn-primary">保存</a>
+                    <input type="text" name="update_profile" placeholder="${user.profile }"/>
+                    <a class="btn btn-primary" onclick="submitUserInfo('3','${user.profile}')">保存</a>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     <div class="info-type" style="min-width: 100px;display: inline-block;">居住地:</div>
-                    <input type="text" placeholder="${user.location}"/>
-                    <a class="btn btn-primary">保存</a>
+                    <input type="text" name="update_location" placeholder="${user.location}"/>
+                    <a class="btn btn-primary" onclick="submitUserInfo('4','${user.location}')">保存</a>
                     <br>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     
 					<div class="info-type" style="min-width: 100px;display: inline-block;">修改生日:</div>
 						<c:if test="${user.birth eq 0 }">
-							<input type="text" placeholder="形如2017-4-10"  />
+							<input type="text" name="update_birth" placeholder="形如2017/4/10"  />
 						</c:if>
-						<a class="btn btn-primary">保存</a>
+						<c:if test="${user.birth ne 0 }">
+							<%
+							User uu = (User)session.getAttribute("user");
+							Date date = new Date(uu.getBirth());
+							%>
+							<input type="text" name="update_birth" 
+							placeholder="<%= new SimpleDateFormat("yyyy/MM/dd").format(date) %>"  />
+						</c:if>
+						<a class="btn btn-primary" onclick="submitUserInfo('5','${user.birth}')">保存</a>
 					<br/>
                    
-                    <br>                 
+                    <br>    
+                    <a class="btn btn-primary" onclick="submitUserInfo('6','${user.headPic}|${user.signature}|${user.sex}|${user.profile}|${user.location}|${user.birth}')">提交全部</a>             
                   </div>
                   
                   

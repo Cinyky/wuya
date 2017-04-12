@@ -34,7 +34,7 @@ public class User {
 	private String focusedFriends;	//关注的朋友
 	private String focusFriends;	//关注朋友
 	private String focusTopics;		//关注的话题数量
-//	private String isFocused;		//是否被关注
+	private String isFocused;		//是否被关注
 	
 //	uid = #{uid},
 //	loginName = #{loginName},
@@ -54,13 +54,13 @@ public class User {
 
 	
 
-//	public String getIsFocused() {
-//		return isFocused;
-//	}
-//
-//	public void setIsFocused(String isFocused) {
-//		this.isFocused = isFocused;
-//	}
+	public String getIsFocused() {
+		return isFocused;
+	}
+
+	public void setIsFocused(String isFocused) {
+		this.isFocused = isFocused;
+	}
 
 
 	public String getFocusFriends() {

@@ -53,8 +53,8 @@ public class FocusServiceImpl implements FocusService {
 	}
 
 	@Override
-	public boolean focusExsist(Focus focus) {
-		return focusDao.selectFocusExsist(focus)!=null;
+	public boolean focusExsist(String uid,String id) {
+		return focusDao.selectFocusExsist(uid,id)!=null;
 	}
 	@Override
 	public String focusCount(String id) {

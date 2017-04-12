@@ -46,7 +46,7 @@
                   	关于作者
                   </div>
 	              <div class="panel-body">
-	              	<img src="${pageContext.request.contextPath}/img/${question_user.headPic}" width="60px" height="60px"/>
+	              	<img src="${pageContext.request.contextPath}/upload/headpic/${question_user.headPic}" width="60px" height="60px"/>
 	              	<div class="author-info" style="display:inline-block;">
 	              		<span class="nickname">${question_user.nickName}</span><br/>
 	              		<span class="sign">${question_user.signature }</span>

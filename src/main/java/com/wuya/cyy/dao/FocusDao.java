@@ -52,7 +52,7 @@ public interface FocusDao {
 	 * 根据uid focusId
 	 * @return
 	 */
-	Focus selectFocusExsist(Focus focus);
+	Focus selectFocusExsist(@Param("uid")String uid,@Param("id")String id);
 	
 	String selectFocusCount(@Param("id")String id);
 	

@@ -137,8 +137,7 @@ public class TopicController {
         }
         List<Topic> randomRecommendTopics = RandomUtils.randomRecommendTopics(recommendedTopics);
         for (Topic temp_topic : randomRecommendTopics) {
-			Focus focus = new Focus(user.getUid(), temp_topic.getTopicId());
-			boolean focusExsist = focusService.focusExsist(focus);
+			boolean focusExsist = focusService.focusExsist(user.getUid(),temp_topic.getTopicId());
 			temp_topic.setIsFocused(focusExsist?"1":"2");
 			String focusCount = focusService.focusCount(temp_topic.getTopicId());
 			temp_topic.setFocusNums(focusCount);
@@ -161,7 +160,7 @@ public class TopicController {
 			ret.setUser(question_user);
 			retList.add(ret);
        }
-       mav.addObject("retList", retList);
+        mav.addObject("retList", retList);
         mav.setViewName("forward:/wuya-topic.jsp");
         return mav;  
     }  
@@ -178,8 +177,7 @@ public class TopicController {
          }
          List<Topic> randomRecommendTopics = RandomUtils.randomRecommendTopics(recommendedTopics);
          for (Topic temp_topic : randomRecommendTopics) {
- 			Focus focus = new Focus(user.getUid(), temp_topic.getTopicId());
- 			boolean focusExsist = focusService.focusExsist(focus);
+ 			boolean focusExsist = focusService.focusExsist(user.getUid(),temp_topic.getTopicId());
  			temp_topic.setIsFocused(focusExsist?"1":"2");
  			String focusCount = focusService.focusCount(temp_topic.getTopicId());
  			temp_topic.setFocusNums(focusCount);
@@ -195,7 +193,7 @@ public class TopicController {
         logger.warn("-----topic topicId==>"+topicId+"----"); 
         User user = (User)request.getSession(true).getAttribute("user");
         Focus focus = new Focus(user.getUid(), topicId);
-        boolean focusExsist = focusService.focusExsist(focus);
+        boolean focusExsist = focusService.focusExsist(user.getUid(),topicId);
         boolean isSuccess;
         String method = "2";   //不存在  关准
         if(focusExsist){

@@ -42,7 +42,7 @@ public class UserFilter extends	OncePerRequestFilter{
         		".img",".jpg",".data",".png",".gif",
         		"/css","/emotions",
         		"/error",
-        		"/fonts","ico","/images","/img","/topic", "/js" ,"upload"
+        		"/fonts","ico","/images","/img","/topic", "/js" ,"/upload"
         		};
         String wuya = "/wuya/";
         // 请求的uri
@@ -93,9 +93,7 @@ public class UserFilter extends	OncePerRequestFilter{
                 if (!isCookie) {
                     // 如果session中不存在登录者实体，则弹出框提示重新登录
                     // 设置request和response的字符集，防止乱码
-                    request.setCharacterEncoding("UTF-8");
-                    response.setCharacterEncoding("UTF-8");
-                    response.sendRedirect("user/login");
+                    response.sendRedirect("http://localhost:8080/wuya/user/login");
 //                    PrintWriter out = response.getWriter();
 //                    String loginPage = "http://localhost:8080/wuya/user/login";
 //                    StringBuilder builder = new StringBuilder();
