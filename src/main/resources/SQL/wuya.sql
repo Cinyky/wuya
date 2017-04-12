@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50554
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : wuya
 
 Target Server Type    : MYSQL
-Target Server Version : 50554
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-10 07:44:42
+Date: 2017-04-12 16:57:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,6 +68,9 @@ INSERT INTO `answer` VALUES ('dc3377ef-a8f9-46be-8ab3-3018324fd0ac', '2791bb3c-8
 INSERT INTO `answer` VALUES ('6d883ed9-0437-4410-97e4-83a53b17204d', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>我的位置 ---.<iframe class=\"ueditor_baidumap\" src=\"http://ueditor.baidu.com/ueditor/dialogs/map/show.html#center=121.480237,31.236305&zoom=11&amp;width=478&amp;height=258&amp;markers=121.449459,31.252429&amp;markerStyles=l,A\" frameborder=\"0\" width=\"478\" height=\"258\"></iframe></p>\n              <p><br></p>', '1491629320662', '1');
 INSERT INTO `answer` VALUES ('b5ceca9d-0734-4119-80da-84c2a8f5772f', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"http://localhost:8080/wuya/emotions/default/3.gif\"><img src=\"/wuya/upload/answer/d56045f6-d4eb-4dda-97c6-e275f4280ed7.JPG\" alt=\"IMG_0025\" style=\"max-width: 100%; width: 134px; height: 149px;\" class=\"\"><iframe class=\"ueditor_baidumap\" src=\"http://ueditor.baidu.com/ueditor/dialogs/map/show.html#center=121.480237,31.236305&zoom=11&amp;width=478&amp;height=258&amp;markerStyles=l,A\" frameborder=\"0\" width=\"478\" height=\"258\"></iframe></p>\n              <p><br></p>', '1491630126631', '1');
 INSERT INTO `answer` VALUES ('76691627-3801-43b9-9d69-18a5e78eb371', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '<p>请输入内容...</p>\n              <p><img style=\"max-width:100%;\" src=\"http://api.map.baidu.com/staticimage?center=121.480237,31.236305&zoom=11&amp;width=478&amp;height=258\"><br></p><p><br></p>', '1491631124767', '1');
+INSERT INTO `answer` VALUES ('6302212d-0e2b-4eef-965d-562d28bdbc2a', '1204f824-0e03-4cd9-8c23-f1c08c4caa7d', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><ol><li>.<img src=\"http://localhost:8080/wuya/emotions/default/13.gif\"><img src=\"http://localhost:8080/wuya/emotions/default/11.gif\"><br></li><li>wobudong</li><li>2123123</li></ol></p>\n              <p><br></p>', '1491814531417', '1');
+INSERT INTO `answer` VALUES ('8357c971-5315-42ad-a8a9-d25aa0380a5f', 'b47cad6f-dfe0-492b-be99-e8db540c9ecf', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/52953628-443a-4561-8835-68cc214f7403.jpg\" alt=\"headpic5\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491814978414', '1');
+INSERT INTO `answer` VALUES ('af779b0f-3d18-4df7-87d3-c72ab40dd4e3', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/cad33ef5-fd7f-4473-8c50-bcaf33d2be74.jpg\" alt=\"headpic\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491817589786', '1');
 
 -- ----------------------------
 -- Table structure for focus
@@ -85,10 +88,9 @@ CREATE TABLE `focus` (
 -- ----------------------------
 -- Records of focus
 -- ----------------------------
-INSERT INTO `focus` VALUES ('81512ba4-abc1-44f2-b823-f14e70f1dab0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '10', '1491750096504', '1');
-INSERT INTO `focus` VALUES ('ae28422f-f5b1-47c7-bcff-16168b89b058', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '2', '1491750691101', '1');
 INSERT INTO `focus` VALUES ('62a7918b-2a9b-4f15-974e-d18943c71906', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '8', '1491750694741', '1');
 INSERT INTO `focus` VALUES ('4a2b39a1-398e-434d-9fde-552f008983a4', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '3', '1491750697188', '1');
+INSERT INTO `focus` VALUES ('293d24f7-e9bf-4ff1-b6d7-665e89861ba4', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '7', '1491814088267', '1');
 
 -- ----------------------------
 -- Table structure for friend
@@ -122,11 +124,17 @@ CREATE TABLE `question` (
 -- ----------------------------
 -- Records of question
 -- ----------------------------
+INSERT INTO `question` VALUES ('1204f824-0e03-4cd9-8c23-f1c08c4caa7d', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'youxiyouxi', '2', '1491814344703', '1');
 INSERT INTO `question` VALUES ('14ddf6d2-dd5d-4716-a2b4-14205b445062', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'php还能发展对酒？', '0', '1491477436205', '1');
 INSERT INTO `question` VALUES ('2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '爱迪生阿萨德', '1', '1491381116366', '1');
 INSERT INTO `question` VALUES ('394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '如嫌疑人这部电影如何？', '3', '1491380990918', '1');
+INSERT INTO `question` VALUES ('5ed523ae-0084-48d0-ab13-69f36240efe0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '英雄联盟还能火多久', '2', '1491815013239', '1');
 INSERT INTO `question` VALUES ('7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'java前景？', '4', '1491380834533', '1');
+INSERT INTO `question` VALUES ('b47cad6f-dfe0-492b-be99-e8db540c9ecf', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'hahah', '0', '1491814364551', '1');
 INSERT INTO `question` VALUES ('e07ade84-7f12-44e7-835f-9681f48fd0c5', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '海贼王怎么样?', '6', '1491703757837', '1');
+INSERT INTO `question` VALUES ('e1a3b9a1-2348-4d5d-8ae8-1603a17c41e3', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '英雄联盟还能火多久', '2', '1491815016878', '1');
+INSERT INTO `question` VALUES ('e5410031-5474-45f1-a45e-f33b9b6adee0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'LOL', '0', '1491814353673', '1');
+INSERT INTO `question` VALUES ('f0acc885-dcbc-405c-9293-48d58cf4e227', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '123123123', '2', '1491814329110', '1');
 
 -- ----------------------------
 -- Table structure for report
@@ -146,6 +154,8 @@ CREATE TABLE `report` (
 -- ----------------------------
 -- Records of report
 -- ----------------------------
+INSERT INTO `report` VALUES ('2d03b899-f6c3-4545-a7e5-469fd5adc6f8', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '147bbe5a-0218-4a51-897a-866b5a5fe4d3', '123123', '1491813939036', '1');
+INSERT INTO `report` VALUES ('87a872ef-045a-45ec-b1b2-f24f638d9d3c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '2', '394bf1aa-f386-4b22-92ad-bf9df19020e6', 'seqing', '1491817552386', '1');
 
 -- ----------------------------
 -- Table structure for secret_question
@@ -187,6 +197,11 @@ CREATE TABLE `share` (
 -- ----------------------------
 -- Records of share
 -- ----------------------------
+INSERT INTO `share` VALUES ('385ef8ea-3a0c-4e02-8a4b-d99ef168b45e', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', 'e1753926-f039-4e1a-ae8f-2e06d640d87f', '1491817567392', '1');
+INSERT INTO `share` VALUES ('4851b9cb-f8cc-4511-b5f2-0beb2e65abaa', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '37d16abf-94aa-4020-818c-1b1ada072f09', '1491817403911', '1');
+INSERT INTO `share` VALUES ('abd828f5-19aa-4815-91f8-40e198f34c96', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '2', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '1491817449872', '1');
+INSERT INTO `share` VALUES ('afb5f5ac-d092-4e9c-94df-d50869c0a6fe', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', 'af779b0f-3d18-4df7-87d3-c72ab40dd4e3', '1491822307680', '1');
+INSERT INTO `share` VALUES ('cee70724-1c12-42ba-8a09-993ee486cc3c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '76691627-3801-43b9-9d69-18a5e78eb371', '1491822304492', '1');
 
 -- ----------------------------
 -- Table structure for topic
@@ -233,7 +248,7 @@ CREATE TABLE `upvote` (
 -- ----------------------------
 -- Records of upvote
 -- ----------------------------
-INSERT INTO `upvote` VALUES ('cc8d4e9a-531c-4b07-9dfd-5e001d3043e5', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1491472855539', '1');
+INSERT INTO `upvote` VALUES ('9bdfa023-0b0b-4530-8e8d-6a8b139f20b5', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1491813962378', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -261,5 +276,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1490787789317', '0', '-1');
+INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', null, null, 'Cinyky1234', '0', '这个人很懒', '个人简介', '中国', '6e44756c-460e-48fb-bafc-990f2e21ba7e.jpg', '1491971208524', '1490787789317', '0', '-1');
 INSERT INTO `user` VALUES ('a643c7bc-ffe3-4675-8d10-79fa1de44b3d', '1079276272', '9034ab708f195b961e5ea00a76d33336', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1491533698993', '0', '-1');
+SET FOREIGN_KEY_CHECKS=1;
