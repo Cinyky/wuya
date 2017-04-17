@@ -23,12 +23,12 @@
             <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/user/login" method="POST">
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <input type="text" class="form-control" id="userName" name="loginCondition" placeholder="请输入用户名/昵称/邮箱" onfocus="showValidate();"/>
+                  <input type="text" class="form-control" id="userName" name="loginCondition" placeholder="请输入用户名/昵称/邮箱" />
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <input type="password" class="form-control" id="password" name="pwd" placeholder="请输入密码">
+                 <input type="password" class="form-control" id="password" name="pwd" placeholder="请输入密码">
                   <input type="text" class="form-control" style="display: none;" id="passwordShow" placeholder="请输入密码">
                 </div>
               </div>

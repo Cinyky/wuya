@@ -10,7 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <jsp:include page="templet/necessary.jsp" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-personal-info.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js" ></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-personal.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/bootstrap/easyui.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
     <title>${user.nickName }的个人信息</title>
   </head>
 <body>
@@ -79,15 +82,17 @@
                     
 					<div class="info-type" style="min-width: 100px;display: inline-block;">修改生日:</div>
 						<c:if test="${user.birth eq 0 }">
-							<input type="text" name="update_birth" placeholder="形如2017/4/10"  />
+							<!-- <input type="text" name="update_birth" placeholder="形如2017/4/10"  /> -->
+							<input class="easyui-datebox" name="update_birth"  data-options="formatter:myformatter,parser:myparser">
 						</c:if>
 						<c:if test="${user.birth ne 0 }">
 							<%
 							User uu = (User)session.getAttribute("user");
 							Date date = new Date(uu.getBirth());
 							%>
-							<input type="text" name="update_birth" 
-							placeholder="<%= new SimpleDateFormat("yyyy/MM/dd").format(date) %>"  />
+							<input class="easyui-datebox" name="update_birth" data-options="formatter:myformatter,parser:myparser">
+							<%-- <input type="text" name="update_birth" 
+							placeholder="<%= new SimpleDateFormat("yyyy/MM/dd").format(date) %>"  /> --%>
 						</c:if>
 						<a class="btn btn-primary" onclick="submitUserInfo('5','${user.birth}')">保存</a>
 					<br/>
@@ -172,5 +177,6 @@
         </div>
       </div>
     </div>
+    
 </body>
 </html>

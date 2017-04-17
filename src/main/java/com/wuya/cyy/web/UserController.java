@@ -572,7 +572,7 @@ public class UserController {
 				user.setLocation(info);
 				break;
 			case "birth":
-				user.setBirth(new SimpleDateFormat("yyyy/MM/dd").parse(info).getTime());
+				user.setBirth(new SimpleDateFormat("yyyy-MM-dd").parse(info).getTime());
 				break;
 			case "all":
 				String[] infos = info.split("|");
