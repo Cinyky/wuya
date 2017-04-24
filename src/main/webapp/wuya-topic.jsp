@@ -45,7 +45,7 @@
          	<div id="topicContent">
          		<c:choose>
          			<c:when test="${empty retList}">
-         					<h5>当前话题无任何问题，赶快去提问该话题相关的问题吧</h5>
+         					<h5>当前话题无任何问题，赶快去提问该话题相关的问题吧!</h5>
          					<a class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target="#question">提问</a>
          			</c:when>
 	         		<c:otherwise>
@@ -59,7 +59,11 @@
 				                <a href="#" class="pull-left"><img class="img-rounded media-object" src="${pageContext.request.contextPath}/topicimg/${topic.topicPic}" height="42" width="42"></a>
 				                <div class="media-body">
 				                  <button type="button" class="close pull-right ccc">×</button>
-				                  <h4 class="media-heading">${list_question.questionInfo }</h4>
+				                  <h4 class="media-heading">
+				                  	<a href="${pageContext.request.contextPath}/question/${list_question.questionId}/detail">
+				                  		${list_question.questionInfo }
+				                  	</a>
+				                  </h4>
 				                  <h6 class="media-heading">
 				                    <span>${list_user.nickName }</span>&nbsp;：
 				                    <span>${list_user.signature }</span>
@@ -69,18 +73,26 @@
 				                  </p>
 				                </div>
 				              </li>
-				              <li class="media">
-				                <span class="pull-left">
-				                  <a class="media-object badge alert-danger" style="width:64px;">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-up"></i></a>
-				                </span>
-				               <div class="media-body">
-				                	  <a>分享</a>
-					                  <a class="shield" data-toggle="shield_tooltip" data-placement="top" title="不再显示在首页推荐中">屏蔽</a>
-					                  <a class="" data-toggle="modal" data-target="#report">
-										举报
-									  </a>
-				                </div>
-				              </li>
+				              <c:choose>
+				              	<c:when test="${empty  list_answer}">
+				              		还没有回答,赶紧去<a href="${pageContext.request.contextPath}/question/${list_question.questionId}/detail">回答</a>吧！！
+				              	</c:when>
+				              	
+				              	<c:otherwise>
+				              		 <li class="media">
+						                <span class="pull-left">
+						                  <a class="media-object badge alert-danger" style="width:64px;">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-up"></i></a>
+						                </span>
+						               <div class="media-body">
+						                	  <a>分享</a>
+							                  <a class="" data-toggle="modal" data-target="#report">
+												举报
+											  </a>
+						                </div>
+						              </li>
+				              	</c:otherwise>
+				              </c:choose>
+				             
 				            </ul>
 			            </div>  <!--推荐人体1结束-->
 						</c:forEach>

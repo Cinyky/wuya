@@ -156,9 +156,9 @@ function getIndexStr(user,question,answer,topic,myuid){
 	str	+="		<div class='media-body'>";
 	str	+="			<button type='button' class='close pull-right ccc' id='close"+question.questionId+"'>×</button>";
 	if(topic==null){
-		str	+="			<h7 class='media-heading'>来自话题：默认话题</h7>";
+		str	+="			<h7 class='media-heading'>来自话题：<a href='http://localhost:8080/wuya/topic/0/detail'>默认话题</a></h7>";
 	}else{
-		str	+="			<h7 class='media-heading'>来自话题："+topic.topicName+"</h7>";
+		str	+="			<h7 class='media-heading'>来自话题：<a href='http://localhost:8080/wuya/topic/"+topic.topicId+"/detail'> "+topic.topicName+"</a></h7>";
 	}
 	str	+="			<a href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'><h4 class='media-heading'>"+question.questionInfo+"</h4></a>";
 	str	+="			<h6 class='media-heading'>";
@@ -167,7 +167,7 @@ function getIndexStr(user,question,answer,topic,myuid){
 	str	+="			</h6>";
 	str +="			<p>";
 	if(answer==null){
-		str += "还没有回答 赶集去回答吧！！";
+		str += "还没有回答,赶紧去回答吧！！";
 	}else{
 		console.debug("answer length:"+answer.answerInfo.length);
 		
@@ -186,6 +186,7 @@ function getIndexStr(user,question,answer,topic,myuid){
 		str +=	answer.upvoteCount;
 	}
 	str += "&nbsp;<i class='fa fa-thumbs-up'></i></a>";*/
+	if(answer!=null){
 		if(answer.isUpvoted=="1"){
 			str+="                 <a class='media-object badge alert-danger' id='upvoteBot"+answer.answerId+"' ";
 		}else{
@@ -199,18 +200,21 @@ function getIndexStr(user,question,answer,topic,myuid){
 		}
 		str+=		"</a>";
 	
-	str	+="  	</span>";
-	str	+="  	<div class='media-body'>";
-	str+="                 <a onclick='share(\""+answer.answerId+"\",\"1\")'>分享</a>";
-	if(myuid==answer.uid){
-		str +="<span>来自我自己的回答</span>"
-	}else{
-		str+="                 <a class='' data-toggle='modal' data-target='#report' onclick='report(\""+answer.answerId+"\",\"1\")'>举报</a>";
+		
+	
+		str	+="  	</span>";
+		str	+="  	<div class='media-body'>";
+		str+="                 <a onclick='share(\""+answer.answerId+"\",\"1\")'>分享</a>";
+		if(myuid==answer.uid){
+			str +="<span>来自我自己的回答</span>"
+		}else{
+			str+="                 <a class='' data-toggle='modal' data-target='#report' onclick='report(\""+answer.answerId+"\",\"1\")'>举报</a>";
+		}
+		str	+=" 	 </div>";
+		str	+=" </li>";
+		str	+="</ul>";
+		str	+="</div>";
 	}
-	str	+=" 	 </div>";
-	str	+=" </li>";
-	str	+="</ul>";
-	str	+="</div>";
 	str +="<script>$('#close"+question.questionId+"').click(function() {closePiece($(this));});</script>";
 	return str;
 }
