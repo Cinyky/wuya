@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-index.css" />
     <title>${nickname }的首页</title>
   </head>
-<body>
+<body onload="initQuestionIndex('${user.uid}')">
     <jsp:include page="templet/navbar.jsp" />
     <!--
     	作者：1079276272@qq.com
@@ -124,72 +124,12 @@
     	描述：模态框1 提问
     -->
     <jsp:include page="templet/showQuestion.jsp" />
-     <!--
+    
+      <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15
-    	描述：模态框2 举报
+    	描述：模态框2 report
     -->
-    <div class="fade modal" id="report">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-举报系统</h4>
-          </div>
-          <div class="modal-body">
-                <h4>举报步骤</h4>
-                <ol>
-                  <li>搜索是否已有相似问题</li>
-                  <li>查看是否解决</li>
-                  <li>坚持提问</li>
-                </ol>
-              <form class="form  text-center" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-            <a class="btn btn-primary" data-dismiss="modal">关闭</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 页脚改到右侧菜单栏
-    	<footer class="section section-info">
-	      <div class="container">
-	        <div class="row">
-	          <div class="col-sm-6">
-	            <h1>无涯网wuya</h1>
-	            <p>书山有路勤为径,学海无涯苦作舟。 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-	              <br>吾生也有涯，而知也无涯。&nbsp;
-	              <br>与别人分享你的知识。</p>
-	          </div>
-	          <div class="col-sm-6">
-	            <p class="text-info text-right">
-	              <br>
-	              <br>
-	            </p>
-	            <div class="row">
-	              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
-	                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-	                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-	                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-	                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-	              </div>
-	            </div>
-	            <div class="row">
-	              <div class="col-md-12 hidden-xs text-right">
-	                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
-	                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
-	                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
-	                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
-	    </footer>
-    -->
+    <jsp:include page="templet/showReport.jsp" />
 </body>
 </html>

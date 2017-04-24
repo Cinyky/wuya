@@ -19,7 +19,7 @@
                   <input type="text" class="form-control" name="questionInfo" id="questionInfo" placeholder="输入你想询问的问题">
                  
                   <span class="pull-left">问题说明</span>
-                  <divclass="panel panel-default">
+                  <div class="panel panel-default">
 	                  <div class="panel-body"  id="searchQuestion" >
 	                  </div>
                   

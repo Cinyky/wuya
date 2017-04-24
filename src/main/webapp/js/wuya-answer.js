@@ -407,7 +407,7 @@
 			)
 	}
 	
-	function submitQuestion(info,topicId){
+/*	function submitQuestion(info,topicId){
 		console.debug("function submitQuestion info :"+info+" topic："+topicId);
 		$.post(
 				"http://localhost:8080/wuya/question/add",
@@ -419,7 +419,33 @@
 					console.debug("rsrsrsrs:"+rs);
 				}
 			);
-	}
+	}*/
+	
+	/*function submitQuestion(info,topicId){
+		console.debug("function submitQuestion info :"+info+" topic："+topicId);
+		$.post(
+				"http://localhost:8080/wuya/question/add",
+				{
+					"questionInfo":info,
+					"topicId"     :topicId
+				},
+				function(rs){
+					console.debug("submoit question:"+rs);
+					if(rs=="fail"){
+						alert("添加问题失败");
+					}else{
+						var arr = eval("("+rs+")");
+						var user = eval(arr.user);
+						var question = eval(arr.question);
+						var answer = eval(arr.answer);
+						var topic = eval(arr.topic);
+						var str = getAnswerStr(user,question,answer,topic);
+						$("#question").modal("hide");
+						$('#wuya').prepend(str);
+					}
+				}
+			);
+	}*/
 
 
      

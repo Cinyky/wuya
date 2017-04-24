@@ -59,3 +59,49 @@ function changeTopics(){
 			}
 		);
 }
+
+function showQuestion(info){
+	console.debug("function showQuestion info :"+info);
+	$.post(
+			"http://localhost:8080/wuya/question/ajax",
+			{
+				"questionInfo":info
+			},
+			function(rs){
+				console.debug("ajax:"+rs);
+				var str = "";
+				if(rs=="empty"){
+					$("#searchQuestion").append("<span>该问题还没有被提问！！<span>")
+					return;
+				}else{
+					var questions = eval(rs);
+					str +="<table class='table table-hover table-condensed table-responsive'>";
+					str +="<thead>";
+					str +="<td>";
+					str +="问题详情";
+					str +="</td>";
+					str +="<td>";
+					str +="提问时间";
+					str +="</td>";
+					str +="</thead>";
+					str +="<tbody>";
+					for(var i=0;i<questions.length;i++){
+						var question = questions[i];
+						str +="<tr>";
+						str +=" <td>";
+						str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
+						str +=    question.questionInfo;
+						str +="  </a>";
+						str +=" </td>";
+						str +=" <td>";
+						str +=   getMyDate(question.questionTime);
+						str +=" </td>";
+						str +="</tr>";
+					}
+					str +="		</tbody>";
+					str +="</table>";
+				}
+				$("#searchQuestion").append(str);
+			}
+		)
+}

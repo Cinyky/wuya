@@ -1,5 +1,5 @@
 $(function() {
-	initQuestionIndex();
+//	initQuestionIndex();
 	<!--提示框组件-- >
 	$("[data-toggle='share_tooltip']").tooltip();
 	$("[data-toggle='showAll_tooltip']").tooltip();
@@ -12,7 +12,7 @@ $(function() {
 		var viewH = window.innerHeight;//可视窗口大小
 		console.debug((viewH + scrollTop) == scrollh);
 		if((viewH + scrollTop) == scrollh) {
-			initQuestionIndex();
+//			initQuestionIndex();
 		}
 	});
 	<!--屏蔽组件-- >
@@ -113,13 +113,11 @@ function showQuestion(info){
 		)
 }
 
-function initQuestionIndex(){
+function initQuestionIndex(myuid){
+	mymyuid = myuid;
 	console.debug("function initQuestionIndex ====");
 	$.post(
 			"http://localhost:8080/wuya/question/init/index",
-			{
-				"method":"1"
-			},
 			function(rs){
 				console.debug("ajax:"+rs);
 				var str = "";
@@ -137,7 +135,7 @@ function initQuestionIndex(){
 						var question = eval(arr.question);
 						var answer = eval(arr.answer);
 						var topic = eval(arr.topic);
-						var str = getIndexStr(user,question,answer,topic);
+						var str = getIndexStr(user,question,answer,topic,myuid);
 						$('#wuya').append(str);
 					}
 					
@@ -146,7 +144,7 @@ function initQuestionIndex(){
 		)
 }
 
-function getIndexStr(user,question,answer,topic){
+function getIndexStr(user,question,answer,topic,myuid){
 	var str = "<div class='piece' id='piece"+question.questionId+"'>";
 	str	+="<ul class='media-list'>";
 	str	+="	<li class='media'>";
@@ -181,22 +179,34 @@ function getIndexStr(user,question,answer,topic){
 	str	+="	</li>";
 	str	+=" <li class='media'>";
 	str	+="		<span class='pull-left'>";
-	str	+="   		<a class='media-object badge alert-danger' style='width:64px;'>"
+	/*str	+="   		<a class='media-object badge alert-danger' style='width:64px;'>"
 	if(answer==null){
 		str +=	"0";
 	}else{
 		str +=	answer.upvoteCount;
 	}
+	str += "&nbsp;<i class='fa fa-thumbs-up'></i></a>";*/
+		if(answer.isUpvoted=="1"){
+			str+="                 <a class='media-object badge alert-danger' id='upvoteBot"+answer.answerId+"' ";
+		}else{
+			str+="                 <a class='media-object badge alert-success' id='upvoteBot"+answer.answerId+"' ";
+		}
+		str+=		"style='width:64px;' onclick='upvote(\""+answer.answerId+"\")'>"+answer.upvoteCount;
+		if(answer.isUpvoted=="1"){
+			str+=					"&nbsp;<i class='fa fa-thumbs-down' id='upvoteIco"+answer.answerId+"'></i>";
+		}else{
+			str+=					"&nbsp;<i class='fa fa-thumbs-up' id='upvoteIco"+answer.answerId+"'></i>";
+		}
+		str+=		"</a>";
 	
-	str += "&nbsp;<i class='fa fa-thumbs-up'></i></a>";
 	str	+="  	</span>";
 	str	+="  	<div class='media-body'>";
-	str	+="  	  <a>分享</a>";
-	str	+="       <a>收藏</a>";
-	str	+="       <a class='shield' data-toggle='shield_tooltip' data-placement='top' title='不再显示在首页推荐中'>屏蔽</a>";
-	str	+="       <a class='' data-toggle='modal' data-target='#report'>";
-	str	+="			举报";
-	str	+="	  	  </a>";
+	str+="                 <a onclick='share(\""+answer.answerId+"\",\"1\")'>分享</a>";
+	if(myuid==answer.uid){
+		str +="<span>来自我自己的回答</span>"
+	}else{
+		str+="                 <a class='' data-toggle='modal' data-target='#report' onclick='report(\""+answer.answerId+"\",\"1\")'>举报</a>";
+	}
 	str	+=" 	 </div>";
 	str	+=" </li>";
 	str	+="</ul>";
@@ -225,6 +235,53 @@ function getzf(num){
     return num;  
 } 
 
+
+function showQuestion(info){
+	console.debug("function showQuestion info :"+info);
+	$.post(
+			"http://localhost:8080/wuya/question/ajax",
+			{
+				"questionInfo":info
+			},
+			function(rs){
+				console.debug("ajax:"+rs);
+				var str = "";
+				if(rs=="empty"){
+					$("#searchQuestion").append("<span>该问题还没有被提问！！<span>")
+					return;
+				}else{
+					var questions = eval(rs);
+					str +="<table class='table table-hover table-condensed table-responsive'>";
+					str +="<thead>";
+					str +="<td>";
+					str +="问题详情";
+					str +="</td>";
+					str +="<td>";
+					str +="提问时间";
+					str +="</td>";
+					str +="</thead>";
+					str +="<tbody>";
+					for(var i=0;i<questions.length;i++){
+						var question = questions[i];
+						str +="<tr>";
+						str +=" <td>";
+						str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
+						str +=    question.questionInfo;
+						str +="  </a>";
+						str +=" </td>";
+						str +=" <td>";
+						str +=   getMyDate(question.questionTime);
+						str +=" </td>";
+						str +="</tr>";
+					}
+					str +="		</tbody>";
+					str +="</table>";
+				}
+				$("#searchQuestion").append(str);
+			}
+		)
+}
+
 function submitQuestion(info,topicId){
 	console.debug("function submitQuestion info :"+info+" topic："+topicId);
 	$.post(
@@ -243,13 +300,49 @@ function submitQuestion(info,topicId){
 					var question = eval(arr.question);
 					var answer = eval(arr.answer);
 					var topic = eval(arr.topic);
-					var str = getIndexStr(user,question,answer,topic);
+					var str = getIndexStr(user,question,answer,topic,mymyuid);
 					$("#question").modal("hide");
 					$('#wuya').prepend(str);
 				}
 			}
 		);
 }
+
+function upvote(id){
+	  console.debug("+++++++upvote id==>>"+id);
+	  $.post(
+				"http://localhost:8080/wuya/answer/"+id+"/upvote",
+				{
+					"answerId":id
+				},
+				function(rs){
+					console.debug("upvote answer rs :"+rs);
+					var strs = rs.split("|");
+					var type = strs[0];
+					var count = strs[1];
+					$("#upvoteCountTop"+id).text(count);
+					$("#upvoteBot"+id).text(count);
+					var icoDown = "&nbsp;<i class='fa fa-thumbs-down' id='upvoteIco"+id+"'></i>";
+					var icoUp = "&nbsp;<i class='fa fa-thumbs-up' id='upvoteIco"+id+"'></i>";
+					if(type=="1"){
+						$("#upvoteBot"+id).removeClass("alert-danger");
+						$("#upvoteBot"+id).addClass("alert-success");
+						$("#upvoteIco"+id).remove();
+						$("#upvoteBot"+id).append(icoUp);
+						alert("取消点赞成功");
+					}else{
+						$("#upvoteBot"+id).removeClass("alert-success");
+						$("#upvoteBot"+id).addClass("alert-danger");
+						$("#upvoteIco"+id).remove();
+						$("#upvoteBot"+id).append(icoDown);
+						alert("点赞成功");
+					}
+				}
+			);
+}
+
+
+
 
 
 

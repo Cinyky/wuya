@@ -48,7 +48,7 @@
 	              <div class="panel-body">
 	              	<img src="${pageContext.request.contextPath}/upload/headpic/${question_user.headPic}" width="60px" height="60px"/>
 	              	<div class="author-info" style="display:inline-block;">
-	              		<span class="nickname">${question_user.nickName}</span><br/>
+	              		<span class="nickname"><a href="${pageContext.request.contextPath}/user/${question_user.uid}/personal">${question_user.nickName}</a></span><br/>
 	              		<span class="sign">${question_user.signature }</span>
 	              	</div>
 	              	<hr/>

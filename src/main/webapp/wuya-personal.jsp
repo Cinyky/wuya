@@ -64,7 +64,7 @@
               <a href="#" class="btn" onclick="changeType('1','${personal_user.uid}','${user.uid}')">回答</a>
               <a href="#" class="btn" onclick="changeType('2','${personal_user.uid}','${user.uid}')">提问</a>
               <a href="#" class="btn" onclick="changeType('3','${personal_user.uid}','${user.uid}')">分享</a>
-              <a href="#" class="btn" onclick="changeType('4','${personal_user.uid}','${user.uid}')">创建的话题</a>
+              <a href="#" class="btn" onclick="changeType('4','${personal_user.uid}','${user.uid}')">话题</a>
               <a href="#" class="btn" onclick="changeType('5','${personal_user.uid}','${user.uid}')">好友</a>
             </div>
               <h3>

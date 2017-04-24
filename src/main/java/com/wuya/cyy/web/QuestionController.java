@@ -171,7 +171,7 @@ public class QuestionController {
     		) throws ParseException, IOException{  
     	ServletOutputStream outputStream = response.getOutputStream();
     	List<Question> questions = questionService.selectQuestionByHot();
-    	
+    	User myuser = (User)request.getSession(true).getAttribute("user");
     	if(questions==null || questions.isEmpty()){
     		outputStream.print("empty");
     	}else{
@@ -184,7 +184,11 @@ public class QuestionController {
 				Answer answer = answerService.answerOneSelectByQuestionId(questionId);
 				if(answer!=null){
 					String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+					boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), myuser.getUid());
 					answer.setUpvoteCount(upvoteCount);
+					answer.setIsUpvoted(isUpvote?"1":"2");
+				}else{
+					continue;
 				}
 				User user = userService.userSelectByUid(uid);
 				//TODO topic service

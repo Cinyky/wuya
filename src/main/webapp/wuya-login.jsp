@@ -35,7 +35,7 @@
               
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                		<input type="text" class="form-control" style="display: inline-block;" name="verifycode" placeholder="请输入验证码">
+                		<input type="text" class="form-control" style="display: inline-block;" name="verifycode" placeholder="请输入验证码" autocomplete="off"> 
                 		<div class="pull-left">
                 			<a href='#' onclick="javascript:changeImg('${pageContext.request.contextPath}')">
                 				<img id="img" src="${pageContext.request.contextPath}/verifycode/generateImg" />
