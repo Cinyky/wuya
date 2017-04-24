@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local
+Source Server         : wuya
 Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : wuya
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-12 16:57:07
+Date: 2017-04-24 19:19:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -71,6 +71,7 @@ INSERT INTO `answer` VALUES ('76691627-3801-43b9-9d69-18a5e78eb371', '394bf1aa-f
 INSERT INTO `answer` VALUES ('6302212d-0e2b-4eef-965d-562d28bdbc2a', '1204f824-0e03-4cd9-8c23-f1c08c4caa7d', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><ol><li>.<img src=\"http://localhost:8080/wuya/emotions/default/13.gif\"><img src=\"http://localhost:8080/wuya/emotions/default/11.gif\"><br></li><li>wobudong</li><li>2123123</li></ol></p>\n              <p><br></p>', '1491814531417', '1');
 INSERT INTO `answer` VALUES ('8357c971-5315-42ad-a8a9-d25aa0380a5f', 'b47cad6f-dfe0-492b-be99-e8db540c9ecf', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/52953628-443a-4561-8835-68cc214f7403.jpg\" alt=\"headpic5\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491814978414', '1');
 INSERT INTO `answer` VALUES ('af779b0f-3d18-4df7-87d3-c72ab40dd4e3', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/cad33ef5-fd7f-4473-8c50-bcaf33d2be74.jpg\" alt=\"headpic\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491817589786', '1');
+INSERT INTO `answer` VALUES ('8ddd3cb5-dc6e-43b8-912f-7056e6117171', '2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><img src=\"/wuya/upload/answer/58cae2a2-5284-455f-8394-6cf380fd4316.jpg\" alt=\"default_headpic\" style=\"max-width: 100%; width: 127px; height: 97px;\" class=\"\"></p>\n              <p>我真帅<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_thumb.png\"><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_thumb.png\"><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif\"></p><p><br></p>', '1493028348685', '1');
 
 -- ----------------------------
 -- Table structure for focus
@@ -90,7 +91,8 @@ CREATE TABLE `focus` (
 -- ----------------------------
 INSERT INTO `focus` VALUES ('62a7918b-2a9b-4f15-974e-d18943c71906', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '8', '1491750694741', '1');
 INSERT INTO `focus` VALUES ('4a2b39a1-398e-434d-9fde-552f008983a4', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '3', '1491750697188', '1');
-INSERT INTO `focus` VALUES ('293d24f7-e9bf-4ff1-b6d7-665e89861ba4', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '7', '1491814088267', '1');
+INSERT INTO `focus` VALUES ('615da62f-a9a7-4f86-8623-29c07a2fac61', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '7', '1493019971893', '1');
+INSERT INTO `focus` VALUES ('aa7353a9-9bab-4efa-9be5-099c751e609a', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '1', '1493027630199', '1');
 
 -- ----------------------------
 -- Table structure for friend
@@ -130,7 +132,10 @@ INSERT INTO `question` VALUES ('2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf
 INSERT INTO `question` VALUES ('394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '如嫌疑人这部电影如何？', '3', '1491380990918', '1');
 INSERT INTO `question` VALUES ('5ed523ae-0084-48d0-ab13-69f36240efe0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '英雄联盟还能火多久', '2', '1491815013239', '1');
 INSERT INTO `question` VALUES ('7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'java前景？', '4', '1491380834533', '1');
+INSERT INTO `question` VALUES ('ab8e35e8-f7f5-45f7-8d65-3990c1debbea', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '脆皮鸡那家好吃？', '4', '1493028407892', '1');
+INSERT INTO `question` VALUES ('afbf42cd-d20c-43ca-b917-9dcc20ceeeef', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '饿了吗？？？？', '4', '1493028573895', '1');
 INSERT INTO `question` VALUES ('b47cad6f-dfe0-492b-be99-e8db540c9ecf', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'hahah', '0', '1491814364551', '1');
+INSERT INTO `question` VALUES ('b5213a51-fcce-4a96-bec8-886dc5caee58', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '脆皮鸡那家好吃？', '4', '1493028405989', '1');
 INSERT INTO `question` VALUES ('e07ade84-7f12-44e7-835f-9681f48fd0c5', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '海贼王怎么样?', '6', '1491703757837', '1');
 INSERT INTO `question` VALUES ('e1a3b9a1-2348-4d5d-8ae8-1603a17c41e3', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '英雄联盟还能火多久', '2', '1491815016878', '1');
 INSERT INTO `question` VALUES ('e5410031-5474-45f1-a45e-f33b9b6adee0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'LOL', '0', '1491814353673', '1');
@@ -248,7 +253,8 @@ CREATE TABLE `upvote` (
 -- ----------------------------
 -- Records of upvote
 -- ----------------------------
-INSERT INTO `upvote` VALUES ('9bdfa023-0b0b-4530-8e8d-6a8b139f20b5', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1491813962378', '1');
+INSERT INTO `upvote` VALUES ('b9d05080-4973-4002-a22b-2b50ed9498aa', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1493027086959', '1');
+INSERT INTO `upvote` VALUES ('e09b53d5-5617-43d0-8c7a-c0285bd71f10', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'dc3377ef-a8f9-46be-8ab3-3018324fd0ac', '1493028311764', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -276,6 +282,6 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', null, null, 'Cinyky1234', '0', '这个人很懒', '个人简介', '中国', '6e44756c-460e-48fb-bafc-990f2e21ba7e.jpg', '1491971208524', '1490787789317', '0', '-1');
+INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', null, null, 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', '5d9593d9-ed9c-4739-955c-70582b3eab4f.jpg', '1491235200000', '1490787789317', '0', '-1');
 INSERT INTO `user` VALUES ('a643c7bc-ffe3-4675-8d10-79fa1de44b3d', '1079276272', '9034ab708f195b961e5ea00a76d33336', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1491533698993', '0', '-1');
 SET FOREIGN_KEY_CHECKS=1;
