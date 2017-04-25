@@ -220,7 +220,8 @@ function getIndexStr(user,question,answer,topic,myuid){
 }
 
 
-function getMyDate(str){  
+function getMyDate(str){
+	console.debug("=======date===="+str);
     var oDate = new Date(str),  
     oYear = oDate.getFullYear(),  
     oMonth = oDate.getMonth()+1,  

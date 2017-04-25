@@ -123,29 +123,58 @@ function submitUserInfo(type,info){
 					var user = eval("("+rs+")");
 					console.debug(user.nickName);
 					var rsArrs = new Array(user.headPic,user.signature,user.sex,user.profile,user.location,user.location);
-					for(var i=0;i<6;i++){
-						console.debug()
-						var method = updateUserInfoTypes[i];
-						var dataIndex= "";
-						if(index==2){
-							dataIndex = "input[name='update_"+method+"']:checked";
-						}else{
-							if(i==0){
-								$("#myPic").attr('src',uploadurl+"/"+rsArrs[i]);
-								$("#myHeadPic").attr('src',uploadurl+"/"+rsArrs[i]);
-							}else{
-								dataIndex= "input[name='update_"+method+"']";
-								$(dataIndex).val(rsArrs[i]);
-								$(dataIndex).attr("placeholder",rsArrs[i]);
-							}
-							
-						}
-						
+					for(var i=0;i<rsArrs.length;i++){
+						console.debug(rsArrs[i]);
 					}
+					if(index==0){
+						$("#myPic").attr('src',uploadurl+"/"+rsArrs[i]);
+						$("#myHeadPic").attr('src',uploadurl+"/"+rsArrs[i]);
+					}else if(index==2){
+						var str ="男";
+						if(rsArrs[index]==0){
+							str="女"
+						}
+						$("#"+updateUserInfoTypes[index]+"_show").text(str);
+					}else if(index==5){
+						$("#"+updateUserInfoTypes[index]+"_show").text(data);
+					}else{
+						$("#"+updateUserInfoTypes[index]+"_show").text(rsArrs[index]);
+					}
+					
+//					for(var i=0;i<6;i++){
+//						var method = updateUserInfoTypes[i];
+//						var dataIndex= "";
+//						if(i==2){
+//							dataIndex = "input[name='update_"+method+"']:checked";
+//						}else{
+//							if(i==0){
+//								$("#myPic").attr('src',uploadurl+"/"+rsArrs[i]);
+//								$("#myHeadPic").attr('src',uploadurl+"/"+rsArrs[i]);
+//							}else{
+//								dataIndex= "input[name='update_"+method+"']";
+//								$(dataIndex).val(rsArrs[i]);
+//								$(dataIndex).attr("placeholder",rsArrs[i]);
+//							}
+//						}
+//					}
+					
 				}
+				if(index>0){
+					changeShow(index);
+				}
+				
 			}
 	);
 }
+
+
+function changeShow(pos){
+	console.debug("====changeShow==="+pos);
+	$("#change"+pos).toggle(100);
+	$("#show"+pos).toggle();
+}
+
+
 
 
 

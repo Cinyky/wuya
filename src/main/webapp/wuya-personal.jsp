@@ -43,7 +43,7 @@
                     		<i class="fa fa-fw fa-female"></i>
                     	</c:if>
                     </label><br>
-                    <span>${personal_user.signature }</span>
+                    <span>${personal_user.profile }</span>
                  	<c:if test="${personal_user.uid ne user.uid }">
                  		 <a href="javaScript" class="btn btn-primary" onclick="changeFriend('${personal_user.uid}')">关注他</a>
                  	</c:if>
@@ -86,22 +86,24 @@
 	                     ${list_answer.answerInfo }
 	                    </p>
 	                    <div>
-	                      <c:if test="${list_answer.isUpvoted eq 1 }">
-	                      	<a class="media-object badge alert-danger" style="width:64px;"  onclick="upvote('${list_answer.answerId}')" id="upvoteBot${list_answer.answerId }">
-		                      	${list_answer.upvoteCount }&nbsp;
-		                      	<i class="fa fa-thumbs-down"></i>
-	                     	</a>
-	                      </c:if>
-	                      <c:if test="${list_answer.isUpvoted ne 1 }">
-	                      	<a class="media-object badge alert-success" style="width:64px;"  onclick="upvote('${list_answer.answerId}')" id="upvoteBot${list_answer.answerId }">
-		                      	${list_answer.upvoteCount }&nbsp;
-		                      	<i class="fa fa-thumbs-up"></i>
-	                     	</a>
-	                      </c:if>
-	                      <a>分享</a>
-	                      <c:if test="${personal_user.uid ne user.uid }">
-								<a data-toggle="modal" data-target="#report">举报</a>
-						  </c:if>
+	                    <c:choose>
+	                    	<c:when test="${list_answer.isUpvoted eq 1 }">
+	                    		<a class="media-object badge alert-danger" style="width:64px;"  onclick="upvote('${list_answer.answerId}')" id="upvoteBot${list_answer.answerId }">
+			                      	${list_answer.upvoteCount }&nbsp;
+			                      	<i class="fa fa-thumbs-down"></i>
+	                     		</a>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<a class="media-object badge alert-success" style="width:64px;"  onclick="upvote('${list_answer.answerId}')" id="upvoteBot${list_answer.answerId }">
+				                    ${list_answer.upvoteCount }&nbsp;
+				                    <i class="fa fa-thumbs-up"></i>
+			                    </a>
+	                    	</c:otherwise>
+	                    </c:choose>
+	                    <a>分享</a>
+	                    <c:if test="${personal_user.uid ne user.uid }">
+							<a data-toggle="modal" data-target="#report">举报</a>
+						</c:if>
 	                      
 	                    </div>
 	                </div>
@@ -109,6 +111,8 @@
             </div>        
 
           </div>
+          
+          
           <div class="col-md-4">
 		           <div class="panel panel-default  panel text-center">
 		                <a style="display:inline-block;" >

@@ -51,38 +51,81 @@
                     <input type="hidden"  name="update_headpic" value="${user.headPic}"/>
                     <a class="btn btn-primary" onclick="submitUserInfo('0','${user.headPic}')">保存</a>
                     <br>
-                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
+                     
+                    <hr class="line" style="width: 500px;margin-left: 2px;"/>
+                    
+                    <!-- 个性签名 -->
                     <div class="info-type" style="min-width: 100px;display: inline-block;">个性签名:</div>
-                    <input type="text" name="update_signature" placeholder="${user.signature }"/>
-                    <a class="btn btn-primary" onclick="submitUserInfo('1','${user.signature}')">保存</a>
+                    <span id="show1">
+                    	<span id="signature_show">${user.signature }</span> <a class="btn btn-primary" onclick="changeShow('1')">修改</a>
+                    </span>
+                    <span id="change1" style="display:none">
+                    	 <input type="text" name="update_signature" placeholder="${user.signature }"/>
+                    	 <a class="btn btn-primary" onclick="changeShow('1')">取消</a>
+                    	 <a class="btn btn-primary" onclick="submitUserInfo('1','${user.signature}')">保存</a>
+                    </span>
+                   
                     <br>
+                    <!-- 性别 -->
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     <div class="info-type" style="min-width: 100px;display: inline-block;">性别:</div>
                     <c:if test="${user.sex eq 1 }">
-	                    <input type="radio" value="1" name="update_sex" checked/>男
-	                    <input type="radio" value="0" name="update_sex"/>女
+	                     <span id="show2">
+	                    	<span id="sex_show">男</span> <a class="btn btn-primary" onclick="changeShow('2')">修改</a>
+	                    </span>
+	                    <span id="change2" style="display:none">
+	                    	 <input type="radio" value="1" name="update_sex" checked/>男
+	                    	 <input type="radio" value="0" name="update_sex"/>女
+	                    	 <a class="btn btn-primary" onclick="changeShow('2')">取消</a>
+	                    	 <a class="btn btn-primary" onclick="submitUserInfo('2','${user.sex}')">保存</a>
+                   		</span>
+	                    
                     </c:if>
                     <c:if test="${user.sex eq 0 }">
-                    	<input type="radio" value="1" name="update_sex" />男
-	                    <input type="radio" value="0" name="update_sex" checked/>女
+                    	 <span id="show2">
+	                    	<span id="sex_show">女</span> <a class="btn btn-primary" onclick="changeShow('2')">修改</a>
+	                    </span>
+	                    <span id="change2" style="display:none">
+	                    	 <input type="radio" value="1" name="update_sex" />男
+	                    	 <input type="radio" value="0" name="update_sex" checked/>女
+	                    	 <a class="btn btn-primary" onclick="changeShow('2')">取消</a>
+	                    	 <a class="btn btn-primary" onclick="submitUserInfo('2','${user.sex}')">保存</a>
+                   		</span>
                     </c:if>
-                    <a class="btn btn-primary" onclick="submitUserInfo('2','${user.sex}')">保存</a>
                     <br>
+                    <!-- 一句话介绍 -->
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     
                     <div class="info-type" style="min-width: 100px;display: inline-block;">一句话介绍:</div>
-                    <input type="text" name="update_profile" placeholder="${user.profile }"/>
-                    <a class="btn btn-primary" onclick="submitUserInfo('3','${user.profile}')">保存</a>
+                   		<span id="show3">
+	                    	<span id="profile_show">${user.profile }</span> <a class="btn btn-primary" onclick="changeShow('3')">修改</a>
+	                    </span>
+	                    <span id="change3" style="display:none">
+							 <input type="text" name="update_profile" placeholder="${user.profile }"/>
+							 <a class="btn btn-primary" onclick="changeShow('3')">取消</a>
+                   			 <a class="btn btn-primary" onclick="submitUserInfo('3','${user.profile}')">保存</a>
+                   		</span>
+                    <br>
+                    <!-- 居住地 -->
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     <div class="info-type" style="min-width: 100px;display: inline-block;">居住地:</div>
-                    <input type="text" name="update_location" placeholder="${user.location}"/>
-                    <a class="btn btn-primary" onclick="submitUserInfo('4','${user.location}')">保存</a>
+                    	<span id="show4">
+	                    	<span id="location_show">${user.location }</span> <a class="btn btn-primary" onclick="changeShow('4')">修改</a>
+	                    </span>
+	                    <span id="change4" style="display:none">
+							 <input type="text" name="update_location" placeholder="${user.location}"/>
+							 <a class="btn btn-primary" onclick="changeShow('4')">取消</a>
+                   			 <a class="btn btn-primary" onclick="submitUserInfo('4','${user.location}')">保存</a>
+                   		</span>
                     <br>
                     <hr class="line" style="width: 500px;margin-left: 2px;"/>
                     
 					<div class="info-type" style="min-width: 100px;display: inline-block;">修改生日:</div>
 						<c:if test="${user.birth eq 0 }">
 							<!-- <input type="text" name="update_birth" placeholder="形如2017/4/10"  /> -->
+							<span id="show5">
+	                    		<span id="profile_show"></span><a class="btn btn-primary" onclick="changeShow('5')">修改</a>
+	                    	</span>
 							<input class="easyui-datebox" name="update_birth"  data-options="formatter:myformatter,parser:myparser">
 						</c:if>
 						<c:if test="${user.birth ne 0 }">
@@ -90,15 +133,23 @@
 							User uu = (User)session.getAttribute("user");
 							Date date = new Date(uu.getBirth());
 							%>
-							<input class="easyui-datebox" name="update_birth" data-options="formatter:myformatter,parser:myparser">
+							<span id="show5">
+	                    		<span id="birth_show"><%= new SimpleDateFormat("yyyy-MM-dd").format(date) %></span> <a class="btn btn-primary" onclick="changeShow('5')">修改</a>
+	                    	</span>
+	                    	<span id="change5" style="display:none">
+							 <input class="easyui-datebox" name="update_birth" data-options="formatter:myformatter,parser:myparser"> 
+							 <a class="btn btn-primary" onclick="changeShow('5')">取消</a>
+                   			 <a class="btn btn-primary" onclick="submitUserInfo('5','${user.birth}')">保存</a>
+                   			</span>
+							<!-- <input class="easyui-datebox" name="update_birth" data-options="formatter:myformatter,parser:myparser"> -->
 							<%-- <input type="text" name="update_birth" 
 							placeholder="<%= new SimpleDateFormat("yyyy/MM/dd").format(date) %>"  /> --%>
 						</c:if>
-						<a class="btn btn-primary" onclick="submitUserInfo('5','${user.birth}')">保存</a>
+						<%-- <a class="btn btn-primary" onclick="submitUserInfo('5','${user.birth}')">保存</a> --%>
 					<br/>
                    
                     <br>    
-                    <a class="btn btn-primary" onclick="submitUserInfo('6','${user.headPic}|${user.signature}|${user.sex}|${user.profile}|${user.location}|${user.birth}')">提交全部</a>             
+                   <%--  <a class="btn btn-primary" onclick="submitUserInfo('6','${user.headPic}|${user.signature}|${user.sex}|${user.profile}|${user.location}|${user.birth}')">提交全部</a>              --%>
                   </div>
                   
                   

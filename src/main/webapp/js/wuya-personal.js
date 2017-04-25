@@ -116,7 +116,7 @@
 				    str +="    <div>";
 				    if(answer.isUpvoted== "1"){
 						str +="        	<a class='media-object badge alert-danger' style='width:64px;'  onclick='upvote('"+answer.answerId+"')'>";
-						str +="             	${list_answer.upvoteCount }&nbsp;";
+						str +=              	answer.upvoteCount+"&nbsp;";
 						str +="          	<i class='fa fa-thumbs-down'></i>";
 						str +="     	</a>";
 					}else{

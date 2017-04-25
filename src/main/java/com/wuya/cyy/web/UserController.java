@@ -245,24 +245,27 @@ public class UserController {
     public ModelAndView  userPersonal(HttpServletRequest request,HttpServletResponse response,
     		@PathVariable("uid")String uid
     		) throws ParseException{
+    	User myuser = (User)request.getSession().getAttribute("user");
     	ModelAndView mav=new ModelAndView();
     	List<Answer> answers = answerService.answerSelectByUid(uid);
     	List<HotQuestionAndAnswerAndTopic> retList = new ArrayList<>();
     	User user = userService.userSelectByUid(uid);
-    	 String answerNums = answerService.answerCountSelectByUid(user.getUid());
-         user.setAnswerNums(answerNums);
-         String focusFriends = friendService.friendCountSelectByAnotherUid(user.getUid());
-         user.setFocusedFriends(focusFriends);
-         String friendCountSelectByUid = friendService.friendCountSelectByUid(uid);
-         user.setFocusFriends(friendCountSelectByUid);
-         mav.addObject("personal_user", user);
+    	String answerNums = answerService.answerCountSelectByUid(user.getUid());
+        user.setAnswerNums(answerNums);
+        String focusFriends = friendService.friendCountSelectByAnotherUid(user.getUid());
+        user.setFocusedFriends(focusFriends);
+        String friendCountSelectByUid = friendService.friendCountSelectByUid(uid);
+        user.setFocusFriends(friendCountSelectByUid);
+        mav.addObject("personal_user", user);
 		for (Answer answer : answers) {
 			HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
 			String questionId = answer.getQuestionId(); //问题
 			Question question = questionService.questionSelectByQuestionId(questionId);
 			if(answer!=null){
 				String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(answer.getAnswerId());
+				boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), myuser.getUid());
 				answer.setUpvoteCount(upvoteCount);
+				answer.setIsUpvoted(isUpvote?"1":"2");
 			}
 			ret.setAnswer(answer);
 			ret.setQuestion(question);
