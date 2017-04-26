@@ -11,9 +11,10 @@
     <jsp:include page="templet/necessary.jsp" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-personal-info.js" ></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js" ></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-personal.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/bootstrap/easyui.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-personal.css" />
+
     <title>${user.nickName }的个人信息</title>
   </head>
 <body>

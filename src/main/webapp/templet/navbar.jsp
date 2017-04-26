@@ -35,7 +35,7 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li><a href="${pageContext.request.contextPath}/user/${user.uid}/personal">我的主页</a></li>
-									<li><a href="${pageContext.request.contextPath}/user/personal/info">设置</a></li>
+									<li><a href="${pageContext.request.contextPath}/user/personal/info">个人信息</a></li>
 									<li><a href="${pageContext.request.contextPath}/user/logout">注销</a></li>
 								</ul>
 					</li>

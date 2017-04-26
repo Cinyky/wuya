@@ -118,7 +118,7 @@ function submitUserInfo(type,info){
 			function(rs){
 				console.debug("rs==>"+rs);
 				if("fail"==rs){
-					alert("更新用户信息失败");
+					$.messager.alert('个人信息修改','修改失败!','error');
 				}else{
 //					updateUserInfoTypes = ["headpic","signature","sex","profile","location","birth","all"];
 					var user = eval("("+rs+")");
@@ -141,6 +141,8 @@ function submitUserInfo(type,info){
 					}else{
 						$("#"+updateUserInfoTypes[index]+"_show").text(rsArrs[index]);
 					}
+					
+					$.messager.alert('个人信息修改','修改成功!');
 					
 //					for(var i=0;i<6;i++){
 //						var method = updateUserInfoTypes[i];
