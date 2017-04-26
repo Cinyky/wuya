@@ -43,6 +43,7 @@ function myparser(s){
 }
 
 function submitUserInfo(type,info){
+	console.debug("submitUserInfo=======");
 	var index = parseInt(type);
 	if(index>6){
 		return;
@@ -51,7 +52,7 @@ function submitUserInfo(type,info){
 	var updateurl = path+"/user/info/"+method+"/update";
 	console.debug("saveUserInfo: type==>"+type+" index=>>"+index+" method==>"+method);
 	console.debug("saveUserInfo: updateurl==>"+updateurl);
-	console.debug("saveUserInfo: info==>"+info);
+
 	var data ="";
 	var alert_info = "";
 	var dataIndex= "input[name='update_"+method+"']";
@@ -127,8 +128,8 @@ function submitUserInfo(type,info){
 						console.debug(rsArrs[i]);
 					}
 					if(index==0){
-						$("#myPic").attr('src',uploadurl+"/"+rsArrs[i]);
-						$("#myHeadPic").attr('src',uploadurl+"/"+rsArrs[i]);
+						$("#myPic").attr('src',uploadurl+"/"+rsArrs[index]);
+						$("#myHeadPic").attr('src',uploadurl+"/"+rsArrs[index]);
 					}else if(index==2){
 						var str ="男";
 						if(rsArrs[index]==0){
