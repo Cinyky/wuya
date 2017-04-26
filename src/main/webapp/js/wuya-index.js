@@ -39,7 +39,7 @@ $(function() {
 			submitQuestion(info,topicId);
 			$('#questionInfo').val("");
 		}else{
-			alert("问题不可为空");
+			$.messager.alert('无涯提问','问题不可为空!','warn');
 		}
 	});
 });
@@ -66,51 +66,6 @@ function openPiece(id) {
 	console.debug("open after id ===>"+id);
 	$(id).children('.media-list').fadeIn(1000);
 	$(id).children('.undo').remove();
-}
-function showQuestion(info){
-	console.debug("function showQuestion info :"+info);
-	$.post(
-			"http://localhost:8080/wuya/question/ajax",
-			{
-				"questionInfo":info
-			},
-			function(rs){
-				console.debug("ajax:"+rs);
-				var str = "";
-				if(rs=="empty"){
-					$("#searchQuestion").append("<span>该问题还没有被提问！！<span>")
-					return;
-				}else{
-					var questions = eval(rs);
-					str +="<table class='table table-hover table-condensed table-responsive'>";
-					str +="<thead>";
-					str +="<td>";
-					str +="问题详情";
-					str +="</td>";
-					str +="<td>";
-					str +="提问时间";
-					str +="</td>";
-					str +="</thead>";
-					str +="<tbody>";
-					for(var i=0;i<questions.length;i++){
-						var question = questions[i];
-						str +="<tr>";
-						str +=" <td>";
-						str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
-						str +=    question.questionInfo;
-						str +="  </a>";
-						str +=" </td>";
-						str +=" <td>";
-						str +=   getMyDate(question.questionTime);
-						str +=" </td>";
-						str +="</tr>";
-					}
-					str +="		</tbody>";
-					str +="</table>";
-				}
-				$("#searchQuestion").append(str);
-			}
-		)
 }
 
 function initQuestionIndex(myuid){
@@ -298,7 +253,7 @@ function submitQuestion(info,topicId){
 			function(rs){
 				console.debug("submoit question:"+rs);
 				if(rs=="fail"){
-					alert("添加问题失败");
+					wuya_messager('无涯提问','提问失败!','error');
 				}else{
 					var arr = eval("("+rs+")");
 					var user = eval(arr.user);
@@ -306,6 +261,7 @@ function submitQuestion(info,topicId){
 					var answer = eval(arr.answer);
 					var topic = eval(arr.topic);
 					var str = getIndexStr(user,question,answer,topic,mymyuid);
+					wuya_messager('无涯提问','提问成功!','info');
 					$("#question").modal("hide");
 					$('#wuya').prepend(str);
 				}
@@ -334,16 +290,25 @@ function upvote(id){
 						$("#upvoteBot"+id).addClass("alert-success");
 						$("#upvoteIco"+id).remove();
 						$("#upvoteBot"+id).append(icoUp);
-						alert("取消点赞成功");
+						wuya_messager('无涯点赞','取消点赞成功!','info');
 					}else{
 						$("#upvoteBot"+id).removeClass("alert-success");
 						$("#upvoteBot"+id).addClass("alert-danger");
 						$("#upvoteIco"+id).remove();
 						$("#upvoteBot"+id).append(icoDown);
-						alert("点赞成功");
+						wuya_messager('无涯点赞','点赞成功!','info');
 					}
 				}
 			);
+}
+
+
+function wuya_messager(title,msg,type){
+	$.messager.alert(title,msg,type);
+	$(".messager-window").css("position","fixed");
+	$(".window-shadow").css("position","fixed");
+	$(".messager-window").css("top","300px");
+	$(".window-shadow").css("top","300px");
 }
 
 

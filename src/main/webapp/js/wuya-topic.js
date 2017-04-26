@@ -15,13 +15,17 @@ function changeFocus(topicId){
 				var method = arr[0];
 				var count = arr[1];
 				var str ="";
+				var msg =""
 				if(method=="1"){//cunzai 
 					str = "关注";
+					msg = "取消关注";
 				}else{
 					str = "取消关注";
+					msg = "关注";
 				}
 				$("#checkFocus"+topicId).html(str);
 				$("#focusNums"+topicId).html(count);
+				wuya_messager('无涯话题',msg+'成功!','info');
 			}
 		);
 }
@@ -46,7 +50,7 @@ function changeTopics(){
 					str +="		<span>关注人数</span><span id='focusNums"+topic.topicId+"'>"+topic.focusNums+"</span>";
 					str +="		</div>";
 					str +="			<a class='btn btn-primary pull-right' style='position:relative;top:10px;' id='checkFocus"+topic.topicId+"'"; 
-					str +="					onclick='changeFocus('${recTopics.topicId}')' >";
+					str +="					onclick='changeFocus('"+topic.topicId+"')' >";
 					if(topic.isFocused=="2"){
 						str +="				关注";
 					}else {
@@ -104,4 +108,40 @@ function showQuestion(info){
 				$("#searchQuestion").append(str);
 			}
 		)
+}
+
+function submitQuestion(info,topicId){
+	console.debug("function submitQuestion info :"+info+" topic："+topicId);
+	$.post(
+			"http://localhost:8080/wuya/question/add",
+			{
+				"questionInfo":info,
+				"topicId"     :topicId
+			},
+			function(rs){
+				console.debug("submoit question:"+rs);
+				if(rs=="fail"){
+					wuya_messager('无涯提问','提问失败!','error');
+				}else{
+					var arr = eval("("+rs+")");
+					var user = eval(arr.user);
+					var question = eval(arr.question);
+					var answer = eval(arr.answer);
+					var topic = eval(arr.topic);
+					var str = getIndexStr(user,question,answer,topic,mymyuid);
+					wuya_messager('无涯提问','提问成功!','info');
+					$("#question").modal("hide");
+					$('#wuya').prepend(str);
+				}
+			}
+		);
+}
+
+
+function wuya_messager(title,msg,type){
+	$.messager.alert(title,msg,type);
+	$(".messager-window").css("position","fixed");
+	$(".window-shadow").css("position","fixed");
+	$(".messager-window").css("top","300px");
+	$(".window-shadow").css("top","300px");
 }

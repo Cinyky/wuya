@@ -40,6 +40,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,6 +70,7 @@ import com.wuya.cyy.service.Impl.ShareServiceImpl;
 import com.wuya.cyy.service.Impl.TopicServiceImpl;
 import com.wuya.cyy.service.Impl.UpvoteServiceImpl;
 import com.wuya.cyy.service.Impl.UserServiceImpl;
+import com.wuya.cyy.utils.MD5Util;
 import com.wuya.cyy.utils.ServiceException;
 /**
  * 用户controller
@@ -121,6 +123,35 @@ public class UserController {
 		return mav;
     } 
 
+	@RequestMapping(value="/pwd/{pwd}/modify",method={RequestMethod.GET,RequestMethod.POST})  
+	@ResponseBody
+    public void  pwdModify(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("pwd")String pwd
+    		) throws ParseException, IOException{ 
+		HttpSession session = request.getSession();
+		User myuser = (User)session.getAttribute("user");
+		String verifyPwd = MD5Util.encode2hex(pwd);
+		myuser.setPwd(verifyPwd);
+		session.removeAttribute("user");
+		session.setAttribute("user", myuser);
+		boolean userUpdate = userService.userUpdate(myuser);
+		response.getOutputStream().print(userUpdate?"1":"2");
+    }
+	
+	@RequestMapping(value="/pwd/{pwd}/verify",method={RequestMethod.GET,RequestMethod.POST})  
+    @ResponseBody
+	public void  pwdVerify(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("pwd")String pwd
+    		) throws ParseException, IOException{ 
+		User myuser = (User)request.getSession().getAttribute("user");
+		String verifyPwd = MD5Util.encode2hex(pwd);
+		String mypwd = myuser.getPwd();
+		if(verifyPwd.equals(mypwd)){
+			response.getOutputStream().print("1");
+		}else{
+			response.getOutputStream().print("2");
+		}
+	}
       
     @RequestMapping(value="/{action}",method={RequestMethod.GET,RequestMethod.POST})  
     public ModelAndView  userReg(HttpServletRequest request,HttpServletResponse response,
@@ -584,7 +615,7 @@ public class UserController {
 				user.setSex(Integer.parseInt(infos[2]));
 				user.setProfile(infos[3]);
 				user.setLocation(infos[4]);
-				user.setBirth(new SimpleDateFormat("yyyy/MM/dd").parse(infos[5]).getTime());
+				user.setBirth(new SimpleDateFormat("yyyy-MM-dd").parse(infos[5]).getTime());
 				break;
 			default:
 				break;

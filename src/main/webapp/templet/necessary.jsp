@@ -7,4 +7,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+<!-- easyui -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js" ></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/bootstrap/easyui.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
  

@@ -10,9 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <jsp:include page="templet/necessary.jsp" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-personal-info.js" ></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/easyui/jquery.easyui.min.js" ></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/bootstrap/easyui.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/easyui/themes/icon.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-personal.css" />
 
     <title>${user.nickName }的个人信息</title>
@@ -148,9 +145,11 @@
 						</c:if>
 						<%-- <a class="btn btn-primary" onclick="submitUserInfo('5','${user.birth}')">保存</a> --%>
 					<br/>
-                   
-                    <br>    
-                   <%--  <a class="btn btn-primary" onclick="submitUserInfo('6','${user.headPic}|${user.signature}|${user.sex}|${user.profile}|${user.location}|${user.birth}')">提交全部</a>              --%>
+					<hr class="line" style="width: 500px;margin-left: 2px;"/>
+					
+					<div class="info-type" style="min-width: 100px;display: inline-block;">修改密码:</div>
+					 <a class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target="#password">修改密码</a>
+
                   </div>
                   
                   
@@ -165,70 +164,48 @@
       </div>
     </div>
 
-    
-    
     <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15
     	描述：模态框1 提问
-      style="position:absolute;left: 4%;bottom: 40%;display: inline-block;"
     -->
-    <div class="fade modal" id="question">
+    <jsp:include page="templet/showQuestion.jsp" />
+    
+    <!-- 修改密码 -->
+    <div class="fade modal" id="password">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-提出你的疑惑</h4>
+            <h4 class="modal-title">无涯-修改密码</h4>
           </div>
           <div class="modal-body">
-                <h4>提问步骤</h4>
+                <h4>修改密码步骤</h4>
                 <ol>
-                  <li>搜索是否已有相似问题</li>
-                  <li>查看是否解决</li>
-                  <li>坚持提问</li>
+                  <li>验证密码</li>
+                  <li>输入新密码</li>
+                  <li>输入两次密码一致</li>
+                  <li>修改密码成功</li>
                 </ol>
-              <form class="form  text-center" role="search">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                  <div><span class="pull-left">问题说明</span></div>
-                  <input type="submit" class="btn btn-block btn-primary" value="query" />
+                	<input type="password" class="form-control" id="oldPwd" placeholder="验证旧密码" onkeyup="verifyOldPwd()">
+                	<div id="oldstatus" class="alert alert-success">请输入验证密码</div>
                 </div>
-              </form>
+                
+                <div class="form-group">
+                	<input type="password" class="form-control" id="newPwd" readonly="readonly" placeholder="输入新密码" onkeyup="verifyNewPwd()">
+                	<div id="newstatus" class="alert alert-success">请输入新密码</div>
+                </div>
+                <div class="form-group">
+                 	<input type="password" class="form-control"  id="newPwd2" readonly="readonly" placeholder="再次输入密码" onkeyup="verifyNewPwdAgain()">
+                 	<div id="newstatus2" class="alert alert-success">请再一次输入密码</div>
+                </div>
+                <!-- disabled="disabled " -->
+                <button type="button" class="btn btn-lg btn-primary btn-block" id="submitPwd"  disabled="disabled" onclick="modifyPwd()">确认修改</button>
           </div>
         </div>
       </div>
-    </div>
-     <!--
-    	作者：1079276272@qq.com
-    	时间：2017-02-15
-    	描述：模态框2 unused
-    -->
-    <div class="fade modal" id="report">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-举报系统</h4>
-          </div>
-          <div class="modal-body">
-                <h4>举报步骤</h4>
-                <ol>
-                  <li>搜索是否已有相似问题</li>
-                  <li>查看是否解决</li>
-                  <li>坚持提问</li>
-                </ol>
-              <form class="form  text-center" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-            <a class="btn btn-primary" data-dismiss="modal">关闭</a>
-          </div>
-        </div>
-      </div>
-    </div>
+</div>
     
 </body>
 </html>

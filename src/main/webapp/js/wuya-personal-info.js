@@ -177,6 +177,117 @@ function changeShow(pos){
 	$("#show"+pos).toggle();
 }
 
+//验证旧密码
+function verifyOldPwd(){
+	var pwd = $("#oldPwd").val().trim();
+	var verifyurl = path+"/user/pwd/"+pwd+"/verify";
+	console.debug("verifyOldPwd=====>"+pwd);
+	console.debug("verifyOldPwd"+verifyurl);
+	var str="";
+	$.post(
+			verifyurl,
+			function(rs){
+				if(rs=="1"){
+					$("#newPwd").removeAttr("readonly");
+					str ="密码正确";
+					$("#oldstatus").text();
+					$("#oldstatus").removeClass("alert-danger");
+					$("#oldstatus").addClass("alert-success");
+				}else{
+					$("#newPwd").attr("readonly","readonly");
+					str ="密码错误";
+					$("#oldstatus").removeClass("alert-success");
+					$("#oldstatus").addClass("alert-danger");
+				}
+				$("#oldstatus").text(str);
+			}
+	);
+}
+
+
+//验证新密码
+function verifyNewPwd(){
+	var pwd = $("#newPwd").val().trim();
+	var verifyurl = path+"/user/pwd/"+pwd+"/verify";
+	console.debug("verifyNewPwd=====>"+pwd);
+	console.debug("verifyNewPwd"+verifyurl);
+	var str="";
+	if(pwd.length<8){
+		str ="密码长度不可小于8位";
+		$("#newstatus").removeClass("alert-success");
+		$("#newstatus").addClass("alert-danger");
+	}else{
+		$.post(
+				verifyurl,
+				function(rs){
+					if(rs=="2"){
+						str ="密码可用";
+						$("#newPwd2").removeAttr("readonly");
+						$("#newstatus").removeClass("alert-danger");
+						$("#newstatus").addClass("alert-success");
+						$("#newstatus").text(str);
+					}else{
+						str ="密码与原始密码相同";
+						$("#newPwd2").attr("readonly","readonly");
+						$("#newstatus").removeClass("alert-success");
+						$("#newstatus").addClass("alert-danger");
+						$("#newstatus").text(str);
+					}
+				}
+		);
+	}
+	
+}
+
+//验证
+function verifyNewPwdAgain(){
+	var str="";
+	var pwd = $("#newPwd").val().trim();
+	var pwd2 = $("#newPwd2").val().trim();
+	if(pwd.length<8){
+		str ="密码长度不可小于8位";
+		$("#newstatus2").removeClass("alert-success");
+		$("#newstatus2").addClass("alert-danger");
+		$("#submitPwd").attr("disabled");
+	}else if(pwd!=pwd2){
+		$("#newstatus2").removeClass("alert-success");
+		$("#newstatus2").addClass("alert-danger");
+		$("#submitPwd").attr("disabled");
+		str ="两次密码不相同";
+	}else{
+		$("#newstatus2").removeClass("alert-danger");
+		$("#newstatus2").addClass("alert-success");
+		$("#submitPwd").removeAttr("disabled");
+		str="密码可用";
+	}
+	$("#newstatus2").text(str);
+}
+
+function modifyPwd(){
+	var pwd = $("#newPwd").val().trim();
+	var modifyurl = path+"/user/pwd/"+pwd+"/modify";
+	$.post(
+			modifyurl,
+			function(rs){
+				if(rs=="2"){
+					str ="密码可用";
+					$("#newPwd2").removeAttr("readonly");
+					$("#newstatus").removeClass("alert-danger");
+					$("#newstatus").addClass("alert-success");
+					$("#newstatus").text(str);
+				}else{
+					str ="密码与原始密码相同";
+					$("#newPwd2").attr("readonly","readonly");
+					$("#newstatus").removeClass("alert-success");
+					$("#newstatus").addClass("alert-danger");
+					$("#newstatus").text(str);
+				}
+			}
+	);
+}
+
+
+
 
 
 
