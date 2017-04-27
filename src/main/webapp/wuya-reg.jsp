@@ -47,7 +47,7 @@
               
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                		<input type="email" class="form-control" style="display: inline-block;" name="bind_email" placeholder="绑定邮箱163邮箱以激活账号">
+                		<input type="email" class="form-control" style="display: inline-block;" name="bind_email" placeholder="绑定邮箱163邮箱以找回密码">
                 </div>
               </div>
               <!--

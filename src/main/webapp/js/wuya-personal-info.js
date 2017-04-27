@@ -273,13 +273,15 @@ function modifyPwd(){
 				if(rs=="1"){
 					str ="修改密码成功";
 					wuya_messager("无涯-修改密码",str,"info");
+					location.href=path;
 				}else{
 					str ="修改密码失败";
 					wuya_messager("无涯-修改密码",str,"error");
+					$("#oldPwd").val("");
+					$("#newPwd").val("");
+					$("#newPwd2").val("");
 				}
-				$("#oldPwd").val("");
-				$("#newPwd").val("");
-				$("#newPwd2").val("");
+				
 			}
 	);
 }

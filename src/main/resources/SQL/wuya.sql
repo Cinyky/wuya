@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-24 19:19:21
+Date: 2017-04-27 19:59:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,6 +72,7 @@ INSERT INTO `answer` VALUES ('6302212d-0e2b-4eef-965d-562d28bdbc2a', '1204f824-0
 INSERT INTO `answer` VALUES ('8357c971-5315-42ad-a8a9-d25aa0380a5f', 'b47cad6f-dfe0-492b-be99-e8db540c9ecf', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/52953628-443a-4561-8835-68cc214f7403.jpg\" alt=\"headpic5\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491814978414', '1');
 INSERT INTO `answer` VALUES ('af779b0f-3d18-4df7-87d3-c72ab40dd4e3', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/cad33ef5-fd7f-4473-8c50-bcaf33d2be74.jpg\" alt=\"headpic\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491817589786', '1');
 INSERT INTO `answer` VALUES ('8ddd3cb5-dc6e-43b8-912f-7056e6117171', '2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><img src=\"/wuya/upload/answer/58cae2a2-5284-455f-8394-6cf380fd4316.jpg\" alt=\"default_headpic\" style=\"max-width: 100%; width: 127px; height: 97px;\" class=\"\"></p>\n              <p>我真帅<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_thumb.png\"><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_thumb.png\"><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif\"></p><p><br></p>', '1493028348685', '1');
+INSERT INTO `answer` VALUES ('9e7ab466-887a-49eb-a35d-a45929216898', 'e5410031-5474-45f1-a45e-f33b9b6adee0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>很好玩<img src=\"/wuya/upload/answer/1fada4c8-1816-451c-9109-fa67fa538f5c.jpg\" alt=\"headpic7\" style=\"max-width: 100%;\"><img src=\"http://localhost:8080/wuya/emotions/default/7.gif\"></p>\n              <p><br></p>', '1493122202191', '1');
 
 -- ----------------------------
 -- Table structure for focus
@@ -89,10 +90,14 @@ CREATE TABLE `focus` (
 -- ----------------------------
 -- Records of focus
 -- ----------------------------
-INSERT INTO `focus` VALUES ('62a7918b-2a9b-4f15-974e-d18943c71906', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '8', '1491750694741', '1');
-INSERT INTO `focus` VALUES ('4a2b39a1-398e-434d-9fde-552f008983a4', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '3', '1491750697188', '1');
-INSERT INTO `focus` VALUES ('615da62f-a9a7-4f86-8623-29c07a2fac61', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '7', '1493019971893', '1');
 INSERT INTO `focus` VALUES ('aa7353a9-9bab-4efa-9be5-099c751e609a', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '1', '1493027630199', '1');
+INSERT INTO `focus` VALUES ('8ca2b7f1-1cc3-4b1f-9154-a2feff7717b8', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '7', '1493186599323', '1');
+INSERT INTO `focus` VALUES ('e3450a29-10c2-48e2-a9aa-b6b4cb066f62', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '4', '1493186779421', '1');
+INSERT INTO `focus` VALUES ('ebdaedd3-93ea-4ec8-97b4-175edccc32ba', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '6', '1493186780949', '1');
+INSERT INTO `focus` VALUES ('34d431dd-3257-4a5f-b301-95c313da141a', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '2', '1493186782638', '1');
+INSERT INTO `focus` VALUES ('61363576-6f20-40f8-bf5a-c3177bb2e589', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '3', '1493186784293', '1');
+INSERT INTO `focus` VALUES ('c5b6cd15-cf0d-4f2b-b978-c78fe8c57e0b', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '5', '1493186803510', '1');
+INSERT INTO `focus` VALUES ('efb15dbf-2d32-43ec-b3cf-5dc86b5c566e', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '10', '1493186805670', '1');
 
 -- ----------------------------
 -- Table structure for friend
@@ -132,13 +137,18 @@ INSERT INTO `question` VALUES ('2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf
 INSERT INTO `question` VALUES ('394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '如嫌疑人这部电影如何？', '3', '1491380990918', '1');
 INSERT INTO `question` VALUES ('5ed523ae-0084-48d0-ab13-69f36240efe0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '英雄联盟还能火多久', '2', '1491815013239', '1');
 INSERT INTO `question` VALUES ('7959eb94-1471-4185-8d8d-5373012c856c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'java前景？', '4', '1491380834533', '1');
+INSERT INTO `question` VALUES ('9ca39baa-5fa3-4174-a63b-d5a56eac35d9', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'test 提问', '0', '1493186881807', '1');
+INSERT INTO `question` VALUES ('9d53162f-9454-4136-aa44-6c8d8e10ff12', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '薛之谦？？？？', '0', '1493185160041', '1');
+INSERT INTO `question` VALUES ('a0f49036-3045-4eb8-bbd4-9c1d86c911b0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '薛之谦是谁？', '0', '1493185205067', '1');
 INSERT INTO `question` VALUES ('ab8e35e8-f7f5-45f7-8d65-3990c1debbea', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '脆皮鸡那家好吃？', '4', '1493028407892', '1');
+INSERT INTO `question` VALUES ('af5c2ffd-738d-4055-8a80-5a49b407962d', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '薛之谦新歌怎么样？', '0', '1493185224105', '1');
 INSERT INTO `question` VALUES ('afbf42cd-d20c-43ca-b917-9dcc20ceeeef', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '饿了吗？？？？', '4', '1493028573895', '1');
 INSERT INTO `question` VALUES ('b47cad6f-dfe0-492b-be99-e8db540c9ecf', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'hahah', '0', '1491814364551', '1');
 INSERT INTO `question` VALUES ('b5213a51-fcce-4a96-bec8-886dc5caee58', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '脆皮鸡那家好吃？', '4', '1493028405989', '1');
 INSERT INTO `question` VALUES ('e07ade84-7f12-44e7-835f-9681f48fd0c5', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '海贼王怎么样?', '6', '1491703757837', '1');
 INSERT INTO `question` VALUES ('e1a3b9a1-2348-4d5d-8ae8-1603a17c41e3', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '英雄联盟还能火多久', '2', '1491815016878', '1');
 INSERT INTO `question` VALUES ('e5410031-5474-45f1-a45e-f33b9b6adee0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'LOL', '0', '1491814353673', '1');
+INSERT INTO `question` VALUES ('ee3910f6-e494-4f87-ba4f-70fe0c6a0ce2', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '123123123123123123123', '0', '1493185241323', '1');
 INSERT INTO `question` VALUES ('f0acc885-dcbc-405c-9293-48d58cf4e227', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '123123123', '2', '1491814329110', '1');
 
 -- ----------------------------
@@ -160,6 +170,7 @@ CREATE TABLE `report` (
 -- Records of report
 -- ----------------------------
 INSERT INTO `report` VALUES ('2d03b899-f6c3-4545-a7e5-469fd5adc6f8', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '147bbe5a-0218-4a51-897a-866b5a5fe4d3', '123123', '1491813939036', '1');
+INSERT INTO `report` VALUES ('3280f02d-46cc-4222-a377-42726d80f5ee', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '9e7ab466-887a-49eb-a35d-a45929216898', '123123', '1493122217812', '1');
 INSERT INTO `report` VALUES ('87a872ef-045a-45ec-b1b2-f24f638d9d3c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '2', '394bf1aa-f386-4b22-92ad-bf9df19020e6', 'seqing', '1491817552386', '1');
 
 -- ----------------------------
@@ -204,6 +215,8 @@ CREATE TABLE `share` (
 -- ----------------------------
 INSERT INTO `share` VALUES ('385ef8ea-3a0c-4e02-8a4b-d99ef168b45e', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', 'e1753926-f039-4e1a-ae8f-2e06d640d87f', '1491817567392', '1');
 INSERT INTO `share` VALUES ('4851b9cb-f8cc-4511-b5f2-0beb2e65abaa', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '37d16abf-94aa-4020-818c-1b1ada072f09', '1491817403911', '1');
+INSERT INTO `share` VALUES ('54474748-2aaf-4da2-92d8-9f92197d8a05', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '8357c971-5315-42ad-a8a9-d25aa0380a5f', '1493120002278', '1');
+INSERT INTO `share` VALUES ('9621ece6-d487-46dd-b183-fadce5fc9f07', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '9e7ab466-887a-49eb-a35d-a45929216898', '1493122211291', '1');
 INSERT INTO `share` VALUES ('abd828f5-19aa-4815-91f8-40e198f34c96', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '2', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '1491817449872', '1');
 INSERT INTO `share` VALUES ('afb5f5ac-d092-4e9c-94df-d50869c0a6fe', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', 'af779b0f-3d18-4df7-87d3-c72ab40dd4e3', '1491822307680', '1');
 INSERT INTO `share` VALUES ('cee70724-1c12-42ba-8a09-993ee486cc3c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '76691627-3801-43b9-9d69-18a5e78eb371', '1491822304492', '1');
@@ -253,8 +266,10 @@ CREATE TABLE `upvote` (
 -- ----------------------------
 -- Records of upvote
 -- ----------------------------
+INSERT INTO `upvote` VALUES ('4c2cfabd-c241-435d-a87d-3c6da15c868e', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '9e7ab466-887a-49eb-a35d-a45929216898', '1493186470354', '1');
+INSERT INTO `upvote` VALUES ('88a0c2c7-8eae-4db1-918a-b10c91219341', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '8357c971-5315-42ad-a8a9-d25aa0380a5f', '1493186564870', '1');
 INSERT INTO `upvote` VALUES ('b9d05080-4973-4002-a22b-2b50ed9498aa', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1493027086959', '1');
-INSERT INTO `upvote` VALUES ('e09b53d5-5617-43d0-8c7a-c0285bd71f10', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'dc3377ef-a8f9-46be-8ab3-3018324fd0ac', '1493028311764', '1');
+INSERT INTO `upvote` VALUES ('f57ef174-3f98-495a-a36d-829f1119ae98', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '37d16abf-94aa-4020-818c-1b1ada072f09', '1493186474218', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -264,8 +279,8 @@ CREATE TABLE `user` (
   `uid` varchar(255) NOT NULL DEFAULT '' COMMENT '用户唯一id',
   `loginName` varchar(255) NOT NULL DEFAULT '' COMMENT '用户登录名',
   `pwd` varchar(255) NOT NULL DEFAULT '' COMMENT '用户密码',
-  `bind_email` varchar(255) DEFAULT '' COMMENT '绑定邮箱账号',
-  `email_code` varchar(255) DEFAULT '' COMMENT '邮箱验证码存放',
+  `bindEmail` varchar(255) DEFAULT '' COMMENT '绑定邮箱账号',
+  `emailCode` varchar(255) DEFAULT '' COMMENT '邮箱验证码存放',
   `nickName` varchar(255) DEFAULT '' COMMENT '用户昵称',
   `sex` int(2) DEFAULT '1' COMMENT '性别 默认1->男 0->女',
   `signature` varchar(255) DEFAULT '' COMMENT '个性签名',
@@ -282,6 +297,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', null, null, 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', '5d9593d9-ed9c-4739-955c-70582b3eab4f.jpg', '1491235200000', '1490787789317', '0', '-1');
-INSERT INTO `user` VALUES ('a643c7bc-ffe3-4675-8d10-79fa1de44b3d', '1079276272', '9034ab708f195b961e5ea00a76d33336', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1491533698993', '0', '-1');
+INSERT INTO `user` VALUES ('50b6d09f-03ef-4292-b495-301985c9e0b4', 'cyy001', 'dc456d21102d943265eabf50cf8e6850', '', '', 'cyy001', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1493260173705', '0', '-1');
+INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', 'ed2b1f468c5f915f3f1cf75d7068baae', 'cyy1079276272@163.com', '727L8J', 'Cinyky1234', '0', '小圈圈捶你胸口～', ' 对面的帅哥看过来！！', '阿拉伯', '409dcd66-f357-4c49-a686-76a0bb6c720f.jpg', '1491580800000', '1490787789317', '0', '-1');
+INSERT INTO `user` VALUES ('a643c7bc-ffe3-4675-8d10-79fa1de44b3d', '1079276272', '25d55ad283aa400af464c76d713c07ad', '', 'DAQBWN', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1491533698993', '0', '-1');
 SET FOREIGN_KEY_CHECKS=1;
