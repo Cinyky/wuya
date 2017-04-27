@@ -122,9 +122,14 @@
 						<c:if test="${user.birth eq 0 }">
 							<!-- <input type="text" name="update_birth" placeholder="形如2017/4/10"  /> -->
 							<span id="show5">
-	                    		<span id="profile_show"></span><a class="btn btn-primary" onclick="changeShow('5')">修改</a>
+	                    		<span id="birth_show"></span><a class="btn btn-primary" onclick="changeShow('5')">修改</a>
 	                    	</span>
-							<input class="easyui-datebox" name="update_birth"  data-options="formatter:myformatter,parser:myparser">
+	                    	<span id="change5" style="display:none">
+		                    	<input class="easyui-datebox" name="update_birth"  data-options="formatter:myformatter,parser:myparser">
+								 <a class="btn btn-primary" onclick="changeShow('5')">取消</a>
+	                   			 <a class="btn btn-primary" onclick="submitUserInfo('5','${user.birth}')">保存</a>
+	                    	</span>
+							
 						</c:if>
 						<c:if test="${user.birth ne 0 }">
 							<%

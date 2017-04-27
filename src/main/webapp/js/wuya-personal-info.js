@@ -118,7 +118,7 @@ function submitUserInfo(type,info){
 			function(rs){
 				console.debug("rs==>"+rs);
 				if("fail"==rs){
-					$.messager.alert('个人信息修改','修改失败!','error');
+					wuya_messager('个人信息修改','修改失败!','error');
 				}else{
 //					updateUserInfoTypes = ["headpic","signature","sex","profile","location","birth","all"];
 					var user = eval("("+rs+")");
@@ -142,7 +142,7 @@ function submitUserInfo(type,info){
 						$("#"+updateUserInfoTypes[index]+"_show").text(rsArrs[index]);
 					}
 					
-					$.messager.alert('个人信息修改','修改成功!');
+					wuya_messager('个人信息修改','修改成功!');
 					
 //					for(var i=0;i<6;i++){
 //						var method = updateUserInfoTypes[i];
@@ -266,24 +266,30 @@ function verifyNewPwdAgain(){
 function modifyPwd(){
 	var pwd = $("#newPwd").val().trim();
 	var modifyurl = path+"/user/pwd/"+pwd+"/modify";
+	var str = "";
 	$.post(
 			modifyurl,
 			function(rs){
-				if(rs=="2"){
-					str ="密码可用";
-					$("#newPwd2").removeAttr("readonly");
-					$("#newstatus").removeClass("alert-danger");
-					$("#newstatus").addClass("alert-success");
-					$("#newstatus").text(str);
+				if(rs=="1"){
+					str ="修改密码成功";
+					wuya_messager("无涯-修改密码",str,"info");
 				}else{
-					str ="密码与原始密码相同";
-					$("#newPwd2").attr("readonly","readonly");
-					$("#newstatus").removeClass("alert-success");
-					$("#newstatus").addClass("alert-danger");
-					$("#newstatus").text(str);
+					str ="修改密码失败";
+					wuya_messager("无涯-修改密码",str,"error");
 				}
+				$("#oldPwd").val("");
+				$("#newPwd").val("");
+				$("#newPwd2").val("");
 			}
 	);
+}
+
+function wuya_messager(title,msg,type){
+	$.messager.alert(title,msg,type);
+	$(".messager-window").css("position","fixed");
+	$(".window-shadow").css("position","fixed");
+	$(".messager-window").css("top","300px");
+	$(".window-shadow").css("top","300px");
 }
 
 
