@@ -49,13 +49,13 @@ public interface UserDao {
 	 * 根据用户Id&pwd查询用户
 	 * @return
 	 */
-	User selectUserByEmailAndPwd(@Param("bind_email")String bind_email,@Param("pwd")String pwd);
+	User selectUserByEmailAndPwd(@Param("bindEmail")String bindEmail,@Param("pwd")String pwd);
 	
 	/**
 	 * 根据email查询用户
 	 * @return
 	 */
-	User selectUserByEmail(@Param("bind_email")String bind_email);
+	User selectUserByEmail(@Param("bindEmail")String bindEmail);
 	
 	/**
 	 * 根据nickName查询用户

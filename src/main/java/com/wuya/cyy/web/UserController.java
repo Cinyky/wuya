@@ -50,7 +50,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mchange.v2.async.StrandedTaskReporting;
 import com.wuya.cyy.pojo.Answer;
 import com.wuya.cyy.pojo.Book;
 import com.wuya.cyy.pojo.Focus;
@@ -122,6 +124,80 @@ public class UserController {
 		mav.setViewName("forward:/wuya-personal-info.jsp");
 		return mav;
     } 
+	
+	@RequestMapping(value="/forgetpwd",method={RequestMethod.GET,RequestMethod.POST})  
+    public ModelAndView  pwdForget(HttpServletRequest request,HttpServletResponse response
+    		) throws ParseException, IOException{ 
+		ModelAndView mav =new ModelAndView("forward:/wuya-pwd.jsp");
+		return mav;
+    }
+	
+	@RequestMapping(value="/email/{bind_email}/verify",method={RequestMethod.GET,RequestMethod.POST})  
+	@ResponseBody
+    public void  emailVerify(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("bind_email")String bind_email
+    		) throws ParseException, IOException{ 
+		logger.warn("email------"+bind_email);
+		ServletOutputStream outputStream = response.getOutputStream();
+		boolean email_bind_user_exsist = userService.email_bind_user_exsist(bind_email);
+		outputStream.print(email_bind_user_exsist?"1":"2");
+    }
+	
+	@RequestMapping(value="/email/{bind_email}/send",method={RequestMethod.GET,RequestMethod.POST})  
+	@ResponseBody
+    public void  emailSend(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("bind_email")String bind_email
+    		) throws ParseException, IOException{ 
+		logger.warn("email------"+bind_email);
+		ServletOutputStream outputStream = response.getOutputStream();
+		String userFindPwd = userService.userFindPwd(bind_email);
+		User myuser = userService.userFindByBindEmail(bind_email);
+		myuser.setEmailCode(userFindPwd);
+		boolean userUpdate = userService.userUpdate(myuser);
+		outputStream.print((userFindPwd!=""&&userUpdate)?"1":"2");
+    }
+	
+	@RequestMapping(value="/email/code/{bind_email}/{code}/verify",method={RequestMethod.GET,RequestMethod.POST})  
+	@ResponseBody
+    public void  emailCodeVerify(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("bind_email")String bind_email,
+    		@PathVariable("code")String code
+    		) throws ParseException, IOException{ 
+		logger.warn("email------"+bind_email);
+		ServletOutputStream outputStream = response.getOutputStream();
+		boolean email_bind_user_exsist = userService.email_bind_user_exsist(bind_email);
+		if(email_bind_user_exsist){
+			User myuser = userService.userFindByBindEmail(bind_email);
+			String email_code = myuser.getEmailCode();
+			if(code.equalsIgnoreCase(email_code)){
+				outputStream.print("1");
+			}else{
+				outputStream.print("2");
+			}
+		}else{
+			outputStream.print("2");
+		}
+    }
+	
+	@RequestMapping(value="/pwd/{pwd}/email/{bind_email}/modify",method={RequestMethod.GET,RequestMethod.POST})  
+	@ResponseBody
+    public void  pwdModifyEmail(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("pwd")String pwd,
+    		@PathVariable("bind_email")String bind_email
+    		) throws ParseException, IOException{ 
+		String verifyPwd = MD5Util.encode2hex(pwd);
+		ServletOutputStream outputStream = response.getOutputStream();
+		boolean email_bind_user_exsist = userService.email_bind_user_exsist(bind_email);
+		if(email_bind_user_exsist){
+			User myuser = userService.userFindByBindEmail(bind_email);
+			myuser.setPwd(verifyPwd);
+			boolean userUpdate = userService.userUpdate(myuser);
+			outputStream.print(userUpdate?"1":"2");
+		}else{
+			outputStream.print("2");
+		}
+		
+    }
 
 	@RequestMapping(value="/pwd/{pwd}/modify",method={RequestMethod.GET,RequestMethod.POST})  
 	@ResponseBody
@@ -187,22 +263,23 @@ public class UserController {
 	            mav.setViewName("redirect:/user/login");
 	       	}
         	
-        }   
-        else if("activate".equals(action)) {  
-            //TODO 
-            email = request.getParameter("email");//获取email  
-            String validateCode = request.getParameter("validateCode");//激活码  
-            logger.warn("-----reg----"+email);  
-            logger.warn("-----reg----"+validateCode);
-            try {  
-                service.processActivate(email , validateCode);//调用激活方法  
-                mav.setViewName("activate_success");  
-            } catch (ServiceException e) {  
-                request.setAttribute("message" , e.getMessage());  
-                mav.setViewName("activate_failure");  
-            }  
-              
-        }  
+        }
+        //激活方法取消
+//        else if("activate".equals(action)) {  
+//            //TODO 
+//            email = request.getParameter("email");//获取email  
+//            String validateCode = request.getParameter("validateCode");//激活码  
+//            logger.warn("-----reg----"+email);  
+//            logger.warn("-----reg----"+validateCode);
+//            try {  
+//                service.processActivate(email , validateCode);//调用激活方法  
+//                mav.setViewName("activate_success");  
+//            } catch (ServiceException e) {  
+//                request.setAttribute("message" , e.getMessage());  
+//                mav.setViewName("activate_failure");  
+//            }  
+//              
+//        }  
         return mav;  
     }  
     
@@ -216,7 +293,7 @@ public class UserController {
     	HttpSession session = request.getSession(true);
     	session.setMaxInactiveInterval(10*60);
     	String method = request.getMethod();
-    	 logger.warn("-----userLogin---- method:"+method); 
+    	 logger.warn("-----userLogin login---- method:"+method); 
     	if("get".equalsIgnoreCase(method)){
     		mav.setViewName("forward:../wuya-login.jsp");
     	}else{

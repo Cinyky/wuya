@@ -65,7 +65,7 @@
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                 	<div class="pull-left">
-	                     <a style="color: #D1EEFC;cursor: pointer;">忘记密码</a>
+	                     <a style="color: #D1EEFC;cursor: pointer;" href="${pageContext.request.contextPath}/user/forgetpwd">忘记密码</a>
 	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">没有账号？前往注册</a>
                      </div>
                 </div>

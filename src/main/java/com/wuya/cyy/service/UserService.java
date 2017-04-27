@@ -28,6 +28,27 @@ public interface UserService {
 	 */
 	boolean userActicate(String bind_email,String code);
 	
+	/**
+	 * 用户激活
+	 * @param email , code
+	 * @return
+	 */
+	String userFindPwd(String bind_email);
+	
+	/**
+	 * 
+	 * @param bind_email
+	 * @return
+	 */
+	User userFindByBindEmail(String bind_email); 
+	
+	/**
+	 * 账号绑定
+	 * @param bind_email
+	 * @return
+	 */
+	boolean email_bind_user_exsist(String bind_email);
+	
 
 	/**
 	 * 用户登录

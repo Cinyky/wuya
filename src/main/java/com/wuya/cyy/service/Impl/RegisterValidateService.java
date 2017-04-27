@@ -55,7 +55,7 @@ public class RegisterValidateService {
         sb.append("</a>");  
           
         //发送邮件  
-        SendEmail.send(email, sb.toString());  
+        SendEmail.send(email, sb.toString(), "subject");  
         System.out.println("发送邮件");  
           
     }  

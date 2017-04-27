@@ -41,7 +41,7 @@ public class UserFilter extends	OncePerRequestFilter{
         		"login", "reg" ,"verifycode",
         		".img",".jpg",".data",".png",".gif",
         		"/css","/emotions",
-        		"/error",
+        		"/error","/forgetpwd","/email","",
         		"/fonts","ico","/images","/img","/topic", "/js" ,"/upload"
         		};
         String wuya = "/wuya/";

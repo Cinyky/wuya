@@ -13,8 +13,8 @@
 			#{uid},
 			#{loginName},
 			#{pwd},
-			#{bind_email},
-			#{email_code},
+			#{bindEmail},
+			#{emailCode},
 			#{nickName},
 			#{sex},
 			#{signature},
@@ -35,8 +35,8 @@
 		SET
 			loginName = #{loginName},
 			pwd = #{pwd},
-			bind_email = #{bind_email},
-			email_code = #{email_code},
+			bindEmail = #{bindEmail},
+			emailCode = #{emailCode},
 			nickName = #{nickName},
 			sex = #{sex},
 			signature = #{signature},
@@ -92,7 +92,7 @@
 		FROM
 			user
 		WHERE
-			bind_email=#{bind_email}
+			bindEmail=#{bindEmail}
 		AND
 			pwd=#{pwd}
 	</select>
@@ -104,7 +104,7 @@
 		FROM
 			user
 		WHERE
-			bind_email=#{bind_email}
+			bindEmail=#{bindEmail}
 	</select>
 	
 	<!-- 根据email查询emial_code -->

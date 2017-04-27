@@ -15,8 +15,8 @@ public class User {
 	private String  uid;			//用户唯一id
 	private String  loginName;		//用户登录名
 	private String  pwd;			//用户密码
-	private String  bind_email;		//绑定邮箱账号
-	private String  email_code;		//邮箱验证码
+	private String  bindEmail;		//绑定邮箱账号
+	private String  emailCode;		//邮箱验证码
 	private String  nickName;		//用户昵称
 	private int 	sex =1;			//性别 默认1->男 0->女'
 	private String  signature="这个人很懒";		//个性签名
@@ -39,8 +39,8 @@ public class User {
 //	uid = #{uid},
 //	loginName = #{loginName},
 //	pwd = #{pwd},
-//	bind_email = #{bind_email},
-//	email_code = #{email_code},
+//	bindEmail = #{bindEmail},
+//	emailCode = #{emailCode},
 //	nickName = #{nickName},
 //	sex = #{sex},
 //	signature = #{signature},
@@ -113,15 +113,15 @@ public class User {
 
 
 
-	public User(String uid, String loginName, String pwd, String bind_email, String email_code, String nickName,
+	public User(String uid, String loginName, String pwd, String bindEmail, String emailCode, String nickName,
 			int sex, String signature, String profile, String location, String headPic, long birth,
 			long banTime, int status) {
 		super();
 		this.uid = UUID.randomUUID()+"";
 		this.loginName = loginName;
 		this.pwd = pwd;
-		this.bind_email = bind_email;
-		this.email_code = email_code;
+		this.bindEmail = bindEmail;
+		this.emailCode = emailCode;
 		this.nickName = nickName;
 		this.sex = sex;
 		this.signature = signature;
@@ -134,13 +134,13 @@ public class User {
 		this.status = status;
 	}
 	
-	public User(String loginName, String pwd, String bind_email, String nickName) {
+	public User(String loginName, String pwd, String bindEmail, String nickName) {
 		super();
 		this.uid = UUID.randomUUID()+"";
 		this.loginName = loginName;
 		this.pwd = MD5Util.encode2hex(pwd);
-		this.bind_email = bind_email;
-		this.email_code = MD5Util.encode2hex(bind_email);
+		this.bindEmail = bindEmail;
+		this.emailCode = MD5Util.encode2hex(bindEmail);
 		this.nickName = nickName;
 		this.regTime = System.currentTimeMillis();
 	}
@@ -188,35 +188,21 @@ public class User {
 	}
 
 
-
-
-	public String getBind_email() {
-		return bind_email;
+	public String getBindEmail() {
+		return bindEmail;
 	}
 
-
-
-
-	public void setBind_email(String bind_email) {
-		this.bind_email = bind_email;
+	public void setBindEmail(String bindEmail) {
+		this.bindEmail = bindEmail;
 	}
 
-
-
-
-	public String getEmail_code() {
-		return email_code;
+	public String getEmailCode() {
+		return emailCode;
 	}
 
-
-
-
-	public void setEmail_code(String email_code) {
-		this.email_code = email_code;
+	public void setEmailCode(String emailCode) {
+		this.emailCode = emailCode;
 	}
-
-
-
 
 	public String getNickName() {
 		return nickName;
@@ -360,8 +346,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", loginName=" + loginName + ", pwd=" + pwd + ", bind_email=" + bind_email
-				+ ", email_code=" + email_code + ", nickName=" + nickName + ", sex=" + sex + ", signature=" + signature
+		return "User [uid=" + uid + ", loginName=" + loginName + ", pwd=" + pwd + ", bindEmail=" + bindEmail
+				+ ", emailCode=" + emailCode + ", nickName=" + nickName + ", sex=" + sex + ", signature=" + signature
 				+ ", profile=" + profile + ", location=" + location + ", headPic=" + headPic + ", birth=" + birth
 				+ ", regTime=" + regTime + ", banTime=" + banTime + ", status=" + status + "]";
 	}
