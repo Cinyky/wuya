@@ -48,7 +48,7 @@
 		                        <h7 class="media-heading">来自话题：<a href="${pageContext.request.contextPath}/topic/${list_topic.topicId}/detail">${list_topic.topicName }</a></h7>
 		                        <h4 class="media-heading"><a href="${pageContext.request.contextPath}/question/${list_question.questionId}/detail">${list.question.questionInfo }</a></h4>
 		                        <h6 class="media-heading">
-		                          <span><a href="${pageContext.request.contextPath}/user/${uid}/personal">${list_user.nickName }</a></span>&nbsp;：
+		                          <span><a href="${pageContext.request.contextPath}/user/${list_user.uid}/personal">${list_user.nickName }</a></span>&nbsp;：
 		                          <span>${list_user.signature }</span>
 		                        </h6>
 		                      </div>
