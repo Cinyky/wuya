@@ -1,17 +1,24 @@
 <%@ page language="java" isELIgnored="false" contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <html>
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" ></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script>
+        <jsp:include page="templet/necessary.jsp" />
+  <%--   <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script> --%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-login.js" ></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" />
+<%--     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" /> --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-login-reg-common.css" />
     <title>无涯登录</title>
 </head>
 <body>
 	<div class="cover">
+	  <c:if test="${not empty txt }">
+	  	<script>
+	  	wuya_messager('无涯登录','${txt}','error');
+	  	</script>
+	  </c:if>
       <div class="cover-image" style="background-image: url(${pageContext.request.contextPath}/upload/headpic/bgimg.jpg);"></div>
       <div class="container">
         <div class="row">

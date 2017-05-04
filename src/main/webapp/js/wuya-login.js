@@ -25,12 +25,12 @@ $(function () {
 		     }
 	    });
 		
-		$("#loginSubmit").bind({
-		     click: function(){
-		    	 
-		     }
-	    });
-		
+//		$("#loginSubmit").bind({
+//		     click: function(){
+//		    	 
+//		     }
+//	    });
+//		
 		
 });
 
@@ -39,3 +39,11 @@ function changeImg(path){
 		var img = document.getElementById("img");  
 		img.src = path+"/verifycode/generateImg?date=" + new Date();;
 	} 
+
+function wuya_messager(title,msg,type){
+	$.messager.alert(title,msg,type);
+	$(".messager-window").css("position","fixed");
+	$(".window-shadow").css("position","fixed");
+	$(".messager-window").css("top","300px");
+	$(".window-shadow").css("top","300px");
+}

@@ -295,6 +295,10 @@ public class UserController {
     	String method = request.getMethod();
     	 logger.warn("-----userLogin login---- method:"+method); 
     	if("get".equalsIgnoreCase(method)){
+    		String info = (String) request.getParameter("txt");
+    		if( info!=null && !info.isEmpty() ){
+    			mav.addObject("txt", info);
+    		}
     		mav.setViewName("forward:../wuya-login.jsp");
     	}else{
     	        User userLogin = userService.userLogin(loginCondition, pwd);
@@ -305,16 +309,16 @@ public class UserController {
 	    	        		session.setAttribute("user", userLogin);
 	    	        		mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
 	    	        	}else{
-	    	        		mav.addObject("txt","success but code null");
+	    	        		mav.addObject("txt","验证码错误");
 	    	        		mav.setViewName("redirect:login");
 	    	        	}
 	    	            logger.warn("-----login----");
     	        	}else{
-    	        		mav.addObject("txt","code null");
+    	        		mav.addObject("txt","验证码错误");
         	        	mav.setViewName("redirect:login");
     	        	}
     	        }else{
-    	        	mav.addObject("txt","user fail");
+    	        	mav.addObject("txt","账号密码错误");
     	        	mav.setViewName("redirect:login");
     	        }
     	       
