@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : wuya
+Source Server         : local
 Source Server Version : 50554
 Source Host           : localhost:3306
 Source Database       : wuya
@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50554
 File Encoding         : 65001
 
-Date: 2017-05-04 20:35:30
+Date: 2017-05-07 23:30:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `admin`
+-- Table structure for admin
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
@@ -30,9 +30,10 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
+INSERT INTO `admin` VALUES ('10956773-5c30-41f1-b9d6-caf69ead19a6', 'admin', '0192023a7bbd73250516f069df18b500', '1');
 
 -- ----------------------------
--- Table structure for `advice`
+-- Table structure for advice
 -- ----------------------------
 DROP TABLE IF EXISTS `advice`;
 CREATE TABLE `advice` (
@@ -47,9 +48,15 @@ CREATE TABLE `advice` (
 -- ----------------------------
 -- Records of advice
 -- ----------------------------
+INSERT INTO `advice` VALUES ('0f10f484-87f6-4238-bbcf-0417eacdfcd8', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '123123123', '1494055360066', '1');
+INSERT INTO `advice` VALUES ('6bb521d2-48a8-4e6b-bf31-941b2a858e02', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '123123123123123123123', '1494164471383', '1');
+INSERT INTO `advice` VALUES ('6bea860f-69c1-4985-9f7c-949bce56f9df', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'xxxx', '1494052366683', '1');
+INSERT INTO `advice` VALUES ('6e2da970-71a3-41ac-a1ad-10b3068e2bda', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'yyyyyy', '1494052264686', '1');
+INSERT INTO `advice` VALUES ('b873c73c-f253-4122-997b-bd9d14ae23e8', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'hahahahhahahhahahhaha', '1494164479022', '1');
+INSERT INTO `advice` VALUES ('daff86e8-2815-46c2-a5bc-3a6d6b3b857a', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'xxxx', '1494144656093', '1');
 
 -- ----------------------------
--- Table structure for `answer`
+-- Table structure for answer
 -- ----------------------------
 DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer` (
@@ -64,8 +71,6 @@ CREATE TABLE `answer` (
 -- ----------------------------
 -- Records of answer
 -- ----------------------------
-INSERT INTO `answer` VALUES ('37d16abf-94aa-4020-818c-1b1ada072f09', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'testInfo1', '1491462535272', '1');
-INSERT INTO `answer` VALUES ('d2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'testInfo2', '1491462687252', '1');
 INSERT INTO `answer` VALUES ('78dadd32-6c58-4591-ad65-e0e281226fec', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...</p>\n              <p>123213123<img src=\"/wuya/upload/answer/88cd27c4-e146-478d-a4c0-15e2882c5bb9.jpg\" alt=\"headpic\" style=\"max-width: 100%;\">我也不知道 测试回答</p><p><br></p>', '1491546272030', '1');
 INSERT INTO `answer` VALUES ('6d9ca932-22ad-4f65-b63a-900a1397e310', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><br></p>\n              <p><img src=\"/wuya/upload/answer/2d38ee98-8ef8-495f-a985-7f8ea868e13e.jpg\" alt=\"headpic2\" style=\"max-width: 100%; width: 105px; height: 98px;\" class=\"\"><br>大家好啊 &nbsp;这个数字 很顺啊</p><p><br></p>', '1491547080975', '1');
 INSERT INTO `answer` VALUES ('246a8345-b3e2-47c0-822b-30bce0b8b4a7', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><br></p>\n              <p><img src=\"/wuya/upload/answer/2d38ee98-8ef8-495f-a985-7f8ea868e13e.jpg\" alt=\"headpic2\" style=\"max-width: 100%; width: 105px; height: 98px;\" class=\"\"><br>大家好啊 &nbsp;这个数字 很顺啊</p><p><br></p>', '1491547083014', '1');
@@ -90,9 +95,11 @@ INSERT INTO `answer` VALUES ('8357c971-5315-42ad-a8a9-d25aa0380a5f', 'b47cad6f-d
 INSERT INTO `answer` VALUES ('af779b0f-3d18-4df7-87d3-c72ab40dd4e3', '394bf1aa-f386-4b22-92ad-bf9df19020e6', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>请输入内容...<img src=\"/wuya/upload/answer/cad33ef5-fd7f-4473-8c50-bcaf33d2be74.jpg\" alt=\"headpic\" style=\"max-width: 100%;\"></p>\n              <p><br></p>', '1491817589786', '1');
 INSERT INTO `answer` VALUES ('8ddd3cb5-dc6e-43b8-912f-7056e6117171', '2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p><img src=\"/wuya/upload/answer/58cae2a2-5284-455f-8394-6cf380fd4316.jpg\" alt=\"default_headpic\" style=\"max-width: 100%; width: 127px; height: 97px;\" class=\"\"></p>\n              <p>我真帅<img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_thumb.png\"><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_thumb.png\"><img src=\"http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif\"></p><p><br></p>', '1493028348685', '1');
 INSERT INTO `answer` VALUES ('9e7ab466-887a-49eb-a35d-a45929216898', 'e5410031-5474-45f1-a45e-f33b9b6adee0', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '\n                  <p>很好玩<img src=\"/wuya/upload/answer/1fada4c8-1816-451c-9109-fa67fa538f5c.jpg\" alt=\"headpic7\" style=\"max-width: 100%;\"><img src=\"http://localhost:8080/wuya/emotions/default/7.gif\"></p>\n              <p><br></p>', '1493122202191', '1');
+INSERT INTO `answer` VALUES ('4e055fb2-6496-4ffa-b18b-bf72e2214702', '2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'testInfo', '1494144654163', '1');
+INSERT INTO `answer` VALUES ('51845155-10ac-4119-b74a-e225957b2d83', '2791bb3c-8f89-420c-84d1-836d710c9a3f', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'testInfo', '1494169550314', '1');
 
 -- ----------------------------
--- Table structure for `focus`
+-- Table structure for focus
 -- ----------------------------
 DROP TABLE IF EXISTS `focus`;
 CREATE TABLE `focus` (
@@ -117,7 +124,7 @@ INSERT INTO `focus` VALUES ('c5b6cd15-cf0d-4f2b-b978-c78fe8c57e0b', '7d9db1cf-cc
 INSERT INTO `focus` VALUES ('efb15dbf-2d32-43ec-b3cf-5dc86b5c566e', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '0', '10', '1493186805670', '1');
 
 -- ----------------------------
--- Table structure for `friend`
+-- Table structure for friend
 -- ----------------------------
 DROP TABLE IF EXISTS `friend`;
 CREATE TABLE `friend` (
@@ -132,7 +139,7 @@ CREATE TABLE `friend` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `question`
+-- Table structure for question
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
@@ -169,7 +176,7 @@ INSERT INTO `question` VALUES ('ee3910f6-e494-4f87-ba4f-70fe0c6a0ce2', '7d9db1cf
 INSERT INTO `question` VALUES ('f0acc885-dcbc-405c-9293-48d58cf4e227', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '123123123', '2', '1491814329110', '1');
 
 -- ----------------------------
--- Table structure for `report`
+-- Table structure for report
 -- ----------------------------
 DROP TABLE IF EXISTS `report`;
 CREATE TABLE `report` (
@@ -191,7 +198,7 @@ INSERT INTO `report` VALUES ('3280f02d-46cc-4222-a377-42726d80f5ee', '7d9db1cf-c
 INSERT INTO `report` VALUES ('87a872ef-045a-45ec-b1b2-f24f638d9d3c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '2', '394bf1aa-f386-4b22-92ad-bf9df19020e6', 'seqing', '1491817552386', '1');
 
 -- ----------------------------
--- Table structure for `secret_question`
+-- Table structure for secret_question
 -- ----------------------------
 DROP TABLE IF EXISTS `secret_question`;
 CREATE TABLE `secret_question` (
@@ -206,15 +213,17 @@ CREATE TABLE `secret_question` (
 -- ----------------------------
 -- Records of secret_question
 -- ----------------------------
+INSERT INTO `secret_question` VALUES ('0ef2da94-098f-40e9-bbb4-06f45b5fe57e', 'tt', '测试2', '无题2', '11');
 INSERT INTO `secret_question` VALUES ('1', '1', '1', '1', null);
 INSERT INTO `secret_question` VALUES ('2', '2', '2', '2', null);
 INSERT INTO `secret_question` VALUES ('3', '1', '3', '3', null);
 INSERT INTO `secret_question` VALUES ('4', '1', '学号？', '2013142202', null);
+INSERT INTO `secret_question` VALUES ('c02b90e3-73d7-446a-aabc-7086bf541377', 'tt', '测试2', '无题2', '11');
 INSERT INTO `secret_question` VALUES ('tt', 'tt', '测试', '无题', null);
 INSERT INTO `secret_question` VALUES ('tt2', 'tt', '测试2', '无题2', '11');
 
 -- ----------------------------
--- Table structure for `share`
+-- Table structure for share
 -- ----------------------------
 DROP TABLE IF EXISTS `share`;
 CREATE TABLE `share` (
@@ -239,7 +248,7 @@ INSERT INTO `share` VALUES ('afb5f5ac-d092-4e9c-94df-d50869c0a6fe', '7d9db1cf-cc
 INSERT INTO `share` VALUES ('cee70724-1c12-42ba-8a09-993ee486cc3c', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '1', '76691627-3801-43b9-9d69-18a5e78eb371', '1491822304492', '1');
 
 -- ----------------------------
--- Table structure for `topic`
+-- Table structure for topic
 -- ----------------------------
 DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic` (
@@ -268,7 +277,7 @@ INSERT INTO `topic` VALUES ('8', 'Cinyky', '科学', 'topic__8.jpg', '1491556959
 INSERT INTO `topic` VALUES ('9', 'Cinyky', '历史', 'topic__9.jpg', '1491556969301', '1');
 
 -- ----------------------------
--- Table structure for `upvote`
+-- Table structure for upvote
 -- ----------------------------
 DROP TABLE IF EXISTS `upvote`;
 CREATE TABLE `upvote` (
@@ -283,12 +292,13 @@ CREATE TABLE `upvote` (
 -- ----------------------------
 -- Records of upvote
 -- ----------------------------
-INSERT INTO `upvote` VALUES ('88a0c2c7-8eae-4db1-918a-b10c91219341', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '8357c971-5315-42ad-a8a9-d25aa0380a5f', '1493186564870', '1');
+INSERT INTO `upvote` VALUES ('6f1adae0-9a79-4ce8-b31e-6fb5060ea53a', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '6302212d-0e2b-4eef-965d-562d28bdbc2a', '1494055542483', '1');
 INSERT INTO `upvote` VALUES ('b9d05080-4973-4002-a22b-2b50ed9498aa', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1493027086959', '1');
+INSERT INTO `upvote` VALUES ('c6e27c65-f82b-4c76-a6bd-84a053770852', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'd2852c7f-1e21-41e5-ad81-1c5538c7b6b3', '1494169551562', '1');
 INSERT INTO `upvote` VALUES ('f57ef174-3f98-495a-a36d-829f1119ae98', '7d9db1cf-cc01-461a-af7b-be98e9aea0c0', '37d16abf-94aa-4020-818c-1b1ada072f09', '1493186474218', '1');
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -313,6 +323,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('50b6d09f-03ef-4292-b495-301985c9e0b4', 'cyy001', 'dc456d21102d943265eabf50cf8e6850', '', '', 'cyy001', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1493260173705', '0', '-1');
-INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', 'cyy1079276272@163.com', '3DMERG', 'Cinyky1234', '0', '小圈圈捶你胸口～', ' 对面的帅哥看过来！！', '阿拉伯', '83b2e7db-b43a-4e1b-a76d-ef4c48e9368a.jpg', '1495641600000', '1490787789317', '0', '-1');
-INSERT INTO `user` VALUES ('a643c7bc-ffe3-4675-8d10-79fa1de44b3d', '1079276272', '25d55ad283aa400af464c76d713c07ad', '', 'DAQBWN', 'Cinyky1234', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1491533698993', '0', '-1');
+INSERT INTO `user` VALUES ('50b6d09f-03ef-4292-b495-301985c9e0b4', 'cyy001', 'dc456d21102d943265eabf50cf8e6850', '', '', 'cyy001', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1493260173705', '1494146854000', '-1');
+INSERT INTO `user` VALUES ('7d9db1cf-cc01-461a-af7b-be98e9aea0c0', 'cyy2013142202', '5d4aa108dadc446fe849346a19b6563d', 'cyy1079276272@163.com', '3DMERG', 'Cinyky1234', '0', '----', ' 对面的帅哥看过来！！', '阿拉伯', '60ab911c-60e1-4b42-9859-0788b32d9a57.jpg', '1494604800000', '1493260173705', '0', '-1');
+INSERT INTO `user` VALUES ('7f215e72-74c4-493b-999a-3a490d5191b4', 'cyy3', '9ac81ed1a7aeb8e442c3596a229776aa', '1079276272@qq.com', '123123', 'Cinyky2222', '1', 'i\'m a boy', 'haha', 'China', 'asd', '0', '1494144656156', '0', '1');
+INSERT INTO `user` VALUES ('a9232f4b-9552-4e20-ba44-e9c94591de8b', '1079276272', '9034ab708f195b961e5ea00a76d33336', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky2222', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1494169550439', '0', '-1');
+INSERT INTO `user` VALUES ('d4fe879d-9488-4bb9-86c8-eeac25d87804', 'cyy3', '9ac81ed1a7aeb8e442c3596a229776aa', '1079276272@qq.com', '123123', 'Cinyky3333', '1', 'i\'m a boy', 'haha', 'China', 'asd', '0', '1494169551735', '0', '1');
+INSERT INTO `user` VALUES ('e07d2794-0370-4b1c-abce-cf290a7a20b1', '1079276272', '9034ab708f195b961e5ea00a76d33336', 'cyy1079276272@163.com', '7a3c235abec79194f1cddbf25c21de96', 'Cinyky0000', '1', '这个人很懒', '个人简介', '中国', 'default_headpic.jpg', '0', '1494144654636', '0', '-1');
