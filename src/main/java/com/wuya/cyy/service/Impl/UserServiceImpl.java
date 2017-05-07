@@ -91,8 +91,6 @@ public class UserServiceImpl  implements UserService {
 				rs = VerifyCodeUtils.generateVerifyCode(6);
 				isSuccess = processFindPwd(bind_email,rs,"findpwd");
 			}
-			
-		
 		return isSuccess?rs:"";
 	}
 

@@ -19,7 +19,25 @@ public class Answer {
 	private User user;				//发表回答的user
 	private String upvoteCount;		//点赞次数
 	private String isUpvoted;		//是否被我点赞过
+	private Question question;
 	
+	
+	
+
+
+
+	public Question getQuestion() {
+		return question;
+	}
+
+
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+
+
 	public Answer() {
 	}
 

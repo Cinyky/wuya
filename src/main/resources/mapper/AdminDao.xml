@@ -12,7 +12,8 @@
 			values(
 				#{uid},
 				#{loginName},
-				#{pwd}
+				#{pwd},
+				#{status}
 				)
 	</insert>
 	

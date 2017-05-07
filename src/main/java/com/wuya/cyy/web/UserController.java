@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -301,25 +302,33 @@ public class UserController {
     		}
     		mav.setViewName("forward:../wuya-login.jsp");
     	}else{
+    			mav.setViewName("redirect:login");
     	        User userLogin = userService.userLogin(loginCondition, pwd);
     	        if(userLogin!=null){
-    	        	String code = (String) session.getAttribute("verifyCode");
-    	        	if(code != null){
-	    	        	if(verifycode.equals(code)){
-	    	        		session.setAttribute("user", userLogin);
-	    	        		mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
-	    	        	}else{
-	    	        		mav.addObject("txt","验证码错误");
-	    	        		mav.setViewName("redirect:login");
-	    	        	}
-	    	            logger.warn("-----login----");
-    	        	}else{
-    	        		mav.addObject("txt","验证码错误");
-        	        	mav.setViewName("redirect:login");
-    	        	}
+    	        		String code = (String) session.getAttribute("verifyCode");
+        	        	if(code != null){
+    	    	        	if(verifycode.equals(code)){
+    	    	        		long banTime = userLogin.getBanTime();
+    	    	        		if(banTime>System.currentTimeMillis()){
+    	        	        		String format = new SimpleDateFormat("yyyy年MM月dd号 HH点mm分").format(new Date(banTime));
+    	        	        		mav.addObject("txt","用户已被封号到"+format);
+    	        	        	}else{
+    	        	        		session.setAttribute("user", userLogin);
+        	    	        		mav.setViewName("redirect:/user/"+userLogin.getNickName()+"/home");
+    	        	        	}
+    	    	        	}else{
+    	    	        		mav.addObject("txt","验证码错误");
+//    	    	        		mav.setViewName("redirect:login");
+    	    	        	}
+    	    	            logger.warn("-----login----");
+        	        	}else{
+        	        		mav.addObject("txt","验证码错误");
+//            	        	mav.setViewName("redirect:login");
+        	        	}
+    	        	
     	        }else{
     	        	mav.addObject("txt","账号密码错误");
-    	        	mav.setViewName("redirect:login");
+//    	        	mav.setViewName("redirect:login");
     	        }
     	       
     	}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.wuya.cyy.pojo.Answer;
+import com.wuya.cyy.pojo.Question;
 
 
 /**
@@ -72,5 +73,22 @@ public interface AnswerDao {
 	 */
 	List<Answer> selectAnswerByInfo(@Param("answerInfo")String answerInfo);
 	
+	/**
+	 * 根据answer count
+	 * @return
+	 */
+	String selectTotalAnswerCount();
 	
+	/**
+	 * 根据questionId查询回答
+	 * @return
+	 */
+	String selectTodayAnswerCount(@Param("startTime")Long startTime,@Param("endTime")Long endTime);
+	
+	/**
+	 * 
+	 * @param todayTime
+	 * @return
+	 */
+	List<Answer> selectAnswerByPage(@Param("start")int start,@Param("pageSize")int pageSize);
 }

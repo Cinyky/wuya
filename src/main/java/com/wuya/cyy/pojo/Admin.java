@@ -22,11 +22,12 @@ public class Admin {
 	public Admin() {
 		super();
 	}
-	public Admin(String uid, String loginName, String pwd) {
+	public Admin(String loginName, String pwd) {
 		super();
 		this.uid = UUID.randomUUID()+"";
 		this.loginName = loginName;
 		this.pwd = pwd;
+		this.status =1;
 	}
 	
 	

@@ -16,8 +16,36 @@ public class Question {
 	private long questionTime;		//提出问题时间
 	private int status;				//状态
 	
+	//====
+	private User user;
+	private Topic topic;
 	
 	
+	
+	public Topic getTopic() {
+		return topic;
+	}
+
+
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
 	public Question() {
 	}
 

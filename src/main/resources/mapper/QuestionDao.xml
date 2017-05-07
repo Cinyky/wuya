@@ -106,5 +106,32 @@
 			count(*)
 		FROM
 			question
-	</select>	   
+	</select>
+	
+	<!-- 根据QuestionTime limit begin end查询Question -->
+	<select id="selectTodayQuestionCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			question
+		where
+		    questionTime 
+		BETWEEN
+			#{startTime}
+		AND
+			#{endTime}
+	</select>
+	
+	<select id="selectQuestionByPage" resultType="Question">
+		SELECT
+			*
+		FROM
+			question
+		ORDER BY questionTime
+		LIMIT
+		#{start},
+		#{pageSize}
+	</select>
+	
+		   
 </mapper>

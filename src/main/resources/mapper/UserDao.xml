@@ -117,4 +117,40 @@
 			nickName like CONCAT('%','${nickName}','%' )
 	</select>
 	
+	<!-- user count -->
+	<select id="selectAllUserCount" resultType="java.lang.String">
+		SELECT
+			COUNT(*)
+		FROM
+			user
+	</select>
+	
+	<!-- user count -->
+	<select id="selectTodayUserCount" resultType="java.lang.String">
+		SELECT
+			COUNT(*)
+		FROM
+			user
+		WHERE
+			regTime 
+		BETWEEN 
+			#{startTime}  
+		AND
+			 #{endTime} 
+	</select>
+	
+	
+	<select id="selectUserByPage" resultType="User">
+		SELECT
+			*
+		FROM
+			user
+		ORDER BY regTime
+		LIMIT
+		#{start},
+		#{pageSize}
+	</select>
+	
+	
+	
 </mapper>

@@ -5,10 +5,7 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <jsp:include page="templet/necessary.jsp" />
-  <%--   <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" ></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script> --%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-login.js" ></script>
-<%--     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" /> --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-login-reg-common.css" />
     <title>无涯登录</title>
 </head>
@@ -62,7 +59,7 @@
                     <label>
                       <input type="checkbox" checked name="max_age"><span style="color: #D1EEFC;">下次自动登录</span>
                     </label>
-                    <label>
+                     <label>
                       <input id="showPwd" type="checkbox"/><span style="color: #D1EEFC;">显示密码</span>
                     </label>
                   </div>
@@ -73,7 +70,8 @@
                 <div class="col-sm-offset-3 col-sm-6">
                 	<div class="pull-left">
 	                     <a style="color: #D1EEFC;cursor: pointer;" href="${pageContext.request.contextPath}/user/forgetpwd">忘记密码</a>
-	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">没有账号？前往注册</a>
+	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">前往注册</a>
+	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/admin/login">管理员登录</a>
                      </div>
                 </div>
               </div>

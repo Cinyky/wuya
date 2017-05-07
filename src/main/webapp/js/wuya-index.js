@@ -39,9 +39,18 @@ $(function() {
 			submitQuestion(info,topicId);
 			$('#questionInfo').val("");
 		}else{
-			$.messager.alert('无涯提问','问题不可为空!','warn');
+			wuya_messager('无涯提问','问题不可为空!','warn');
 		}
 	});
+	
+	$('#submitSuggestion').click(function(){
+		var info =$('#suggestionInfo').val().trim();
+		if(info.length>0){
+			submitSuggestion(info);
+		}else{
+			wuya_messager('无涯意见反馈','问题不可为空!','warn');
+		}
+	})
 });
 
 function showReport() {
@@ -300,6 +309,22 @@ function upvote(id){
 					}
 				}
 			);
+}
+
+function submitSuggestion(info){
+	console.debug("function submitSuggestion info :"+info);
+	$.post(
+			"http://localhost:8080/wuya/advice/"+info+"/add",
+			function(rs){
+				if(rs=="1"){
+				
+					wuya_messager('无涯意见反馈','反馈成功!','info');
+					$("#suggestion").modal("hide");
+				}else{
+					wuya_messager('无涯意见反馈','反馈失败!','error');
+				}
+			}
+	);
 }
 
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuya.cyy.dao.AdviceDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<!-- 插入advice  --> 
+	<insert id="addAdvice" parameterType="Advice">
+			INSERT
+			INTO
+				advice
+			values(
+				#{adviceId},
+				#{uid},
+				#{adviceInfo},
+	  			#{adviceTime},
+				#{status}
+				)
+	</insert>
+	
+	<!-- 更新advice  --> 
+	<update id="updateAdvice" parameterType="Advice">
+			UPDATE
+				admin
+			SET
+				uid = #{uid},
+				adviceInfo = #{adviceInfo},
+	  			adviceTime = #{adviceTime},
+				status = #{status}
+					WHERE
+				adviceId = #{adviceId}
+	</update>
+	
+	<!-- 根据adviceID查询advice -->
+	<select id="selectAdviceByAdviceID" resultType="Advice">
+		SELECT
+			*
+		FROM
+			advice
+		WHERE
+			adviceId = #{adviceId}
+		ORDER BY adviceTime DESC
+	</select>
+	
+	<!-- 根据uid查询advice -->
+	<select id="selectAdviceByUid" resultType="Advice">
+		SELECT
+			*
+		FROM
+			advice
+		WHERE
+			uid = #{uid}
+		ORDER BY adviceTime DESC
+	</select>
+	
+	<!-- 根据uid查询advice -->
+	<select id="selectAdvice" resultType="Advice">
+		SELECT
+			*
+		FROM
+			advice
+		ORDER BY adviceTime DESC
+	</select>
+
+	<select id="selectTotalAdviceCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			advice
+	</select>
+	
+	<select id="selectTodayAdviceCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			advice
+		where
+		    adviceTime 
+		BETWEEN
+			#{startTime}
+		AND
+			#{endTime}
+	</select>
+	
+		
+	<select id="selectAdviceByPage" resultType="Advice">
+		SELECT
+			*
+		FROM
+			advice
+		ORDER BY adviceTime
+		LIMIT
+		#{start},
+		#{pageSize}
+	</select>
+	
+
+</mapper>

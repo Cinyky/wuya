@@ -131,5 +131,6 @@
     	描述：模态框2 report
     -->
     <jsp:include page="templet/showReport.jsp" />
+    <jsp:include page="templet/showSuggestion.jsp" />
 </body>
 </html>

@@ -4,11 +4,8 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        <jsp:include page="templet/necessary.jsp" />
-  <%--   <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js" ></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js" ></script> --%>
+    <jsp:include page="templet/necessary.jsp" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-login.js" ></script>
-<%--     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css" /> --%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-login-reg-common.css" />
     <title>无涯登录</title>
 </head>
@@ -23,14 +20,14 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-offset-3 col-md-6 text-center">
-            <h1 class="text-primary">无涯</h1>
+            <h1 class="text-primary">无涯-后台管理系统</h1>
             <p class="text-center text-primary">吾生也有涯，而知也无涯。</p>
         
             
-            <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/user/login" method="POST">
+            <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/admin/login" method="POST">
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                  <input type="text" class="form-control" id="userName" name="loginCondition" placeholder="请输入用户名/昵称/邮箱" />
+                  <input type="text" class="form-control" id="userName" name="loginName" placeholder="请输入用户名/昵称/邮箱" />
                 </div>
               </div>
               <div class="form-group">
@@ -59,9 +56,9 @@
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                   <div class="checkbox pull-left">
-                    <label>
+             <!--        <label>
                       <input type="checkbox" checked name="max_age"><span style="color: #D1EEFC;">下次自动登录</span>
-                    </label>
+                    </label> -->
                     <label>
                       <input id="showPwd" type="checkbox"/><span style="color: #D1EEFC;">显示密码</span>
                     </label>
@@ -69,14 +66,14 @@
                 </div>
               </div>
               
-              <div class="form-group">
+             <%--  <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                 	<div class="pull-left">
 	                     <a style="color: #D1EEFC;cursor: pointer;" href="${pageContext.request.contextPath}/user/forgetpwd">忘记密码</a>
 	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">没有账号？前往注册</a>
                      </div>
                 </div>
-              </div>
+              </div> --%>
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                   <button type="submit" class="btn btn-lg btn-primary btn-block" id="loginSubmit">登录</button>

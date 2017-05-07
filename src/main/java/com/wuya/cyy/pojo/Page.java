@@ -14,7 +14,7 @@ public class Page implements Serializable {
   
     private int pageNow = 1; 	// 当前页数  
   
-    private int pageSize = 4; 	// 每页显示记录的条数  
+    private int pageSize = 2; 	// 每页显示记录的条数  
   
     private int totalCount; 	// 总的记录条数  
   
@@ -117,6 +117,8 @@ public class Page implements Serializable {
     public void setHasPre(boolean hasPre) {  
         this.hasPre = hasPre;  
     }  
+    
+    
     /** 
      * 是否有下一页 
      * @return 
@@ -140,6 +142,16 @@ public class Page implements Serializable {
   
     public void setHasLast(boolean hasLast) {  
         this.hasLast = hasLast;  
-    }  
+    }
+    
+
+	@Override
+	public String toString() {
+		return "Page [pageNow=" + pageNow + ", pageSize=" + pageSize + ", totalCount=" + totalCount
+				+ ", totalPageCount=" + totalPageCount + ", startPos=" + startPos + ", hasFirst=" + hasFirst
+				+ ", hasPre=" + hasPre + ", hasNext=" + hasNext + ", hasLast=" + hasLast + "]";
+	}  
+    
+    
   
 }  

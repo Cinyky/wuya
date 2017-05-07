@@ -41,6 +41,7 @@
 					</li>
 		            </ul>
 		            <a class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target="#question">提问</a>
+		             <a class="btn btn-primary btn-sm navbar-btn" data-toggle="modal" data-target="#suggestion">意见反馈</a>
 		          </div>
 	        </div>
       </div>

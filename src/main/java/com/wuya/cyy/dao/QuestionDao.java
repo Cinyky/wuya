@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.wuya.cyy.pojo.Question;
+import com.wuya.cyy.pojo.User;
 
 
 /**
@@ -70,5 +71,18 @@ public interface QuestionDao {
 	 * @return
 	 */
 	String selectQuestionCountByHot();
+	
+	/**
+	 * 查询question 根据topicId
+	 * @return
+	 */
+	String selectTodayQuestionCount(@Param("startTime")Long startTime,@Param("endTime")Long endTime);
+	
+	/**
+	 * 
+	 * @param todayTime
+	 * @return
+	 */
+	List<Question> selectQuestionByPage(@Param("start")int start,@Param("pageSize")int pageSize);
 	
 }

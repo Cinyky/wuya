@@ -16,6 +16,30 @@ public class Report {
 	private String	reportInfo;		//举报理由	
 	private long reportTime;		//举报时间
 	private int status;				//状态
+	
+	//
+	private User user;
+	private Question question;
+	private Answer answer;
+	
+	public Question getQuestion() {
+		return question;
+	}
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+	public Answer getAnswer() {
+		return answer;
+	}
+	public void setAnswer(Answer answer) {
+		this.answer = answer;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Report() {
 	}
 	public Report(String uid, int reportType, String id, String reportInfo) {

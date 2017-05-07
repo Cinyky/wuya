@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.wuya.cyy.pojo.Question;
 import com.wuya.cyy.pojo.Report;
 
 
@@ -53,4 +54,20 @@ public interface ReportDao {
 	 */
 	List<Report> selectReportByTypeAndUid(@Param("uid")String uid,@Param("uid")int reportType);
 	
+	/**
+	 * total advice count
+	 */
+	String selectTotalReportCount();
+	
+	/**
+	 * total advice count
+	 */
+	String selectTodayReportCount(@Param("startTime")Long startTime,@Param("endTime")Long endTime);
+	
+	/**
+	 * 
+	 * @param todayTime
+	 * @return
+	 */
+	List<Report> selectReportByPage(@Param("start")int start,@Param("pageSize")int pageSize);
 }

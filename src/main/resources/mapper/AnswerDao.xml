@@ -107,6 +107,39 @@
 		WHERE
 			answerInfo like CONCAT('%','${answerInfo}','%' )
 	</select>
+	
+	<!-- 根据QuestionTime limit begin end查询Question -->
+	<select id="selectTotalAnswerCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			answer
+	</select>
+	
+	<!-- 根据QuestionTime limit begin end查询Question -->
+	<select id="selectTodayAnswerCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			answer
+		where
+		    answerTime 
+		BETWEEN
+			#{startTime}
+		AND
+			#{endTime}
+	</select>
+	
+	<select id="selectAnswerByPage" resultType="Answer">
+		SELECT
+			*
+		FROM
+			answer
+		ORDER BY answerTime
+		LIMIT
+		#{start},
+		#{pageSize}
+	</select>
 
 
 </mapper>

@@ -14,9 +14,18 @@ public class Advice {
 	private long    adviceTime;		//意见反馈时间
 	private int status;				//状态   1 可用 0 不可用
 	
+	private User user;
+	
+	
 	
 	
 
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Advice() {
 		super();
 	}

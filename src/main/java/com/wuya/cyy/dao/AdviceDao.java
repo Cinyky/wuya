@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.wuya.cyy.pojo.Admin;
 import com.wuya.cyy.pojo.Advice;
+import com.wuya.cyy.pojo.Question;
 
 /**
  * advice dao
@@ -45,5 +46,22 @@ public interface AdviceDao {
 	 * @return
 	 */
 	List<Advice> selectAdvice();
+	
+	/**
+	 * total advice count
+	 */
+	String selectTotalAdviceCount();
+	
+	/**
+	 * total advice count
+	 */
+	String selectTodayAdviceCount(@Param("startTime")Long startTime,@Param("endTime")Long endTime);
+	
+	/**
+	 * 
+	 * @param todayTime
+	 * @return
+	 */
+	List<Advice> selectAdviceByPage(@Param("start")int start,@Param("pageSize")int pageSize);
 	
 }

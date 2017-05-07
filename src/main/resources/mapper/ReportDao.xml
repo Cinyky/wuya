@@ -78,5 +78,37 @@
 			AND
 			reportType=#{reportType}
 	</select>
+	
+	<select id="selectTotalReportCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			report
+	</select>
+	
+	<select id="selectTodayReportCount" resultType="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			report
+		where
+		    reportTime 
+		BETWEEN
+			#{startTime}
+		AND
+			#{endTime}
+	</select>
+	
+		
+	<select id="selectReportByPage" resultType="Report">
+		SELECT
+			*
+		FROM
+			report
+		ORDER BY reportTime
+		LIMIT
+		#{start},
+		#{pageSize}
+	</select>
 
 </mapper>

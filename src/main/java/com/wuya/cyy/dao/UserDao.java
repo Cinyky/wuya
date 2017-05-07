@@ -63,7 +63,23 @@ public interface UserDao {
 	 */
 	List<User> selectUserByNickName(@Param("nickName")String nickName);
 	
+	/**
+	 * count user
+	 * @return
+	 */
+	String selectAllUserCount();
 	
+	/**
+	 * 
+	 * @param todayTime
+	 * @return
+	 */
+	String selectTodayUserCount(@Param("startTime")Long startTime,@Param("endTime")Long endTime);
 	
-	
+	/**
+	 * 
+	 * @param todayTime
+	 * @return
+	 */
+	List<User> selectUserByPage(@Param("start")int start,@Param("pageSize")int pageSize);
 }
