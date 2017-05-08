@@ -1,11 +1,13 @@
 package com.wuya.cyy.web;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,10 +17,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.fabric.xmlrpc.base.Array;
 import com.wuya.cyy.dao.AdminDao;
 import com.wuya.cyy.dao.AdviceDao;
@@ -304,6 +309,7 @@ public class AdminController {
 					continue;
 				}
 				answer.setUser(user);
+				report.setAnswer(answer);
 			}else if(reportType==2){
 				Question question = questionDao.selectQuestionByQuestionId(id);
 				if(question == null) 
@@ -313,6 +319,7 @@ public class AdminController {
 					continue;
 				}
 				question.setUser(user);
+				report.setQuestion(question);
 			}
 			retReports.add(report);
 		}
@@ -320,6 +327,77 @@ public class AdminController {
 		mav.addObject("reportpage", page);
 		return mav;
 	}
+	
+	//封号
+	@RequestMapping(value="/user/{uid}/{dayAmount}/ban",method={RequestMethod.GET,RequestMethod.POST})  
+	@ResponseBody
+    public void  userBan(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("uid")String uid,
+    		@PathVariable("dayAmount")String dayAmount
+    		) throws ParseException, IOException{ 
+		logger.warn("ban user uid ------"+uid+"dayAmount:"+dayAmount);
+		ServletOutputStream outputStream = response.getOutputStream();
+		ObjectMapper objectMapper = new ObjectMapper();
+		boolean banSuccess = false;
+		String result = "";
+		if(uid == null || uid == "") {
+			result="error|数据异常";
+		}else{
+			User user = userDao.selectUserByUid(uid);
+			if(user == null) 
+				result="error|数据异常";
+			else{
+				Long days= Long.parseLong(dayAmount);
+				Long currentTime = System.currentTimeMillis();
+				Long spendTime = (long) (24*60*60*1000*days);
+				Long banTime = currentTime+spendTime;
+				user.setBanTime(banTime);
+				int updateUser = userDao.updateUser(user);
+				banSuccess = updateUser>0;
+				if(banSuccess){
+					objectMapper.writeValue(outputStream, user);
+					return;
+				}else{
+					result ="error|封号失败";
+				}
+			}
+		}
+		objectMapper.writeValue(outputStream, result);
+		
+    }
+	
+	//解禁
+	@RequestMapping(value="/user/{uid}/cancel/ban",method={RequestMethod.GET,RequestMethod.POST})  
+	@ResponseBody
+    public void  userCancel(HttpServletRequest request,HttpServletResponse response,
+    		@PathVariable("uid")String uid
+    		) throws ParseException, IOException{ 
+		logger.warn("ban user uid ------"+uid);
+		ServletOutputStream outputStream = response.getOutputStream();
+		ObjectMapper objectMapper = new ObjectMapper();
+		boolean banSuccess = false;
+		String result = "";
+		if(uid == null || uid == "") {
+			result="error|数据异常";
+		}else{
+			User user = userDao.selectUserByUid(uid);
+			if(user == null) 
+				result="error|数据异常";
+			else{
+				Long banTime = 0L;
+				user.setBanTime(banTime);
+				int updateUser = userDao.updateUser(user);
+				banSuccess = updateUser>0;
+				if(banSuccess){
+					objectMapper.writeValue(outputStream, user);
+					return;
+				}else{
+					result ="error|解禁失败";
+				}
+			}
+		}
+		objectMapper.writeValue(outputStream, result);
+    }
 	
 	
 }

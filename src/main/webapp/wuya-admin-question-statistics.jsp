@@ -87,7 +87,6 @@
                   <th>话题名</th>
                   <th>提出问题用户名</th>
                   <th>问题时间</th>
-                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,9 +108,6 @@
 			                  	%>
 			                  		<%=new SimpleDateFormat("yyyy-MM-dd").format(date) %>
 			                  </td>
-			                  <td>
-			                   	<a>封号</a>
-			                   </td>
 			                </tr>
               			</c:forEach>
               		</c:when>
@@ -126,7 +122,7 @@
               	</c:choose>
                 
                 <tr class="gradeA" >
-                  <td colspan="5" class="text-center">
+                  <td colspan="4" class="text-center">
                   	总数 <span id="pages">${questionpage.totalCount }</span>
                   	总页数 <span id="pages">${questionpage.totalPageCount }</span>
                   	当前页 <span id="currentPage">${questionpage.pageNow}</span>
@@ -151,30 +147,7 @@
 </div>
 
 
-<div class="fade modal" id="ban" style="z-index:999999999999;">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-提出你的疑惑</h4>
-          </div>
-          <div class="modal-body">
-              <form class="form  text-center" role="search" action="${pageContext.request.contextPath}/question/add">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="questionInfo" id="questionInfo" placeholder="输入你想询问的问题">
-                 
-                  <div class="panel panel-default">
-	                  <div class="panel-body"  id="searchQuestion" >
-	                  </div>
-                  
-                  </div>
-                </div>
-                <button type="button" class="btn btn-lg btn-primary btn-block" id="submitQuestion">提问</button>
-              </form>
-          </div>
-        </div>
-      </div>
-</div>
+
 
 <!--Footer-part-->
 <div class="row-fluid">

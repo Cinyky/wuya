@@ -56,9 +56,6 @@
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                   <div class="checkbox pull-left">
-             <!--        <label>
-                      <input type="checkbox" checked name="max_age"><span style="color: #D1EEFC;">下次自动登录</span>
-                    </label> -->
                     <label>
                       <input id="showPwd" type="checkbox"/><span style="color: #D1EEFC;">显示密码</span>
                     </label>
@@ -66,14 +63,6 @@
                 </div>
               </div>
               
-             <%--  <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-6">
-                	<div class="pull-left">
-	                     <a style="color: #D1EEFC;cursor: pointer;" href="${pageContext.request.contextPath}/user/forgetpwd">忘记密码</a>
-	                     <a style="color: #D1EEFC;cursor: pointer;margin-left: 10px;" href="${pageContext.request.contextPath}/user/register">没有账号？前往注册</a>
-                     </div>
-                </div>
-              </div> --%>
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                   <button type="submit" class="btn btn-lg btn-primary btn-block" id="loginSubmit">登录</button>

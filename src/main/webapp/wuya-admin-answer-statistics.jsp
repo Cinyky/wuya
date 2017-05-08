@@ -87,7 +87,6 @@
                   <th>回答详情</th>
                   <th>回答人</th>
                   <th>回答时间</th>
-                  <th>操作</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,9 +108,6 @@
 			                  	%>
 			                  		<%=new SimpleDateFormat("yyyy-MM-dd").format(date) %>
 			                  </td>
-			                  <td>
-			                   	<a>封号</a>
-			                   </td>
 			                </tr>
               			</c:forEach>
               		</c:when>
@@ -126,7 +122,7 @@
               	</c:choose>
                 
                 <tr class="gradeA" >
-                  <td colspan="5" class="text-center">
+                  <td colspan="4" class="text-center">
                   	总数 <span id="pages">${answerpage.totalCount }</span>
                   	总页数 <span id="pages">${answerpage.totalPageCount }</span>
                   	当前页 <span id="currentPage">${answerpage.pageNow}</span>

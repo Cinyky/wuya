@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-admin-media.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/wuya-admin-style.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-admin.js" ></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/wuya-admin-report.js" ></script>
+
 </head>
 <body>
 <!--Header-part-->
@@ -113,7 +115,7 @@
 										                  </div>
 											              <div class="panel-body">
 												               <p class="answer-info">
-												               ${answeruser.answerInfo }
+												               ${answer.answerInfo }
 												               </p>
 												               <hr>
 												               <span class="answer-date">发布于 
@@ -137,7 +139,7 @@
 							                </div>
 							              </li>
 							              <li>
-							                <button class="btn btn-warning btn-mini">处理</button>
+							                <a class="btn btn-primary" id="handle${ answeruser.uid }"  onclick="handle('${answeruser.uid}','${answeruser.nickName }','${answeruser.banTime }')">处理</a>
 							              </li>
 							            </ul>
 							          </div>
@@ -182,7 +184,7 @@
 					            </div> 
 					              </li>
 					              <li>
-					                <button class="btn btn-warning btn-mini">处理</button>
+					                	<a class="btn btn-primary" id="handle${ questionuser.uid }" onclick="handle('${ questionuser.uid }','${ questionuser.nickName }','${ questionuser.banTime }')">处理</a>
 					              </li>
 					            </ul>
 					          </div>
@@ -222,21 +224,24 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-提出你的疑惑</h4>
+            <h4 class="modal-title">无涯-封号系统</h4>
           </div>
-          <div class="modal-body">
-              <form class="form  text-center" role="search" action="${pageContext.request.contextPath}/question/add">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="questionInfo" id="questionInfo" placeholder="输入你想询问的问题">
-                 
-                  <div class="panel panel-default">
-	                  <div class="panel-body"  id="searchQuestion" >
-	                  </div>
-                  
-                  </div>
-                </div>
-                <button type="button" class="btn btn-lg btn-primary btn-block" id="submitQuestion">提问</button>
-              </form>
+          <div class="modal-body text-center" id="handleContent">
+               	 	<h4 id="nickName">Cinyky1234</h4>
+               	 	状态:<span id="state">封号</span>
+               	 	<br>
+               	 	<div id="showdays">
+		             	<label><input name="days" type="radio" value="1" checked/> 1 天 </label> 
+						<label><input name="days" type="radio" value="2" /> 2 天 </label> 
+						<label><input name="days" type="radio" value="3" /> 3 天 </label> 
+						<label><input name="days" type="radio" value="7" /> 1 周 </label> 
+						<label><input name="days" type="radio" value="30" />1 月 </label> 
+						<label><input name="days" type="radio" value="365" /> 1 年 </label> 
+					</div>
+          </div>
+          
+          <div class="modal-footer">
+          	<a class="btn btn-primary btn-block" id="handleUser">封号</a> 
           </div>
         </div>
       </div>
