@@ -40,7 +40,8 @@
          				 <a href="#" >
          				 	<img class="img-rounded media-object" src="${pageContext.request.contextPath}/topicimg/${topic.topicPic}" height="42" width="42">
          				 </a>
-         				 <span class="topic-name">${topic.topicName }</span> <a class="pull-right"><span>热门排序</span></a><a class="pull-right"><span>时间排序</span></a>
+         				 <span class="topic-name">${topic.topicName }</span>
+         				 <%-- <a class="pull-right"><span>热门排序</span></a><a class="pull-right"><span>时间排序</span></a> --%>
          	</div>
          	<div id="topicContent">
          		<c:choose>
@@ -84,8 +85,8 @@
 						                  <a class="media-object badge alert-danger" style="width:64px;">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-up"></i></a>
 						                </span>
 						               <div class="media-body">
-						                	  <a>分享</a>
-							                  <a class="" data-toggle="modal" data-target="#report">
+						                	  <a onclick="share('${list_answer.answerId}','1')">分享</a>
+							                  <a class="" data-toggle="modal" data-target="#report"  onclick="report('${list_answer.answerId}','1')">
 												举报
 											  </a>
 						                </div>
@@ -103,7 +104,7 @@
           
           <div class="col-md-4">
          		<div class="panel panel-default">
-         			<div class="panel-heading">
+         			<!-- <div class="panel-heading">
          				<form class="navbar-form" role="search" style="display:inline-block;">
 			              <div class="form-group">
 			                <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
@@ -112,11 +113,11 @@
 			                <i class="fa fa-fw fa-lg fa-search"></i>
 			              </button>
 			            </form>
-			         </div>
+			         </div> -->
          				
 		              <div class="panel-body">
 							来源：<span class="status">
-								其他人关注  推荐
+								随机  推荐
 								<a onclick="changeTopics()">换一换</a>
 							</span>			           
 							<hr>
@@ -172,33 +173,9 @@
      <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15
-    	描述：模态框2 unused
+    	描述：模态框2 suggestion
     -->
-    <div class="fade modal" id="report">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-举报系统</h4>
-          </div>
-          <div class="modal-body">
-                <h4>举报步骤</h4>
-                <ol>
-                  <li>搜索是否已有相似问题</li>
-                  <li>查看是否解决</li>
-                  <li>坚持提问</li>
-                </ol>
-              <form class="form  text-center" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-            <a class="btn btn-primary" data-dismiss="modal">关闭</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <jsp:include page="templet/showReport.jsp" />
+    <jsp:include page="templet/showSuggestion.jsp" />
 </body>
 </html>

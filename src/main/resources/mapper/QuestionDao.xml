@@ -97,7 +97,6 @@
 		FROM
 			question
 	    ORDER BY questionTime DESC
-	    LIMIT #{begin},#{end}
 	</select>
 	
 	<!-- 根据QuestionTime limit begin end查询Question -->

@@ -201,20 +201,20 @@
 				}
 			}
 		}else if("5"==type){
-			str +="<a href='' class='btn' style='color: orange;' onclick='toggleFriends("+1+")'>他关注的人</a>";
-			str +="<a href='' class='btn' onclick='toggleFriends("+1+")'>关注他的人 </a>";
+/*			str +="<a href='' class='btn' style='color: orange;' onclick='toggleFriends("+1+")'>他关注的人</a>";
+			str +="<a href='' class='btn' onclick='toggleFriends("+1+")'>关注他的人 </a>";*/
 			for(var i=0;i<arrs.length;i++){
 				var arr = arrs[i];
 				var type = arr.friendType;
 				var user = eval(arr.user);
-					str+="<div class='piece' id='piece1'>";
+					str+="<div class='piece' id='friend"+user.uid+"'>";
 					str+="    <img src='"+path+"/upload/headpic/"+user.headPic+"' class='navbarimg-responsive img-thumbnail' width='64px' height='64px'>";
 					str+="    <div style='display: inline-block;position: relative;top: 20px'>";
-					str+="     <span>韦庆明</span><br>";
-					str+="     <span>认真，你就赢了</span><br>";
-					str+="      <span>6 回答</span>&nbsp;<span>165 关注者</span>";
+					str+="     <span>"+user.nickName+"</span><br>";
+					str+="     <span>"+user.signature+"</span><br>";
+					str+="      <span>"+user.answerNums+" 回答</span>&nbsp;<span>"+user.focusedFriends+" 关注者</span>";
 					str+="   </div> ";
-					str+="    <a class='btn btn-primary pull-right' style='margin-top: 30px' onclick='changeFriend('"+user.uid+"')' id='friendStatus"+user.uid+"'>";
+					str+="    <a class='btn btn-primary pull-right' style='margin-top: 30px' onclick='changeFriend(\""+user.uid+"\")' id='friendStatus"+user.uid+"'>";
 					if(type="1"){
 						str+="取关";
 					}else{
@@ -234,9 +234,17 @@
 				function(rs){
 					console.debug("changeFriend anotherUid  :"+changeFriend);
 					if("fail"==rs){
-						alert("失败");
+						wuya_messager("无涯好友系统","修改好友失败","error");
 					}else{
-						$("#friendStatus"+anotherUid).text(friendStatus[parseInt(rs)]);
+						var str = "";
+						if(rs=="1"){
+							str = "关注";
+							wuya_messager("无涯好友系统","取关成功","success");
+						}else{
+							str = "取关";
+							wuya_messager("无涯好友系统","关注成功","success");
+						}
+						$("#friendStatus"+anotherUid).val(str);
 					}
 				}
 			);
@@ -264,17 +272,26 @@
 							$("#upvoteBot"+id).addClass("alert-success");
 							$("#upvoteIco"+id).remove();
 							$("#upvoteBot"+id).append(icoUp);
-							alert("取消点赞成功");
+							wuya_messager("无涯点赞系统","取消点赞成功","info");
 						}else{
 							$("#upvoteBot"+id).removeClass("alert-success");
 							$("#upvoteBot"+id).addClass("alert-danger");
 							$("#upvoteIco"+id).remove();
 							$("#upvoteBot"+id).append(icoDown);
-							alert("点赞成功");
+							wuya_messager("无涯点赞系统","点赞成功","info");
 						}
 					}
 				);
 	  }
+	
+	
+	function wuya_messager(title,msg,type){
+		$.messager.alert(title,msg,type);
+		$(".messager-window").css("position","fixed");
+		$(".window-shadow").css("position","fixed");
+		$(".messager-window").css("top","300px");
+		$(".window-shadow").css("top","300px");
+	}
 
 
 

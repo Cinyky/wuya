@@ -55,6 +55,9 @@
                   
             	</div>
     	 </div>
+   	   </div>
+   	  </div>
+   	 </div>
 
      <div class="section top table hottopic" >
       <div class="container">
@@ -114,26 +117,25 @@
           
           
           <div class="col-md-4">
-		           <div class="panel panel-default  panel text-center">
-		                <a style="display:inline-block;" >
+                <div class="panel panel-default">
+                	<div class="panel-heading text-center">
+                		 <a style="display:inline-block;" >
 			              		<div class="NumberBoard-item" style="width:42px;">关注了</div>
 			              		<div class="NumberBoard-item" style="width:42px;">${personal_user.focusFriends }</div>
-			              	</a>
+			            </a>
 			              	
-			              	<a style="display:inline-block;margin-left:40px;">
+			            <a style="display:inline-block;margin-left:40px;">
 			              		<div class="NumberBoard-item" style="width:42px;">关注者</div>
 			              		<div class="NumberBoard-item" style="width:42px;">${personal_user.focusedFriends }</div>
-			              	</a>
-		          
-		          </div>
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                  <h1>无涯网wuya</h1>
-                        <p>书山有路勤为径,学海无涯苦作舟<br />
-                            吾生也有涯，而知也无涯。       <br />
-                           与别人分享你的知识。   <br />
-                           &copy; 2017 无涯
-                         </p>
+			             </a>
+                	</div>
+                  <div class="panel-body text-center">
+	                  <h1>无涯网wuya</h1>
+	                  <p>书山有路勤为径,学海无涯苦作舟<br />
+	                                          吾生也有涯，而知也无涯。       <br />
+	                                          与别人分享你的知识。   <br />
+	                      &copy; 2017 无涯
+	                   </p>
                   </div>
                 </div>
         
@@ -154,34 +156,9 @@
      <!--
     	作者：1079276272@qq.com
     	时间：2017-02-15
-    	描述：模态框2 unused
+    	描述：模态框2 意见反馈
     -->
-    <div class="fade modal" id="report">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">无涯-举报系统</h4>
-          </div>
-          <div class="modal-body">
-                <h4>举报步骤</h4>
-                <ol>
-                  <li>搜索是否已有相似问题</li>
-                  <li>查看是否解决</li>
-                  <li>坚持提问</li>
-                </ol>
-              <form class="form  text-center" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="搜索你感兴趣的内容...">
-                </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-            <a class="btn btn-primary" data-dismiss="modal">关闭</a>
-          </div>
-        </div>
-      </div>
-    </div>
+     <jsp:include page="templet/showSuggestion.jsp" />
     
 </body>
 </html>

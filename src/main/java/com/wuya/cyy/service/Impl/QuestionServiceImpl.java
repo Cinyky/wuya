@@ -71,8 +71,7 @@ public class QuestionServiceImpl  implements QuestionService {
 
 	@Override
 	public List<Question> selectQuestionByHot() {
-		String selectQuestionCountByHot = questionDao.selectQuestionCountByHot();
-		List<Question> selectQuestionByHot = questionDao.selectQuestionByHot(0, Integer.parseInt(selectQuestionCountByHot));
+		List<Question> selectQuestionByHot = questionDao.selectQuestionByHot();
 		return selectQuestionByHot;
 	}
 	

@@ -32,17 +32,7 @@ $(function() {
 		}
 	});
 	
-	$('#submitQuestion').click(function(){
-		var info =  $('#questionInfo').val().trim();
-		var topicId = $('#topicId').val();
-		if(info!=""){
-			submitQuestion(info,topicId);
-			$('#questionInfo').val("");
-		}else{
-			wuya_messager('无涯提问','问题不可为空!','warn');
-		}
-	});
-	
+
 	$('#submitSuggestion').click(function(){
 		var info =$('#suggestionInfo').val().trim();
 		if(info.length>0){
@@ -50,12 +40,24 @@ $(function() {
 		}else{
 			wuya_messager('无涯意见反馈','问题不可为空!','warn');
 		}
-	})
+	});
+	
+	$('#submitQuestion').click(function(){
+	var info =  $('#questionInfo').val().trim();
+	var topicId = $('#topicId').val();
+	if(info!=""){
+		submitQuestion(info,topicId);
+		$('#questionInfo').val("");
+	}else{
+		wuya_messager('无涯提问','问题不可为空!','warn');
+	}
+	
+	
+	
 });
 
-function showReport() {
-	$('#report').modal('toggle');
-}
+});
+
 
 function closePiece(piece) {
 	var id = piece.closest('.piece').attr('id');
@@ -125,13 +127,14 @@ function getIndexStr(user,question,answer,topic,myuid){
 		str	+="			<h7 class='media-heading'>来自话题：<a href='http://localhost:8080/wuya/topic/"+topic.topicId+"/detail'> "+topic.topicName+"</a></h7>";
 	}
 	str	+="			<a href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'><h4 class='media-heading'>"+question.questionInfo+"</h4></a>";
+	str +="			<span>提出时间："+getMyDate(question.questionTime)+"</span>"
 	str	+="			<h6 class='media-heading'>";
 	str	+="			<a href='http://localhost:8080/wuya/user/"+user.uid+"/personal'>"+user.nickName+"</a>&nbsp;";
 	str	+="			<span>"+user.signature+"</span>";
 	str	+="			</h6>";
 	str +="			<p>";
 	if(answer==null){
-		str += "还没有回答,赶紧去回答吧！！";
+		str += "还没有回答,赶紧去<a href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>回答<a/>吧！！";
 	}else{
 		console.debug("answer length:"+answer.answerInfo.length);
 		
@@ -174,17 +177,40 @@ function getIndexStr(user,question,answer,topic,myuid){
 		}else{
 			str+="                 <a class='' data-toggle='modal' data-target='#report' onclick='report(\""+answer.answerId+"\",\"1\")'>举报</a>";
 		}
+		str +=" 发表时间："+getMyDate(answer.answerTime);
 		str	+=" 	 </div>";
 		str	+=" </li>";
 		str	+="</ul>";
 		str	+="</div>";
+	}else{
+		
 	}
 	str +="<script>$('#close"+question.questionId+"').click(function() {closePiece($(this));});</script>";
 	return str;
 }
+//分享
+function share(id,shareType){
+	  console.debug("+++++++share id==>>"+id);
+	  console.debug("+++++++share shareType==>>"+shareType);
+	  $.post(
+				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				{
+					"shareId" :id
+				},
+				function(rs){
+					console.debug("report  rs :"+rs);
+					if(rs=="1"){
+						wuya_messager("无涯点赞系统","分享成功","info");
+					}else{
+						wuya_messager("无涯点赞系统","分享失败","info");
+					}
+				}
+			);
+}
 
 
 function getMyDate(str){
+	str = parseInt(str);
 	console.debug("=======date===="+str);
     var oDate = new Date(str),  
     oYear = oDate.getFullYear(),  
@@ -325,6 +351,37 @@ function submitSuggestion(info){
 				}
 			}
 	);
+}
+
+function report(id,reportType){
+	  console.debug("+++++++report id==>>"+id);
+	  console.debug("+++++++report reportType==>>"+reportType);
+	  $("#reportId").val(id);
+	  $("#reportType").val(reportType);
+}
+
+function submitReport(){
+	  var reportId = $("#reportId").val();
+	  var reportType = $("#reportType").val();
+	  var reportInfo = $("#reportInfo").val().trim();
+	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
+	  $.post(
+				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				{
+					"reportId" :reportId,
+					"reportInfo":reportInfo
+				},
+				function(rs){
+					console.debug("report  rs :"+rs);
+					if(rs=="1"){
+						wuya_messager("无涯举报系统","举报成功","success");
+						$("#reportInfo").val("");
+						$('#report').modal('hide');
+					}else{
+						wuya_messager("无涯举报系统","举报失败","error");
+					}
+				}
+			);
 }
 
 

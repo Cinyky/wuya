@@ -187,8 +187,6 @@ public class QuestionController {
 					boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(answer.getAnswerId(), myuser.getUid());
 					answer.setUpvoteCount(upvoteCount);
 					answer.setIsUpvoted(isUpvote?"1":"2");
-				}else{
-					continue;
 				}
 				User user = userService.userSelectByUid(uid);
 				//TODO topic service

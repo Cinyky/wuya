@@ -19,7 +19,7 @@
 			if(info!=""){
 				submitQuestion(info,topicId);
 			}else{
-				alert("问题不可为空");
+				wuya_messager("无涯提问","问题不可为空","warn");
 			}
 		});
   	  editor = new wangEditor('answer-editor');
@@ -230,32 +230,32 @@
 						$("#upvoteBot"+id).addClass("alert-success");
 						$("#upvoteIco"+id).remove();
 						$("#upvoteBot"+id).append(icoUp);
-						alert("取消点赞成功");
+						wuya_messager("无涯点赞系统","取消点赞成功","info");
 					}else{
 						$("#upvoteBot"+id).removeClass("alert-success");
 						$("#upvoteBot"+id).addClass("alert-danger");
 						$("#upvoteIco"+id).remove();
 						$("#upvoteBot"+id).append(icoDown);
-						alert("点赞成功");
+						wuya_messager("无涯点赞系统","点赞成功","info");
 					}
 				}
 			);
   }
   
   //加好友
-	function changeFriend(anotherUid){
-		$.post(
-				path+"/user/"+anotherUid+"/friend",
-				function(rs){
-					console.debug("changeFriend anotherUid  :"+changeFriend);
-					if("fail"==rs){
-						alert("失败");
-					}else{
-						$("#friendStatus"+anotherUid).text(friendStatus[parseInt(rs)]);
-					}
-				}
-			);
-	}
+//	function changeFriend(anotherUid){
+//		$.post(
+//				path+"/user/"+anotherUid+"/friend",
+//				function(rs){
+//					console.debug("changeFriend anotherUid  :"+changeFriend);
+//					if("fail"==rs){
+//						wuya_messager("无涯好友系统","修改好友状态失败");
+//					}else{
+//						$("#friendStatus"+anotherUid).text(friendStatus[parseInt(rs)]);
+//					}
+//				}
+//			);
+//	}
   
   //分享
   function share(id,shareType){
@@ -269,9 +269,9 @@
 				function(rs){
 					console.debug("report  rs :"+rs);
 					if(rs=="1"){
-						alert("分享成功");
+						wuya_messager("无涯点赞系统","分享成功","info");
 					}else{
-						alert("分享失败");
+						wuya_messager("无涯点赞系统","分享失败","info");
 					}
 				}
 			);
@@ -298,11 +298,11 @@
 				function(rs){
 					console.debug("report  rs :"+rs);
 					if(rs=="1"){
-						alert("举报成功");
+						wuya_messager("无涯举报系统","举报成功","success");
 						$("#reportInfo").val("");
 						$('#report').modal('hide');
 					}else{
-						alert("举报失败");
+						wuya_messager("无涯举报系统","举报失败","error");
 					}
 				}
 			);
@@ -407,45 +407,15 @@
 			)
 	}
 	
-/*	function submitQuestion(info,topicId){
-		console.debug("function submitQuestion info :"+info+" topic："+topicId);
-		$.post(
-				"http://localhost:8080/wuya/question/add",
-				{
-					"questionInfo":info,
-					"topicId"     :topicId
-				},
-				function(rs){
-					console.debug("rsrsrsrs:"+rs);
-				}
-			);
-	}*/
-	
-	/*function submitQuestion(info,topicId){
-		console.debug("function submitQuestion info :"+info+" topic："+topicId);
-		$.post(
-				"http://localhost:8080/wuya/question/add",
-				{
-					"questionInfo":info,
-					"topicId"     :topicId
-				},
-				function(rs){
-					console.debug("submoit question:"+rs);
-					if(rs=="fail"){
-						alert("添加问题失败");
-					}else{
-						var arr = eval("("+rs+")");
-						var user = eval(arr.user);
-						var question = eval(arr.question);
-						var answer = eval(arr.answer);
-						var topic = eval(arr.topic);
-						var str = getAnswerStr(user,question,answer,topic);
-						$("#question").modal("hide");
-						$('#wuya').prepend(str);
-					}
-				}
-			);
-	}*/
+
+
+	function wuya_messager(title,msg,type){
+		$.messager.alert(title,msg,type);
+		$(".messager-window").css("position","fixed");
+		$(".window-shadow").css("position","fixed");
+		$(".messager-window").css("top","300px");
+		$(".window-shadow").css("top","300px");
+	}
 
 
      

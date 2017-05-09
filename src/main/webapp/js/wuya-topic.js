@@ -1,7 +1,65 @@
 
-function showReport() {
-	$('#report').modal('toggle');
+$(function(){
+	//动态显示
+	$('#questionInfo').keyup(function(){
+		var info =  $(this).val().trim();
+		$("#searchQuestion").empty();
+		if(info!=""){
+		showQuestion(info);
+		}
+	});
+
+	$('#submitQuestion').click(function(){
+	var info =  $('#questionInfo').val().trim();
+	var topicId = $('#topicId').val();
+	if(info!=""){
+		submitQuestion(info,topicId);
+		$('#questionInfo').val("");
+	}else{
+		wuya_messager('无涯提问','问题不可为空!','warn');
+	}
+	});
+
+	$('#submitSuggestion').click(function(){
+		var info =$('#suggestionInfo').val().trim();
+		if(info.length>0){
+			submitSuggestion(info);
+		}else{
+			wuya_messager('无涯意见反馈','问题不可为空!','warn');
+		}
+	});
+});
+function report(id,reportType){
+	  console.debug("+++++++report id==>>"+id);
+	  console.debug("+++++++report reportType==>>"+reportType);
+	  $("#reportId").val(id);
+	  $("#reportType").val(reportType);
 }
+
+function submitReport(){
+	  var reportId = $("#reportId").val();
+	  var reportType = $("#reportType").val();
+	  var reportInfo = $("#reportInfo").val().trim();
+	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
+	  $.post(
+				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				{
+					"reportId" :reportId,
+					"reportInfo":reportInfo
+				},
+				function(rs){
+					console.debug("report  rs :"+rs);
+					if(rs=="1"){
+						wuya_messager("无涯举报系统","举报成功","success");
+						$("#reportInfo").val("");
+						$('#report').modal('hide');
+					}else{
+						wuya_messager("无涯举报系统","举报失败","error");
+					}
+				}
+			);
+}
+
 
 function changeFocus(topicId){
 	$.post(
@@ -110,6 +168,27 @@ function showQuestion(info){
 		)
 }
 
+//分享
+function share(id,shareType){
+	  console.debug("+++++++share id==>>"+id);
+	  console.debug("+++++++share shareType==>>"+shareType);
+	  $.post(
+				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				{
+					"shareId" :id
+				},
+				function(rs){
+					console.debug("report  rs :"+rs);
+					if(rs=="1"){
+						wuya_messager("无涯点赞系统","分享成功","info");
+					}else{
+						wuya_messager("无涯点赞系统","分享失败","info");
+					}
+				}
+			);
+}
+
+
 function submitQuestion(info,topicId){
 	console.debug("function submitQuestion info :"+info+" topic："+topicId);
 	$.post(
@@ -123,20 +202,48 @@ function submitQuestion(info,topicId){
 				if(rs=="fail"){
 					wuya_messager('无涯提问','提问失败!','error');
 				}else{
-					var arr = eval("("+rs+")");
-					var user = eval(arr.user);
-					var question = eval(arr.question);
-					var answer = eval(arr.answer);
-					var topic = eval(arr.topic);
-					var str = getIndexStr(user,question,answer,topic,mymyuid);
-					wuya_messager('无涯提问','提问成功!','info');
 					$("#question").modal("hide");
-					$('#wuya').prepend(str);
+					location.href="http://localhost:8080/wuya/topic/"+topicId+"/detail";
 				}
 			}
 		);
 }
 
+function submitSuggestion(info){
+	console.debug("function submitSuggestion info :"+info);
+	$.post(
+			"http://localhost:8080/wuya/advice/"+info+"/add",
+			function(rs){
+				if(rs=="1"){
+					wuya_messager('无涯意见反馈','反馈成功!','info');
+					$("#suggestion").modal("hide");
+				}else{
+					wuya_messager('无涯意见反馈','反馈失败!','error');
+				}
+			}
+	);
+}
+
+function getMyDate(str){
+	str = parseInt(str);
+	console.debug("=======date===="+str);
+    var oDate = new Date(str),  
+    oYear = oDate.getFullYear(),  
+    oMonth = oDate.getMonth()+1,  
+    oDay = oDate.getDate(),  
+    oHour = oDate.getHours(),  
+    oMin = oDate.getMinutes(),  
+    oSen = oDate.getSeconds(),  
+    oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间  
+    return oTime;  
+};  
+//补0操作  
+function getzf(num){  
+    if(parseInt(num) < 10){  
+        num = '0'+num;  
+    }  
+    return num;  
+} 
 
 function wuya_messager(title,msg,type){
 	$.messager.alert(title,msg,type);

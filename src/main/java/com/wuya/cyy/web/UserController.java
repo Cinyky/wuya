@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -309,7 +310,8 @@ public class UserController {
         	        	if(code != null){
     	    	        	if(verifycode.equals(code)){
     	    	        		long banTime = userLogin.getBanTime();
-    	    	        		if(banTime>System.currentTimeMillis()){
+    	    	        		long currentTimeMillis = System.currentTimeMillis();
+    	    	        		if(banTime>currentTimeMillis){
     	        	        		String format = new SimpleDateFormat("yyyy年MM月dd号 HH点mm分").format(new Date(banTime));
     	        	        		mav.addObject("txt","用户已被封号到"+format);
     	        	        	}else{

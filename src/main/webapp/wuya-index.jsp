@@ -74,9 +74,9 @@
     	时间：2017-02-20
     	描述：加载动画
     -->
-    <div id="loading" style="position:fixed;bottom:0;left:0;width:80%;line-height:20px;font-size:16px;color:#fff;text-align:center;">
+<%--     <div id="loading" style="position:fixed;bottom:0;left:0;width:80%;line-height:20px;font-size:16px;color:#fff;text-align:center;">
 		<img src="${pageContext.request.contextPath}/images/waiting.gif" width="20px" height="20px"/>
-	</div>  
+	</div>   --%>
 
     <!--暂时不要分页
 	    <div class="section">
