@@ -3,7 +3,7 @@
 	  console.debug("+++++++share id==>>"+id);
 	  console.debug("+++++++share shareType==>>"+shareType);
 	  $.post(
-				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				"http://localhost/wuya/share/"+shareType+"/add",
 				{
 					"shareId" :id
 				},

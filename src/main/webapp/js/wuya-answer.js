@@ -25,7 +25,7 @@
   	  editor = new wangEditor('answer-editor');
 
          // 上传图片
-       editor.config.uploadImgUrl = 'http://localhost:8080/wuya/upload/answer';
+       editor.config.uploadImgUrl = 'http://localhost/wuya/upload/answer';
        editor.config.uploadParams = {
              token1: 'abcde',
              token2: '12345'
@@ -45,7 +45,7 @@
           editor.config.pasteText = true;
 
            // 跨域上传
-//              editor.config.uploadImgUrl = 'http://localhost:8080/wuya/test/upload';
+//              editor.config.uploadImgUrl = 'http://localhost/wuya/test/upload';
 
            //第三方上传
           // editor.config.customUpload = true;
@@ -138,7 +138,7 @@
   function initAnswers(questionId,uid){
 	  console.debug("function initAnswers questionId :"+questionId);
 		$.post(
-				"http://localhost:8080/wuya/answer/select",
+				"http://localhost/wuya/answer/select",
 				{
 					"questionId":questionId
 				},
@@ -169,7 +169,7 @@
 		str+="<div class='answer' id='"+answer.answerId+"'>";
 		str+="  <div class='panel panel-default'>";
 		str+="        <div class='panel-heading'>";
-		str+="        	<a href='http://localhost:8080/wuya/user/"+answer_user.uid+"/personal'><img src='http://localhost:8080/wuya/upload/headpic/"+answer_user.headPic+"' width='60px' height='60px'/></a>";
+		str+="        	<a href='http://localhost/wuya/user/"+answer_user.uid+"/personal'><img src='http://localhost/wuya/upload/headpic/"+answer_user.headPic+"' width='60px' height='60px'/></a>";
 		str+="        	<div class='author-info' style='display:inline-block;'>";
 		str+="        		<span class='nickname'>"+answer_user.nickName+"</span><br/>";
 		str+="       		<span class='sign'>"+answer_user.signature+"</span>";
@@ -212,7 +212,7 @@
   function upvote(id){
 	  console.debug("+++++++upvote id==>>"+id);
 	  $.post(
-				"http://localhost:8080/wuya/answer/"+id+"/upvote",
+				"http://localhost/wuya/answer/"+id+"/upvote",
 				{
 					"answerId":id
 				},
@@ -262,7 +262,7 @@
 	  console.debug("+++++++share id==>>"+id);
 	  console.debug("+++++++share shareType==>>"+shareType);
 	  $.post(
-				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				"http://localhost/wuya/share/"+shareType+"/add",
 				{
 					"shareId" :id
 				},
@@ -290,7 +290,7 @@
 	  var reportInfo = $("#reportInfo").val().trim();
 	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
 	  $.post(
-				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				"http://localhost/wuya/report/"+reportType+"/add",
 				{
 					"reportId" :reportId,
 					"reportInfo":reportInfo
@@ -336,7 +336,7 @@
 		var answerInfo=editor.$txt.html();
 		console.debug("answerInfo:"+answerInfo);
 		$.post(
-				"http://localhost:8080/wuya/answer/add",
+				"http://localhost/wuya/answer/add",
 				{
 					"answerInfo":answerInfo,
 					"questionId":questionId
@@ -364,7 +364,7 @@
 	function showQuestion(info){
 		console.debug("function showQuestion info :"+info);
 		$.post(
-				"http://localhost:8080/wuya/question/ajax",
+				"http://localhost/wuya/question/ajax",
 				{
 					"questionInfo":info
 				},
@@ -390,7 +390,7 @@
 							var question = questions[i];
 							str +="<tr>";
 							str +=" <td>";
-							str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
+							str +="  <a target='_blank' href='http://localhost/wuya/question/"+question.questionId+"/detail'>";
 							str +=    question.questionInfo;
 							str +="  </a>";
 							str +=" </td>";

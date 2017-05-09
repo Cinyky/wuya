@@ -82,7 +82,15 @@
 				              	<c:otherwise>
 				              		 <li class="media">
 						                <span class="pull-left">
-						                  <a class="media-object badge alert-danger" style="width:64px;">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-up"></i></a>
+										  <c:choose>
+										  	<c:when test="${list_answer.isUpvoted eq '1'}">
+										  		<a class="media-object badge alert-danger" style="width:64px;" id="upvoteBot${list_answer.answerId }">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-down"></i></a>
+										  	</c:when>
+										  	<c:when test="${list_answer.isUpvoted eq '2'}">
+										  		<a class="media-object badge alert-success" style="width:64px;" id="upvoteBot${list_answer.answerId }">${list_answer.upvoteCount }&nbsp;<i class="fa fa-thumbs-up"></i></a>
+										  	</c:when>
+										  </c:choose>
+						                  
 						                </span>
 						               <div class="media-body">
 						                	  <a onclick="share('${list_answer.answerId}','1')">分享</a>

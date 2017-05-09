@@ -23,9 +23,10 @@ import com.wuya.cyy.utils.VerifyCodeUtils;
 @Service
 public class UserServiceImpl  implements UserService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	private static final String ACTIVATE_URL = "http://localhost:8080/wuya/user/activate";
-	private static final String FINDPWD_URL = "http://localhost:8080/wuya/user/findpwd";
-	private static final String WUYA_URL = "http://localhost:8080/wuya"; 
+	private static final String ip = "localhost";
+	private static final String ACTIVATE_URL = "http://"+ip+"/wuya/user/activate";
+	private static final String FINDPWD_URL = "http://"+ip+"/wuya/user/findpwd";
+	private static final String WUYA_URL = "http://"+ip+"/wuya"; 
 	@Autowired
 	private UserDao userDao;
 	@Override

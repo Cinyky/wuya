@@ -1,5 +1,5 @@
 $(function () {
-	path = "http://localhost:8080/wuya";
+	path = "http://localhost/wuya";
 		
 });
 

@@ -83,7 +83,7 @@ function initQuestionIndex(myuid){
 	mymyuid = myuid;
 	console.debug("function initQuestionIndex ====");
 	$.post(
-			"http://localhost:8080/wuya/question/init/index",
+			"http://localhost/wuya/question/init/index",
 			function(rs){
 				console.debug("ajax:"+rs);
 				var str = "";
@@ -115,26 +115,26 @@ function getIndexStr(user,question,answer,topic,myuid){
 	str	+="<ul class='media-list'>";
 	str	+="	<li class='media'>";
 	if(topic==null){
-		str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topicimg/"+topic.topicPic+"' height='42' width='42'></a>";
+		str	+="		<a href='#' class='pull-left'><img class='img-rounded media-object' src='http://localhost/wuya/topicimg/"+topic.topicPic+"' height='42' width='42'></a>";
 	}else{
-		str	+="		<a href='http://localhost:8080/wuya/topic/"+topic.topicId+"/detail' class='pull-left'><img class='img-rounded media-object' src='http://localhost:8080/wuya/topicimg/"+topic.topicPic+"' height='42' width='42'></a>";
+		str	+="		<a href='http://localhost/wuya/topic/"+topic.topicId+"/detail' class='pull-left'><img class='img-rounded media-object' src='http://localhost/wuya/topicimg/"+topic.topicPic+"' height='42' width='42'></a>";
 	}
 	str	+="		<div class='media-body'>";
 	str	+="			<button type='button' class='close pull-right ccc' id='close"+question.questionId+"'>×</button>";
 	if(topic==null){
-		str	+="			<h7 class='media-heading'>来自话题：<a href='http://localhost:8080/wuya/topic/0/detail'>默认话题</a></h7>";
+		str	+="			<h7 class='media-heading'>来自话题：<a href='http://localhost/wuya/topic/0/detail'>默认话题</a></h7>";
 	}else{
-		str	+="			<h7 class='media-heading'>来自话题：<a href='http://localhost:8080/wuya/topic/"+topic.topicId+"/detail'> "+topic.topicName+"</a></h7>";
+		str	+="			<h7 class='media-heading'>来自话题：<a href='http://localhost/wuya/topic/"+topic.topicId+"/detail'> "+topic.topicName+"</a></h7>";
 	}
-	str	+="			<a href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'><h4 class='media-heading'>"+question.questionInfo+"</h4></a>";
+	str	+="			<a href='http://localhost/wuya/question/"+question.questionId+"/detail'><h4 class='media-heading'>"+question.questionInfo+"</h4></a>";
 	str +="			<span>提出时间："+getMyDate(question.questionTime)+"</span>"
 	str	+="			<h6 class='media-heading'>";
-	str	+="			<a href='http://localhost:8080/wuya/user/"+user.uid+"/personal'>"+user.nickName+"</a>&nbsp;";
+	str	+="			<a href='http://localhost/wuya/user/"+user.uid+"/personal'>"+user.nickName+"</a>&nbsp;";
 	str	+="			<span>"+user.signature+"</span>";
 	str	+="			</h6>";
 	str +="			<p>";
 	if(answer==null){
-		str += "还没有回答,赶紧去<a href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>回答<a/>吧！！";
+		str += "还没有回答,赶紧去<a href='http://localhost/wuya/question/"+question.questionId+"/detail'>回答<a/>吧！！";
 	}else{
 		console.debug("answer length:"+answer.answerInfo.length);
 		
@@ -193,7 +193,7 @@ function share(id,shareType){
 	  console.debug("+++++++share id==>>"+id);
 	  console.debug("+++++++share shareType==>>"+shareType);
 	  $.post(
-				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				"http://localhost/wuya/share/"+shareType+"/add",
 				{
 					"shareId" :id
 				},
@@ -234,7 +234,7 @@ function getzf(num){
 function showQuestion(info){
 	console.debug("function showQuestion info :"+info);
 	$.post(
-			"http://localhost:8080/wuya/question/ajax",
+			"http://localhost/wuya/question/ajax",
 			{
 				"questionInfo":info
 			},
@@ -260,7 +260,7 @@ function showQuestion(info){
 						var question = questions[i];
 						str +="<tr>";
 						str +=" <td>";
-						str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
+						str +="  <a target='_blank' href='http://localhost/wuya/question/"+question.questionId+"/detail'>";
 						str +=    question.questionInfo;
 						str +="  </a>";
 						str +=" </td>";
@@ -280,7 +280,7 @@ function showQuestion(info){
 function submitQuestion(info,topicId){
 	console.debug("function submitQuestion info :"+info+" topic："+topicId);
 	$.post(
-			"http://localhost:8080/wuya/question/add",
+			"http://localhost/wuya/question/add",
 			{
 				"questionInfo":info,
 				"topicId"     :topicId
@@ -307,7 +307,7 @@ function submitQuestion(info,topicId){
 function upvote(id){
 	  console.debug("+++++++upvote id==>>"+id);
 	  $.post(
-				"http://localhost:8080/wuya/answer/"+id+"/upvote",
+				"http://localhost/wuya/answer/"+id+"/upvote",
 				{
 					"answerId":id
 				},
@@ -340,7 +340,7 @@ function upvote(id){
 function submitSuggestion(info){
 	console.debug("function submitSuggestion info :"+info);
 	$.post(
-			"http://localhost:8080/wuya/advice/"+info+"/add",
+			"http://localhost/wuya/advice/"+info+"/add",
 			function(rs){
 				if(rs=="1"){
 				
@@ -366,7 +366,7 @@ function submitReport(){
 	  var reportInfo = $("#reportInfo").val().trim();
 	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
 	  $.post(
-				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				"http://localhost/wuya/report/"+reportType+"/add",
 				{
 					"reportId" :reportId,
 					"reportInfo":reportInfo

@@ -3306,11 +3306,11 @@ _e(function (E, $) {
     E.config.emotions = {
          'default': {
              title: '默认',
-             data: 'http://localhost:8080/wuya/emotions/default.data'
+             data: 'http://localhost/wuya/emotions/default.data'
          },
          'sina': {
              title: '新浪',
-             data: 'http://localhost:8080/wuya/emotions/sina_min.data'
+             data: 'http://localhost/wuya/emotions/sina_min.data'
          },
          
         'weibo': {
@@ -6127,7 +6127,7 @@ _e(function (E, $) {
         }
         var script = document.createElement("script");
         script.type = "text/javascript";
-        script.src = "http://localhost:8080/wuya/js/highlight.min.js";
+        script.src = "http://localhost/wuya/js/highlight.min.js";
         document.body.appendChild(script);
     }
     

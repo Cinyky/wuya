@@ -35,7 +35,7 @@
 <div id="content">
    
 	<div id="content-header">
-		 <h3>欢迎管理员，${admin.loginName }</h3>	
+		 <h3>欢迎管理员，${admin.loginName }  <a href="${pageContext.request.contextPath}/admin/login">退出</a></h3>	
     	 <h1 id="showInfo">主页</h1>
 	</div>
   

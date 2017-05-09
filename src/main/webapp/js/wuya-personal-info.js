@@ -1,6 +1,6 @@
 $(function() {
 	updateUserInfoTypes = ["headpic","signature","sex","profile","location","birth","all"];
-	path = "http://localhost:8080/wuya";
+	path = "http://localhost/wuya";
 	uploadurl = path+'/upload/headpic';
 	$("#changeHeadPic").change(function(){
 		var formData = new FormData();

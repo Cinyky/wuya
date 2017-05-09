@@ -1,5 +1,5 @@
 	$(function() {
-		path = "http://localhost:8080/wuya";
+		path = "http://localhost/wuya";
 		personalTypes = ["回答", "问题", "分享", "话题", "好友"];
 		friendStatus = ["关注", "取关"];
 	});
@@ -254,7 +254,7 @@
 	function upvote(id){
 		  console.debug("+++++++upvote id==>>"+id);
 		  $.post(
-					"http://localhost:8080/wuya/answer/"+id+"/upvote",
+					"http://localhost/wuya/answer/"+id+"/upvote",
 					{
 						"answerId":id
 					},

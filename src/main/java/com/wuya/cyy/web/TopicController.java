@@ -121,7 +121,7 @@ public class TopicController {
         User user = (User)request.getSession(true).getAttribute("user");
         List<Focus> focusSelectByUid = focusService.focusSelectByUid(user.getUid());
         List<Topic> myTopics = new ArrayList<>();
-        if(focusSelectByUid!=null || !focusSelectByUid.isEmpty()){
+        if(focusSelectByUid!=null && !focusSelectByUid.isEmpty()){
         	for (Focus focus : focusSelectByUid) {
 				String id = focus.getId();
 				Topic selectTopicByTopicId = topicService.selectTopicByTopicId(id);
@@ -153,6 +153,8 @@ public class TopicController {
 			if(question_answer!=null){
 				String upvoteCount = upvoteService.upvoteCountSelectByAnswerId(question_answer.getAnswerId());
 				question_answer.setUpvoteCount(upvoteCount);
+				boolean isUpvote = upvoteService.upvoteSelectByAnswerIdAndUid(question_answer.getAnswerId(), user.getUid());
+				question_answer.setIsUpvoted(isUpvote?"1":"2");
 			}
 			User question_user = userService.userSelectByUid(uid);
 			ret.setAnswer(question_answer);

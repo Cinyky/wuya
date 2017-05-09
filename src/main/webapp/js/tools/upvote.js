@@ -1,7 +1,7 @@
 function upvote(id){
 	  console.debug("+++++++upvote id==>>"+id);
 	  $.post(
-				"http://localhost:8080/wuya/answer/"+id+"/upvote",
+				"http://localhost/wuya/answer/"+id+"/upvote",
 				{
 					"answerId":id
 				},

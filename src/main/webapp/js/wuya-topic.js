@@ -42,7 +42,7 @@ function submitReport(){
 	  var reportInfo = $("#reportInfo").val().trim();
 	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
 	  $.post(
-				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				"http://localhost/wuya/report/"+reportType+"/add",
 				{
 					"reportId" :reportId,
 					"reportInfo":reportInfo
@@ -63,7 +63,7 @@ function submitReport(){
 
 function changeFocus(topicId){
 	$.post(
-			"http://localhost:8080/wuya/topic/"+topicId+"/focus",
+			"http://localhost/wuya/topic/"+topicId+"/focus",
 			{
 				"topicId":topicId
 			},
@@ -91,7 +91,7 @@ function changeFocus(topicId){
 //换话题 切换
 function changeTopics(){
 	$.getJSON(
-			"http://localhost:8080/wuya/topic/recommend",
+			"http://localhost/wuya/topic/recommend",
 			function(rs){
 				console.debug("changeFocus rs :"+rs);
 //				var arr = eval("("+rs+")");
@@ -102,7 +102,7 @@ function changeTopics(){
 					var topic = rs[i];
 					var str = "";
 					str +="<div class='topic-item'>";
-					str +="<a href='#' ><img class='img-rounded media-object' src='http://localhost:8080/wuya/topicimg/"+topic.topicPic+"' height='42' width='42'></a>";
+					str +="<a href='#' ><img class='img-rounded media-object' src='http://localhost/wuya/topicimg/"+topic.topicPic+"' height='42' width='42'></a>";
 					str +="	<div style='display:inline-block;position:relative;top:10px;'>";
 					str +="		<span>话题："+topic.topicName+"</span><br>";
 					str +="		<span>关注人数</span><span id='focusNums"+topic.topicId+"'>"+topic.focusNums+"</span>";
@@ -122,10 +122,44 @@ function changeTopics(){
 		);
 }
 
+
+function upvote(id){
+	  console.debug("+++++++upvote id==>>"+id);
+	  $.post(
+				"http://localhost/wuya/answer/"+id+"/upvote",
+				{
+					"answerId":id
+				},
+				function(rs){
+					console.debug("upvote answer rs :"+rs);
+					var strs = rs.split("|");
+					var type = strs[0];
+					var count = strs[1];
+					$("#upvoteCountTop"+id).text(count);
+					$("#upvoteBot"+id).text(count);
+					var icoDown = "&nbsp;<i class='fa fa-thumbs-down' id='upvoteIco"+id+"'></i>";
+					var icoUp = "&nbsp;<i class='fa fa-thumbs-up' id='upvoteIco"+id+"'></i>";
+					if(type=="1"){
+						$("#upvoteBot"+id).removeClass("alert-danger");
+						$("#upvoteBot"+id).addClass("alert-success");
+						$("#upvoteIco"+id).remove();
+						$("#upvoteBot"+id).append(icoUp);
+						wuya_messager("无涯点赞系统","取消点赞成功","info");
+					}else{
+						$("#upvoteBot"+id).removeClass("alert-success");
+						$("#upvoteBot"+id).addClass("alert-danger");
+						$("#upvoteIco"+id).remove();
+						$("#upvoteBot"+id).append(icoDown);
+						wuya_messager("无涯点赞系统","点赞成功","info");
+					}
+				}
+			);
+}
+
 function showQuestion(info){
 	console.debug("function showQuestion info :"+info);
 	$.post(
-			"http://localhost:8080/wuya/question/ajax",
+			"http://localhost/wuya/question/ajax",
 			{
 				"questionInfo":info
 			},
@@ -151,7 +185,7 @@ function showQuestion(info){
 						var question = questions[i];
 						str +="<tr>";
 						str +=" <td>";
-						str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
+						str +="  <a target='_blank' href='http://localhost/wuya/question/"+question.questionId+"/detail'>";
 						str +=    question.questionInfo;
 						str +="  </a>";
 						str +=" </td>";
@@ -173,7 +207,7 @@ function share(id,shareType){
 	  console.debug("+++++++share id==>>"+id);
 	  console.debug("+++++++share shareType==>>"+shareType);
 	  $.post(
-				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				"http://localhost/wuya/share/"+shareType+"/add",
 				{
 					"shareId" :id
 				},
@@ -192,7 +226,7 @@ function share(id,shareType){
 function submitQuestion(info,topicId){
 	console.debug("function submitQuestion info :"+info+" topic："+topicId);
 	$.post(
-			"http://localhost:8080/wuya/question/add",
+			"http://localhost/wuya/question/add",
 			{
 				"questionInfo":info,
 				"topicId"     :topicId
@@ -203,7 +237,7 @@ function submitQuestion(info,topicId){
 					wuya_messager('无涯提问','提问失败!','error');
 				}else{
 					$("#question").modal("hide");
-					location.href="http://localhost:8080/wuya/topic/"+topicId+"/detail";
+					location.href="http://localhost/wuya/topic/"+topicId+"/detail";
 				}
 			}
 		);
@@ -212,7 +246,7 @@ function submitQuestion(info,topicId){
 function submitSuggestion(info){
 	console.debug("function submitSuggestion info :"+info);
 	$.post(
-			"http://localhost:8080/wuya/advice/"+info+"/add",
+			"http://localhost/wuya/advice/"+info+"/add",
 			function(rs){
 				if(rs=="1"){
 					wuya_messager('无涯意见反馈','反馈成功!','info');

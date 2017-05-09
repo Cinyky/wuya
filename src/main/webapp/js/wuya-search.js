@@ -1,10 +1,10 @@
   $(function(){
-	  path = "http://localhost:8080/wuya";
+	  path = "http://localhost/wuya";
   });
   function upvote(id){
 	  console.debug("+++++++upvote id==>>"+id);
 	  $.post(
-				"http://localhost:8080/wuya/answer/"+id+"/upvote",
+				"http://localhost/wuya/answer/"+id+"/upvote",
 				{
 					"answerId":id
 				},
@@ -61,7 +61,7 @@
 	  console.debug("+++++++share id==>>"+id);
 	  console.debug("+++++++share shareType==>>"+shareType);
 	  $.post(
-				"http://localhost:8080/wuya/share/"+shareType+"/add",
+				"http://localhost/wuya/share/"+shareType+"/add",
 				{
 					"shareId" :id
 				},
@@ -89,7 +89,7 @@
 	  var reportInfo = $("#reportInfo").val().trim();
 	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
 	  $.post(
-				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				"http://localhost/wuya/report/"+reportType+"/add",
 				{
 					"reportId" :reportId,
 					"reportInfo":reportInfo
@@ -131,7 +131,7 @@
 	function showQuestion(info){
 		console.debug("function showQuestion info :"+info);
 		$.post(
-				"http://localhost:8080/wuya/question/ajax",
+				"http://localhost/wuya/question/ajax",
 				{
 					"questionInfo":info
 				},
@@ -157,7 +157,7 @@
 							var question = questions[i];
 							str +="<tr>";
 							str +=" <td>";
-							str +="  <a target='_blank' href='http://localhost:8080/wuya/question/"+question.questionId+"/detail'>";
+							str +="  <a target='_blank' href='http://localhost/wuya/question/"+question.questionId+"/detail'>";
 							str +=    question.questionInfo;
 							str +="  </a>";
 							str +=" </td>";
@@ -177,7 +177,7 @@
 	function submitQuestion(info,topicId){
 		console.debug("function submitQuestion info :"+info+" topic："+topicId);
 		$.post(
-				"http://localhost:8080/wuya/question/add",
+				"http://localhost/wuya/question/add",
 				{
 					"questionInfo":info,
 					"topicId"     :topicId

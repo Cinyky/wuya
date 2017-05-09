@@ -20,10 +20,8 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-offset-3 col-md-6 text-center">
-            <h1 class="text-primary">无涯-后台管理系统</h1>
+            <h1 class="text-primary">无涯-后台登录</h1>
             <p class="text-center text-primary">吾生也有涯，而知也无涯。</p>
-        
-            
             <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/admin/login" method="POST">
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">

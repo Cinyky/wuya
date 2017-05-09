@@ -47,6 +47,7 @@ public class UserFilter extends	OncePerRequestFilter{
         String wuya = "/wuya/";
         // 请求的uri
         String uri = request.getRequestURI();
+        String ip="localhost";
         /**
          *  
          */
@@ -93,7 +94,7 @@ public class UserFilter extends	OncePerRequestFilter{
                 if (!isCookie) {
                     // 如果session中不存在登录者实体，则弹出框提示重新登录
                     // 设置request和response的字符集，防止乱码
-                    response.sendRedirect("http://localhost:8080/wuya/user/login");
+                    response.sendRedirect("http://"+ip+"/wuya/user/login");
 //                    PrintWriter out = response.getWriter();
 //                    String loginPage = "http://localhost:8080/wuya/user/login";
 //                    StringBuilder builder = new StringBuilder();

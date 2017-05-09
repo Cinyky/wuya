@@ -11,7 +11,7 @@ function report(id,reportType){
 	  var reportInfo = $("#reportInfo").val().trim();
 	  console.debug("+++submitReport()  reportId==>>"+reportId+"  reportType==>>"+reportType+"reportInfo==>>"+reportInfo);
 	  $.post(
-				"http://localhost:8080/wuya/report/"+reportType+"/add",
+				"http://localhost/wuya/report/"+reportType+"/add",
 				{
 					"reportId" :reportId,
 					"reportInfo":reportInfo
