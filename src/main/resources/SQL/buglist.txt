@@ -1,0 +1,30 @@
+1. 主页面 分享提示	modify
+		  刷新功能	add
+		  举报功能  add  
+		  提问 	    update
+		  添加提问之后 刷出的问题  添加回答入口
+2. onequestion 页面 回答成功提示 alert  ==> messager 
+	添加回答去除举报按钮
+3. 所有页面
+			alert 	替换为 wuya_messager
+			add 	question
+			add 	suggestion
+4. 话题界面 
+			屏蔽举报自己的按钮 
+			举报功能完善
+			remove sortgoing功能
+			add  取消关注本话题入口
+			添加完话题之后在关注的话题界面添加进去 取消关注 删除
+			搜索话题功能  待做
+5.搜索界面
+			搜索完 讲搜索的信息一并带入  去除“”
+			关注用户有问题
+6.登录界面
+			自动登录取消
+7.后台界面
+			add 注销
+			管理员登录 add 返回登录
+8.个人界面  加时间显示  all
+			好友关注显示
+
+
