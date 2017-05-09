@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -308,7 +309,7 @@ public class UserController {
     	        if(userLogin!=null){
     	        		String code = (String) session.getAttribute("verifyCode");
         	        	if(code != null){
-    	    	        	if(verifycode.equals(code)){
+    	    	        	if(verifycode.equalsIgnoreCase(code)){
     	    	        		long banTime = userLogin.getBanTime();
     	    	        		long currentTimeMillis = System.currentTimeMillis();
     	    	        		if(banTime>currentTimeMillis){
@@ -613,18 +614,18 @@ public class UserController {
 					ret.setUser(userSelectByUid);
 					retList.add(ret);
 				}
-				for(Friend friend :focused){
-					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
-					ret.setFriendType(2);
-					String anotherUid = friend.getAnotherUid();
-					User userSelectByUid = userService.userSelectByUid(anotherUid);
-					String answerNums = answerService.answerCountSelectByUid(userSelectByUid.getUid());
-					userSelectByUid.setAnswerNums(answerNums);
-			        String focusFriendsCount = friendService.friendCountSelectByAnotherUid(userSelectByUid.getUid());
-			        userSelectByUid.setFocusedFriends(focusFriendsCount);
-					ret.setUser(userSelectByUid);
-					retList.add(ret);
-				}
+//				for(Friend friend :focused){
+//					HotQuestionAndAnswerAndTopic ret = new HotQuestionAndAnswerAndTopic();
+//					ret.setFriendType(2);
+//					String anotherUid = friend.getAnotherUid();
+//					User userSelectByUid = userService.userSelectByUid(anotherUid);
+//					String answerNums = answerService.answerCountSelectByUid(userSelectByUid.getUid());
+//					userSelectByUid.setAnswerNums(answerNums);
+//			        String focusFriendsCount = friendService.friendCountSelectByAnotherUid(userSelectByUid.getUid());
+//			        userSelectByUid.setFocusedFriends(focusFriendsCount);
+//					ret.setUser(userSelectByUid);
+//					retList.add(ret);
+//				}
 				break;
 			default:
 				break;

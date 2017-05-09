@@ -232,19 +232,21 @@
 		$.post(
 				path+"/user/"+anotherUid+"/friend",
 				function(rs){
-					console.debug("changeFriend anotherUid  :"+changeFriend);
+					console.debug("changeFriend anotherUid  :"+rs);
 					if("fail"==rs){
 						wuya_messager("无涯好友系统","修改好友失败","error");
 					}else{
 						var str = "";
 						if(rs=="1"){
 							str = "关注";
+							$("#friendStatus"+anotherUid).text(str);
 							wuya_messager("无涯好友系统","取关成功","success");
 						}else{
 							str = "取关";
+							$("#friendStatus"+anotherUid).text(str);
 							wuya_messager("无涯好友系统","关注成功","success");
 						}
-						$("#friendStatus"+anotherUid).val(str);
+						
 					}
 				}
 			);

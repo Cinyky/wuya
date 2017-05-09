@@ -156,6 +156,27 @@ function upvote(id){
 			);
 }
 
+
+//分享
+function share(id,shareType){
+	  console.debug("+++++++share id==>>"+id);
+	  console.debug("+++++++share shareType==>>"+shareType);
+	  $.post(
+				"http://localhost/wuya/share/"+shareType+"/add",
+				{
+					"shareId" :id
+				},
+				function(rs){
+					console.debug("report  rs :"+rs);
+					if(rs=="1"){
+						wuya_messager("无涯点赞系统","分享成功","info");
+					}else{
+						wuya_messager("无涯点赞系统","分享失败","info");
+					}
+				}
+			);
+}
+
 function showQuestion(info){
 	console.debug("function showQuestion info :"+info);
 	$.post(
@@ -202,25 +223,6 @@ function showQuestion(info){
 		)
 }
 
-//分享
-function share(id,shareType){
-	  console.debug("+++++++share id==>>"+id);
-	  console.debug("+++++++share shareType==>>"+shareType);
-	  $.post(
-				"http://localhost/wuya/share/"+shareType+"/add",
-				{
-					"shareId" :id
-				},
-				function(rs){
-					console.debug("report  rs :"+rs);
-					if(rs=="1"){
-						wuya_messager("无涯点赞系统","分享成功","info");
-					}else{
-						wuya_messager("无涯点赞系统","分享失败","info");
-					}
-				}
-			);
-}
 
 
 function submitQuestion(info,topicId){
@@ -236,8 +238,10 @@ function submitQuestion(info,topicId){
 				if(rs=="fail"){
 					wuya_messager('无涯提问','提问失败!','error');
 				}else{
+					var arrs = eval("("+rs+")");
+					var question = arrs.question;
 					$("#question").modal("hide");
-					location.href="http://localhost/wuya/topic/"+topicId+"/detail";
+					location.href="http://localhost/wuya/question/"+question.questionId+"/detail";
 				}
 			}
 		);

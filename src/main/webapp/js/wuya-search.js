@@ -1,6 +1,37 @@
   $(function(){
 	  path = "http://localhost/wuya";
+		//动态显示
+		$('#questionInfo').keyup(function(){
+			var info =  $(this).val().trim();
+			$("#searchQuestion").empty();
+			if(info!=""){
+			showQuestion(info);
+			}
+		});
+		
+
+		$('#submitSuggestion').click(function(){
+			var info =$('#suggestionInfo').val().trim();
+			if(info.length>0){
+				submitSuggestion(info);
+			}else{
+				wuya_messager('无涯意见反馈','问题不可为空!','warn');
+			}
+		});
+		
+		$('#submitQuestion').click(function(){
+		var info =  $('#questionInfo').val().trim();
+		var topicId = $('#topicId').val();
+		if(info!=""){
+			submitQuestion(info,topicId);
+			$('#questionInfo').val("");
+		}else{
+			wuya_messager('无涯提问','问题不可为空!','warn');
+		}	
+		});
   });
+  
+  
   function upvote(id){
 	  console.debug("+++++++upvote id==>>"+id);
 	  $.post(
@@ -35,46 +66,53 @@
   }
   
   //加好友
-	function changeFriend(anotherUid){
-		console.debug(anotherUid);
-		console.debug("关注");
+  function changeFriend(anotherUid){
 		$.post(
 				path+"/user/"+anotherUid+"/friend",
 				function(rs){
-					console.debug("changeFriend anotherUid  :"+anotherUid);
+					console.debug("changeFriend anotherUid  :"+rs);
 					if("fail"==rs){
-						alert("失败");
+						wuya_messager("无涯好友系统","修改好友失败","error");
 					}else{
-						console.debug("rs:"+rs);
-						if(rs=="1"){
-							$("#checkFriend"+anotherUid).text("关注");
-						}else if(rs=="2"){
-							$("#checkFriend"+anotherUid).text("取关");
+						var showStr = "";
+						var messagerInfo="";
+						if("1"==rs){	//取关成功
+							showStr = "关注";
+							messagerInfo ="取关成功";
+						}else{			//关注成功
+							showStr = "取关";
+							messagerInfo = "关注成功";
 						}
+						console.debug("showStr====>"+showStr+" messagerInfpo===>"+messagerInfo);
+						$("#friendStatus"+anotherUid).text(showStr);
+						wuya_messager("无涯好友系统",messagerInfo,"success");
+						showStr = "";
+						messagerInfo="";
 					}
 				}
 			);
 	}
   
-  //分享
-  function share(id,shareType){
-	  console.debug("+++++++share id==>>"+id);
-	  console.debug("+++++++share shareType==>>"+shareType);
-	  $.post(
-				"http://localhost/wuya/share/"+shareType+"/add",
-				{
-					"shareId" :id
-				},
-				function(rs){
-					console.debug("report  rs :"+rs);
-					if(rs=="1"){
-						alert("分享成功");
-					}else{
-						alert("分享失败");
+	//分享
+	function share(id,shareType){
+		  console.debug("+++++++share id==>>"+id);
+		  console.debug("+++++++share shareType==>>"+shareType);
+		  $.post(
+					"http://localhost/wuya/share/"+shareType+"/add",
+					{
+						"shareId" :id
+					},
+					function(rs){
+						console.debug("report  rs :"+rs);
+						if(rs=="1"){
+							wuya_messager("无涯点赞系统","分享成功","info");
+						}else{
+							wuya_messager("无涯点赞系统","分享失败","info");
+						}
 					}
-				}
-			);
-  }
+				);
+	}
+
   
   function report(id,reportType){
 	  console.debug("+++++++report id==>>"+id);
@@ -97,15 +135,15 @@
 				function(rs){
 					console.debug("report  rs :"+rs);
 					if(rs=="1"){
-						alert("举报成功");
+						wuya_messager("无涯举报系统","举报成功","success");
 						$("#reportInfo").val("");
 						$('#report').modal('hide');
 					}else{
-						alert("举报失败");
+						wuya_messager("无涯举报系统","举报失败","error");
 					}
 				}
 			);
-  }
+}
   
   
   function getMyDate(str){
@@ -183,10 +221,40 @@
 					"topicId"     :topicId
 				},
 				function(rs){
-					console.debug("rsrsrsrs:"+rs);
+					console.debug("submoit question:"+rs);
+					if(rs=="fail"){
+						wuya_messager('无涯提问','提问失败!','error');
+					}else{
+						$("#question").modal("hide");
+						location.href="http://localhost/wuya/topic/"+topicId+"/detail";
+					}
 				}
 			);
 	}
+
+	function submitSuggestion(info){
+		console.debug("function submitSuggestion info :"+info);
+		$.post(
+				"http://localhost/wuya/advice/"+info+"/add",
+				function(rs){
+					if(rs=="1"){
+						wuya_messager('无涯意见反馈','反馈成功!','info');
+						$("#suggestion").modal("hide");
+					}else{
+						wuya_messager('无涯意见反馈','反馈失败!','error');
+					}
+				}
+		);
+	}
+	
+	function wuya_messager(title,msg,type){
+		$.messager.alert(title,msg,type);
+		$(".messager-window").css("position","fixed");
+		$(".window-shadow").css("position","fixed");
+		$(".messager-window").css("top","300px");
+		$(".window-shadow").css("top","300px");
+	}
+
 
 
      

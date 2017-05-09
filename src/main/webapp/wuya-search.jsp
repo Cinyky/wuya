@@ -72,12 +72,12 @@
 		                       <span>${list_user.answerNums }&nbsp; 回答</span>&nbsp;<span>${list_user.focusFriends }&nbsp; 关注者</span>
 		                     </div> 
 		                     <c:if test="${list_user.isFocused eq '1'}">
-		                     		<a  class="btn btn-primary pull-right" style="margin-top: 30px" id="checkFriend${list_user.uid }" onclick="changeFriend('${list_user.uid}')">
+		                     		<a  class="btn btn-primary pull-right" style="margin-top: 30px" id="friendStatus${list_user.uid }" onclick="changeFriend('${list_user.uid}')">
 		                     		取关
 		                    		 </a>
 		                     </c:if>
 		                     <c:if test="${list_user.isFocused eq '2'}">
-		                     	<a  class="btn btn-primary pull-right" style="margin-top: 30px" id="checkFriend${list_user.uid }" onclick="changeFriend('${list_user.uid}')">
+		                     	<a  class="btn btn-primary pull-right" style="margin-top: 30px" id="friendStatus${list_user.uid }" onclick="changeFriend('${list_user.uid}')">
 		                     		关注
 		                    	</a>
 		                     </c:if>
@@ -191,6 +191,7 @@
 	    -->
 	    
 	    <jsp:include page="templet/showReport.jsp" />
+    	<jsp:include page="templet/showSuggestion.jsp" />
 	          
         </div>
       </div>

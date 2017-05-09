@@ -45,7 +45,7 @@
                     </label><br>
                     <span>${personal_user.profile }</span>
                  	<c:if test="${personal_user.uid ne user.uid }">
-                 		 <a href="javaScript" class="btn btn-primary" onclick="changeFriend('${personal_user.uid}')">关注他</a>
+                 		 <a href="" class="btn btn-primary" onclick="changeFriend('${personal_user.uid}')">关注他</a>
                  	</c:if>
                  	<c:if test="${personal_user.uid eq user.uid }">
                  		 <a href="${pageContext.request.contextPath }/user/personal/info">修改个人界面</a>

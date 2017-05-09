@@ -50,11 +50,8 @@ $(function() {
 		$('#questionInfo').val("");
 	}else{
 		wuya_messager('无涯提问','问题不可为空!','warn');
-	}
-	
-	
-	
-});
+	}	
+	});
 
 });
 
