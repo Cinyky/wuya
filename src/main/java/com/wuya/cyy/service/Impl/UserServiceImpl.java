@@ -83,6 +83,17 @@ public class UserServiceImpl  implements UserService {
 		return userDao.selectUserByEmail(bind_email);
 	}
 
+	
+
+	
+	//处理注册 发送邮件
+	private boolean processReg(String bind_email,String email_code,String method){
+		 ///邮件的内容  
+        String mailInfo = generatMailInfo(bind_email, email_code, method);
+      //发送邮件  
+        logger.debug("SendEmail to"+bind_email+" emailIndo:"+mailInfo);
+        return SendEmail.send(bind_email, mailInfo.toString(),"账户注册成功");
+	}
 	@Override
 	public String userFindPwd(String bind_email) {
 		boolean isSuccess = false;
@@ -95,17 +106,6 @@ public class UserServiceImpl  implements UserService {
 		return isSuccess?rs:"";
 	}
 
-
-	
-	//处理注册 发送邮件
-	private boolean processReg(String bind_email,String email_code,String method){
-		 ///邮件的内容  
-        String mailInfo = generatMailInfo(bind_email, email_code, method);
-      //发送邮件  
-        logger.debug("SendEmail to"+bind_email+" emailIndo:"+mailInfo);
-        return SendEmail.send(bind_email, mailInfo.toString(),"账户注册成功");
-	}
-	
 	//处理注册 发送邮件
 	private boolean processFindPwd(String bind_email,String email_code,String method){
 			 ///邮件的内容  
